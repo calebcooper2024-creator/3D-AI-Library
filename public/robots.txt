@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /CalebCooper/
+
+Sitemap: https://lifetaplabs.com/CalebCooper/sitemap.xml

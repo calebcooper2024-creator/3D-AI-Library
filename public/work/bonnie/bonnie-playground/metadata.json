@@ -1,0 +1,5 @@
+{
+  "name": "Bonnie",
+  "description": "A computer vision-powered dashboard for automating GTA V via Xbox Cloud Gaming, featuring real-time frame analysis and virtual controller telemetry.",
+  "requestFramePermissions": ["display-capture", "microphone"]
+}

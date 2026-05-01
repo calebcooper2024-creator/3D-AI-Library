@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Cormorant Garamond", serif;
+  --font-mono: "JetBrains Mono", monospace;
+  
+  --color-zinc-950: #09090B;
+  --color-zinc-500: #71717A;
+  --color-accent: #FFFFFF;
+}
+
+@layer base {
+  body {
+    @apply bg-black text-white antialiased overflow-hidden;
+    font-family: var(--font-sans);
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-sans font-bold tracking-tight;
+  }
+
+  ::selection {
+    @apply bg-white text-black;
+  }
+}
+
+@layer utilities {
+  .text-label {
+    @apply font-mono text-[10px] uppercase tracking-[0.35em] font-medium text-zinc-500;
+  }
+  
+  .text-body {
+    @apply font-sans text-[16px] leading-relaxed text-zinc-500 font-light;
+  }
+
+  .text-display {
+    @apply font-serif italic;
+  }
+
+  .text-glow {
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  }
+
+  .glass-card {
+    @apply bg-zinc-950/50 backdrop-blur-xl border border-white/10 rounded-2xl;
+  }
+
+  .luxury-button {
+    @apply rounded-full px-8 py-4 font-sans font-medium transition-all duration-300 active:scale-[0.98] hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(255,255,255,0.1)];
+  }
+
+  .luxury-input {
+    @apply w-full bg-zinc-950/50 border border-white/10 rounded-2xl px-6 py-4 font-sans text-white focus:outline-none focus:border-white/30 transition-all placeholder:text-zinc-500/50;
+  }
+
+  .custom-cursor {
+    @apply fixed w-3 h-3 bg-white rounded-full pointer-events-none z-[10000] mix-blend-difference transition-transform duration-300 ease-out;
+    transform: translate(-50%, -50%);
+  }
+
+  .custom-cursor.hovering {
+    @apply scale-[4] opacity-20;
+  }
+
+  .marquee-container {
+    @apply fixed inset-0 pointer-events-none z-0 flex items-center overflow-hidden whitespace-nowrap;
+  }
+
+  .marquee-content {
+    @apply font-serif italic text-[20vw] opacity-[0.02] text-white tracking-tighter;
+    animation: marquee 120s linear infinite;
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .logo-pill {
+    @apply flex items-center justify-center w-8 h-8 rounded-full bg-white text-black;
+  }
+
+  .logo-title {
+    @apply font-serif italic text-[40px] tracking-tighter leading-none text-white;
+  }
+
+  .logo-subtitle {
+    @apply font-mono text-[10px] uppercase tracking-widest opacity-40 text-white;
+  }
+}

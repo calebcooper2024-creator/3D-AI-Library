@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Brokie V2 — Memory Topology</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #050a0f; }
+
+  /* ── Loading Screen ── */
+  #loader {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: #050a0f;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  #loader.fade-out {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .loader-label {
+    font-family: 'Geist', 'Inter', ui-sans-serif, system-ui, sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(74, 222, 128, 0.5);
+  }
+
+  .loader-title {
+    font-family: 'Geist', 'Inter', ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.8rem);
+    font-weight: 300;
+    letter-spacing: 0.06em;
+    color: #e2e8f0;
+    text-align: center;
+  }
+
+  .loader-sub {
+    font-family: 'Geist Mono', ui-monospace, monospace;
+    font-size: 0.7rem;
+    color: rgba(74, 222, 128, 0.4);
+    letter-spacing: 0.1em;
+  }
+
+  /* Progress bar */
+  .loader-bar-track {
+    width: 240px;
+    height: 1px;
+    background: rgba(74, 222, 128, 0.12);
+    position: relative;
+    overflow: hidden;
+  }
+  .loader-bar-fill {
+    position: absolute;
+    top: 0; left: 0; height: 100%;
+    width: 0%;
+    background: #4ade80;
+    transition: width 0.15s linear;
+    box-shadow: 0 0 8px rgba(74, 222, 128, 0.6);
+  }
+
+  /* Animated dot ring */
+  .loader-ring {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 1px solid rgba(74, 222, 128, 0.15);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .loader-ring::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: 50%;
+    border: 1px solid transparent;
+    border-top-color: #4ade80;
+    animation: spin 1.2s linear infinite;
+  }
+  .loader-ring-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #4ade80;
+    box-shadow: 0 0 10px rgba(74, 222, 128, 0.8);
+    animation: pulse-dot 1.2s ease-in-out infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.7); }
+  }
+
+  /* Status messages */
+  .loader-status {
+    font-family: 'Geist Mono', ui-monospace, monospace;
+    font-size: 0.65rem;
+    color: rgba(74, 222, 128, 0.35);
+    letter-spacing: 0.08em;
+    min-height: 1em;
+    text-align: center;
+    transition: opacity 0.3s ease;
+  }
+
+  /* ── Back Button ── */
+  #back-btn {
+    position: fixed;
+    top: 1.4rem;
+    left: 1.4rem;
+    z-index: 1000;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem 1rem 0.45rem 0.75rem;
+    background: rgba(5, 10, 15, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(74, 222, 128, 0.18);
+    border-radius: 999px;
+    color: rgba(226, 232, 240, 0.8);
+    font-family: 'Geist', 'Inter', ui-sans-serif, sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    cursor: pointer;
+    transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease, border-color 0.2s ease, color 0.2s ease;
+  }
+  #back-btn.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  #back-btn:hover {
+    border-color: rgba(74, 222, 128, 0.5);
+    color: #4ade80;
+    background: rgba(5, 10, 15, 0.9);
+  }
+  #back-btn svg {
+    width: 12px;
+    height: 12px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+  }
+
+  /* Three.js canvas container */
+  #threejs-mount {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  #threejs-mount canvas {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+  }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500&family=Geist+Mono:wght@400;500&display=swap">
+</head>
+<body>
+
+<!-- Loading Screen -->
+<div id="loader">
+  <div class="loader-label">Brokie V2 · Memory Topology</div>
+  <div class="loader-ring">
+    <div class="loader-ring-dot"></div>
+  </div>
+  <div class="loader-title">Project Winter Haven</div>
+  <div class="loader-sub">Mindball Visualizer</div>
+  <div class="loader-bar-track">
+    <div class="loader-bar-fill" id="bar-fill"></div>
+  </div>
+  <div class="loader-status" id="loader-status">Initializing graph substrate…</div>
+</div>
+
+<!-- Back Button (shown after load) -->
+<button id="back-btn" type="button" onclick="
+  document.body.style.opacity='0';
+  document.body.style.transition='opacity 0.35s ease';
+  setTimeout(function(){ window.location.replace('/work/avroko/index.html'); }, 350);
+">
+  <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+  Brokie V2
+</button>
+
+<!-- Three.js Mount -->
+<div id="threejs-mount"></div>
+
+<script>
+  // ── Loading Screen Logic ──
+  const LOAD_DURATION = 5000;
+  const barFill = document.getElementById('bar-fill');
+  const loaderStatus = document.getElementById('loader-status');
+  const loader = document.getElementById('loader');
+  const backBtn = document.getElementById('back-btn');
+
+  const statusMessages = [
+    { at: 0,    msg: 'Initializing graph substrate…' },
+    { at: 0.18, msg: 'Mounting Neo4j node manifold…' },
+    { at: 0.36, msg: 'Hydrating BrokiePointer lattice…' },
+    { at: 0.54, msg: 'Resolving trust-decay vectors…' },
+    { at: 0.72, msg: 'Compiling contradiction graph…' },
+    { at: 0.88, msg: 'Rendering semantic shells…' },
+    { at: 0.97, msg: 'Ready.' },
+  ];
+
+  let msgIdx = 0;
+  const start = performance.now();
+
+  function tickLoader() {
+    const elapsed = performance.now() - start;
+    const progress = Math.min(elapsed / LOAD_DURATION, 1);
+    barFill.style.width = (progress * 100) + '%';
+
+    // Advance status messages
+    while (msgIdx < statusMessages.length - 1 && progress >= statusMessages[msgIdx + 1].at) {
+      msgIdx++;
+    }
+    loaderStatus.textContent = statusMessages[msgIdx].msg;
+
+    if (progress < 1) {
+      requestAnimationFrame(tickLoader);
+    } else {
+      // Done — fade out loader, show back button
+      loader.classList.add('fade-out');
+      backBtn.classList.add('visible');
+      setTimeout(() => { loader.style.display = 'none'; }, 850);
+    }
+  }
+
+  requestAnimationFrame(tickLoader);
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+
+// ── Scene Setup ──────────────────────────────────────────────────────
+const mount = document.getElementById('threejs-mount');
+const W = mount.clientWidth, H = mount.clientHeight;
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x050a0f);
+scene.fog = new THREE.FogExp2(0x050a0f, 0.018);
+
+const camera = new THREE.PerspectiveCamera(55, W / H, 0.1, 300);
+camera.position.set(0, 12, 42);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setSize(W, H);
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.1;
+mount.appendChild(renderer.domElement);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.06;
+controls.autoRotate = true;
+controls.autoRotateSpeed = 0.35;
+controls.minDistance = 8;
+controls.maxDistance = 90;
+
+// ── Post-processing ──────────────────────────────────────────────────
+const composer = new EffectComposer(renderer);
+composer.addPass(new RenderPass(scene, camera));
+const bloom = new UnrealBloomPass(new THREE.Vector2(W, H), 1.2, 0.6, 0.55);
+composer.addPass(bloom);
+
+// ── Lights ───────────────────────────────────────────────────────────
+scene.add(new THREE.AmbientLight(0x0a1220, 4));
+const pointA = new THREE.PointLight(0x4ade80, 3, 60);
+pointA.position.set(0, 0, 0);
+scene.add(pointA);
+const pointB = new THREE.PointLight(0x22d3ee, 1.5, 80);
+pointB.position.set(20, 15, -20);
+scene.add(pointB);
+
+// ── Shell definitions ─────────────────────────────────────────────────
+// 5 semantic shells: Vault (core) → Surface (outermost)
+const SHELLS = [
+  { name: 'Vault',      radius: 3.2,  nodeCount: 14,  color: 0x4ade80, emissive: 0x22c55e, nodeSize: 0.18, lineOpacity: 0.55 },
+  { name: 'Compressor', radius: 7.0,  nodeCount: 28,  color: 0x22d3ee, emissive: 0x06b6d4, nodeSize: 0.14, lineOpacity: 0.38 },
+  { name: 'Court',      radius: 12.2, nodeCount: 52,  color: 0xa78bfa, emissive: 0x8b5cf6, nodeSize: 0.11, lineOpacity: 0.26 },
+  { name: 'Watchers',   radius: 18.5, nodeCount: 96,  color: 0xfbbf24, emissive: 0xf59e0b, nodeSize: 0.09, lineOpacity: 0.16 },
+  { name: 'Surface',    radius: 26.0, nodeCount: 160, color: 0xf87171, emissive: 0xef4444, nodeSize: 0.07, lineOpacity: 0.10 },
+];
+
+// ── Helpers ───────────────────────────────────────────────────────────
+function fibonacciSphere(count, radius) {
+  const pts = [];
+  const golden = Math.PI * (3 - Math.sqrt(5));
+  for (let i = 0; i < count; i++) {
+    const y = 1 - (i / (count - 1)) * 2;
+    const r = Math.sqrt(1 - y * y);
+    const theta = golden * i;
+    pts.push(new THREE.Vector3(
+      Math.cos(theta) * r * radius,
+      y * radius,
+      Math.sin(theta) * r * radius
+    ));
+  }
+  return pts;
+}
+
+function noise3(x, y, z, t) {
+  return (
+    Math.sin(x * 0.8 + t * 0.7) * Math.cos(y * 0.6 + t * 0.5) +
+    Math.cos(z * 0.9 + t * 0.4) * Math.sin(x * 0.5 - t * 0.3)
+  ) * 0.5;
+}
+
+// ── Build shells ──────────────────────────────────────────────────────
+const shellGroups = [];
+const allPositions = []; // flat array of { pos, shellIdx }
+
+SHELLS.forEach((shell, si) => {
+  const group = new THREE.Group();
+  scene.add(group);
+  shellGroups.push(group);
+
+  const positions = fibonacciSphere(shell.nodeCount, shell.radius);
+  positions.forEach(p => allPositions.push({ pos: p, shellIdx: si }));
+
+  // Instanced nodes
+  const geo = new THREE.SphereGeometry(shell.nodeSize, 8, 8);
+  const mat = new THREE.MeshStandardMaterial({
+    color: shell.color,
+    emissive: shell.emissive,
+    emissiveIntensity: 1.2,
+    roughness: 0.3,
+    metalness: 0.5,
+  });
+  const mesh = new THREE.InstancedMesh(geo, mat, positions.length);
+  const dummy = new THREE.Object3D();
+  positions.forEach((p, i) => {
+    dummy.position.copy(p);
+    dummy.updateMatrix();
+    mesh.setMatrixAt(i, dummy.matrix);
+  });
+  mesh.instanceMatrix.needsUpdate = true;
+  group.add(mesh);
+  group.__instancedMesh = mesh;
+  group.__positions = positions;
+  group.__shell = shell;
+
+  // Shell wireframe ring (latitude lines)
+  const ringGeo = new THREE.TorusGeometry(shell.radius, 0.012, 4, 96);
+  const ringMat = new THREE.MeshBasicMaterial({
+    color: shell.color,
+    transparent: true,
+    opacity: 0.07,
+  });
+  for (let i = 0; i < 3; i++) {
+    const ring = new THREE.Mesh(ringGeo, ringMat);
+    ring.rotation.x = Math.PI / 2 + i * (Math.PI / 3.5);
+    ring.rotation.y = i * 0.9;
+    group.add(ring);
+  }
+});
+
+// ── Inter-shell contradiction lines ───────────────────────────────────
+const LINE_COUNT = 180;
+const linePositions = new Float32Array(LINE_COUNT * 6);
+const lineGeo = new THREE.BufferGeometry();
+lineGeo.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
+lineGeo.setDrawRange(0, LINE_COUNT * 2);
+// (line material created inline below)
+
+const lineSegs = new THREE.LineSegments(
+  lineGeo,
+  new THREE.LineBasicMaterial({ color: 0x4ade80, transparent: true, opacity: 0.12, vertexColors: false })
+);
+scene.add(lineSegs);
+
+// Pre-pick random node pairs across shells
+const linePairs = [];
+for (let i = 0; i < LINE_COUNT; i++) {
+  const a = allPositions[Math.floor(Math.random() * allPositions.length)];
+  const b = allPositions[Math.floor(Math.random() * allPositions.length)];
+  linePairs.push({ a, b, phase: Math.random() * Math.PI * 2, speed: 0.3 + Math.random() * 0.7 });
+}
+
+// ── Core glow ─────────────────────────────────────────────────────────
+const coreGeo = new THREE.SphereGeometry(1.8, 32, 32);
+const coreMat = new THREE.MeshStandardMaterial({
+  color: 0x4ade80,
+  emissive: 0x22c55e,
+  emissiveIntensity: 3.5,
+  roughness: 0.1,
+  metalness: 0.8,
+  transparent: true,
+  opacity: 0.92,
+});
+scene.add(new THREE.Mesh(coreGeo, coreMat));
+
+// Inner haze
+const hazeGeo = new THREE.SphereGeometry(2.6, 16, 16);
+const hazeMat = new THREE.MeshBasicMaterial({
+  color: 0x4ade80,
+  transparent: true,
+  opacity: 0.06,
+  side: THREE.BackSide,
+});
+scene.add(new THREE.Mesh(hazeGeo, hazeMat));
+
+// ── Cinematic auto-sequence state ─────────────────────────────────────
+// Reveal layers one by one (15s each), hold full (30s), then repeat
+const SEQ_PER_SHELL = 15;   // seconds
+const SEQ_HOLD     = 30;    // seconds hold when all visible
+const SEQ_TOTAL    = SHELLS.length * SEQ_PER_SHELL + SEQ_HOLD;
+
+let visibleShells = 0; // how many shells are currently shown
+
+// Start with only Vault visible
+shellGroups.forEach((g, i) => { g.visible = i === 0; });
+visibleShells = 1;
+
+// ── UI Panel ──────────────────────────────────────────────────────────
+const panel = document.createElement('div');
+panel.style.cssText = `
+  position: fixed; top: 1.4rem; right: 1.4rem; z-index: 500;
+  display: flex; flex-direction: column; gap: 0.45rem;
+  font-family: 'Geist', ui-sans-serif, sans-serif;
+`;
+document.body.appendChild(panel);
+
+const panelTitle = document.createElement('div');
+panelTitle.style.cssText = `
+  font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase;
+  color: rgba(74,222,128,0.5); padding-bottom: 0.3rem;
+  border-bottom: 1px solid rgba(74,222,128,0.1);
+`;
+panelTitle.textContent = 'Memory Shells';
+panel.appendChild(panelTitle);
+
+const layerBtns = SHELLS.map((shell, i) => {
+  const btn = document.createElement('button');
+  btn.style.cssText = `
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.35rem 0.75rem; border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(5,10,15,0.65); backdrop-filter: blur(8px);
+    color: rgba(226,232,240,0.45); font-size: 0.68rem;
+    letter-spacing: 0.04em; cursor: pointer;
+    transition: all 0.25s ease;
+  `;
+
+  const dot = document.createElement('span');
+  dot.style.cssText = `
+    width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
+    background: #${shell.color.toString(16).padStart(6, '0')};
+    opacity: 0.4;
+    box-shadow: 0 0 0 0 rgba(74,222,128,0);
+    transition: all 0.25s ease;
+  `;
+  btn.appendChild(dot);
+  btn.appendChild(document.createTextNode(shell.name));
+  panel.appendChild(btn);
+
+  btn.addEventListener('click', () => {
+    shellGroups[i].visible = !shellGroups[i].visible;
+    updatePanelState();
+  });
+
+  return { btn, dot };
+});
+
+function updatePanelState() {
+  shellGroups.forEach((g, i) => {
+    const { btn, dot } = layerBtns[i];
+    const active = g.visible;
+    const hex = '#' + SHELLS[i].color.toString(16).padStart(6, '0');
+    dot.style.opacity = active ? '1' : '0.25';
+    dot.style.boxShadow = active ? `0 0 6px 2px ${hex}55` : 'none';
+    btn.style.color = active ? 'rgba(226,232,240,0.9)' : 'rgba(226,232,240,0.3)';
+    btn.style.borderColor = active ? `${hex}44` : 'rgba(255,255,255,0.06)';
+  });
+}
+updatePanelState();
+
+// ── Animation Loop ────────────────────────────────────────────────────
+const clock = new THREE.Clock();
+let seqTime = 0;
+
+function animate() {
+  requestAnimationFrame(animate);
+  const delta = clock.getDelta();
+  const t = clock.getElapsedTime();
+
+  // Cinematic sequence
+  seqTime += delta;
+  const cycleT = seqTime % SEQ_TOTAL;
+  const targetVisible = Math.min(
+    Math.floor(cycleT / SEQ_PER_SHELL) + 1,
+    SHELLS.length
+  );
+  if (targetVisible > visibleShells) {
+    shellGroups[visibleShells].visible = true;
+    visibleShells = targetVisible;
+    updatePanelState();
+  }
+  if (cycleT < delta * 2 && seqTime > SEQ_TOTAL) {
+    // Loop reset
+    shellGroups.forEach((g, i) => { g.visible = i === 0; });
+    visibleShells = 1;
+    updatePanelState();
+  }
+
+  // Rotate shells at different speeds
+  shellGroups.forEach((g, i) => {
+    g.rotation.y = t * (0.04 + i * 0.012);
+    g.rotation.x = Math.sin(t * 0.07 + i) * 0.06;
+  });
+
+  // Noise-animate contradiction lines
+  const posArr = lineGeo.attributes.position.array;
+  for (let i = 0; i < LINE_COUNT; i++) {
+    const pair = linePairs[i];
+    const noiseT = t * pair.speed + pair.phase;
+    const na = noise3(pair.a.pos.x, pair.a.pos.y, pair.a.pos.z, noiseT) * 0.8;
+    const nb = noise3(pair.b.pos.x, pair.b.pos.y, pair.b.pos.z, noiseT) * 0.8;
+
+    posArr[i * 6 + 0] = pair.a.pos.x + na;
+    posArr[i * 6 + 1] = pair.a.pos.y + na * 0.5;
+    posArr[i * 6 + 2] = pair.a.pos.z + na;
+    posArr[i * 6 + 3] = pair.b.pos.x + nb;
+    posArr[i * 6 + 4] = pair.b.pos.y + nb * 0.5;
+    posArr[i * 6 + 5] = pair.b.pos.z + nb;
+  }
+  lineGeo.attributes.position.needsUpdate = true;
+
+  // Pulse core
+  coreMat.emissiveIntensity = 3.0 + Math.sin(t * 2.1) * 0.8;
+  pointA.intensity = 3 + Math.sin(t * 1.7) * 0.6;
+
+  controls.update();
+  composer.render();
+}
+
+animate();
+
+// ── Resize ────────────────────────────────────────────────────────────
+window.addEventListener('resize', () => {
+  const w = mount.clientWidth, h = mount.clientHeight;
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+  renderer.setSize(w, h);
+  composer.setSize(w, h);
+});
+</script>
+
+</body>
+</html>

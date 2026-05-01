@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Brokie V2 - Mindball</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #0b101a;
+            overflow: hidden;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        #canvas-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        #ui-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            pointer-events: none;
+        }
+        .pointer-events-auto {
+            pointer-events: auto;
+        }
+        .layer-btn {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .layer-btn.active {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateX(-4px);
+        }
+        .layer-btn.active .layer-dot {
+            transform: scale(1.4);
+        }
+        
+        /* Custom heavy text shadow to ensure white text is readable over glowing 3D objects */
+        .cinematic-text-shadow {
+            text-shadow: 0 4px 24px rgba(0,0,0,1), 0 0 40px rgba(0,0,0,0.8), 0 0 10px rgba(0,0,0,1);
+        }
+    </style>
+    
+    <!-- Three.js Import Map -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+</head>
+<body class="text-white selection:bg-cyan-900 selection:text-white">
+
+    <!-- Initialization Overlay for Web Audio API Policy -->
+    <div id="init-overlay" class="absolute inset-0 z-50 flex flex-col items-center justify-center bg-[#0b101a] text-white cursor-pointer transition-opacity duration-1000">
+        <div class="w-12 h-12 border-t-2 border-cyan-400 rounded-full animate-spin mb-6"></div>
+        <div class="text-[10px] tracking-[0.4em] uppercase text-slate-400 animate-pulse font-light">Click anywhere to initialize interface</div>
+    </div>
+
+    <div id="canvas-container"></div>
+
+    <!-- Cinematic Text Overlay -->
+    <div id="cinematic-text-container" class="absolute inset-0 pointer-events-none flex flex-col justify-center items-center text-center opacity-0 z-20 px-6 md:px-12 transition-opacity duration-1000">
+        <div id="cinematic-body" class="max-w-4xl text-lg md:text-3xl font-light text-white leading-relaxed md:leading-loose cinematic-text-shadow"></div>
+    </div>
+
+    <!-- Minimal UI Overlay -->
+    <div id="ui-layer" class="flex flex-col justify-between p-6 opacity-0 transition-opacity duration-1000">
+        <!-- Top Section -->
+        <div class="flex justify-between items-start">
+            <div class="flex flex-col gap-3">
+                <a href="../index.html" class="pointer-events-auto flex items-center gap-2 text-[9px] tracking-[0.2em] uppercase text-slate-500 hover:text-cyan-400 transition-colors duration-300 group w-fit">
+                    <svg class="w-3 h-3 transform group-hover:-translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                    Back to Project
+                </a>
+                <h1 class="text-xs tracking-[0.3em] uppercase text-slate-300 font-light flex items-center gap-3 drop-shadow-md">
+                    Brokie V2
+                    <span class="inline-block w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.8)] animate-pulse"></span>
+                    <span id="top-countdown-text" class="text-cyan-400 font-mono tracking-[0.2em] font-semibold ml-2 opacity-90"></span>
+                </h1>
+            </div>
+            
+            <!-- Layer Controls -->
+            <div class="flex flex-col gap-1 pointer-events-auto backdrop-blur-sm bg-slate-900/20 border border-white/5 p-3 rounded-xl shadow-lg min-w-[140px]" id="layer-controls">
+                <div class="text-[8px] tracking-[0.2em] uppercase text-slate-500 mb-1 px-1 font-semibold">Semantic Shells</div>
+                <!-- Populated by JS -->
+            </div>
+        </div>
+
+        <!-- Bottom Section -->
+        <div class="flex justify-between items-end pb-2">
+            <div class="flex items-center gap-6 text-[9px] tracking-widest uppercase font-semibold opacity-70">
+                <div class="flex items-center gap-2 text-cyan-400 drop-shadow-[0_0_6px_rgba(6,182,212,0.8)]">
+                    <span class="w-3 h-[1px] bg-cyan-400 shadow-[0_0_6px_#06b6d4]"></span> Truth Paths
+                </div>
+                <div class="flex items-center gap-2 text-red-500 drop-shadow-[0_0_6px_rgba(239,68,68,0.8)]">
+                    <span class="w-3 h-[1px] bg-red-500 shadow-[0_0_6px_#ef4444] animate-pulse"></span> Contradictions
+                </div>
+            </div>
+            <div id="sys-status" class="text-[9px] tracking-widest text-slate-500 uppercase font-mono opacity-60 transition-all duration-500">
+                Sys.Status: <span id="sys-status-text" class="text-emerald-400/80">Nominal</span> // T-Graph: <span id="tgraph-status-text" class="text-emerald-400/80">Synced</span> <span id="countdown-text" class="ml-2 text-cyan-400 font-bold tracking-[0.2em]"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Application Script -->
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+        import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+        import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+        import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+
+        // --- Audio System (Continuous Arrival Style Tone) ---
+        let audioCtx, masterGain, filter, oscillators = [], subOsc;
+        
+        function initAudio() {
+            if (!audioCtx) {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                audioCtx = new AudioContext();
+                
+                // Master Gain (Controls overall volume)
+                masterGain = audioCtx.createGain();
+                masterGain.gain.value = 0; // Start silent
+                masterGain.connect(audioCtx.destination);
+
+                // Lowpass Filter (Controls the muffled vs brassy bright tone)
+                filter = audioCtx.createBiquadFilter();
+                filter.type = 'lowpass';
+                filter.frequency.value = 40; // Deeply muffled initially
+                filter.Q.value = 5.0; // High resonance for that roaring edge
+                filter.connect(masterGain);
+
+                // Detuned Oscillators (The heavy, beating dissonance)
+                // Root notes around deep E1 (~41Hz) and E2 (~82Hz)
+                const frequencies = [41.20, 41.80, 82.41, 83.10]; 
+                
+                frequencies.forEach(f => {
+                    const osc = audioCtx.createOscillator();
+                    osc.type = 'sawtooth';
+                    osc.frequency.value = f;
+                    osc.connect(filter);
+                    osc.start();
+                    oscillators.push(osc);
+                });
+
+                // Sub-bass layer for theater-rumble
+                subOsc = audioCtx.createOscillator();
+                subOsc.type = 'sine';
+                subOsc.frequency.value = 20.60; // E0 (Very deep sub)
+                subOsc.connect(masterGain);
+                subOsc.start();
+            }
+        }
+
+        // Dynamically shapes the sound based on exactly where we are in the cinematic timeline
+        function updateContinuousAudio(currentTime, totalBuildTime, totalHoldTime) {
+            if (!audioCtx || !masterGain || !filter) return;
+
+            let targetGain = 0;
+            let targetFreq = 40;
+
+            if (currentTime < totalBuildTime) {
+                // --- Build Phase (Ominous rising drone) ---
+                const progress = currentTime / totalBuildTime;
+                
+                // Volume slowly creeps up as shells are built
+                targetGain = progress * 0.15; 
+                // Filter slowly opens slightly, getting more tense
+                targetFreq = 40 + (progress * 200);
+
+            } else if (currentTime < totalHoldTime) {
+                // --- Climax Phase (Introducing Brokie V2) ---
+                const holdProgress = (currentTime - totalBuildTime); 
+                
+                if (holdProgress < 3.0) {
+                    // Massive Swell (The "Arrival" blast) over 3 seconds
+                    const blastProgress = holdProgress / 3.0; // 0 to 1
+                    targetGain = 0.15 + (blastProgress * 0.45); // Ramp up to 0.6 volume
+                    targetFreq = 240 + (blastProgress * 800); // Ramp up to 1040Hz
+                } else {
+                    // Sustain and decay back into the void
+                    const decayProgress = Math.min(1, (holdProgress - 3) / 15.0); // Decay over 15s
+                    targetGain = 0.6 - (decayProgress * 0.58); // Decay down to near silence (0.02)
+                    targetFreq = 1040 - (decayProgress * 980); // Decay down to 60Hz
+                }
+            } else {
+                // --- Reset Phase (Silence) ---
+                targetGain = 0;
+                targetFreq = 40;
+            }
+
+            // Important Fix: Assign values directly. 
+            // Using setTargetAtTime inside a 60fps animation loop freezes the envelope!
+            masterGain.gain.value = targetGain;
+            filter.frequency.value = targetFreq;
+        }
+
+        // --- Configuration ---
+        const CONFIG = {
+            layers: [
+                { id: 'surface', name: 'The Surface', radius: 90, color: '#8b5cf6', nodeColor: '#eab308', speed: 0.0005, opacity: 0.20 },
+                { id: 'watchers', name: 'The Watchers', radius: 70, color: '#3b82f6', nodeColor: '#ec4899', speed: 0.0007, opacity: 0.35 },
+                { id: 'court', name: 'The Court', radius: 52, color: '#10b981', nodeColor: '#a855f7', speed: 0.0009, opacity: 0.50 },
+                { id: 'compressor', name: 'The Compressor', radius: 36, color: '#f59e0b', nodeColor: '#06b6d4', speed: 0.0012, opacity: 0.70 },
+                { id: 'vault', name: 'The Vault', radius: 22, color: '#ef4444', nodeColor: '#84cc16', speed: 0.0016, opacity: 0.90 }
+            ],
+            nodesPerLayer: 80,
+            pillars: 20,
+            truthPaths: 6,
+            contradictions: 24,
+            bgColor: 0x0b101a,
+            baseNodeSize: 2.0
+        };
+
+        const CINEMATIC_TEXTS = [
+            { 
+                title: "Shell 1 — The Vault", 
+                sentences: [
+                    "It starts with memory.", 
+                    "A graph crystallizes in the dark — every entity, every relationship, every artifact the Agentic System has ever known, written into durable stone.", 
+                    "This is the foundation.", 
+                    "Nothing above it exists without it."
+                ] 
+            },
+            { 
+                title: "Shell 2 — The Compressor", 
+                sentences: [
+                    "Now the graph needs to speak.", 
+                    "A 10-stage pipeline wraps around the vault, intercepting every message between agents and crushing it down — 90 to 99% smaller — until entire world-states travel as nothing more than a single pointer.", 
+                    "Communication becomes nearly free."
+                ] 
+            },
+            { 
+                title: "Shell 3 — The Court", 
+                sentences: [
+                    "Raw signals aren't truth.", 
+                    "A settlement layer rises around the compressor, forcing every claim through judiciary review and formal verdict before it can touch the vault below.", 
+                    "Evidence enters.", 
+                    "Propositions crystallize.", 
+                    "Only what survives the court becomes permanent."
+                ] 
+            },
+            { 
+                title: "Shell 4 — The Watchers", 
+                sentences: [
+                    "Nine sentinels take their positions around the court.", 
+                    "They monitor contradictions, resolve duplicate identities, map topology gaps, validate quality, propose improvements, and govern what the system is allowed to change about itself.", 
+                    "Nothing mutates unchecked."
+                ] 
+            },
+            { 
+                title: "Shell 5 — The Surface", 
+                sentences: [
+                    "The outermost layer opens to the world.", 
+                    "The routing substrate, Lead Agent, and the Global Intelligence Market reach in through stable contracts — querying the graph, hydrating pointers, reading settlement verdicts — without ever seeing the machinery beneath.", 
+                    "Everything below serves this moment: a clean, honest answer delivered on demand."
+                ] 
+            }
+        ];
+
+        // --- Pre-calculate Timings for Cinematic Text ---
+        const STAGE_DURATION = 25.0;
+        CINEMATIC_TEXTS.forEach(stage => {
+            const totalChars = stage.sentences.reduce((sum, s) => sum + s.length, 0);
+            const baseTime = 2.0; 
+            const remainingTime = STAGE_DURATION - (baseTime * stage.sentences.length);
+            
+            let accumulatedTime = 0;
+            stage.timings = stage.sentences.map(s => {
+                const duration = baseTime + remainingTime * (s.length / totalChars);
+                const start = accumulatedTime;
+                accumulatedTime += duration;
+                return { start, end: accumulatedTime, duration, text: s };
+            });
+        });
+
+        // --- Core Variables ---
+        let scene, camera, renderer, composer, controls, clock;
+        let layerGroups = [];
+        let globalTime = 0;
+        let cinematicTime = 0;
+        let contradictionLines, contradictionPositions, baseContradictionPositions;
+        let raycaster, mouse;
+        let allNodes = [];
+        let allEdges = [];
+        let pointObjects = [];
+        let hoveredNode = null;
+        let activeLayerId = null;
+        
+        const layerOpacities = CONFIG.layers.map(l => ({ current: 0, target: l.opacity, base: l.opacity }));
+
+        // --- Cinematic Sequence State ---
+        let cinematic = {
+            active: false, // Waits for user click to begin
+            stageDuration: 25.0, 
+            holdDuration: 25.0,  
+            resetDelay: 10.0,    // 10 second delay loop restart
+            sequence: [4, 3, 2, 1, 0], 
+            currentStage: -1
+        };
+
+        // UI Initialization Hook
+        document.getElementById('init-overlay').addEventListener('click', async function() {
+            initAudio();
+            
+            // Explicitly resume Audio Context for strict browsers (Safari/Chrome)
+            if (audioCtx && audioCtx.state === 'suspended') {
+                await audioCtx.resume();
+            }
+
+            this.style.opacity = '0';
+            document.getElementById('ui-layer').style.opacity = '1';
+            setTimeout(() => this.remove(), 1000);
+            
+            // Begin the show
+            cinematic.active = true;
+            cinematicTime = 0;
+        });
+
+        init();
+        animate();
+
+        function init() {
+            const container = document.getElementById('canvas-container');
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(CONFIG.bgColor);
+            scene.fog = new THREE.FogExp2(CONFIG.bgColor, 0.004);
+
+            clock = new THREE.Clock();
+
+            camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
+            camera.position.set(0, 30, 220); 
+
+            renderer = new THREE.WebGLRenderer({ antialias: false, powerPreference: "high-performance" });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.toneMapping = THREE.ACESFilmicToneMapping;
+            renderer.toneMappingExposure = 1.2;
+            container.appendChild(renderer.domElement);
+
+            const renderScene = new RenderPass(scene, camera);
+            const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.5, 0.4, 0.85);
+            bloomPass.threshold = 0.35;
+            bloomPass.strength = 0.5;
+            bloomPass.radius = 0.5;
+
+            composer = new EffectComposer(renderer);
+            composer.addPass(renderScene);
+            composer.addPass(bloomPass);
+
+            controls = new OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.04;
+            controls.enablePan = false;
+            controls.enableZoom = true;
+            controls.enableRotate = true;
+            controls.minDistance = 10;
+            controls.maxDistance = 350;
+            controls.autoRotate = true; 
+            controls.autoRotateSpeed = 0.6; 
+
+            controls.addEventListener('start', () => {
+                controls.autoRotate = false;
+            });
+
+            generateMindballData();
+            buildMindball();
+
+            raycaster = new THREE.Raycaster();
+            raycaster.params.Points.threshold = 2.0;
+            mouse = new THREE.Vector2(-1, -1);
+            
+            window.addEventListener('resize', onWindowResize);
+            window.addEventListener('mousemove', onMouseMove);
+            
+            buildUI();
+        }
+
+        // --- Data Generation ---
+        function generateMindballData() {
+            const pillarAngles = [];
+            for(let i=0; i<CONFIG.pillars; i++) {
+                const theta = Math.acos(THREE.MathUtils.randFloatSpread(2)); 
+                const phi = THREE.MathUtils.randFloatSpread(Math.PI * 2);
+                pillarAngles.push({ theta, phi, isTruthPath: i < CONFIG.truthPaths });
+            }
+
+            CONFIG.layers.forEach((layerDef, layerIndex) => {
+                const layerNodes = [];
+                
+                pillarAngles.forEach((angles, i) => {
+                    layerNodes.push({
+                        id: `l${layerIndex}_p${i}`,
+                        layerIndex,
+                        isPillar: true,
+                        pillarIndex: i,
+                        isTruthPath: angles.isTruthPath,
+                        pos: sphericalToCartesian(layerDef.radius, angles.theta, angles.phi),
+                        baseColor: new THREE.Color(layerDef.nodeColor),
+                        connections: []
+                    });
+                });
+
+                for(let i=0; i<CONFIG.nodesPerLayer; i++) {
+                    const theta = Math.acos(THREE.MathUtils.randFloatSpread(2)); 
+                    const phi = THREE.MathUtils.randFloatSpread(Math.PI * 2);
+                    layerNodes.push({
+                        id: `l${layerIndex}_s${i}`,
+                        layerIndex,
+                        isPillar: false,
+                        isTruthPath: false,
+                        pos: sphericalToCartesian(layerDef.radius, theta, phi),
+                        baseColor: new THREE.Color(layerDef.nodeColor).multiplyScalar(0.85),
+                        connections: []
+                    });
+                }
+                allNodes.push(...layerNodes);
+            });
+
+            CONFIG.layers.forEach((_, layerIndex) => {
+                const nodesInLayer = allNodes.filter(n => n.layerIndex === layerIndex);
+                const threshold = layerIndex === 0 ? 30 : (layerIndex * 8 + 15); 
+                
+                for(let i=0; i<nodesInLayer.length; i++) {
+                    let connectionsMade = 0;
+                    for(let j=i+1; j<nodesInLayer.length; j++) {
+                        const dist = nodesInLayer[i].pos.distanceTo(nodesInLayer[j].pos);
+                        if(dist < threshold && connectionsMade < 4) {
+                            allEdges.push({ source: nodesInLayer[i], target: nodesInLayer[j], type: 'intra' });
+                            nodesInLayer[i].connections.push(nodesInLayer[j]);
+                            nodesInLayer[j].connections.push(nodesInLayer[i]);
+                            connectionsMade++;
+                        }
+                    }
+                }
+            });
+
+            for(let p=0; p<CONFIG.pillars; p++) {
+                const pillarNodes = allNodes.filter(n => n.isPillar && n.pillarIndex === p);
+                pillarNodes.sort((a,b) => b.layerIndex - a.layerIndex); 
+                
+                for(let i=0; i<pillarNodes.length - 1; i++) {
+                    const type = pillarNodes[i].isTruthPath ? 'truth' : 'bridge';
+                    allEdges.push({ source: pillarNodes[i], target: pillarNodes[i+1], type: type });
+                    pillarNodes[i].connections.push(pillarNodes[i+1]);
+                    pillarNodes[i+1].connections.push(pillarNodes[i]);
+                }
+            }
+
+            for(let i=0; i<CONFIG.contradictions; i++) {
+                const srcNode = allNodes[Math.floor(Math.random() * allNodes.length)];
+                let possibleTargets = allNodes.filter(n => Math.abs(n.layerIndex - srcNode.layerIndex) >= 1 && Math.abs(n.layerIndex - srcNode.layerIndex) <= 2);
+                if(possibleTargets.length > 0) {
+                    const targetNode = possibleTargets[Math.floor(Math.random() * possibleTargets.length)];
+                    allEdges.push({ source: srcNode, target: targetNode, type: 'contradiction' });
+                }
+            }
+        }
+
+        function sphericalToCartesian(radius, theta, phi) {
+            return new THREE.Vector3(
+                radius * Math.sin(theta) * Math.cos(phi),
+                radius * Math.sin(theta) * Math.sin(phi),
+                radius * Math.cos(theta)
+            );
+        }
+
+        // --- 3D Construction ---
+        function buildMindball() {
+            CONFIG.layers.forEach((layerDef, layerIndex) => {
+                const group = new THREE.Group();
+                layerGroups.push(group);
+                scene.add(group);
+
+                const shellGeo = new THREE.SphereGeometry(layerDef.radius, 64, 64);
+                
+                const shellMat = new THREE.ShaderMaterial({
+                    uniforms: {
+                        color: { value: new THREE.Color(layerDef.color) },
+                        viewVector: { value: camera.position },
+                        opacityMultiplier: { value: 0.0 } 
+                    },
+                    vertexShader: `
+                        varying vec3 vNormal;
+                        varying vec3 vPositionNormal;
+                        void main() {
+                            vNormal = normalize(normalMatrix * normal);
+                            vPositionNormal = normalize((modelViewMatrix * vec4(position, 1.0)).xyz);
+                            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                        }
+                    `,
+                    fragmentShader: `
+                        uniform vec3 color;
+                        uniform float opacityMultiplier;
+                        varying vec3 vNormal;
+                        varying vec3 vPositionNormal;
+                        void main() {
+                            float fresnel = dot(vNormal, vPositionNormal);
+                            fresnel = clamp(1.0 - fresnel, 0.0, 1.0);
+                            fresnel = pow(fresnel, 4.0); 
+                            
+                            float baseAlpha = 0.01;
+                            float finalAlpha = (fresnel * 0.20 + baseAlpha) * opacityMultiplier;
+                            
+                            gl_FragColor = vec4(color, finalAlpha);
+                        }
+                    `,
+                    transparent: true,
+                    blending: THREE.AdditiveBlending,
+                    depthWrite: false,
+                    side: THREE.BackSide
+                });
+                
+                const shellMatFront = shellMat.clone();
+                shellMatFront.side = THREE.FrontSide;
+                
+                const shellBack = new THREE.Mesh(shellGeo, shellMat);
+                const shellFront = new THREE.Mesh(shellGeo, shellMatFront);
+                shellBack.userData = { layerIndex, isShell: true };
+                shellFront.userData = { layerIndex, isShell: true };
+                group.add(shellBack);
+                group.add(shellFront);
+
+                const nodesInLayer = allNodes.filter(n => n.layerIndex === layerIndex);
+                
+                const geometries = [
+                    new THREE.IcosahedronGeometry(1, 0),
+                    new THREE.BoxGeometry(1.4, 1.4, 1.4),
+                    new THREE.TetrahedronGeometry(1.2, 0),
+                    new THREE.OctahedronGeometry(1.2, 0),
+                    new THREE.SphereGeometry(1, 16, 16)
+                ];
+                
+                const nodeGeo = geometries[layerIndex];
+                
+                const nodeMat = new THREE.MeshBasicMaterial({
+                    color: 0xffffff,
+                    transparent: true,
+                    opacity: 0.0,
+                    blending: THREE.AdditiveBlending,
+                    depthWrite: false
+                });
+
+                const instancedMesh = new THREE.InstancedMesh(nodeGeo, nodeMat, nodesInLayer.length);
+                const dummy = new THREE.Object3D();
+
+                nodesInLayer.forEach((node, i) => {
+                    node.indexInPoints = i;
+                    dummy.position.copy(node.pos);
+                    dummy.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI);
+                    
+                    const scale = node.isTruthPath ? CONFIG.baseNodeSize * 1.5 : (node.isPillar ? CONFIG.baseNodeSize * 1.2 : CONFIG.baseNodeSize);
+                    dummy.scale.set(scale, scale, scale);
+                    dummy.updateMatrix();
+                    
+                    instancedMesh.setMatrixAt(i, dummy.matrix);
+                    instancedMesh.setColorAt(i, node.baseColor);
+                });
+
+                instancedMesh.instanceMatrix.needsUpdate = true;
+                if (instancedMesh.instanceColor) instancedMesh.instanceColor.needsUpdate = true;
+                
+                instancedMesh.userData = { layerIndex, nodes: nodesInLayer, isNodes: true };
+                group.add(instancedMesh);
+                pointObjects.push(instancedMesh);
+
+                const layerEdges = allEdges.filter(e => e.source.layerIndex === layerIndex && e.type !== 'contradiction');
+                if(layerEdges.length > 0) {
+                    const linePos = new Float32Array(layerEdges.length * 6);
+                    const lineCol = new Float32Array(layerEdges.length * 6);
+                    
+                    layerEdges.forEach((edge, i) => {
+                        const s = edge.source.pos;
+                        const t = edge.target.pos;
+                        linePos[i*6] = s.x; linePos[i*6+1] = s.y; linePos[i*6+2] = s.z;
+                        linePos[i*6+3] = t.x; linePos[i*6+4] = t.y; linePos[i*6+5] = t.z;
+                        
+                        let col = edge.type === 'truth' ? new THREE.Color(0x06b6d4) : edge.source.baseColor.clone().lerp(edge.target.baseColor, 0.5);
+                        if(edge.type === 'truth') col.multiplyScalar(1.1);
+                        
+                        const intensity = edge.type === 'truth' ? 1.0 : (edge.type === 'bridge' ? 0.3 : 0.15);
+                        
+                        lineCol[i*6] = col.r * intensity; lineCol[i*6+1] = col.g * intensity; lineCol[i*6+2] = col.b * intensity;
+                        lineCol[i*6+3] = col.r * intensity; lineCol[i*6+4] = col.g * intensity; lineCol[i*6+5] = col.b * intensity;
+                        
+                        edge.baseIntensity = intensity;
+                        edge.baseColor = col;
+                        edge.lineIndex = i;
+                    });
+
+                    const linesGeo = new THREE.BufferGeometry();
+                    linesGeo.setAttribute('position', new THREE.BufferAttribute(linePos, 3));
+                    linesGeo.setAttribute('color', new THREE.BufferAttribute(lineCol, 3));
+                    
+                    const linesMat = new THREE.LineBasicMaterial({
+                        vertexColors: true,
+                        transparent: true,
+                        blending: THREE.AdditiveBlending,
+                        depthWrite: false,
+                        opacity: 0.0 
+                    });
+                    
+                    const lines = new THREE.LineSegments(linesGeo, linesMat);
+                    lines.userData = { layerIndex, isLines: true };
+                    group.add(lines);
+                    
+                    layerEdges.forEach(e => e.lineGeo = linesGeo);
+                }
+            });
+
+            const cEdges = allEdges.filter(e => e.type === 'contradiction');
+            if(cEdges.length > 0) {
+                baseContradictionPositions = new Float32Array(cEdges.length * 6);
+                contradictionPositions = new Float32Array(cEdges.length * 6);
+                const cColors = new Float32Array(cEdges.length * 6);
+                
+                const cColor = new THREE.Color(0xff3311);
+                
+                cEdges.forEach((edge, i) => {
+                    const s = edge.source.pos;
+                    const t = edge.target.pos;
+                    baseContradictionPositions[i*6] = s.x; baseContradictionPositions[i*6+1] = s.y; baseContradictionPositions[i*6+2] = s.z;
+                    baseContradictionPositions[i*6+3] = t.x; baseContradictionPositions[i*6+4] = t.y; baseContradictionPositions[i*6+5] = t.z;
+                    
+                    cColors[i*6] = cColor.r; cColors[i*6+1] = cColor.g; cColors[i*6+2] = cColor.b;
+                    cColors[i*6+3] = cColor.r; cColors[i*6+4] = cColor.g; cColors[i*6+5] = cColor.b;
+                });
+
+                contradictionPositions.set(baseContradictionPositions);
+
+                const cGeo = new THREE.BufferGeometry();
+                cGeo.setAttribute('position', new THREE.BufferAttribute(contradictionPositions, 3));
+                cGeo.setAttribute('color', new THREE.BufferAttribute(cColors, 3));
+                
+                const cMat = new THREE.LineBasicMaterial({
+                    vertexColors: true,
+                    transparent: true,
+                    opacity: 0.0, 
+                    blending: THREE.AdditiveBlending,
+                    depthWrite: false
+                });
+                
+                contradictionLines = new THREE.LineSegments(cGeo, cMat);
+                scene.add(contradictionLines);
+            }
+        }
+
+        function buildUI() {
+            const container = document.getElementById('layer-controls');
+            [...CONFIG.layers].reverse().forEach((layer) => {
+                const btn = document.createElement('button');
+                btn.className = `layer-btn group relative flex items-center justify-between w-full py-1.5 px-2 rounded-lg border border-transparent hover:bg-white/5 hover:border-white/10 overflow-hidden`;
+                
+                btn.innerHTML = `
+                    <div class="flex items-center gap-2 z-10">
+                        <div class="layer-dot w-2 h-2 rounded-full border border-white/20 transition-transform duration-300 group-hover:scale-125 shadow-[0_0_10px_${layer.color}]" style="background-color: ${layer.color};"></div>
+                        <span class="text-xs font-semibold tracking-wider drop-shadow-md" style="color: ${layer.color}; text-shadow: 0 0 12px ${layer.color};">${layer.name}</span>
+                    </div>
+                    <span class="opacity-40 text-[8px] font-mono text-white transition-opacity group-hover:opacity-100 z-10">RAD_${layer.radius}</span>
+                    <div class="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300" style="background: linear-gradient(90deg, transparent, ${layer.color});"></div>
+                `;
+                
+                btn.addEventListener('mouseenter', () => setActiveLayer(layer.id, true));
+                btn.addEventListener('mouseleave', () => setActiveLayer(null, true));
+                
+                btn.id = `btn-${layer.id}`;
+                container.appendChild(btn);
+            });
+        }
+
+        function setActiveLayer(layerId, isUserInteraction = false) {
+            if (isUserInteraction && cinematic.active) {
+                cinematic.active = false;
+                
+                // Mute audio on manual override
+                if (masterGain) {
+                    masterGain.gain.setTargetAtTime(0, audioCtx.currentTime, 1.0);
+                }
+                
+                const statusText = document.getElementById('sys-status-text');
+                const tgraphText = document.getElementById('tgraph-status-text');
+                const countdownText = document.getElementById('countdown-text');
+                const topCountdownText = document.getElementById('top-countdown-text');
+                const cinematicOverlay = document.getElementById('cinematic-text-container');
+                
+                if(statusText) {
+                    statusText.innerHTML = `Manual Override`;
+                    statusText.className = `text-amber-400/80`;
+                }
+                if(tgraphText) {
+                    tgraphText.innerHTML = `Synced`;
+                    tgraphText.className = `text-emerald-400/80`;
+                }
+                if(countdownText) countdownText.innerHTML = ``;
+                if(topCountdownText) topCountdownText.innerHTML = ``;
+                if(cinematicOverlay) cinematicOverlay.style.opacity = '0'; 
+            }
+
+            activeLayerId = layerId;
+            
+            document.querySelectorAll('.layer-btn').forEach(btn => {
+                if(layerId && btn.id === `btn-${layerId}`) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                    if(layerId) btn.style.opacity = '0.2';
+                    else btn.style.opacity = '';
+                }
+            });
+
+            CONFIG.layers.forEach((layer, i) => {
+                if (!layerId) {
+                    layerOpacities[i].target = layerOpacities[i].base;
+                } else if (layer.id === layerId) {
+                    layerOpacities[i].target = 1.0; 
+                } else {
+                    layerOpacities[i].target = 0.05; 
+                }
+            });
+        }
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            composer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        function onMouseMove(event) {
+            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+        }
+
+        function handleRaycasting() {
+            raycaster.setFromCamera(mouse, camera);
+            
+            const intersects = raycaster.intersectObjects(pointObjects);
+            
+            if (intersects.length > 0) {
+                const intersect = intersects[0];
+                const pointsObj = intersect.object;
+                const layerNodes = pointsObj.userData.nodes;
+                
+                const nodeIndex = intersect.instanceId !== undefined ? intersect.instanceId : intersect.index; 
+                
+                if (nodeIndex !== undefined && layerNodes[nodeIndex]) {
+                    const node = layerNodes[nodeIndex];
+                    if (hoveredNode !== node) {
+                        hoveredNode = node;
+                        updateHighlightState();
+                    }
+                }
+            } else if (hoveredNode !== null) {
+                hoveredNode = null;
+                updateHighlightState();
+            }
+        }
+
+        function updateHighlightState() {
+            if (activeLayerId) return;
+
+            allEdges.forEach(edge => {
+                if (edge.type === 'contradiction') return;
+                const colors = edge.lineGeo.attributes.color.array;
+                const i = edge.lineIndex;
+                
+                let isHighlighted = false;
+                let isDimmed = false;
+                
+                if (hoveredNode) {
+                    if (edge.source === hoveredNode || edge.target === hoveredNode) {
+                        isHighlighted = true;
+                    } else {
+                        isDimmed = true;
+                    }
+                }
+
+                let intensity = edge.baseIntensity;
+                if (isHighlighted) intensity *= 4.0;
+                if (isDimmed) intensity *= 0.2;
+                
+                const c = edge.baseColor;
+                colors[i*6] = c.r * intensity; colors[i*6+1] = c.g * intensity; colors[i*6+2] = c.b * intensity;
+                colors[i*6+3] = c.r * intensity; colors[i*6+4] = c.g * intensity; colors[i*6+5] = c.b * intensity;
+                
+                edge.lineGeo.attributes.color.needsUpdate = true;
+            });
+        }
+
+        // --- Main Animation Loop ---
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            const delta = Math.min(clock.getDelta(), 0.1); 
+            globalTime += delta;
+            
+            if (cinematic.active) {
+                cinematicTime += delta;
+            }
+
+            controls.update();
+
+            // Cinematic Sequence Logic
+            if (cinematic.active) {
+                const totalBuildTime = cinematic.sequence.length * cinematic.stageDuration;
+                const totalHoldTime = totalBuildTime + cinematic.holdDuration;
+                const totalLoopTime = totalHoldTime + cinematic.resetDelay;
+                
+                // Sync continuous audio with the timeline
+                updateContinuousAudio(cinematicTime, totalBuildTime, totalHoldTime);
+
+                const totalTimeLeft = Math.max(0, Math.ceil(totalLoopTime - cinematicTime));
+                
+                const mins = Math.floor(totalTimeLeft / 60);
+                const secs = totalTimeLeft % 60;
+                const timeString = `[ T-${mins}:${secs.toString().padStart(2, '0')} ]`;
+
+                const statusText = document.getElementById('sys-status-text');
+                const tgraphText = document.getElementById('tgraph-status-text');
+                const countdownText = document.getElementById('countdown-text');
+                const topCountdownText = document.getElementById('top-countdown-text');
+                
+                const cinematicOverlay = document.getElementById('cinematic-text-container');
+                const cinematicBodyText = document.getElementById('cinematic-body');
+
+                if (cinematicTime < totalBuildTime) {
+                    // --- Build Up Phase ---
+                    const stage = Math.floor(cinematicTime / cinematic.stageDuration);
+                    const timeInStage = cinematicTime % cinematic.stageDuration;
+                    
+                    if (stage !== cinematic.currentStage) {
+                        cinematic.currentStage = stage;
+                        
+                        CONFIG.layers.forEach((layer, i) => {
+                            const seqIndex = cinematic.sequence.indexOf(i);
+                            if (seqIndex <= stage) {
+                                layerOpacities[i].target = layerOpacities[i].base;
+                            } else {
+                                layerOpacities[i].target = 0.0;
+                            }
+                        });
+                        
+                        document.querySelectorAll('.layer-btn').forEach(btn => btn.classList.remove('active'));
+                    }
+
+                    if (stage >= 0 && stage < CINEMATIC_TEXTS.length) {
+                        const currentTextObj = CINEMATIC_TEXTS[stage];
+                        
+                        let activeSentence = currentTextObj.timings[0];
+                        for (let i = 0; i < currentTextObj.timings.length; i++) {
+                            if (timeInStage >= currentTextObj.timings[i].start && timeInStage < currentTextObj.timings[i].end) {
+                                activeSentence = currentTextObj.timings[i];
+                                break;
+                            }
+                        }
+
+                        const localTime = timeInStage - activeSentence.start;
+                        const fadeTime = 0.8; 
+
+                        let textOpacity = 1.0;
+                        if (localTime < fadeTime) {
+                            textOpacity = localTime / fadeTime; 
+                        } else if (localTime > activeSentence.duration - fadeTime) {
+                            textOpacity = (activeSentence.duration - localTime) / fadeTime; 
+                        }
+
+                        cinematicOverlay.style.opacity = 1;
+                        cinematicBodyText.innerHTML = `<span style="opacity: ${Math.max(0, textOpacity)}; display: inline-block;">${activeSentence.text}</span>`;
+                    }
+
+                    if(statusText) {
+                        statusText.innerHTML = `Initializing Shell ${stage + 1}/5...`;
+                        statusText.className = `text-cyan-400/80 animate-pulse`;
+                    }
+                    if(tgraphText) tgraphText.innerHTML = `Syncing`;
+                    if(countdownText) countdownText.innerHTML = timeString;
+                    if(topCountdownText) topCountdownText.innerHTML = timeString;
+                    
+                } else if (cinematicTime < totalHoldTime) {
+                    // --- Final Hold Phase ---
+                    const timeInHold = cinematicTime - totalBuildTime;
+                    
+                    if (cinematic.currentStage !== 99) {
+                        cinematic.currentStage = 99; 
+                        CONFIG.layers.forEach((layer, i) => {
+                            layerOpacities[i].target = layerOpacities[i].base;
+                        });
+                    }
+
+                    const fadeTime = 1.5; 
+                    let textOpacity = 1.0;
+                    if (timeInHold < fadeTime) {
+                        textOpacity = timeInHold / fadeTime;
+                    } else if (timeInHold > cinematic.holdDuration - fadeTime) {
+                        textOpacity = (cinematic.holdDuration - timeInHold) / fadeTime;
+                    }
+                    
+                    cinematicOverlay.style.opacity = 1;
+                    cinematicBodyText.innerHTML = `<span style="opacity: ${Math.max(0, textOpacity)}; display: inline-block;" class="text-3xl md:text-5xl font-semibold tracking-[0.4em] uppercase text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.6)]">Introducing Brokie V2</span>`;
+                    
+                    if(statusText) {
+                        statusText.innerHTML = `Nominal`;
+                        statusText.className = `text-emerald-400/80`;
+                    }
+                    if(tgraphText) tgraphText.innerHTML = `Synced`;
+                    if(countdownText) countdownText.innerHTML = timeString;
+                    if(topCountdownText) topCountdownText.innerHTML = timeString;
+
+                } else if (cinematicTime < totalLoopTime) {
+                    // --- Delay Phase (Fade out to reset) ---
+                    const timeInDelay = cinematicTime - totalHoldTime;
+                    const delayTimeLeft = Math.ceil(cinematic.resetDelay - timeInDelay);
+
+                    cinematicOverlay.style.opacity = 0;
+
+                    CONFIG.layers.forEach((layer, i) => {
+                        layerOpacities[i].target = 0.0;
+                    });
+
+                    if(statusText) {
+                        statusText.innerHTML = `System Standby`;
+                        statusText.className = `text-slate-500`;
+                    }
+                    if(tgraphText) {
+                        tgraphText.innerHTML = `Offline`;
+                        tgraphText.className = `text-slate-500`;
+                    }
+                    if(countdownText) countdownText.innerHTML = timeString;
+                    if(topCountdownText) topCountdownText.innerHTML = timeString;
+
+                } else {
+                    // --- Loop Reset ---
+                    cinematicTime = 0;
+                    cinematic.currentStage = -1;
+                    
+                    // Reset opacities instantly to 0 for a clean restart
+                    CONFIG.layers.forEach((layer, i) => {
+                        layerOpacities[i].current = 0.0;
+                        layerOpacities[i].target = 0.0;
+                    });
+                }
+            }
+
+            handleRaycasting();
+
+            for(let i=0; i<CONFIG.layers.length; i++) {
+                layerOpacities[i].current += (layerOpacities[i].target - layerOpacities[i].current) * 0.05;
+            }
+
+            layerGroups.forEach((group, i) => {
+                group.rotation.y += CONFIG.layers[i].speed;
+                group.rotation.x += CONFIG.layers[i].speed * 0.3;
+                group.rotation.z += Math.sin(globalTime * 0.5 + i) * 0.0002;
+
+                const currentOpacity = layerOpacities[i].current;
+                
+                group.children.forEach(child => {
+                    if (child.userData.isShell) {
+                        child.material.uniforms.opacityMultiplier.value = currentOpacity;
+                    } else if (child.userData.isNodes) {
+                        child.material.opacity = currentOpacity * 0.6;
+                    } else if (child.userData.isLines) {
+                        child.material.opacity = currentOpacity;
+                    }
+                });
+            });
+
+            if (contradictionLines) {
+                const posAttr = contradictionLines.geometry.attributes.position;
+                const arr = posAttr.array;
+                
+                for(let i=0; i<CONFIG.contradictions * 6; i++) {
+                    const noise = (Math.random() - 0.5) * 0.4;
+                    arr[i] = baseContradictionPositions[i] + noise;
+                }
+                posAttr.needsUpdate = true;
+                
+                let targetContradictionOpacity = 0.4 + Math.random() * 0.4;
+                if (activeLayerId || cinematic.active) {
+                    targetContradictionOpacity *= 0.05; 
+                }
+                
+                contradictionLines.material.opacity += (targetContradictionOpacity - contradictionLines.material.opacity) * 0.1;
+            }
+
+            layerGroups.forEach(group => {
+                group.children.forEach(child => {
+                    if (child.userData.isShell) {
+                        child.material.uniforms.viewVector.value.copy(camera.position);
+                    }
+                });
+            });
+
+            composer.render();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1440,initial-scale=1" />
+<title>Panopticon — World Model</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --bg: #f4efe8;
+    --bg-2: #efe9e1;
+    --card: #fbf8f3;
+    --card-2: #faf6f0;
+    --ink: #1f2024;
+    --ink-2: #3b3d44;
+    --ink-3: #6b6e78;
+    --ink-4: #9a9ca4;
+    --ink-5: #c6c7cd;
+    --line: rgba(31, 32, 36, 0.08);
+    --line-soft: rgba(31, 32, 36, 0.05);
+    --shadow-sm: 0 1px 2px rgba(40, 32, 20, 0.04), 0 2px 8px rgba(40, 32, 20, 0.04);
+    --shadow-md: 0 2px 6px rgba(40, 32, 20, 0.05), 0 10px 30px rgba(40, 32, 20, 0.06);
+    --shadow-drawer: 0 10px 40px rgba(40, 32, 20, 0.10), 0 2px 10px rgba(40, 32, 20, 0.05);
+
+    --c-core: #c2410c;
+    --c-stable: #4d7c5f;
+    --c-contra: #b8345a;
+    --c-evidence: #2563a8;
+    --c-forecast: #7c5cbf;
+    --c-archive: #8a7355;
+    --c-emerging: #d4a017;
+    --c-live: #6ca367;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin:0; padding:0; height:100%; background: #e8e1d4; font-family: "Geist", ui-sans-serif, system-ui, sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  body { overflow: hidden; display:flex; align-items:center; justify-content:center; }
+  .mono { font-family: "Geist Mono", ui-monospace, monospace; }
+
+  .scaler {
+    width: 1440px; height: 900px;
+    transform-origin: center center;
+    position: relative;
+    background:
+      radial-gradient(1200px 780px at 50% 50%, #fbf6ee 0%, #f4efe8 55%, #ede6dc 100%);
+    overflow: hidden;
+  }
+
+  /* Floating chrome */
+  .chrome { position:absolute; z-index: 5; }
+  .chrome.tl { top: 22px; left: 24px; display:flex; align-items:center; gap: 10px; }
+  .chrome.tr { top: 22px; right: 24px; display:flex; align-items:center; gap: 10px; }
+  .chrome.bl { left: 24px; bottom: 22px; display:flex; align-items:center; gap: 10px; }
+  .chrome.br { right: 24px; bottom: 22px; display:flex; align-items:center; gap: 10px; }
+  .chrome.bc { left: 50%; transform: translateX(-50%); bottom: 30px; display:flex; flex-direction:column; align-items:center; gap:10px; }
+
+  .pill {
+    display:inline-flex; align-items:center; gap:8px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 7px 14px;
+    font-size: 12.5px;
+    color: var(--ink-2);
+    box-shadow: var(--shadow-sm);
+  }
+  .pill .dot { width:7px; height:7px; border-radius:50%; background: var(--c-live); box-shadow: 0 0 0 3px rgba(108,163,103,0.14); }
+  .pill .sep { color: var(--ink-4); }
+
+  .icon-btn {
+    width:40px; height:40px;
+    display:inline-flex; align-items:center; justify-content:center;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    box-shadow: var(--shadow-sm);
+    color: var(--ink-2);
+    cursor: pointer;
+    transition: background 120ms;
+  }
+  .icon-btn:hover { background: #f2ece3; }
+  .icon-btn.active { background: #1f2024; color: #fbf8f3; border-color: #1f2024; }
+  .search-pill {
+    display:inline-flex; align-items:center; gap:8px;
+    padding: 0 16px 0 14px; height:40px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    box-shadow: var(--shadow-sm);
+    font-size:13px; color: var(--ink-3);
+    cursor:pointer;
+  }
+
+  /* Stage fills the whole canvas */
+  .stage { position:absolute; inset: 0; display:flex; align-items:center; justify-content:center; }
+
+  /* Drawer panels */
+  .drawer {
+    position:absolute; top: 22px; bottom: 22px;
+    width: 300px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    box-shadow: var(--shadow-drawer);
+    overflow: hidden;
+    transform-origin: left center;
+    transition: transform 260ms cubic-bezier(.2,.8,.2,1), opacity 240ms;
+    z-index: 10;
+    display:flex; flex-direction:column;
+  }
+  .drawer.left { left: 24px; transform-origin: left center; }
+  .drawer.right { right: 24px; transform-origin: right center; }
+  .drawer.left.hidden { transform: translateX(calc(-100% - 30px)); opacity: 0; pointer-events:none; }
+  .drawer.right.hidden { transform: translateX(calc(100% + 30px)); opacity: 0; pointer-events:none; }
+
+  .drawer-head {
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--line-soft);
+    font-size: 12px; color: var(--ink-2); font-weight: 500;
+  }
+  .drawer-head .close {
+    width:26px; height:26px; border-radius:8px;
+    display:inline-flex; align-items:center; justify-content:center;
+    color: var(--ink-3); cursor:pointer;
+  }
+  .drawer-head .close:hover { background: #f2ece3; }
+
+  .drawer-body { overflow-y: auto; flex: 1; padding: 6px 0 10px; }
+  .drawer-body::-webkit-scrollbar { width: 6px; }
+  .drawer-body::-webkit-scrollbar-thumb { background: rgba(31,32,36,0.12); border-radius: 3px; }
+
+  /* cards inside drawer */
+  .section {
+    padding: 14px 14px 12px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .section:last-child { border-bottom: none; }
+  .section-title { font-size: 12px; color: var(--ink-2); font-weight: 500; margin-bottom: 10px; letter-spacing: 0.01em; }
+
+  .heading h1 { font-size: 26px; font-weight: 500; letter-spacing: -0.01em; margin: 0 0 2px 0; color: var(--ink); }
+  .heading .sub { display:flex; align-items:center; gap:6px; font-size: 13px; color: var(--ink-3); margin-bottom: 10px; }
+  .heading p { font-size: 12.5px; line-height: 1.55; color: var(--ink-3); margin: 0; }
+  .info-i { width:13px; height:13px; border-radius:50%; border:1px solid var(--ink-4); display:inline-flex; align-items:center; justify-content:center; font-size:9px; color: var(--ink-4); font-family:"Geist Mono",monospace; }
+
+  .ev-row { display:grid; grid-template-columns: 26px 1fr 10px; align-items:center; gap: 10px; padding: 6px 0; }
+  .ev-row .ico { width:26px; height:26px; border-radius:7px; background: #f1ece3; border:1px solid var(--line-soft); display:inline-flex; align-items:center; justify-content:center; color: var(--ink-3); }
+  .ev-row .txt { font-size: 12px; color: var(--ink-2); line-height: 1.25; }
+  .ev-row .txt .sub { font-size: 10.5px; color: var(--ink-4); margin-top:1px; }
+  .ev-row .rdot { width:7px; height:7px; border-radius:50%; }
+  .row-footer { display:flex; align-items:center; justify-content:space-between; padding-top: 8px; font-size: 11.5px; color: var(--ink-4); }
+  .row-footer a { color: var(--ink-2); text-decoration: none; }
+
+  .health { display:grid; grid-template-columns: 84px 1fr; gap: 10px; align-items:center; }
+  .gauge { position:relative; width:74px; height:74px; }
+  .gauge .num { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+  .gauge .num b { font-size: 20px; font-weight: 500; color: var(--ink); letter-spacing: -0.02em; }
+  .gauge .num span { font-size: 10px; color: #5a8a56; margin-top:1px; }
+  .metrics { display:grid; grid-template-columns: 1fr auto; gap: 4px 10px; font-size: 11px; color: var(--ink-3); }
+  .metrics b { font-weight: 500; color: var(--ink-2); }
+  .metrics .good { color: #5a8a56; font-weight: 500; }
+
+  .empty { display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding: 16px 14px 4px; }
+  .empty .tg { width:28px; height:28px; border-radius:50%; border:1px solid var(--ink-5); position:relative; margin-bottom: 12px; }
+  .empty .tg::before, .empty .tg::after { content:""; position:absolute; background: var(--ink-5); }
+  .empty .tg::before { top:50%; left:-5px; right:-5px; height:1px; }
+  .empty .tg::after { left:50%; top:-5px; bottom:-5px; width:1px; }
+  .empty .t1 { font-size: 12.5px; color: var(--ink-2); margin-bottom: 4px; }
+  .empty .t2 { font-size: 11.5px; color: var(--ink-4); max-width: 200px; line-height: 1.45; }
+
+  .inspector .head { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom: 10px; }
+  .inspector .head .title { font-size: 15px; color: var(--ink); font-weight: 500; }
+  .inspector .head .sub { font-size: 11.5px; color: var(--ink-4); margin-top: 2px; }
+  .inspector .meta { display:grid; grid-template-columns: 1fr auto; gap:6px 10px; font-size: 11.5px; color: var(--ink-3); }
+  .inspector .meta b { color: var(--ink); font-weight: 500; }
+  .inspector .bar { height: 4px; border-radius: 2px; background: rgba(31,32,36,0.08); overflow:hidden; margin-top: 10px; }
+  .inspector .bar > div { height:100%; border-radius:2px; }
+
+  .legend .row { display:flex; align-items:center; gap:10px; padding: 4px 0; font-size: 11.5px; color: var(--ink-3); }
+  .legend .dot { width:8px; height:8px; border-radius:50%; }
+
+  .stats .row { display:flex; align-items:center; justify-content:space-between; padding: 4px 0; font-size: 11.5px; color: var(--ink-3); }
+  .stats .row b { color: var(--ink); font-weight: 500; }
+
+  /* Floating action strip under globe */
+  .action-strip {
+    display:flex; align-items:center; gap: 2px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 4px;
+    box-shadow: var(--shadow-sm);
+  }
+  .action-strip .seg {
+    display:inline-flex; align-items:center; gap:6px;
+    padding: 6px 12px; border-radius: 999px;
+    font-size: 12px; color: var(--ink-2); cursor:pointer;
+    white-space: nowrap;
+  }
+  .action-strip .seg:hover { background: #f2ece3; }
+  .action-strip .seg svg { opacity: 0.65; }
+  .helper {
+    font-size: 11.5px; color: var(--ink-4); display:flex; gap:10px; align-items:center; white-space: nowrap;
+  }
+  .helper .dotx { width:3px; height:3px; border-radius:50%; background: var(--ink-5); }
+
+  /* Timeline drawer (bottom) */
+  .timeline-drawer {
+    position:absolute; left: 24px; right: 24px; bottom: 22px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: var(--shadow-drawer);
+    padding: 10px 16px;
+    height: 64px;
+    display:grid; grid-template-columns: auto auto 1fr auto auto; gap: 14px; align-items:center;
+    z-index: 10;
+    transform-origin: bottom center;
+    transition: transform 260ms cubic-bezier(.2,.8,.2,1), opacity 240ms;
+  }
+  .timeline-drawer.hidden { transform: translateY(calc(100% + 30px)); opacity: 0; pointer-events:none; }
+  .play { width:34px; height:34px; border-radius:50%; background: #1f2024; color: #fbf8f3; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; }
+  .live { display:flex; flex-direction:column; line-height: 1.1; }
+  .live .a { display:flex; align-items:center; gap:6px; font-size:12px; color: var(--ink-2); }
+  .live .a .d { width:6px; height:6px; border-radius:50%; background: var(--c-live); box-shadow: 0 0 0 3px rgba(108,163,103,0.16); }
+  .live .b { font-size: 10.5px; color: var(--ink-4); }
+  .track-wrap { position:relative; height: 44px; }
+  .x1 { width:34px; height:28px; border-radius: 8px; background: var(--bg-2); border:1px solid var(--line-soft); font-size:11px; color: var(--ink-2); display:inline-flex; align-items:center; justify-content:center; gap:2px; }
+  .cal { width:30px; height:30px; border-radius:8px; background: var(--bg-2); border:1px solid var(--line-soft); display:inline-flex; align-items:center; justify-content:center; color: var(--ink-2); }
+  .tstamp {
+    position:absolute; top:-14px; left:50%; transform: translateX(-50%);
+    background: #1f2024; color:#fbf8f3; font-size: 11px;
+    padding: 3px 9px; border-radius: 6px;
+    font-family: "Geist Mono", monospace;
+    letter-spacing: 0.02em;
+  }
+  .tstamp::after {
+    content:""; position:absolute; left:50%; bottom:-4px; transform: translateX(-50%) rotate(45deg);
+    width:6px; height:6px; background:#1f2024;
+  }
+</style>
+</head>
+<body>
+  <div class="scaler" id="scaler">
+
+    <!-- Stage (globe fills everything) -->
+    <div class="stage" id="stage"></div>
+
+    <!-- Back to Panopticon -->
+    <button type="button" onclick="
+      this.style.opacity='0.5';
+      document.documentElement.style.opacity='0';
+      document.documentElement.style.transition='opacity 0.3s ease';
+      setTimeout(function(){ window.location.replace('/work/argor-heraeus/index.html'); }, 320);
+    " style="
+      position:absolute; top:22px; right:24px; z-index:20;
+      display:inline-flex; align-items:center; gap:8px;
+      background:var(--card); border:1px solid var(--line);
+      border-radius:999px; padding:7px 16px 7px 12px;
+      font-size:12px; font-weight:500; color:var(--ink-2);
+      cursor:pointer; box-shadow:var(--shadow-sm);
+      transition:background 120ms;
+    " onmouseover="this.style.background='#f2ece3'" onmouseout="this.style.background='var(--card)'">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M15 18l-6-6 6-6"/></svg>
+      Back to Panopticon
+    </button>
+
+    <!-- Top-left: status + menu toggle -->
+    <div class="chrome tl">
+      <div class="pill">
+        <span class="dot"></span>
+        <span>Observer</span>
+        <span class="sep">•</span>
+        <span>Healthy</span>
+      </div>
+      <div class="icon-btn" id="btn-left" title="Open overview">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </div>
+    </div>
+
+    <!-- Top-right chrome: search / filter (inspector removed — click pin drills to regional view) -->
+    <div class="chrome tr" style="right:200px;">
+      <div class="search-pill">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        Search
+      </div>
+      <div class="icon-btn" title="Filter">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
+      </div>
+    </div>
+
+    <!-- Bottom-center: action strip + helper -->
+    <div class="chrome bc">
+      <div class="action-strip">
+        <div class="seg" data-act="rotate">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
+          Rotate
+        </div>
+        <div class="seg" data-act="zoom-in">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M8 11h6M11 8v6"/></svg>
+          Zoom
+        </div>
+        <div class="seg" data-act="select">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg>
+          Select
+        </div>
+        <div class="seg" data-act="drill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m9 6 6 6-6 6"/></svg>
+          Drill down
+        </div>
+      </div>
+      <div class="helper">
+        <span>Drag to rotate</span><span class="dotx"></span>
+        <span>Scroll to zoom</span><span class="dotx"></span>
+        <span>Click a pin to drill into the region</span>
+      </div>
+    </div>
+
+    <!-- Bottom-right: timeline toggle -->
+    <div class="chrome br">
+      <div class="icon-btn" id="btn-timeline" title="Timeline">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+      </div>
+    </div>
+
+    <!-- Left drawer -->
+    <aside class="drawer left hidden" id="drawer-left">
+      <div class="drawer-head">
+        <span>World Model</span>
+        <span class="close" data-close="left">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6 6 18"/></svg>
+        </span>
+      </div>
+      <div class="drawer-body" id="left-body"></div>
+    </aside>
+
+    <!-- Right drawer -->
+    <aside class="drawer right hidden" id="drawer-right">
+      <div class="drawer-head">
+        <span id="right-title">Inspector</span>
+        <span class="close" data-close="right">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6 6 18"/></svg>
+        </span>
+      </div>
+      <div class="drawer-body" id="right-body"></div>
+    </aside>
+
+    <!-- Timeline drawer -->
+    <div class="timeline-drawer hidden" id="timeline-drawer">
+      <div class="play">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+      <div class="live">
+        <div class="a"><span class="d"></span>Live</div>
+        <div class="b mono">24/7</div>
+      </div>
+      <div class="track-wrap" id="track"></div>
+      <div class="x1 mono">1 <span style="color:var(--ink-4)">×</span></div>
+      <div class="cal">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    (function(){
+      const scaler = document.getElementById('scaler');
+      function fit(){
+        const w = window.innerWidth || document.documentElement.clientWidth || 1440;
+        const h = window.innerHeight || document.documentElement.clientHeight || 900;
+        const s = Math.min(w/1440, h/900) || 1;
+        scaler.style.transform = `scale(${s})`;
+      }
+      requestAnimationFrame(fit);
+      window.addEventListener('load', fit);
+      window.addEventListener('resize', fit);
+      new ResizeObserver(fit).observe(document.documentElement);
+    })();
+  </script>
+  <script src="data.js?v=7"></script>
+  <script src="globe.js?v=7"></script>
+  <script src="panels.js?v=7"></script>
+  <script src="timeline.js?v=7"></script>
+  <script src="app.js?v=7"></script>
+</body>
+</html>

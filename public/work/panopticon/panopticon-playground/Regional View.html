@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>World Model — Fabric Tension Field</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+  <style>
+    :root {
+      --bg: #f4efe8;
+      --card: #fbf8f3;
+      --ink: #1f2024;
+      --ink-2: #3b3d44;
+      --ink-3: #6b6e78;
+      --ink-4: #9a9ca4;
+      --ink-5: #c6c7cd;
+      --line: rgba(31,32,36,0.08);
+      --line-soft: rgba(31,32,36,0.05);
+      --shadow-sm: 0 1px 3px rgba(40,32,20,0.05), 0 2px 8px rgba(40,32,20,0.04);
+      --shadow-md: 0 4px 16px rgba(40,32,20,0.08), 0 1px 3px rgba(40,32,20,0.05);
+      --shadow-panel: 0 8px 40px rgba(40,32,20,0.12), 0 1px 4px rgba(40,32,20,0.06);
+      --c-core: #2a2b2f;
+      --c-stable: #6b8a66;
+      --c-contra: #c87a3e;
+      --c-evidence: #4f7ba8;
+      --c-forecast: #8a7aa8;
+      --c-archive: #a3a49f;
+      --c-live: #6ca367;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #2c2c2c;
+      font-family: "Geist", ui-sans-serif, system-ui, sans-serif;
+      display: flex; justify-content: center; align-items: center;
+      min-height: 100vh; overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    #app {
+      width: 1440px; height: 860px;
+      background: var(--bg);
+      border-radius: 12px;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.55);
+      position: relative; overflow: hidden;
+      transform-origin: center center;
+    }
+
+    /* Canvases */
+    #fabric { position: absolute; inset: 0; z-index: 1; cursor: grab; }
+    #fabric:active { cursor: grabbing; }
+    #overlay { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+
+    /* Header */
+    .top-left {
+      position: absolute; top: 20px; left: 24px; z-index: 20;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .pill {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: 999px; padding: 6px 14px;
+      font-size: 12.5px; color: var(--ink-2);
+      box-shadow: var(--shadow-sm);
+    }
+    .pill .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--c-live); box-shadow: 0 0 0 3px rgba(108,163,103,0.18); }
+    .pill .sep { color: var(--ink-4); }
+    .top-right {
+      position: absolute; top: 20px; right: 24px; z-index: 20;
+    }
+    .icon-btn {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: var(--card); border: 1px solid var(--line);
+      box-shadow: var(--shadow-sm); color: var(--ink-3);
+      display: inline-flex; align-items: center; justify-content: center;
+      cursor: pointer;
+    }
+
+    /* Title area */
+    .title-area {
+      position: absolute; top: 72px; left: 24px; width: 260px; z-index: 20;
+    }
+    .title-area h1 { font-size: 24px; font-weight: 500; color: var(--ink); letter-spacing: -0.01em; margin-bottom: 3px; }
+    .title-area .subtitle { display: flex; align-items: center; gap: 6px; font-size: 14px; color: var(--ink-3); margin-bottom: 10px; }
+    .info-i { width: 14px; height: 14px; border-radius: 50%; border: 1px solid var(--ink-4); display: inline-flex; align-items: center; justify-content: center; font-size: 8px; color: var(--ink-4); font-family: "Geist Mono", monospace; flex-shrink: 0; }
+    .title-area p { font-size: 12.5px; line-height: 1.55; color: var(--ink-3); }
+
+    /* Evidence panel */
+    .evidence-area {
+      position: absolute; top: 210px; left: 24px; width: 260px; z-index: 20;
+    }
+    .ev-heading { font-size: 11.5px; font-weight: 600; color: var(--ink-2); letter-spacing: 0.02em; text-transform: uppercase; margin-bottom: 10px; }
+    .ev-list { display: flex; flex-direction: column; gap: 5px; }
+    .ev-item {
+      display: grid; grid-template-columns: 28px 1fr 8px;
+      align-items: center; gap: 8px;
+      padding: 7px 10px 7px 8px;
+      background: rgba(251,248,243,0.72);
+      border: 1px solid var(--line-soft);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 120ms;
+    }
+    .ev-item:hover { background: var(--card); }
+    .ev-item.active { background: var(--card); border-color: rgba(31,32,36,0.12); }
+    .ev-ico {
+      width: 26px; height: 26px; border-radius: 7px;
+      background: rgba(31,32,36,0.04); border: 1px solid var(--line-soft);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--ink-4); flex-shrink: 0;
+    }
+    .ev-body { min-width: 0; }
+    .ev-title { font-size: 12px; font-weight: 500; color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 1.2; }
+    .ev-time { font-size: 10.5px; color: var(--ink-4); margin-top: 1px; }
+    .ev-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+    .ev-footer { display: flex; justify-content: space-between; margin-top: 10px; font-size: 12px; }
+    .ev-footer a { color: var(--ink-2); text-decoration: none; font-weight: 500; }
+    .ev-footer span { color: var(--ink-4); }
+
+    /* Right inspector panel */
+    .inspector {
+      position: absolute; top: 94px; bottom: 80px; right: 24px; width: 338px;
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: 14px; box-shadow: var(--shadow-panel);
+      z-index: 20; overflow: hidden;
+      display: flex; flex-direction: column;
+      transition: opacity 240ms, transform 240ms cubic-bezier(.2,.8,.2,1);
+    }
+    .inspector.hidden { opacity: 0; pointer-events: none; transform: translateX(20px); }
+    .insp-head {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      padding: 16px 16px 0;
+    }
+    .insp-head h3 { font-size: 14.5px; font-weight: 500; color: var(--ink); line-height: 1.3; max-width: 240px; }
+    .insp-close {
+      width: 24px; height: 24px; border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--ink-4); cursor: pointer; flex-shrink: 0;
+    }
+    .insp-close:hover { background: rgba(31,32,36,0.06); color: var(--ink-2); }
+    .insp-risk { padding: 4px 16px 14px; font-size: 12.5px; font-weight: 500; color: var(--c-contra); }
+    .insp-body { padding: 0 16px 16px; overflow-y: auto; flex: 1; }
+    .insp-body::-webkit-scrollbar { width: 4px; }
+    .insp-body::-webkit-scrollbar-thumb { background: rgba(31,32,36,0.1); border-radius: 2px; }
+
+    .insp-row {
+      display: grid; grid-template-columns: 14px 1fr minmax(90px, auto);
+      align-items: center; gap: 8px;
+      padding: 9px 0;
+      border-bottom: 1px solid var(--line-soft);
+      font-size: 12px;
+    }
+    .insp-row:last-child { border-bottom: none; }
+    .insp-row .lbl { color: var(--ink-3); }
+    .insp-row .val { color: var(--ink-2); font-weight: 500; text-align: right; }
+    .insp-row .val.muted { font-weight: 400; color: var(--ink-4); }
+    .insp-row .val.risk { color: var(--c-contra); }
+    .insp-row .val.link { display: flex; align-items: center; gap: 4px; }
+    .conf-wrap { display: flex; align-items: center; gap: 6px; justify-content: flex-end; white-space: nowrap; }
+    .conf-bar { width: 44px; height: 3px; background: rgba(31,32,36,0.12); border-radius: 2px; overflow: hidden; flex-shrink: 0; }
+    .conf-fill { height: 100%; border-radius: 2px; background: var(--ink-3); }
+    .conf-fill.risk { background: var(--c-contra); }
+
+    .insp-section {
+      display: flex; align-items: center; gap: 6px;
+      padding: 12px 0 8px;
+      font-size: 11.5px; font-weight: 500; color: var(--ink-3);
+      border-top: 1px solid var(--line-soft);
+      margin-top: 4px;
+    }
+    .ev-support-item {
+      display: flex; align-items: center; gap: 8px;
+      padding: 6px 0; font-size: 11.5px; color: var(--ink-2);
+      border-bottom: 1px solid var(--line-soft);
+    }
+    .ev-support-item:last-child { border-bottom: none; }
+    .ev-support-item .t { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .ev-support-item .when { color: var(--ink-4); font-size: 10.5px; flex-shrink: 0; white-space: nowrap; }
+    .sup-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; border: 1.5px solid transparent; }
+    .more-link { font-size: 11.5px; font-weight: 500; color: var(--ink-2); display: inline-block; margin: 8px 0; cursor: pointer; }
+    .lineage-grid { display: grid; grid-template-columns: 1fr auto; gap: 6px 12px; font-size: 11.5px; margin-top: 4px; }
+    .lineage-grid .k { color: var(--ink-3); }
+    .lineage-grid .v { color: var(--ink-4); text-align: right; }
+    .last-obs {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 12px; padding-top: 12px;
+      border-top: 1px solid var(--line-soft);
+      font-size: 11.5px; color: var(--ink-3);
+    }
+    .last-obs .v { color: var(--ink-2); font-weight: 500; white-space: nowrap; }
+
+    /* Legend */
+    .legend {
+      position: absolute; bottom: 84px; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 18px; align-items: center;
+      background: rgba(251,248,243,0.82); backdrop-filter: blur(8px);
+      border: 1px solid var(--line-soft); border-radius: 999px;
+      padding: 7px 18px; z-index: 20;
+      font-size: 11.5px; color: var(--ink-3);
+      white-space: nowrap;
+    }
+    .leg-item { display: flex; align-items: center; gap: 5px; }
+    .leg-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+    /* Timeline */
+    .timeline {
+      position: absolute; bottom: 16px; left: 24px; right: 24px; height: 56px;
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: 12px; box-shadow: var(--shadow-sm);
+      display: grid; grid-template-columns: 38px 52px 1fr auto;
+      align-items: center; gap: 14px; padding: 0 14px;
+      z-index: 20;
+    }
+    .play-btn {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--ink); color: var(--card);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; flex-shrink: 0;
+    }
+    .live-lbl { display: flex; flex-direction: column; gap: 1px; }
+    .live-lbl .a { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--ink-2); font-weight: 500; }
+    .live-lbl .a .d { width: 6px; height: 6px; border-radius: 50%; background: var(--c-live); }
+    .live-lbl .b { font-size: 10.5px; color: var(--ink-4); font-family: "Geist Mono", monospace; }
+    .track { position: relative; height: 40px; display: flex; align-items: center; }
+    .track-line { position: absolute; left: 0; right: 0; height: 1px; background: rgba(31,32,36,0.12); }
+    .track-ticks { position: absolute; left: 0; right: 0; bottom: 0; display: flex; justify-content: space-between; }
+    .t-tick { font-size: 10.5px; color: var(--ink-4); font-family: "Geist Mono", monospace; text-align: center; width: 30px; margin-left: -15px; position: relative; }
+    .t-tick::before { content: ""; position: absolute; top: -14px; left: 50%; width: 1px; height: 4px; background: rgba(31,32,36,0.15); }
+    .t-tick.now { color: var(--ink-2); font-weight: 500; }
+    .scrubber {
+      position: absolute; left: 44%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 3px;
+      pointer-events: none;
+    }
+    .scrubber-pill {
+      background: var(--ink); color: var(--card);
+      font-size: 10.5px; font-family: "Geist Mono", monospace;
+      padding: 3px 8px; border-radius: 6px; white-space: nowrap;
+      box-shadow: 0 2px 8px rgba(31,32,36,0.25);
+    }
+    .scrubber-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--ink); border: 2px solid var(--bg); }
+    .time-tools { display: flex; gap: 8px; align-items: center; }
+    .tool-btn {
+      height: 30px; padding: 0 12px; border-radius: 8px;
+      background: rgba(31,32,36,0.05); border: 1px solid var(--line-soft);
+      font-size: 12px; color: var(--ink-2); cursor: pointer;
+      display: flex; align-items: center; gap: 5px;
+    }
+    .cal-btn {
+      width: 30px; height: 30px; border-radius: 8px;
+      background: rgba(31,32,36,0.05); border: 1px solid var(--line-soft);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--ink-3); cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <canvas id="fabric" width="1440" height="860"></canvas>
+  <canvas id="overlay" width="1440" height="860"></canvas>
+
+  <!-- Top left status -->
+  <div class="top-left">
+    <div class="pill">
+      <span class="dot"></span>
+      <span>Observer</span>
+      <span class="sep">•</span>
+      <span>Healthy</span>
+    </div>
+  </div>
+  <div class="top-right" style="display:flex; align-items:center; gap:8px;">
+    <a href="World Model.html" style="
+      display:inline-flex; align-items:center; gap:8px;
+      background:var(--card); border:1px solid var(--line);
+      border-radius:999px; padding:6px 16px 6px 12px;
+      font-size:12.5px; font-weight:500; color:var(--ink-2);
+      text-decoration:none; box-shadow:var(--shadow-sm);
+      transition:background 120ms; font-family:inherit;
+    " onmouseover="this.style.background='#f2ece3'" onmouseout="this.style.background='var(--card)'">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M15 18l-6-6 6-6"/></svg>
+      World Model
+    </a>
+  </div>
+
+  <!-- Title -->
+  <div class="title-area">
+    <h1>World Model</h1>
+    <div class="subtitle">Fabric Tension Field <span class="info-i">i</span></div>
+    <p>A living map of beliefs, evidence, and contradictions shaping the current view of the world.</p>
+  </div>
+
+  <!-- Evidence inflow -->
+  <div class="evidence-area">
+    <div class="ev-heading">Evidence Inflow</div>
+    <div class="ev-list" id="ev-list"></div>
+    <div class="ev-footer">
+      <span>+2 more</span>
+      <a href="#">View all</a>
+    </div>
+  </div>
+
+  <!-- Inspector panel -->
+  <div class="inspector" id="inspector">
+    <div class="insp-head">
+      <h3 id="insp-title">Contradiction cluster expanded</h3>
+      <div class="insp-close" onclick="closeInspector()">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </div>
+    </div>
+    <div class="insp-risk" id="insp-risk">Risk: High</div>
+    <div class="insp-body">
+      <!-- Meta rows -->
+      <div class="insp-row">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="var(--ink-4)"><path d="M12 2L2 22h20L12 2zm0 3.8 8 14.2H4l8-14.2zM11 16h2v2h-2zm0-7h2v5h-2z"/></svg>
+        <span class="lbl">Type</span>
+        <span class="val muted" id="insp-type">Contradiction Cluster</span>
+      </div>
+      <div class="insp-row">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--ink-4)" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        <span class="lbl">Confidence</span>
+        <div class="conf-wrap">
+          <span class="val" id="insp-conf">0.27</span>
+          <div class="conf-bar"><div class="conf-fill risk" id="insp-conf-bar" style="width:27%"></div></div>
+        </div>
+      </div>
+      <div class="insp-row">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--ink-4)" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3" fill="var(--ink-4)" stroke="none"/></svg>
+        <span class="lbl">Freshness</span>
+        <span class="val" id="insp-fresh">11m ago</span>
+      </div>
+      <div class="insp-row">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="var(--ink-4)"><path d="M12 2L2 22h20L12 2zm0 3.8 8 14.2H4l8-14.2zM11 16h2v2h-2zm0-7h2v5h-2z"/></svg>
+        <span class="lbl">Impact</span>
+        <span class="val risk" id="insp-impact">High</span>
+      </div>
+      <div class="insp-row" style="border-bottom:none;">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--ink-4)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        <span class="lbl">Affected beliefs</span>
+        <span class="val link">7 <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--ink-4)" stroke-width="2.5"><path d="m9 6 6 6-6 6"/></svg></span>
+      </div>
+
+      <!-- Supporting Evidence -->
+      <div class="insp-section">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Supporting Evidence
+      </div>
+      <div id="insp-evidence">
+        <div class="ev-support-item"><div class="sup-dot" style="background:#fff;border-color:var(--c-contra)"></div><span class="t">Backend latency elevated</span><span class="when">4m ago</span></div>
+        <div class="ev-support-item"><div class="sup-dot" style="background:var(--c-contra);border-color:var(--c-contra)"></div><span class="t">Memory pressure rising</span><span class="when">5m ago</span></div>
+        <div class="ev-support-item"><div class="sup-dot" style="background:var(--c-evidence);border-color:var(--c-evidence)"></div><span class="t">Sensor drifted out of band</span><span class="when">7m ago</span></div>
+        <div class="ev-support-item"><div class="sup-dot" style="background:var(--c-stable);border-color:var(--c-stable)"></div><span class="t">Historical pattern reworked</span><span class="when">9m ago</span></div>
+        <div class="ev-support-item" style="border-bottom:none"><div class="sup-dot" style="background:#fff;border-color:var(--c-contra)"></div><span class="t">Visual regression risk</span><span class="when">11m ago</span></div>
+      </div>
+      <div class="more-link">+2 more</div>
+
+      <!-- Lineage -->
+      <div class="insp-section">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/></svg>
+        Lineage
+      </div>
+      <div class="lineage-grid">
+        <span class="k">First detected</span><span class="v">2h 41m ago</span>
+        <span class="k">Cluster ID</span><span class="v">CN-732A</span>
+        <span class="k">Occurrences</span><span class="v">23</span>
+      </div>
+      <div class="last-obs">
+        <span style="display:flex;align-items:center;gap:5px;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          Last observed
+        </span>
+        <span class="v">11m ago</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Legend -->
+  <div class="legend">
+    <div class="leg-item"><div class="leg-dot" style="background:var(--c-core)"></div> Core anchor</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--c-stable)"></div> Stable / reinforced</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--c-contra)"></div> Contradiction / risk</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--c-evidence)"></div> Evidence inflow</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--c-archive)"></div> Archived / weak</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--c-forecast)"></div> Forecast / hypothesis</div>
+  </div>
+
+  <!-- Timeline -->
+  <div class="timeline">
+    <div class="play-btn" onclick="togglePlay()">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+    </div>
+    <div class="live-lbl">
+      <div class="a"><span class="d"></span> Live</div>
+      <div class="b">24/7</div>
+    </div>
+    <div class="track" id="track">
+      <div class="track-line"></div>
+      <div class="track-ticks" id="track-ticks"></div>
+      <div class="scrubber" id="scrubber">
+        <div class="scrubber-pill" id="clock">11:42:07 AM</div>
+        <div class="scrubber-dot"></div>
+      </div>
+    </div>
+    <div class="time-tools">
+      <div class="tool-btn">1 <span style="color:var(--ink-4)">×</span></div>
+      <div class="cal-btn">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── DATA ──────────────────────────────────────────────────────────────────
+const C = {
+  core:     '#2a2b2f',
+  stable:   '#6b8a66',
+  contra:   '#c87a3e',
+  evidence: '#4f7ba8',
+  forecast: '#8a7aa8',
+  archive:  '#a3a49f',
+};
+
+const NODES = [
+  { id:'n_world',   cx:580,  cy:75,  r:150, h:170, label:'World model refreshed',     type:'core',     conf:0.92, time:'1h ago'  },
+  { id:'n_load',    cx:330,  cy:130, r:110, h:120, label:'Load balancing stable',      type:'stable',   conf:0.86, time:'12m ago' },
+  { id:'n_integ',   cx:310,  cy:290, r:90,  h:80,  label:'Integration tests stable',   type:'stable',   conf:0.82, time:'5m ago'  },
+  { id:'n_retriev', cx:780,  cy:100, r:110, h:90,  label:'Retrieval index stale',      type:'contra',   conf:0.26, time:'11m ago' },
+  { id:'n_contra',  cx:600,  cy:260, r:100, h:90,  label:'Contradiction detected',     type:'contra',   conf:0.27, time:'11m ago', risk:'High'   },
+  { id:'n_forecast',cx:900,  cy:170, r:80,  h:70,  label:'Forecast drift low',         type:'forecast', conf:0.48, time:'8m ago'  },
+  { id:'n_history', cx:990,  cy:290, r:100, h:80,  label:'Historical pattern reworked',type:'stable',   conf:0.71, time:'9m ago'  },
+  { id:'n_belief',  cx:810,  cy:280, r:85,  h:70,  label:'Belief cluster reinforced',  type:'stable',   conf:0.79, time:'11m ago' },
+  { id:'n_backend', cx:870,  cy:400, r:100, h:75,  label:'Backend latency elevated',   type:'contra',   conf:0.24, time:'4m ago'  },
+  { id:'n_memory',  cx:740,  cy:530, r:95,  h:65,  label:'Memory strain recovered',    type:'stable',   conf:0.68, time:'5m ago'  },
+  { id:'n_confero', cx:650,  cy:390, r:85,  h:60,  label:'Confidence erosion',         type:'contra',   conf:0.33, time:'11m ago' },
+  { id:'n_contmed', cx:570,  cy:540, r:95,  h:68,  label:'Contradiction detected',     type:'archive',  conf:0.41, time:'15m ago', risk:'Medium' },
+  { id:'n_visual',  cx:370,  cy:490, r:100, h:72,  label:'Visual regression risk',     type:'archive',  conf:0.31, time:'11m ago', risk:'Medium' },
+  { id:'n_sensor',  cx:440,  cy:345, r:88,  h:70,  label:'Sensor drift in band',       type:'evidence', conf:0.74, time:'7m ago'  },
+];
+NODES.forEach(n => { n.phase = Math.random() * Math.PI * 2; });
+
+const EVIDENCES = [
+  { title:'Recent diff ingested',         time:'Just now', color:'stable',   linkTo:'n_integ'   },
+  { title:'Reservoir build stable',       time:'5m ago',   color:'stable',   linkTo:'n_load'    },
+  { title:'Voice pipeline healthy',       time:'12m ago',  color:'evidence', linkTo:'n_sensor'  },
+  { title:'Workspace changed',            time:'23m ago',  color:'evidence', linkTo:'n_belief'  },
+  { title:'Backend latency elevated',     time:'4m ago',   color:'contra',   linkTo:'n_backend' },
+  { title:'Memory pressure rising',       time:'5m ago',   color:'contra',   linkTo:'n_confero' },
+  { title:'Evidence pending review',      time:'9m ago',   color:'evidence', linkTo:'n_memory'  },
+  { title:'Search pipeline active',       time:'15m ago',  color:'evidence', linkTo:'n_history' },
+  { title:'Contradiction cluster emerged',time:'17m ago',  color:'contra',   linkTo:'n_contra'  },
+  { title:'Archive refreshed',            time:'1h 10m',   color:'forecast', linkTo:'n_forecast'},
+];
+
+// Background scatter nodes
+const SCATTER = [];
+for (let i = 0; i < 200; i++) {
+  SCATTER.push({
+    x: 160 + Math.random() * 1060,
+    y: 40  + Math.random() * 640,
+    type: ['stable','contra','evidence','archive','archive','archive'][Math.floor(Math.random()*6)],
+    size: 1.2 + Math.random() * 1.6,
+  });
+}
+
+// ─── TIMELINE TICKS ────────────────────────────────────────────────────────
+const TICKS = ['24h','18h','12h','6h','Now','6h','12h','18h','24h','36h','48h','72h','7d'];
+const ticksEl = document.getElementById('track-ticks');
+TICKS.forEach(t => {
+  const d = document.createElement('div');
+  d.className = 'track-tick' + (t === 'Now' ? ' now' : '');
+  d.textContent = t;
+  ticksEl.appendChild(d);
+});
+
+// ─── EVIDENCE LIST ─────────────────────────────────────────────────────────
+const filePath = 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z';
+const lockPath = 'M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-9-2c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6zm9 14H6V10h12v10zm-6-3c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z';
+const dotColorMap = { stable:'var(--c-stable)', contra:'var(--c-contra)', evidence:'var(--c-evidence)', forecast:'var(--c-forecast)', archive:'var(--c-archive)' };
+const evListEl = document.getElementById('ev-list');
+EVIDENCES.forEach((ev, i) => {
+  if (i >= 10) return;
+  const icon = (ev.color === 'contra') ? lockPath : filePath;
+  evListEl.insertAdjacentHTML('beforeend', `
+    <div class="ev-item" id="evi-${i}" onclick="selectByLink('${ev.linkTo}')">
+      <div class="ev-ico">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="var(--ink-4)"><path d="${icon}"/></svg>
+      </div>
+      <div class="ev-body">
+        <div class="ev-title">${ev.title}</div>
+        <div class="ev-time">${ev.time}</div>
+      </div>
+      <div class="ev-dot" style="background:${dotColorMap[ev.color]}"></div>
+    </div>
+  `);
+});
+
+// ─── CANVAS SETUP ──────────────────────────────────────────────────────────
+const fab = document.getElementById('fabric');
+const ctx = fab.getContext('2d', { alpha: false });
+const ovl = document.getElementById('overlay');
+const olc = ovl.getContext('2d');
+
+const COLS = 70, ROWS = 52, CS = 16;
+const GW = COLS * CS, GH = ROWS * CS;
+
+let camZ = Math.PI * 0.05;
+let camX = Math.PI * 0.33;
+let zoom  = 1.05;
+let panX  = -80, panY = -20;
+let t     = 0;
+let playing = true;
+let selectedNode = NODES.find(n => n.id === 'n_contra');
+
+function getH(lx, ly, time) {
+  let z = 0;
+  for (const n of NODES) {
+    const dSq = (lx - n.cx) ** 2 + (ly - n.cy) ** 2;
+    const breath = Math.sin(time * 0.0012 + n.phase) * 5;
+    const inf = Math.exp(-dSq / (2 * n.r * n.r / 4));
+    z += inf * (n.h + breath);
+  }
+  z += Math.sin(lx * 0.04 + time * 0.0003) * 3 + Math.cos(ly * 0.04) * 3;
+  return z;
+}
+
+function project(lx, ly, lz) {
+  const dx = lx - GW / 2, dy = ly - GH / 2;
+  const x1 =  dx * Math.cos(camZ) - dy * Math.sin(camZ);
+  const y1 =  dx * Math.sin(camZ) + dy * Math.cos(camZ);
+  const x2 = x1;
+  const y2 = y1 * Math.cos(camX) - lz * Math.sin(camX);
+  const z2 = y1 * Math.sin(camX) + lz * Math.cos(camX);
+  const f  = 1200;
+  let s = (f / (f + z2 + 200)) * zoom;
+  return { px: 730 + panX + x2 * s, py: 470 + panY + y2 * s, z: z2 };
+}
+
+// ─── DRAG / ZOOM ───────────────────────────────────────────────────────────
+let drag = false, dragMode = 'none', sx = 0, sy = 0;
+fab.addEventListener('wheel', e => {
+  e.preventDefault();
+  const r = document.getElementById('app').getBoundingClientRect();
+  const sc = r.width / 1440;
+  const cx = (e.clientX - r.left) / sc;
+  const cy = (e.clientY - r.top) / sc;
+  const f = e.deltaY > 0 ? 0.9 : 1.1;
+  const nz = Math.max(0.3, Math.min(4, zoom * f));
+  const ratio = nz / zoom;
+  panX = (cx - 780) - (cx - 780 - panX) * ratio;
+  panY = (cy - 480) - (cy - 480 - panY) * ratio;
+  zoom = nz;
+}, { passive: false });
+fab.addEventListener('mousedown', e => {
+  drag = true; dragMode = e.button === 2 || e.shiftKey ? 'pan' : 'rotate';
+  sx = e.clientX; sy = e.clientY;
+});
+window.addEventListener('mousemove', e => {
+  if (!drag) return;
+  const r = document.getElementById('app').getBoundingClientRect();
+  const sc = r.width / 1440;
+  const dx = (e.clientX - sx) / sc, dy = (e.clientY - sy) / sc;
+  if (dragMode === 'pan') { panX += dx; panY += dy; }
+  else { camZ += dx * 0.004; camX = Math.max(0.1, Math.min(1.4, camX - dy * 0.004)); }
+  sx = e.clientX; sy = e.clientY;
+});
+window.addEventListener('mouseup', () => { drag = false; });
+fab.addEventListener('contextmenu', e => e.preventDefault());
+
+// Click to select pin
+fab.addEventListener('click', e => {
+  const r = document.getElementById('app').getBoundingClientRect();
+  const sc = r.width / 1440;
+  const mx = (e.clientX - r.left) / sc;
+  const my = (e.clientY - r.top) / sc;
+  let best = null, bestD = 999;
+  for (const n of NODES) {
+    if (!n.proj) continue;
+    const d = Math.hypot(mx - n.proj.px, my - n.proj.py - (n.type === 'core' ? -50 : -32));
+    if (d < 22 && d < bestD) { best = n; bestD = d; }
+  }
+  if (best) selectNode(best);
+});
+
+// ─── UI INTERACTIONS ───────────────────────────────────────────────────────
+function togglePlay() { playing = !playing; }
+function closeInspector() {
+  document.getElementById('inspector').classList.add('hidden');
+  selectedNode = null;
+}
+function selectByLink(id) {
+  const n = NODES.find(x => x.id === id);
+  if (n) selectNode(n);
+}
+function selectNode(n) {
+  selectedNode = n;
+  const panel = document.getElementById('inspector');
+  panel.classList.remove('hidden');
+  document.getElementById('insp-title').textContent = n.label;
+  const riskEl = document.getElementById('insp-risk');
+  if (n.risk) {
+    riskEl.textContent = 'Risk: ' + n.risk;
+    riskEl.style.display = '';
+  } else {
+    riskEl.style.display = 'none';
+  }
+  document.getElementById('insp-type').textContent = { contra:'Contradiction Cluster', stable:'Stable Belief', core:'Core Anchor', evidence:'Evidence Node', forecast:'Forecast', archive:'Archived' }[n.type] || n.type;
+  document.getElementById('insp-conf').textContent = n.conf.toFixed(2);
+  const bar = document.getElementById('insp-conf-bar');
+  bar.style.width = (n.conf * 100) + '%';
+  bar.className = 'conf-fill' + (n.type === 'contra' ? ' risk' : '');
+  document.getElementById('insp-fresh').textContent = n.time;
+  document.getElementById('insp-impact').textContent = n.risk || (n.conf < 0.4 ? 'Medium' : n.conf > 0.7 ? 'Low' : 'Low');
+  document.getElementById('insp-impact').className = 'val' + (n.type === 'contra' ? ' risk' : '');
+}
+
+// ─── RENDER ────────────────────────────────────────────────────────────────
+const LX = -0.5, LY = -0.6, LZ = 0.5;
+const LL = Math.sqrt(LX*LX + LY*LY + LZ*LZ);
+const lx = LX/LL, ly = LY/LL, lz = LZ/LL;
+
+function renderTerrain(hm) {
+  ctx.lineJoin = 'round';
+  for (let iy = 0; iy < ROWS; iy++) {
+    for (let ix = 0; ix < COLS; ix++) {
+      const h0 = hm[iy][ix], h1 = hm[iy][ix+1], h2 = hm[iy+1][ix+1], h3 = hm[iy+1][ix];
+      const p0 = project(ix*CS,      iy*CS,      h0);
+      const p1 = project((ix+1)*CS,  iy*CS,      h1);
+      const p2 = project((ix+1)*CS,  (iy+1)*CS,  h2);
+      const p3 = project(ix*CS,      (iy+1)*CS,  h3);
+
+      // Surface normal for shading
+      const nx = hm[iy][Math.max(0, ix-1)] - h1;
+      const ny = hm[Math.max(0, iy-1)][ix] - h3;
+      const nz = CS * 2;
+      const nl = Math.sqrt(nx*nx + ny*ny + nz*nz);
+      const intensity = (nx/nl*lx + ny/nl*ly + nz/nl*lz) * 0.45 + 0.55;
+
+      // World coords center
+      const wx = ix * CS, wy = iy * CS;
+
+      // Risk coloring (multiple risk nodes)
+      let risk = 0;
+      for (const n of NODES) {
+        if (n.type !== 'contra') continue;
+        const dSq = (wx - n.cx)**2 + (wy - n.cy)**2;
+        risk = Math.max(risk, Math.max(0, 1 - Math.sqrt(dSq) / (n.r * 0.9)));
+      }
+      risk = Math.min(1, risk * 1.4);
+
+      // Edge vignette
+      const ex = Math.abs(ix - COLS/2) / (COLS/2);
+      const ey = Math.abs(iy - ROWS/2) / (ROWS/2);
+      const fade = Math.max(0, 1 - Math.pow(Math.max(ex, ey), 2.2) * 1.4);
+
+      if (fade < 0.02) continue;
+
+      // Base terrain color: warm gray-cream
+      let r = 232 - (1-intensity)*34;
+      let g = 227 - (1-intensity)*38;
+      let b = 219 - (1-intensity)*44;
+
+      // Risk overlay: warm amber tint
+      if (risk > 0) {
+        r = r*(1-risk*0.75) + 218*risk*0.75;
+        g = g*(1-risk*0.75) + 118*risk*0.75;
+        b = b*(1-risk*0.75) + 52*risk*0.75;
+      }
+
+      const alpha = fade * 0.99;
+      ctx.fillStyle = `rgba(${r|0},${g|0},${b|0},${alpha})`;
+      ctx.strokeStyle = `rgba(60,50,40,${fade * (0.11 + risk * 0.07)})`;
+      ctx.lineWidth = 0.45;
+
+      ctx.beginPath();
+      ctx.moveTo(p0.px, p0.py);
+      ctx.lineTo(p1.px, p1.py);
+      ctx.lineTo(p2.px, p2.py);
+      ctx.lineTo(p3.px, p3.py);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+    }
+  }
+}
+
+function renderScatter(hm) {
+  SCATTER.forEach(n => {
+    const h = getH(n.x, n.y, t);
+    n.proj = project(n.x, n.y, h);
+  });
+
+  // Connection lines between nearby scatter nodes
+  olc.lineWidth = 0.5;
+  for (let i = 0; i < SCATTER.length; i++) {
+    for (let j = i+1; j < SCATTER.length; j++) {
+      const a = SCATTER[i], b = SCATTER[j];
+      const dSq = (a.x-b.x)**2 + (a.y-b.y)**2;
+      if (dSq < 4800) {
+        const alpha = (1 - Math.sqrt(dSq)/70) * 0.18;
+        olc.strokeStyle = `rgba(50,45,40,${alpha})`;
+        olc.beginPath();
+        olc.moveTo(a.proj.px, a.proj.py);
+        olc.lineTo(b.proj.px, b.proj.py);
+        olc.stroke();
+      }
+    }
+  }
+
+  SCATTER.forEach(n => {
+    olc.beginPath();
+    olc.arc(n.proj.px, n.proj.py, n.size, 0, Math.PI * 2);
+    olc.fillStyle = C[n.type];
+    olc.globalAlpha = 0.7;
+    olc.fill();
+    olc.globalAlpha = 1;
+  });
+}
+
+function renderPins(hm) {
+  // Draw connection lines from main nodes to each other (tension field lines)
+  olc.setLineDash([3, 4]);
+  olc.lineWidth = 0.8;
+  for (let i = 0; i < NODES.length; i++) {
+    for (let j = i+1; j < NODES.length; j++) {
+      const a = NODES[i], b = NODES[j];
+      if (!a.proj || !b.proj) continue;
+      const dSq = (a.cx - b.cx)**2 + (a.cy - b.cy)**2;
+      if (dSq < 90000) {
+        olc.strokeStyle = `rgba(40,38,35,0.22)`;
+        olc.beginPath();
+        olc.moveTo(a.proj.px, a.proj.py);
+        olc.lineTo(b.proj.px, b.proj.py);
+        olc.stroke();
+      }
+    }
+  }
+  olc.setLineDash([]);
+
+  // Project and draw each pin
+  for (const n of NODES) {
+    const bh = getH(n.cx, n.cy, t);
+    const pBase = project(n.cx, n.cy, bh);
+    n.proj = pBase;
+    const pinH = n.type === 'core' ? 52 : n.type === 'contra' ? 40 : 32;
+    const pTop = { px: pBase.px, py: pBase.py - pinH };
+    n.projTop = pTop;
+
+    const col = C[n.type];
+
+    // Concentric rings for risk/contra nodes
+    if (n.type === 'contra') {
+      const pulse = (Math.sin(t * 0.003 + n.phase) * 0.5 + 0.5);
+      for (let ring = 3; ring >= 1; ring--) {
+        const rr = 12 + ring * 8 + pulse * 4;
+        const alpha = (0.18 - ring * 0.04) * pulse * 1.6;
+        olc.beginPath();
+        olc.ellipse(pBase.px, pBase.py, rr, rr * 0.45, 0, 0, Math.PI * 2);
+        olc.strokeStyle = `rgba(200,120,60,${alpha})`;
+        olc.lineWidth = 1.2;
+        olc.stroke();
+        // Fill innermost
+        if (ring === 1) {
+          olc.fillStyle = `rgba(200,120,60,${alpha * 0.3})`;
+          olc.fill();
+        }
+      }
+    }
+
+    // Ground shadow ellipse
+    olc.beginPath();
+    olc.ellipse(pBase.px, pBase.py, 9, 4.5, 0, 0, Math.PI * 2);
+    olc.fillStyle = 'rgba(0,0,0,0.28)';
+    olc.fill();
+    olc.strokeStyle = col;
+    olc.lineWidth = 1.2;
+    olc.stroke();
+
+    // Pin stem
+    olc.beginPath();
+    olc.moveTo(pBase.px, pBase.py);
+    olc.lineTo(pTop.px, pTop.py);
+    olc.strokeStyle = 'rgba(20,18,16,0.55)';
+    olc.lineWidth = 1.4;
+    olc.stroke();
+
+    // Pin cap outer
+    const capR = n.type === 'core' ? 7 : n === selectedNode ? 6.5 : 5.5;
+    olc.beginPath();
+    olc.arc(pTop.px, pTop.py, capR, 0, Math.PI * 2);
+    olc.fillStyle = col;
+    olc.fill();
+    olc.strokeStyle = 'rgba(255,255,255,0.9)';
+    olc.lineWidth = 1.5;
+    olc.stroke();
+
+    // Cap highlight
+    olc.beginPath();
+    olc.arc(pTop.px - 1.5, pTop.py - 1.5, capR * 0.38, 0, Math.PI * 2);
+    olc.fillStyle = 'rgba(255,255,255,0.45)';
+    olc.fill();
+
+    // Selected ring
+    if (n === selectedNode) {
+      olc.beginPath();
+      olc.arc(pTop.px, pTop.py, capR + 4, 0, Math.PI * 2);
+      olc.strokeStyle = col;
+      olc.lineWidth = 1.5;
+      olc.globalAlpha = 0.5;
+      olc.stroke();
+      olc.globalAlpha = 1;
+    }
+
+    // Label chip
+    const lx2 = pTop.px + capR + 7;
+    const ly2 = pTop.py;
+    const isRisk = n.type === 'contra';
+    const selected = n === selectedNode;
+
+    olc.font = `${selected ? 600 : 500} 11px "Geist", sans-serif`;
+    const tw = olc.measureText(n.label).width;
+    const chipW = tw + 10;
+    const chipH = isRisk ? 36 : 26;
+
+    // Chip bg
+    olc.fillStyle = selected ? 'rgba(255,253,250,0.97)' : 'rgba(255,253,250,0.88)';
+    olc.strokeStyle = selected ? 'rgba(31,32,36,0.14)' : 'rgba(31,32,36,0.09)';
+    olc.lineWidth = 0.8;
+    roundRect(olc, lx2, ly2 - chipH/2, chipW, chipH, 5);
+    olc.fill();
+    olc.stroke();
+
+    // Label name
+    olc.fillStyle = selected ? '#1f2024' : '#3b3d44';
+    olc.font = `${selected ? 600 : 500} 11px "Geist", sans-serif`;
+    olc.fillText(n.label, lx2 + 5, ly2 - (isRisk ? 9 : 4));
+
+    // Confidence
+    olc.fillStyle = '#9a9ca4';
+    olc.font = '400 9.5px "Geist", sans-serif';
+    olc.fillText('Confidence ' + n.conf.toFixed(2), lx2 + 5, ly2 + (isRisk ? 3 : 8));
+
+    // Risk text
+    if (isRisk && n.risk) {
+      olc.fillStyle = '#c87a3e';
+      olc.font = '500 9.5px "Geist", sans-serif';
+      olc.fillText('Risk: ' + n.risk, lx2 + 5, ly2 + 15);
+    }
+  }
+
+  // "Future exploration region" label
+  const fex = project(980, 510, getH(980, 510, t));
+  olc.save();
+  olc.globalAlpha = 0.30;
+  olc.fillStyle = '#6b6e78';
+  olc.font = 'italic 10px "Geist", sans-serif';
+  olc.fillText('Future exploration', fex.px - 40, fex.py);
+  olc.fillText('region / 1 gon', fex.px - 40, fex.py + 13);
+  olc.restore();
+}
+
+function roundRect(c, x, y, w, h, r) {
+  c.beginPath();
+  c.moveTo(x + r, y);
+  c.lineTo(x + w - r, y);
+  c.quadraticCurveTo(x + w, y, x + w, y + r);
+  c.lineTo(x + w, y + h - r);
+  c.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  c.lineTo(x + r, y + h);
+  c.quadraticCurveTo(x, y + h, x, y + h - r);
+  c.lineTo(x, y + r);
+  c.quadraticCurveTo(x, y, x + r, y);
+  c.closePath();
+}
+
+// Evidence connector lines (overlay dashed from panel to pin)
+function renderEvidenceLines() {
+  const app = document.getElementById('app');
+  const appR = app.getBoundingClientRect();
+  const sc = appR.width / 1440;
+
+  olc.setLineDash([3, 5]);
+  olc.lineWidth = 0.8;
+
+  EVIDENCES.forEach((ev, i) => {
+    const target = NODES.find(n => n.id === ev.linkTo);
+    if (!target || !target.proj) return;
+    const itemEl = document.getElementById('evi-' + i);
+    if (!itemEl) return;
+    const r = itemEl.getBoundingClientRect();
+    const px = (r.right - appR.left) / sc;
+    const py = (r.top - appR.top + r.height / 2) / sc;
+    olc.strokeStyle = 'rgba(80,75,70,0.25)';
+    olc.beginPath();
+    olc.moveTo(px, py);
+    const cx1 = px + 120, cy1 = py;
+    const cx2 = target.proj.px - 60, cy2 = target.proj.py;
+    olc.bezierCurveTo(cx1, cy1, cx2, cy2, target.proj.px, target.proj.py);
+    olc.stroke();
+  });
+  olc.setLineDash([]);
+}
+
+function render() {
+  if (playing) t += 16;
+
+  ctx.fillStyle = '#f4efe8';
+  ctx.fillRect(0, 0, 1440, 860);
+  olc.clearRect(0, 0, 1440, 860);
+
+  // Build height map
+  const hm = [];
+  for (let iy = 0; iy <= ROWS; iy++) {
+    const row = [];
+    for (let ix = 0; ix <= COLS; ix++) {
+      row.push(getH(ix * CS, iy * CS, t));
+    }
+    hm.push(row);
+  }
+
+  renderTerrain(hm);
+  renderScatter(hm);
+  renderPins(hm);
+  renderEvidenceLines();
+
+  // Scrubber clock
+  if (playing) {
+    document.getElementById('clock').textContent = new Date().toLocaleTimeString('en-US', { hour12: true });
+  }
+
+  requestAnimationFrame(render);
+}
+
+// ─── SCALE TO FIT ──────────────────────────────────────────────────────────
+function scaleFit() {
+  const s = Math.min(window.innerWidth / 1440, window.innerHeight / 880) * 0.97;
+  document.getElementById('app').style.transform = `scale(${s})`;
+}
+window.addEventListener('resize', scaleFit);
+scaleFit();
+
+requestAnimationFrame(render);
+</script>
+</body>
+</html>

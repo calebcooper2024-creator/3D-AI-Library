@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Living Architecture - Brokie Citadel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cyan: #00f3ff;
+            --panel-bg: rgba(3, 8, 20, 0.4);
+            --panel-border: rgba(0, 195, 255, 0.15);
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #02050f;
+            overflow: hidden;
+            user-select: none;
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        #webgl-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            cursor: grab;
+        }
+
+        #webgl-container:active {
+            cursor: grabbing;
+        }
+
+        #narration-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 900px;
+            text-align: center;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .narration-text {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 42px;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.95);
+            text-shadow: 0 4px 30px rgba(0, 0, 0, 0.9), 0 0 15px rgba(0, 243, 255, 0.2);
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+            letter-spacing: 1.5px;
+            line-height: 1.4;
+        }
+
+        .narration-text.visible {
+            opacity: 1;
+        }
+
+        #zoom-hint {
+            position: absolute;
+            bottom: 25px;
+            right: 25px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.4);
+            z-index: 10;
+            pointer-events: none;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: opacity 0.5s ease-in-out;
+            text-align: right;
+        }
+
+        #countdown-timer {
+            position: absolute;
+            top: 25px;
+            left: 25px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 22px;
+            z-index: 10;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: color 0.1s, text-shadow 0.1s;
+        }
+
+        #countdown-timer .label {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            z-index: 20;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-height: 42px;
+            padding: 0 16px;
+            border: 1px solid rgba(0, 243, 255, 0.35);
+            background: rgba(3, 8, 20, 0.58);
+            color: rgba(255, 255, 255, 0.92);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            font-size: 11px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 24px rgba(0, 243, 255, 0.14);
+            transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+        }
+
+        .back-button:hover {
+            border-color: rgba(0, 243, 255, 0.7);
+            box-shadow: 0 0 28px rgba(0, 243, 255, 0.22);
+            transform: translateY(-1px);
+        }
+
+        .back-button:focus-visible {
+            outline: 2px solid rgba(0, 243, 255, 0.85);
+            outline-offset: 3px;
+        }
+
+        #loading-screen {
+            position: fixed;
+            inset: 0;
+            z-index: 40;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background:
+                radial-gradient(circle at center, rgba(0, 243, 255, 0.08), transparent 38%),
+                linear-gradient(180deg, rgba(2, 5, 15, 0.96), rgba(2, 5, 15, 0.985));
+            cursor: progress;
+            transition: opacity 0.9s ease, visibility 0.9s ease;
+        }
+
+        #loading-screen.is-hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .loading-panel {
+            width: min(90vw, 420px);
+            padding: 28px 24px;
+            border: 1px solid rgba(0, 243, 255, 0.18);
+            background: rgba(3, 8, 20, 0.58);
+            box-shadow: 0 0 40px rgba(0, 243, 255, 0.08);
+            backdrop-filter: blur(18px);
+            text-align: center;
+        }
+
+        .loading-mark {
+            position: relative;
+            width: 124px;
+            height: 124px;
+            margin: 0 auto 24px;
+        }
+
+        .loading-ring {
+            position: absolute;
+            inset: 0;
+            border: 1px solid rgba(0, 243, 255, 0.22);
+            border-radius: 50%;
+        }
+
+        .loading-ring.outer {
+            box-shadow: inset 0 0 22px rgba(0, 243, 255, 0.1), 0 0 18px rgba(0, 243, 255, 0.08);
+            animation: spin 6s linear infinite;
+        }
+
+        .loading-ring.inner {
+            inset: 16px;
+            border-color: rgba(255, 255, 255, 0.26);
+            animation: reverse-spin 4.5s linear infinite;
+        }
+
+        .loading-core {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 14px;
+            height: 14px;
+            margin: -7px 0 0 -7px;
+            border-radius: 50%;
+            background: var(--cyan);
+            box-shadow: 0 0 22px rgba(0, 243, 255, 0.72);
+            animation: pulse 1.7s ease-in-out infinite;
+        }
+
+        .loading-eyebrow {
+            margin-bottom: 10px;
+            color: rgba(255, 255, 255, 0.56);
+            font-size: 11px;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+        }
+
+        .loading-title {
+            margin: 0;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: clamp(28px, 4vw, 38px);
+            font-weight: 500;
+            line-height: 1.05;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.96);
+            text-shadow: 0 0 20px rgba(0, 243, 255, 0.15);
+        }
+
+        .loading-copy {
+            margin: 12px auto 20px;
+            max-width: 320px;
+            color: rgba(255, 255, 255, 0.64);
+            font-size: 12px;
+            line-height: 1.7;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .loading-bar {
+            position: relative;
+            width: min(72vw, 320px);
+            height: 4px;
+            margin: 0 auto;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: inset 0 0 0 1px rgba(0, 243, 255, 0.08);
+        }
+
+        .loading-bar-fill {
+            position: absolute;
+            inset: 0;
+            transform-origin: left center;
+            background: linear-gradient(90deg, rgba(0, 243, 255, 0.35), rgba(0, 243, 255, 0.95));
+            box-shadow: 0 0 14px rgba(0, 243, 255, 0.45);
+            animation: load-fill 5s linear forwards;
+        }
+
+        .loading-status {
+            margin-top: 12px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes reverse-spin {
+            from {
+                transform: rotate(360deg);
+            }
+            to {
+                transform: rotate(0deg);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(0.9);
+                opacity: 0.75;
+            }
+            50% {
+                transform: scale(1.35);
+                opacity: 1;
+            }
+        }
+
+        @keyframes load-fill {
+            from {
+                transform: scaleX(0);
+            }
+            to {
+                transform: scaleX(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="webgl-container"></div>
+
+    <div id="loading-screen">
+        <div class="loading-panel">
+            <div class="loading-mark" aria-hidden="true">
+                <div class="loading-ring outer"></div>
+                <div class="loading-ring inner"></div>
+                <div class="loading-core"></div>
+            </div>
+            <div class="loading-eyebrow">Global Intelligence Market</div>
+            <h1 class="loading-title">Initializing Market Topology</h1>
+            <div class="loading-copy">Probing routes, calibrating endpoints, and preparing the live architecture.</div>
+            <div class="loading-bar" aria-hidden="true">
+                <div class="loading-bar-fill"></div>
+            </div>
+            <div class="loading-status">Loading scene...</div>
+        </div>
+    </div>
+
+    <div id="countdown-timer">
+        <span class="label">PARADIGM SHIFTING</span>
+        <span id="timer-val">02:19:00</span>
+    </div>
+
+    <a class="back-button" href="/work/the-roger-hub/index.html">Back to Project</a>
+
+    <div id="narration-overlay">
+        <div id="narration-text" class="narration-text"></div>
+    </div>
+
+    <div id="zoom-hint">Zoom out for better readability</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/ShaderPass.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
+
+    <script>
+        const LOADING_SCREEN_DURATION = 5000;
+        const loadingScreen = document.getElementById('loading-screen');
+
+        const container = document.getElementById('webgl-container');
+        const scene = new THREE.Scene();
+        scene.fog = new THREE.FogExp2(0x02050f, 0.015);
+
+        const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(0, 0, 45);
+
+        const renderer = new THREE.WebGLRenderer({ antialias: false, powerPreference: "high-performance" });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        container.appendChild(renderer.domElement);
+
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+        controls.autoRotate = true;
+        controls.autoRotateSpeed = 0.5;
+        controls.enablePan = false;
+        controls.minDistance = 20;
+        controls.maxDistance = 80;
+
+        const renderScene = new THREE.RenderPass(scene, camera);
+        const bloomPass = new THREE.UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.5, 0.4, 0.85);
+        bloomPass.threshold = 0.1;
+        bloomPass.strength = 1.8;
+        bloomPass.radius = 0.5;
+
+        const composer = new THREE.EffectComposer(renderer);
+        composer.addPass(renderScene);
+        composer.addPass(bloomPass);
+
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+        scene.add(ambientLight);
+
+        const pointLight1 = new THREE.PointLight(0x00f3ff, 3, 100);
+        pointLight1.position.set(20, 30, 20);
+        scene.add(pointLight1);
+
+        const pointLight2 = new THREE.PointLight(0xb026ff, 3, 100);
+        pointLight2.position.set(-20, -30, -20);
+        scene.add(pointLight2);
+
+        const SPHERE_RADIUS = 12;
+        const INSTANCE_COUNT = 15000;
+
+        const geometry = new THREE.BoxGeometry(0.12, 0.12, 1);
+        geometry.translate(0, 0, 0.5);
+
+        const material = new THREE.MeshStandardMaterial({
+            color: 0xffffff,
+            emissive: 0x000000,
+            roughness: 0.3,
+            metalness: 0.8
+        });
+
+        const instancedMesh = new THREE.InstancedMesh(geometry, material, INSTANCE_COUNT);
+        const dummy = new THREE.Object3D();
+        const color = new THREE.Color();
+
+        const baseHeights = new Float32Array(INSTANCE_COUNT);
+        const phases = new Float32Array(INSTANCE_COUNT);
+        const speeds = new Float32Array(INSTANCE_COUNT);
+
+        const goldenRatio = 1 + Math.sqrt(5) / 2;
+
+        for (let i = 0; i < INSTANCE_COUNT; i++) {
+            const theta = 2 * Math.PI * i / goldenRatio;
+            const phi = Math.acos(1 - 2 * (i + 0.5) / INSTANCE_COUNT);
+
+            const x = Math.sin(phi) * Math.cos(theta);
+            const y = Math.sin(phi) * Math.sin(theta);
+            const z = Math.cos(phi);
+
+            const pos = new THREE.Vector3(x, y, z);
+
+            dummy.position.copy(pos).multiplyScalar(SPHERE_RADIUS);
+            dummy.lookAt(pos.clone().multiplyScalar(SPHERE_RADIUS * 2));
+
+            const nx = x * 2.5;
+            const ny = y * 2.5;
+            const nz = z * 2.5;
+            const noiseVal = Math.sin(nx) * Math.cos(ny) + Math.sin(ny) * Math.cos(nz) + Math.sin(nz) * Math.cos(nx);
+
+            let h = 0.5 + (noiseVal * 0.4) + (Math.random() * 0.6);
+            if (Math.random() > 0.96) h += 1.0 + Math.random() * 1.5;
+
+            baseHeights[i] = h;
+            phases[i] = (x * 2.2) + (y * 1.8) + (z * 2.5);
+            speeds[i] = 0.15 + (Math.abs(noiseVal) * 0.15);
+
+            dummy.scale.set(1, 1, h);
+            dummy.updateMatrix();
+            instancedMesh.setMatrixAt(i, dummy.matrix);
+
+            let hexColor;
+            const rand = Math.random();
+
+            if (noiseVal > 0.8) {
+                hexColor = rand > 0.6 ? 0xff7a00 : (rand > 0.3 ? 0xffaa00 : 0xff007b);
+            } else if (noiseVal < -0.5) {
+                hexColor = rand > 0.5 ? 0xb026ff : 0x7000ff;
+            } else {
+                hexColor = rand > 0.4 ? 0x00f3ff : (rand > 0.1 ? 0x0066ff : 0x00aaff);
+            }
+
+            color.setHex(hexColor);
+
+            if (h < 0.8) color.multiplyScalar(0.6);
+            else if (h > 1.5) color.multiplyScalar(1.5);
+
+            instancedMesh.setColorAt(i, color);
+        }
+
+        scene.add(instancedMesh);
+
+        const coreGeo = new THREE.SphereGeometry(SPHERE_RADIUS - 0.2, 64, 64);
+        const coreMat = new THREE.MeshBasicMaterial({ color: 0x010308 });
+        const core = new THREE.Mesh(coreGeo, coreMat);
+        scene.add(core);
+
+        const particleGeo = new THREE.BufferGeometry();
+        const particleCount = 2500;
+        const particlePos = new Float32Array(particleCount * 3);
+        for (let i = 0; i < particleCount * 3; i++) {
+            particlePos[i] = (Math.random() - 0.5) * 60;
+        }
+        particleGeo.setAttribute('position', new THREE.BufferAttribute(particlePos, 3));
+        const particleMat = new THREE.PointsMaterial({
+            color: 0x00f3ff,
+            size: 0.08,
+            transparent: true,
+            opacity: 0.6,
+            blending: THREE.AdditiveBlending
+        });
+        const particles = new THREE.Points(particleGeo, particleMat);
+        scene.add(particles);
+
+        const clock = new THREE.Clock();
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            const elapsedTime = clock.getElapsedTime();
+
+            controls.update();
+
+            for (let i = 0; i < INSTANCE_COUNT; i++) {
+                instancedMesh.getMatrixAt(i, dummy.matrix);
+                dummy.matrix.decompose(dummy.position, dummy.quaternion, dummy.scale);
+
+                const baseH = baseHeights[i];
+                const phase = phases[i];
+                const speed = speeds[i];
+                const variance = baseH * 0.6;
+                const dynamicScale = baseH + Math.sin(elapsedTime * speed + phase) * variance;
+                dummy.scale.z = Math.max(0.1, dynamicScale);
+
+                dummy.updateMatrix();
+                instancedMesh.setMatrixAt(i, dummy.matrix);
+            }
+            instancedMesh.instanceMatrix.needsUpdate = true;
+
+            particles.rotation.y -= 0.0005;
+            particles.rotation.x -= 0.0002;
+
+            composer.render();
+        }
+
+        animate();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            composer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        const narrationQueue = [
+            "The first real constraint in building with AI agents is not the model — it is the compute.",
+            "GPU access is expensive. Enterprise API subscriptions compound fast.",
+            "When none of those options are sustainable, the question becomes: what does intelligence actually require?",
+            "Not a single large model. Not a single provider.",
+            "A probeable, routeable, health-scored network of endpoints — generators, retrievers, rerankers, verifiers, simulations...",
+            "...deterministic kernels, evaluation services — anything HTTP-callable that improves the quality of an agent's output.",
+            "The Global Intelligence Market is that network.",
+            "It treats intelligence as an acquisition problem: discover endpoints, calibrate them, score their reliability and cost per task...",
+            "...route evidence-gathering work to the best available source, and compose the results.",
+            "The governing definition of an endpoint is not just an LLM API.",
+            "It is any unit of cognition, computation, search, transformation, or synthesis that can be probed, tagged, and routed.",
+            "That framing changes what the system can reach.",
+            "Introducing The Global Intelligence Market"
+        ];
+
+        const textElement = document.getElementById('narration-text');
+        let currentNarrationIndex = 0;
+
+        async function runNarrationSequence() {
+            if (narrationQueue.length === 0) return;
+
+            textElement.innerText = narrationQueue[currentNarrationIndex];
+
+            requestAnimationFrame(() => {
+                textElement.classList.add('visible');
+            });
+
+            const isLastLine = currentNarrationIndex === narrationQueue.length - 1;
+            const holdTime = isLastLine ? 15000 : 6000;
+
+            await new Promise(resolve => setTimeout(resolve, 2000 + holdTime));
+
+            textElement.classList.remove('visible');
+
+            await new Promise(resolve => setTimeout(resolve, 2000));
+
+            currentNarrationIndex = (currentNarrationIndex + 1) % narrationQueue.length;
+
+            runNarrationSequence();
+        }
+
+        setTimeout(runNarrationSequence, LOADING_SCREEN_DURATION + 500);
+
+        const TOTAL_DURATION = 139000;
+        let timeRemainingMs = TOTAL_DURATION;
+        const timerContainer = document.getElementById('countdown-timer');
+        const timerElement = document.getElementById('timer-val');
+        let lastFrameTime = performance.now();
+
+        function updateCountdown() {
+            const now = performance.now();
+            const delta = now - lastFrameTime;
+            lastFrameTime = now;
+
+            timeRemainingMs -= delta;
+
+            if (timeRemainingMs <= 0) {
+                timeRemainingMs = TOTAL_DURATION;
+            }
+
+            const mins = Math.floor(timeRemainingMs / 60000);
+            const secs = Math.floor((timeRemainingMs % 60000) / 1000);
+            const ms = Math.floor((timeRemainingMs % 1000) / 10);
+
+            timerElement.innerText =
+                String(mins).padStart(2, '0') + ':' +
+                String(secs).padStart(2, '0') + ':' +
+                String(ms).padStart(2, '0');
+
+            const progress = timeRemainingMs / TOTAL_DURATION;
+            const hue = (1 - progress) * 120;
+
+            timerContainer.style.color = `hsl(${hue}, 100%, 55%)`;
+            timerContainer.style.textShadow = `0 0 10px hsla(${hue}, 100%, 55%, 0.6)`;
+
+            requestAnimationFrame(updateCountdown);
+        }
+
+        updateCountdown();
+
+        const hintElement = document.getElementById('zoom-hint');
+        const hints = ["Zoom out for better readability", "Rotate. Zoom."];
+        let currentHintIndex = 0;
+
+        setInterval(() => {
+            hintElement.style.opacity = 0;
+
+            setTimeout(() => {
+                currentHintIndex = (currentHintIndex + 1) % hints.length;
+                hintElement.innerText = hints[currentHintIndex];
+                hintElement.style.opacity = 1;
+            }, 500);
+        }, 5000);
+
+        setTimeout(() => {
+            loadingScreen.classList.add('is-hidden');
+            setTimeout(() => {
+                loadingScreen.remove();
+            }, 900);
+        }, LOADING_SCREEN_DURATION);
+    </script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: var(--font-serif);
+  --font-mono: var(--font-mono);
+}
+
+:root {
+  --ink-color: #0A0A0F;
+}
+
+body {
+  font-family: var(--font-serif), serif;
+}
+
+.font-mono {
+  font-family: var(--font-mono), monospace;
+}
+
+@keyframes inkWash {
+  0% {
+    transform: translateX(-100%) skewX(-10deg);
+  }
+  100% {
+    transform: translateX(100%) skewX(-10deg);
+  }
+}
+
+.ink-wash-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--ink-color);
+  z-index: 50;
+  pointer-events: none;
+  transform: translateX(-100%);
+}
+
+.ink-wash-overlay.light {
+  background: #F8FAFC;
+}
+
+.ink-wash-active {
+  animation: inkWash 0.8s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+}
+
+/* Custom scrollbar for the textarea and other scrollable areas */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(184, 150, 62, 0.3);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(184, 150, 62, 0.5);
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.05); opacity: 1; }
+}
+
+.animate-breathe {
+  animation: breathe 3s ease-in-out infinite;
+}
+
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-count {
+  animation: countUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
