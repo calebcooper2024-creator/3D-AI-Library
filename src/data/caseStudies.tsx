@@ -1,7 +1,6 @@
 import React from 'react';
-import { SectionContent } from './portfolio';
+import { SectionContent, STANDARD_SOURCE_NOTE_LABEL, STANDARD_SOURCE_NOTE_TEXT } from './caseStudyMeta';
 import { BubbleDiagram, ProcessFlow, BeforeAfter, HandwrittenNote } from '../components/Visuals';
-import { STANDARD_SOURCE_NOTE_LABEL, STANDARD_SOURCE_NOTE_TEXT } from './caseStudyMeta';
 
 export const ImagePlaceholder = ({ title, desc, height = "aspect-video" }: { title: string, desc: string, height?: string }) => (
   <div className={`w-full bg-black/5 ${height} flex flex-col items-center justify-center border border-black/10 rounded-lg p-8 text-center my-8 relative overflow-hidden group`}>
@@ -16,7 +15,16 @@ export const ImagePlaceholder = ({ title, desc, height = "aspect-video" }: { tit
 
 // Helper function to create massive sections for a project
 const createMassiveSections = (
-  theme: { bgLeft: string, textLeft: string, bgRight: string, textRight: string, heroBg: string, heroText: string },
+  theme: { 
+    bgLeft: string, 
+    textLeft: string, 
+    bgRight: string, 
+    textRight: string, 
+    heroBg: string, 
+    heroText: string,
+    heroVideo?: string,
+    heroOverlay?: string
+  },
   title: string,
   subtitle: string,
   problem: string,
@@ -30,10 +38,34 @@ const createMassiveSections = (
     id: `${title}-hero`,
     fullWidthContent: (
       <div className={`w-full min-h-screen ${theme.heroBg} ${theme.heroText} flex flex-col justify-end p-8 md:p-24 relative overflow-hidden`}>
+        {theme.heroVideo && (
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 h-full w-full object-cover opacity-85 z-0"
+          >
+            <source src={theme.heroVideo} type="video/mp4" />
+          </video>
+        )}
+        <div 
+          className="absolute inset-0 z-0 opacity-30" 
+          style={{ 
+            backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px)', 
+            backgroundSize: '32px 32px' 
+          }} 
+        />
+        <div 
+          className="absolute inset-0 z-[1] pointer-events-none" 
+          style={{ 
+            background: theme.heroOverlay || 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 60%, transparent 100%)' 
+          }} 
+        />
         <div className="absolute top-1/4 -right-32 w-[600px] h-[600px] bg-white/10 rounded-full mix-blend-overlay blur-3xl opacity-50" />
         <div className="absolute bottom-0 left-0 w-full h-[1px] bg-white/20" />
         <p className="font-mono text-sm md:text-lg tracking-widest uppercase mb-12 opacity-80 z-10 border-l-4 pl-4 border-current">01 — Enterprise Agentic Integration</p>
-        <h1 className="text-[12vw] md:text-[10vw] font-serif leading-[0.85] tracking-tighter mix-blend-overlay z-10 uppercase">{title}</h1>
+        <h1 className="text-[12vw] md:text-[10vw] font-serif leading-[0.85] tracking-tighter z-10 uppercase text-white fill-white stroke-white">{title}</h1>
         <p className="mt-8 text-2xl md:text-4xl font-serif max-w-3xl opacity-90 z-10">{subtitle}</p>
         <div className="mt-24 grid grid-cols-1 md:grid-cols-4 gap-8 border-t border-white/20 pt-8 z-10 font-mono">
            <div><p className="text-xs opacity-50 uppercase">Role</p><p className="mt-2 text-lg">Lead AI Architect</p></div>
@@ -162,7 +194,16 @@ const createMassiveSections = (
 ];
 
 export const cellcoreSections = createMassiveSections(
-  { bgLeft: 'bg-black', textLeft: 'text-white', bgRight: 'bg-transparent', textRight: 'text-black', heroBg: 'bg-[#166534]', heroText: 'text-[#fecdd3]' },
+  { 
+    bgLeft: 'bg-black', 
+    textLeft: 'text-white', 
+    bgRight: 'bg-transparent', 
+    textRight: 'text-black', 
+    heroBg: 'bg-[#166534]', 
+    heroText: 'text-white',
+    heroVideo: '/videos/cellcore-bg.mp4',
+    heroOverlay: 'linear-gradient(to top, rgba(20, 83, 45, 0.95) 0%, rgba(20, 83, 45, 0.4) 50%, rgba(20, 83, 45, 0.2) 100%)'
+  },
   "CellCore", "Agentic Data Structuring for Biological Scale.",
   "CellCore possessed petabytes of highly valuable clinical trial data scattered across legacy ERPs. The data was unstructured, locked in PDFs, handwritten notes, and disparate DB schemas.",
   "We built specialized data-extraction agents that crawl legacy systems, read unstructured PDFs via OCR and Vision models, and map the outputs into a unified biological schema.",
@@ -187,28 +228,6 @@ export const jmFamilySections = _jmFamilySections;
 import _nvidiaSections from './nvidiaCase';
 export const nvidiaSections = _nvidiaSections;
 
-const legacyJmFamilySections = createMassiveSections(
-  { bgLeft: 'bg-[#faf5ff]', textLeft: 'text-purple-950', bgRight: 'bg-white', textRight: 'text-black', heroBg: 'bg-purple-950', heroText: 'text-white' },
-  "JM Family", "Legacy Modernization via Retrieval.",
-  "50 years of institutional knowledge locked inside intranet portals, disconnected SharePoint drives, and PDF memos. Finding an answer took days.",
-  "We designed and deployed an enterprise-wide RAG (Retrieval-Augmented Generation) AI assistant backed by a Pinecone vector DB.",
-  "Enterprise search requires enterprise permissions. The RAG system dynamically filters vector retrieval based on the user's Active Directory roles.",
-  "Instant Knowledge Retrieval",
-  "We built a chat interface that doesn't just guess—it retrieves the exact memo from 2018 and highlights the cited paragraph.",
-  "Reduced HR and IT support tickets by 45% in the first quarter of deployment."
-);
-
-const legacyNvidiaSections = createMassiveSections(
-  { bgLeft: 'bg-[#050505]', textLeft: 'text-green-500', bgRight: 'bg-black', textRight: 'text-white', heroBg: 'bg-black', heroText: 'text-green-500' },
-  "Nvidia", "Agent Swarms for ML Ops & Data Pipelines.",
-  "Training massive frontier models requires perfectly orchestrated data pipelines. Human engineers couldn't balance the load fast enough to prevent GPU idle time.",
-  "We integrated a hierarchical agentic system. Supervisor Agents monitor cluster health globally, while Worker Agents autonomously adjust batch sizes.",
-  "If telemetry shows a bottleneck, the agent invokes a Python tool to reallocate the batch and notifies the engineering Slack channel autonomously.",
-  "22% Efficiency Gain",
-  "We built a custom WebGL pipeline to visualize the agent swarm in real-time, mapping 100k+ DOM nodes without dropping frames.",
-  "Prevented millions of dollars in wasted compute hours by keeping GPU utilization above 98% constantly."
-);
-
 export const flowSections = createMassiveSections(
   { bgLeft: 'bg-white', textLeft: 'text-teal-900', bgRight: 'bg-slate-50', textRight: 'text-black', heroBg: 'bg-teal-600', heroText: 'text-white' },
   "Flow", "Fluid Conversational UI Paradigm.",
@@ -232,7 +251,16 @@ export const globalManagementSections = createMassiveSections(
 );
 
 export const fintechAwsSections = createMassiveSections(
-  { bgLeft: 'bg-white', textLeft: 'text-orange-900', bgRight: 'bg-orange-50', textRight: 'text-black', heroBg: 'bg-orange-600', heroText: 'text-white' },
+  { 
+    bgLeft: 'bg-white', 
+    textLeft: 'text-orange-900', 
+    bgRight: 'bg-orange-50', 
+    textRight: 'text-black', 
+    heroBg: 'bg-orange-600', 
+    heroText: 'text-white',
+    heroVideo: '/videos/fintech-bg.mp4',
+    heroOverlay: 'linear-gradient(to top, rgba(124, 45, 18, 0.95) 0%, rgba(124, 45, 18, 0.4) 50%, rgba(124, 45, 18, 0.2) 100%)'
+  },
   "Fintech", "Serverless Event-Driven AI Agents.",
   "A monolithic fraud detection engine was struggling to scale during volume spikes, causing massive latency in transaction approvals.",
   "We built event-driven micro-agents using AWS Bedrock and Lambda. When a transaction triggers a flag, a Lambda LLM agent investigates.",
@@ -253,16 +281,8 @@ export const gwnSections = createMassiveSections(
   "Achieved 100% compliance across 400 advisors, completely eliminating SEC fine exposure."
 );
 
-export const helloPatientSections = createMassiveSections(
-  { bgLeft: 'bg-white', textLeft: 'text-red-900', bgRight: 'bg-red-50', textRight: 'text-black', heroBg: 'bg-red-600', heroText: 'text-white' },
-  "Plummet", "Empathetic Medical Voice Agents.",
-  "Patients don't want to talk to robots when they are sick. Traditional IVR menus were causing massive patient frustration.",
-  "We developed an integrated voice agent using GPT-4o combined with emotional prosody TTS. It answers calls with a warm bedside manner.",
-  "Crucially, we gave the agent tools. It executes JSON API calls to the hospital's EHR system to read history and modify calendar records.",
-  "24/7 Triaging System",
-  "We designed a conversation tracking dashboard so human nurses can take over an AI call seamlessly if an emergency symptom is detected.",
-  "Reduced front-desk hold times to zero while maintaining a 4.8/5 patient satisfaction score."
-);
+import _helloPatientSections from './helloPatientCase';
+export const helloPatientSections = _helloPatientSections;
 
 export const milestoneSections = createMassiveSections(
   { bgLeft: 'bg-[#0f172a]', textLeft: 'text-emerald-400', bgRight: 'bg-white', textRight: 'text-black', heroBg: 'bg-emerald-700', heroText: 'text-white' },

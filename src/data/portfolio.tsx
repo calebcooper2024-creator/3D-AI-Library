@@ -6,17 +6,7 @@ import {
 } from './caseStudies';
 
 
-export interface SectionContent {
-  id: string;
-  bgColorLeft?: string;
-  textColorLeft?: string;
-  bgColorRight?: string;
-  textColorRight?: string;
-  leftTitle?: string;
-  leftContent?: React.ReactNode;
-  rightContent?: React.ReactNode;
-  fullWidthContent?: React.ReactNode;
-}
+import { SectionContent } from './caseStudyMeta';
 
 export interface BookProject {
   id: string;
