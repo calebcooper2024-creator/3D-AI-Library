@@ -123,12 +123,20 @@ export function ManagedHeroVideo({
 
   return (
     <div ref={hostRef} className={className} aria-hidden="true">
+      {poster && (
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${poster})` }}
+        />
+      )}
+
       <video
         ref={videoRef}
         muted
         loop
         playsInline
         preload={nearViewport ? 'metadata' : 'none'}
+        poster={poster}
         className={videoClassName}
       >
         {nearViewport && <source src={src} type="video/mp4" />}

@@ -1457,3 +1457,11 @@ Known risks:
 
 Next recommended step:
 - If further bundle reduction is desired, refactor portfolio.tsx to separate shelf metadata from case study section data.
+
+
+## Session 8: Buttery Smooth Performance Pass
+- Implemented strict video playback contract globally via `ManagedHeroVideo`.
+- Paused offscreen videos and suppressed background overlays to eliminate UI flashing.
+- Broadcasted `portfolio:heavy-motion` from Bookshelf dragging, horizontal rails, and Paper Curtain transitions to instantly pause all 4K video rendering and give 100% of GPU/CPU resources to the scroll and UI transitions.
+- Prevented GPU leak by scoping `will-change-transform` dynamically on the Bookshelf stage.
+

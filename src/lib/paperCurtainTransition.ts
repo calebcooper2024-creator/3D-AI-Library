@@ -15,6 +15,8 @@
  * primary React project detail navigation.
  */
 
+import { setHeavyMotion } from './heavyMotion';
+
 const DEFAULT_DURATION_MS = 1400;
 const FALLBACK_SWAP_DELAY_MS = 420;
 
@@ -110,15 +112,21 @@ export async function runPaperCurtainSwap(
   const effect = (window as any).paperCurtainEffect;
   const durationMs: number = (window as any).paperCurtainDuration ?? DEFAULT_DURATION_MS;
 
+  setHeavyMotion('paper-curtain', true, 'curtain-start');
+
   if (effect) {
     preparePaperCurtain(effect);
     await curtainIn(effect, durationMs);
     await swap();
     await nextFrame();
     curtainOut(effect);
+    
+    // The out animation takes durationMs to finish visually
+    setTimeout(() => setHeavyMotion('paper-curtain', false, 'curtain-end'), durationMs + 50);
   } else {
     // No curtain available — fade-only fallback
     await new Promise<void>((resolve) => setTimeout(resolve, FALLBACK_SWAP_DELAY_MS));
     await swap();
+    setHeavyMotion('paper-curtain', false, 'fallback-end');
   }
 }

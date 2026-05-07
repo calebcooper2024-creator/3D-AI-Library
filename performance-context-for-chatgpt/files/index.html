@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preload" href="/assets/fonts/canopee.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap" rel="stylesheet" />
+    <title>Caleb Cooper — AI Systems Engineer</title>
+    <meta name="description" content="Caleb Cooper — AI Systems Engineer based in South Florida. Agentic systems, voice interfaces, and data architecture across enterprise and product." />
+    <meta name="author" content="Caleb Cooper" />
+    <link rel="canonical" href="https://lifetaplabs.com/CalebCooper/" />
+    <meta property="og:title" content="Caleb Cooper — AI Systems Engineer" />
+    <meta property="og:description" content="AI Systems Engineer building agentic infrastructure, voice pipelines, and enterprise AI across healthcare, fintech, and gaming." />
+    <meta property="og:url" content="https://lifetaplabs.com/CalebCooper/" />
+    <meta property="og:type" content="website" />
+  </head>
+  <body>
+    <div id="root">
+      <style>
+        .app-loader{position:fixed;inset:0;z-index:9998;display:flex;align-items:center;justify-content:center;background:#cdc6be}
+        .app-loader-ring{position:relative;width:72px;height:72px;display:flex;align-items:center;justify-content:center}
+        .app-loader-ring::before{content:'';position:absolute;inset:0;border-radius:50%;border:2px solid rgba(0,0,0,0.08);border-top-color:rgba(0,0,0,0.4);animation:loader-spin 0.9s linear infinite}
+        .app-loader-ring svg{width:32px;height:32px;opacity:0.45}
+        @keyframes loader-spin{to{transform:rotate(360deg)}}
+      </style>
+      <div class="app-loader">
+        <div class="app-loader-ring">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/>
+            <path d="M8 7h6"/>
+            <path d="M8 11h8"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <!-- Full-screen WebGL canvas for PaperCurtainEffect -->
+    <canvas id="above-canvas" style="position: fixed; top: 0; left: 0; z-index: 9999; pointer-events: none; display: block;"></canvas>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script type="module">
+      import PaperCurtainEffect from "https://cdn.jsdelivr.net/gh/niccolomiranda/portfolio@fa29f26/paper-curtain.mjs";
+
+      const DURATION_MS = 1400; // must match duration in PaperCurtainEffect config (seconds * 1000)
+
+      function setCanvasSize(canvas) {
+        canvas.width  = window.innerWidth;
+        canvas.height = window.innerHeight;
+        canvas.style.width  = window.innerWidth  + "px";
+        canvas.style.height = window.innerHeight + "px";
+      }
+
+      function initEffect() {
+        const aboveCanvas = document.querySelector("#above-canvas");
+        setCanvasSize(aboveCanvas);
+
+        const effect = new PaperCurtainEffect(aboveCanvas, {
+          color: "#1D1D1B",
+          background: "#000000",
+          backgroundOpacity: 0,
+          ease: "power3.inOut",
+          duration: DURATION_MS / 1000,
+          texture: "https://cdn.prod.website-files.com/5f2429f172d117fcee10e819/614f353f1e11a6a7afdd8b74_6059a3e2b9ae6d2bd508685c_pt-texture-2.jpg",
+          amplitude: 0.25,
+          rippedFrequency: 3.5,
+          rippedAmplitude: 0.05,
+          curveFrequency: 1,
+          curveAmplitude: 0.1,
+          rippedDelta: 1,
+          rippedHeight: 0.07,
+          horizontal: true
+        });
+
+        // OGL Renderer resets canvas to 300x150 in its constructor.
+        // Force the correct size immediately after instantiation.
+        setCanvasSize(aboveCanvas);
+        if (effect.resizeObserver) {
+          // Fire the resize callback manually with real dimensions
+          effect.canvasSize = { width: window.innerWidth, height: window.innerHeight };
+          effect.resizeGL();
+        }
+
+        // Keep canvas in sync on resize
+        window.addEventListener("resize", () => {
+          setCanvasSize(aboveCanvas);
+        });
+
+        window.paperCurtainEffect = effect;
+        window.paperCurtainDuration = DURATION_MS;
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initEffect);
+      } else {
+        initEffect();
+      }
+    </script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
