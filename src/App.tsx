@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState, Suspense } from 'react';
 import { Bookshelf } from './components/Bookshelf';
 import { HomeView } from './components/HomeView';
+import { ProjectEntryOverlay } from './components/ProjectEntryOverlay';
 import { projects, BookProject as PortfolioBook } from './data/portfolio';
 import { works } from './data/works';
 import {
@@ -13,14 +14,19 @@ import type { SectionContent } from './data/caseStudyMeta';
 import { WebflowNav } from './components/Navigation';
 import { AnimatePresence, motion } from 'motion/react';
 import { ShelfBook } from './components/Bookshelf';
+import { prepareProjectEntry } from './lib/projectEntryGate';
+import { setHeavyMotion } from './lib/heavyMotion';
+import { getWorkDetail } from './data/workDetails';
 
 // ---------- Lazy-loaded detail views ----------
 // These are code-split into their own chunks and only loaded when a book is opened.
+const loadCaseStudyDetailModule = () => import('./components/CaseStudyDetail');
 const CaseStudyDetail = React.lazy(() =>
-  import('./components/CaseStudyDetail').then((m) => ({ default: m.CaseStudyDetail }))
+  loadCaseStudyDetailModule().then((m) => ({ default: m.CaseStudyDetail }))
 );
+const loadProjectDetailPageModule = () => import('./components/project/ProjectDetailPage');
 const ProjectDetailPage = React.lazy(() =>
-  import('./components/project/ProjectDetailPage').then((m) => ({
+  loadProjectDetailPageModule().then((m) => ({
     default: m.ProjectDetailPage,
   }))
 );
@@ -240,11 +246,23 @@ export default function App() {
   const [selectedBookType, setSelectedBookType] = useState<'work' | 'case-study' | null>(null);
   const [activeView, setActiveView] = useState<ActiveView>(() => getActiveViewFromLocation());
   const [isHomeTransitioning, setIsHomeTransitioning] = useState(false);
+  const [entryOverlay, setEntryOverlay] = useState<{
+    visible: boolean;
+    title: string | null;
+    progress: number;
+    phase: string;
+  }>({
+    visible: false,
+    title: null,
+    progress: 0,
+    phase: 'starting',
+  });
   const [availabilityNotice, setAvailabilityNotice] = useState<{ title: string; message: string } | null>(null);
   // Lazily-resolved book data for the detail view
   const [resolvedBookData, setResolvedBookData] = useState<PortfolioBook | null>(null);
   const [isLoadingBookData, setIsLoadingBookData] = useState(false);
   const transitionTimerRef = useRef<number | null>(null);
+  const entryRequestRef = useRef(0);
 
   const syncHistoryForView = (tab: ActiveView, mode: 'push' | 'replace' = 'replace') => {
     const nextUrl = getActiveViewUrl(tab);
@@ -436,8 +454,11 @@ export default function App() {
     const nextRoute = getRouteSnapshotFromLocation();
     const nextView = nextRoute.kind === 'home' ? 'home' : 'project';
 
+    entryRequestRef.current += 1;
     setActiveView(nextView);
     setIsHomeTransitioning(false);
+    setEntryOverlay({ visible: false, title: null, progress: 0, phase: 'starting' });
+    setHeavyMotion('project-entry', false, 'sync-location');
     setAvailabilityNotice(null);
 
     if (nextRoute.kind === 'home') {
@@ -533,40 +554,59 @@ export default function App() {
 
     setAvailabilityNotice(null);
 
-    const effect = (window as any).paperCurtainEffect;
-    const durationMs: number = (window as any).paperCurtainDuration ?? 1400;
+    const requestId = ++entryRequestRef.current;
+    const fromTab = activeView;
+    const detailVideoSrc =
+      targetBook.type === 'work'
+        ? getWorkDetail(targetBook.id)?.heroVideo ?? null
+        : null;
+
+    const loadProject = async () => {
+      if (targetBook.type === 'work' && !CUSTOM_WORK_DETAIL_IDS.has(targetBook.id)) {
+        await loadProjectDetailPageModule();
+        return;
+      }
+
+      await loadCaseStudyDetailModule();
+
+      if (hasCustomBookData(targetBook.id)) {
+        await loadBookData(targetBook.id);
+      }
+    };
 
     setIsHomeTransitioning(true);
-    if (effect) {
-      effect.in();
-      if (transitionTimerRef.current !== null) window.clearTimeout(transitionTimerRef.current);
-      transitionTimerRef.current = window.setTimeout(() => {
-        setSelectedBookId(id);
-        setSelectedBookType(targetBook.type);
-        setActiveView(targetBook.type === 'case-study' ? 'case-study' : 'project');
-        pushDetailToHistory(targetBook, activeView);
+    setEntryOverlay({ visible: true, title: targetBook.title, progress: 5, phase: 'starting' });
+    setHeavyMotion('project-entry', true, 'book-select-start');
+
+    void prepareProjectEntry({
+      projectId: targetBook.id,
+      videoSrc: detailVideoSrc,
+      loadProject,
+      onProgress: ({ overallProgress, phase }) => {
+        if (entryRequestRef.current !== requestId) return;
+        setEntryOverlay((prev) => ({ ...prev, progress: overallProgress, phase }));
+      },
+    }).then(() => {
+      if (entryRequestRef.current !== requestId) return;
+
+      setSelectedBookId(id);
+      setSelectedBookType(targetBook.type);
+      setActiveView(targetBook.type === 'case-study' ? 'case-study' : 'project');
+      pushDetailToHistory(targetBook, fromTab);
+
+      window.requestAnimationFrame(() => {
+        if (entryRequestRef.current !== requestId) return;
         setIsHomeTransitioning(false);
-        transitionTimerRef.current = null;
-        
-        // Delay opening the curtain by 400ms so the new video has time to buffer its first frame
-        window.setTimeout(() => {
-          effect.out();
-        }, 400);
-      }, durationMs);
-    } else {
-      if (transitionTimerRef.current !== null) window.clearTimeout(transitionTimerRef.current);
-      transitionTimerRef.current = window.setTimeout(() => {
-        setSelectedBookId(id);
-        setSelectedBookType(targetBook.type);
-        setActiveView(targetBook.type === 'case-study' ? 'case-study' : 'project');
-        pushDetailToHistory(targetBook, activeView);
-        setIsHomeTransitioning(false);
-        transitionTimerRef.current = null;
-      }, 420);
-    }
+        setEntryOverlay({ visible: false, title: null, progress: 100, phase: 'ready' });
+        setHeavyMotion('project-entry', false, 'book-select-complete');
+      });
+    });
   };
 
   const handleCloseDetail = () => {
+    entryRequestRef.current += 1;
+    setEntryOverlay({ visible: false, title: null, progress: 0, phase: 'starting' });
+    setHeavyMotion('project-entry', false, 'detail-close');
     if (window.history.state?.detailView) {
       window.history.back();
       return;
@@ -628,6 +668,12 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-transparent">
+      <ProjectEntryOverlay
+        visible={entryOverlay.visible}
+        title={entryOverlay.title}
+        progress={entryOverlay.progress}
+        phase={entryOverlay.phase}
+      />
       <Suspense fallback={null}>
         <AnimatePresence mode="wait">
           {!selectedBookId && (
