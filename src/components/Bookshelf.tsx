@@ -202,11 +202,66 @@ export const Bookshelf = ({
       }
     };
 
+    // --- Touch support for mobile ---
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchLastX = 0;
+    let touchActive = false;
+
+    const handleTouchStart = (e: TouchEvent) => {
+      if (isTransitioning) return;
+      const touch = e.touches[0];
+      touchStartX = touch.clientX;
+      touchStartY = touch.clientY;
+      touchLastX = touch.clientX;
+      touchActive = false;
+      // Kill existing inertia on new touch
+      velocity.current = 0;
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (isTransitioning) return;
+      const touch = e.touches[0];
+      const dx = touch.clientX - touchStartX;
+      const dy = touch.clientY - touchStartY;
+
+      // Once horizontal intent is established, lock to horizontal
+      if (!touchActive && Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 8) {
+        touchActive = true;
+      }
+
+      if (touchActive) {
+        e.preventDefault();
+        const moveDelta = touchLastX - touch.clientX;
+        touchLastX = touch.clientX;
+        offset.current += moveDelta;
+        applyTransform();
+      }
+    };
+
+    const handleTouchEnd = (e: TouchEvent) => {
+      if (!touchActive) return;
+      const touch = e.changedTouches[0];
+      const flickDelta = touchLastX - touch.clientX;
+      velocity.current = flickDelta * 0.8;
+      velocity.current = Math.max(-32, Math.min(32, velocity.current));
+      if (rafId.current === null) {
+        rafId.current = requestAnimationFrame(animate);
+      }
+      touchActive = false;
+    };
+
     applyTransform();
     el.addEventListener('wheel', handleWheelEvent, { passive: false });
+    el.addEventListener('touchstart', handleTouchStart, { passive: true });
+    el.addEventListener('touchmove', handleTouchMove, { passive: false });
+    el.addEventListener('touchend', handleTouchEnd, { passive: true });
 
     return () => {
       el.removeEventListener('wheel', handleWheelEvent);
+      el.removeEventListener('touchstart', handleTouchStart);
+      el.removeEventListener('touchmove', handleTouchMove);
+      el.removeEventListener('touchend', handleTouchEnd);
       if (rafId.current !== null) {
         cancelAnimationFrame(rafId.current);
       }
