@@ -95,9 +95,9 @@ export const boonkBook: BookProject = {
         <div className="relative flex min-h-screen w-full flex-col justify-end overflow-hidden bg-[#14110b] px-8 py-16 text-white md:px-24">
           <ManagedHeroVideo
             src="/videos/boonk-4k.mp4"
-            idSeed={`managed-${Math.random().toString(36).substring(7)}`}
+            idSeed="boonk-hero-video"
             className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
-            videoClassName="h-full w-full object-cover opacity-[0.9]"
+            videoClassName="absolute inset-0 h-full w-full object-cover opacity-85 pointer-events-none"
           />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(224,171,112,0.16),transparent_22%),radial-gradient(circle_at_78%_22%,rgba(91,199,187,0.14),transparent_20%),linear-gradient(180deg,rgba(10,10,12,0.12),rgba(10,10,12,0.72))]" />
 
@@ -288,9 +288,9 @@ export const boonkBook: BookProject = {
         <div className="relative flex min-h-[88vh] w-full items-end overflow-hidden bg-[#14110b] px-8 py-16 text-white md:px-24">
           <ManagedHeroVideo
             src="/videos/boonk-4k.mp4"
-            idSeed={`managed-${Math.random().toString(36).substring(7)}`}
+            idSeed="boonk-secondary-video"
             className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
-            videoClassName="h-full w-full object-cover opacity-[0.86]"
+            videoClassName="absolute inset-0 h-full w-full object-cover opacity-85 pointer-events-none"
           />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_20%,rgba(224,171,112,0.12),transparent_24%),radial-gradient(circle_at_76%_24%,rgba(91,199,187,0.1),transparent_20%),linear-gradient(180deg,rgba(11,11,12,0.12),rgba(11,11,12,0.72)_78%)]" />
           <div className="relative z-10 max-w-5xl">

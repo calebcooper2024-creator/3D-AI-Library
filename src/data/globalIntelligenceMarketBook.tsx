@@ -99,9 +99,9 @@ export const globalIntelligenceMarketBook: BookProject = {
         <div className="relative flex min-h-screen w-full flex-col justify-end overflow-hidden bg-[#08111e] px-8 py-16 text-white md:px-24">
           <ManagedHeroVideo
             src="/videos/gim-4k.mp4"
-            idSeed={`managed-${Math.random().toString(36).substring(7)}`}
+            idSeed="global-intelligence-market-hero-video"
             className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
-            videoClassName="h-full w-full object-cover opacity-[0.9]"
+            videoClassName="absolute inset-0 h-full w-full object-cover opacity-85 pointer-events-none"
           />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(143,231,255,0.14),transparent_22%),radial-gradient(circle_at_82%_22%,rgba(253,224,71,0.12),transparent_20%),radial-gradient(circle_at_62%_78%,rgba(59,130,246,0.1),transparent_22%),linear-gradient(180deg,rgba(6,12,24,0.08),rgba(6,12,24,0.66))]" />
 
@@ -246,9 +246,9 @@ export const globalIntelligenceMarketBook: BookProject = {
         <div className="relative min-h-[72vh] overflow-hidden bg-[#06111d] px-8 py-20 text-white md:px-24">
           <ManagedHeroVideo
             src="/videos/gim-4k.mp4"
-            idSeed={`managed-${Math.random().toString(36).substring(7)}`}
+            idSeed="global-intelligence-market-secondary-video"
             className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
-            videoClassName="h-full w-full object-cover opacity-[0.84]"
+            videoClassName="absolute inset-0 h-full w-full object-cover opacity-85 pointer-events-none"
           />
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,16,28,0.14),rgba(7,16,28,0.58))]" />
           <div className="relative z-10 mx-auto flex min-h-[60vh] max-w-5xl flex-col justify-end">

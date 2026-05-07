@@ -97,9 +97,9 @@ export const bonnieBook: BookProject = {
         <div className="relative flex min-h-screen w-full flex-col justify-end overflow-hidden bg-[#12040d] px-8 py-16 text-white md:px-24">
           <ManagedHeroVideo
             src="/videos/bonnie-bg.mp4"
-            idSeed={`managed-${Math.random().toString(36).substring(7)}`}
+            idSeed="bonnie-hero-video"
             className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
-            videoClassName="h-full w-full object-cover opacity-[0.9]"
+            videoClassName="absolute inset-0 h-full w-full object-cover opacity-85 pointer-events-none"
           />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(242,163,199,0.2),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(95,14,53,0.24),transparent_34%),linear-gradient(180deg,rgba(10,3,7,0.08),rgba(10,3,7,0.66))]" />
           <div className="absolute inset-0 bg-[url('/paper-texture.jpg')] bg-center opacity-[0.04] mix-blend-soft-light" />
@@ -294,9 +294,9 @@ export const bonnieBook: BookProject = {
         <div className="relative flex min-h-[88vh] w-full items-end overflow-hidden bg-[#12040d] px-8 py-16 text-white md:px-24">
           <ManagedHeroVideo
             src="/videos/bonnie-bg.mp4"
-            idSeed={`managed-${Math.random().toString(36).substring(7)}`}
+            idSeed="bonnie-secondary-video"
             className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
-            videoClassName="h-full w-full object-cover opacity-[0.88]"
+            videoClassName="absolute inset-0 h-full w-full object-cover opacity-85 pointer-events-none"
           />
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(18,4,13,0.08),rgba(18,4,13,0.68)_78%)]" />
           <div className="relative z-10 max-w-5xl">

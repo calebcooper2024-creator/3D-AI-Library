@@ -114,9 +114,9 @@ const helloPatientSections: SectionContent[] = [
         {/* Video Background */}
         <ManagedHeroVideo
             src="/videos/hero-bg.mp4"
-            idSeed={`managed-${Math.random().toString(36).substring(7)}`}
+            idSeed="hello-patient-hero-video"
             className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
-            videoClassName="h-full w-full object-cover opacity-70"
+            videoClassName="absolute inset-0 h-full w-full object-cover opacity-85 pointer-events-none"
           />
 
         {/* Dark Overlay for legibility - fine-tuned */}
@@ -1118,9 +1118,9 @@ const helloPatientSections: SectionContent[] = [
         <div className="absolute inset-y-0 right-0 w-full lg:w-[60%]">
           <ManagedHeroVideo
             src="/videos/hero-bg.mp4"
-            idSeed={`managed-${Math.random().toString(36).substring(7)}`}
+            idSeed="hello-patient-secondary-video"
             className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
-            videoClassName="h-full w-full object-cover"
+            videoClassName="absolute inset-0 h-full w-full object-cover opacity-85 pointer-events-none"
           />
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(69,10,10,0.3),rgba(69,10,10,0.52))] lg:bg-[linear-gradient(90deg,rgba(69,10,10,0.97)_0%,rgba(69,10,10,0.84)_18%,rgba(69,10,10,0.42)_48%,rgba(69,10,10,0.14)_100%)]" />
         </div>

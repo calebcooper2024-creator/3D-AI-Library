@@ -99,9 +99,9 @@ export const brokieV2Book: BookProject = {
         <div className="relative flex min-h-screen w-full flex-col justify-end overflow-hidden bg-[#07130f] px-8 py-16 text-white md:px-24">
           <ManagedHeroVideo
             src="/videos/brokie-v2-bg.mp4"
-            idSeed={`managed-${Math.random().toString(36).substring(7)}`}
+            idSeed="brokie-v2-hero-video"
             className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
-            videoClassName="h-full w-full object-cover opacity-[0.92]"
+            videoClassName="absolute inset-0 h-full w-full object-cover opacity-85 pointer-events-none"
           />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(58,255,180,0.1),transparent_24%),radial-gradient(circle_at_80%_24%,rgba(115,245,255,0.08),transparent_22%),radial-gradient(circle_at_62%_78%,rgba(255,216,107,0.07),transparent_26%),linear-gradient(180deg,rgba(4,10,8,0.08),rgba(4,10,8,0.72))]" />
 
@@ -293,9 +293,9 @@ export const brokieV2Book: BookProject = {
         <div className="relative min-h-[72vh] overflow-hidden bg-[#06110e] px-8 py-20 text-white md:px-24">
           <ManagedHeroVideo
             src="/videos/brokie-v2-bg.mp4"
-            idSeed={`managed-${Math.random().toString(36).substring(7)}`}
+            idSeed="brokie-v2-secondary-video"
             className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
-            videoClassName="h-full w-full object-cover opacity-[0.78]"
+            videoClassName="absolute inset-0 h-full w-full object-cover opacity-85 pointer-events-none"
           />
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,12,10,0.32),rgba(4,12,10,0.68))]" />
           <div className="relative z-10 mx-auto flex min-h-[60vh] max-w-5xl flex-col justify-end">
