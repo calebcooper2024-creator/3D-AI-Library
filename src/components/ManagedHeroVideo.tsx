@@ -9,7 +9,6 @@ import {
 type ManagedHeroVideoProps = {
   src: string;
   idSeed: string;
-  poster?: string;
   className?: string;
   videoClassName?: string;
   visibilityThreshold?: number;
@@ -24,7 +23,6 @@ function safeId(value: string) {
 export function ManagedHeroVideo({
   src,
   idSeed,
-  poster,
   className = '',
   videoClassName = 'absolute inset-0 h-full w-full object-cover pointer-events-none',
   visibilityThreshold = 0.45,
@@ -124,6 +122,7 @@ export function ManagedHeroVideo({
   return (
     <div ref={hostRef} className={className} aria-hidden="true">
       <video
+        key={videoId}
         ref={videoRef}
         muted
         loop
