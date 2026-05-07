@@ -329,28 +329,46 @@ export const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({
     if (!rail) return;
 
     const desktopQuery = window.matchMedia('(min-width: 901px)');
-    const SNAP_VELOCITY_THRESHOLD = 0.4;
-    const SNAP_EASING = 0.18;
+    const railMotion = createHeavyMotionSettler(`project-rail-${slug}`, 650);
+    const SNAP_VELOCITY_THRESHOLD = 0.36;
+    const SNAP_EASING = 0.16;
     const SNAP_DONE_PX = 0.5;
+    const VELOCITY_SCALE = 0.12;
+    const VELOCITY_LIMIT = 24;
+    const DAMPING_PER_FRAME = 0.84;
 
-    const getMaxOffset = () => Math.max(0, rail.scrollWidth - rail.clientWidth);
-
-    const clampOffset = (value: number) => Math.max(0, Math.min(value, getMaxOffset()));
-
-    const applyOffset = () => {
-      railOffsetRef.current = clampOffset(railOffsetRef.current);
-      rail.scrollLeft = railOffsetRef.current;
-    };
-
-    const getSnapPoints = () => {
+    const measureRail = () => {
       const panels = Array.from(
         rail.querySelectorAll('.project-horizontal-panel')
       ) as HTMLElement[];
 
-      if (!panels.length) return [0];
+      railMaxOffsetRef.current = Math.max(0, rail.scrollWidth - rail.clientWidth);
+
+      if (!panels.length) {
+        railSnapPointsRef.current = [0];
+        return;
+      }
 
       const baseOffset = panels[0].offsetLeft;
-      return panels.map((panel) => clampOffset(panel.offsetLeft - baseOffset));
+
+      railSnapPointsRef.current = panels.map((panel) =>
+        Math.max(
+          0,
+          Math.min(panel.offsetLeft - baseOffset, railMaxOffsetRef.current)
+        )
+      );
+    };
+
+    const clampOffset = (value: number) =>
+      Math.max(0, Math.min(value, railMaxOffsetRef.current));
+
+    const applyOffset = () => {
+      const nextOffset = clampOffset(railOffsetRef.current);
+      railOffsetRef.current = nextOffset;
+
+      if (Math.abs(rail.scrollLeft - nextOffset) > 0.25) {
+        rail.scrollLeft = nextOffset;
+      }
     };
 
     const stopRailAnimation = () => {
@@ -358,18 +376,28 @@ export const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({
         cancelAnimationFrame(railRafRef.current);
         railRafRef.current = null;
       }
+
       railVelocityRef.current = 0;
       railSnappingRef.current = false;
+      railLastTimestampRef.current = 0;
+      railMotion.end('rail-stop');
     };
 
-    const animateRail = () => {
+    const animateRail = (timestamp: number) => {
       if (!desktopQuery.matches || lightboxOpen) {
         stopRailAnimation();
         return;
       }
 
+      railMotion.markActive('rail-animation');
+
+      const previousTimestamp = railLastTimestampRef.current || timestamp;
+      const dt = Math.min(34, timestamp - previousTimestamp);
+      const frameScale = dt > 0 ? dt / 16.667 : 1;
+      railLastTimestampRef.current = timestamp;
+
       if (railSnappingRef.current) {
-        const snapPoints = getSnapPoints();
+        const snapPoints = railSnapPointsRef.current;
         const snapTarget = snapPoints.reduce<number>(
           (closest, point) =>
             Math.abs(point - railOffsetRef.current) < Math.abs(closest - railOffsetRef.current)
@@ -386,23 +414,23 @@ export const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({
           return;
         }
 
-        railOffsetRef.current += delta * SNAP_EASING;
+        railOffsetRef.current += delta * Math.min(1, SNAP_EASING * frameScale);
         applyOffset();
         railRafRef.current = requestAnimationFrame(animateRail);
         return;
       }
 
-      railOffsetRef.current += railVelocityRef.current;
+      railOffsetRef.current += railVelocityRef.current * frameScale;
       applyOffset();
 
-      const maxOffset = getMaxOffset();
+      const maxOffset = railMaxOffsetRef.current;
       const atStart = railOffsetRef.current <= 0.5;
       const atEnd = railOffsetRef.current >= maxOffset - 0.5;
 
       if ((atStart && railVelocityRef.current < 0) || (atEnd && railVelocityRef.current > 0)) {
         railVelocityRef.current = 0;
       } else {
-        railVelocityRef.current *= 0.88;
+        railVelocityRef.current *= Math.pow(DAMPING_PER_FRAME, frameScale);
       }
 
       if (Math.abs(railVelocityRef.current) > SNAP_VELOCITY_THRESHOLD) {
@@ -415,6 +443,15 @@ export const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({
       railRafRef.current = requestAnimationFrame(animateRail);
     };
 
+    const startRailAnimation = () => {
+      railMotion.markActive('rail-start');
+
+      if (railRafRef.current === null) {
+        railLastTimestampRef.current = 0;
+        railRafRef.current = requestAnimationFrame(animateRail);
+      }
+    };
+
     const handleWheel = (e: WheelEvent) => {
       if (!desktopQuery.matches || lightboxOpen || e.ctrlKey) return;
 
@@ -424,26 +461,42 @@ export const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({
       if (Math.abs(dominantDelta) < 0.01) return;
 
       e.preventDefault();
-      railOffsetRef.current = rail.scrollLeft;
+      railMotion.markActive('rail-wheel');
+      railOffsetRef.current = clampOffset(rail.scrollLeft);
       railSnappingRef.current = false;
-      railVelocityRef.current += dominantDelta * 0.16;
-      railVelocityRef.current = Math.max(-32, Math.min(32, railVelocityRef.current));
+      railVelocityRef.current += dominantDelta * VELOCITY_SCALE;
+      railVelocityRef.current = Math.max(
+        -VELOCITY_LIMIT,
+        Math.min(VELOCITY_LIMIT, railVelocityRef.current)
+      );
 
-      if (railRafRef.current === null) {
-        railRafRef.current = requestAnimationFrame(animateRail);
-      }
+      startRailAnimation();
     };
 
     const handleScroll = () => {
       if (railRafRef.current === null) {
-        railOffsetRef.current = rail.scrollLeft;
+        railOffsetRef.current = clampOffset(rail.scrollLeft);
       }
     };
 
     const handleResize = () => {
+      measureRail();
       railOffsetRef.current = clampOffset(rail.scrollLeft);
       applyOffset();
     };
+
+    measureRail();
+    railOffsetRef.current = clampOffset(rail.scrollLeft);
+
+    const resizeObserver =
+      typeof ResizeObserver !== 'undefined'
+        ? new ResizeObserver(() => {
+            measureRail();
+            railOffsetRef.current = clampOffset(rail.scrollLeft);
+          })
+        : null;
+
+    resizeObserver?.observe(rail);
 
     rail.addEventListener('wheel', handleWheel, { passive: false });
     rail.addEventListener('scroll', handleScroll, { passive: true });
@@ -453,9 +506,11 @@ export const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({
       rail.removeEventListener('wheel', handleWheel);
       rail.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleResize);
+      resizeObserver?.disconnect();
       stopRailAnimation();
+      railMotion.dispose();
     };
-  }, [lightboxOpen]);
+  }, [lightboxOpen, slug]);
 
   if (!detail) {
     return (
@@ -527,21 +582,18 @@ export const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({
           >
             {detail.heroVideo && (
               <>
-                <video
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  preload="none"
-                  className="absolute inset-0 h-full w-full object-cover opacity-85 z-0 pointer-events-none"
-                >
-                  <source src={detail.heroVideo} type="video/mp4" />
-                </video>
-                <div 
-                  className="absolute inset-0 z-[1] pointer-events-none" 
-                  style={{ 
+                <ManagedHeroVideo
+                  src={detail.heroVideo}
+                  idSeed={`project-detail-${detail.slug}`}
+                  poster={detail.heroImage || undefined}
+                  className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
+                  videoClassName="absolute inset-0 h-full w-full object-cover opacity-85 pointer-events-none"
+                />
+                <div
+                  className="absolute inset-0 z-[1] pointer-events-none"
+                  style={{
                     background: 'linear-gradient(180deg, rgba(251,246,239,0.05) 0%, rgba(242,229,215,0.3) 100%)'
-                  }} 
+                  }}
                 />
               </>
             )}
