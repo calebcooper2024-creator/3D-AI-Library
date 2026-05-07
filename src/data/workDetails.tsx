@@ -505,6 +505,19 @@ const workDetails: WorkDetail[] = [
   },
 
   {
+    slug: 'about-caleb',
+    title: 'Caleb Cooper',
+    subtitle: 'AI Engineering',
+    year: '2026',
+    client: 'Caleb Cooper',
+    tags: [],
+    heroVideo: '/videos/about-bg.mp4',
+    intro: '',
+    longIntro: '',
+    sections: [],
+  },
+
+  {
     slug: 'ai-library',
     title: 'The AI Library',
     subtitle: 'Real Business Is Done On Paper. Okay? Write That Down.',

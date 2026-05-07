@@ -205,14 +205,8 @@ export function prepareVideoForEntry(
       record.snapshot = { ...record.snapshot, canPlay: true };
       notifyListeners(record);
     }
-    // Attempt to play the muted warmup video to get the real playing signal.
-    // Muted videos can autoplay without user gesture in all major browsers.
-    video.play().catch(() => {
-      if (!record.settled) {
-        record.snapshot = { ...record.snapshot, progress: Math.max(record.snapshot.progress, 90) };
-        notifyListeners(record);
-      }
-    });
+    // Do NOT call video.play() here. The warmup element is for buffering only.
+    // The gate waits for the managed (visible) video to fire playing via markManagedVideoPlaying.
   };
 
   const onPlaying = () => {

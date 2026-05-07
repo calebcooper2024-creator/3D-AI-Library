@@ -586,20 +586,23 @@ export default function App() {
         if (entryRequestRef.current !== requestId) return;
         setEntryOverlay((prev) => ({ ...prev, progress: overallProgress, phase }));
       },
+      // Content is ready: render the page behind the overlay now.
+      // Heavy motion is cleared so ManagedHeroVideo can start playing.
+      // The gate continues waiting for the managed video's playing event.
+      onContentReady: () => {
+        if (entryRequestRef.current !== requestId) return;
+        setHeavyMotion('project-entry', false, 'content-ready');
+        setSelectedBookId(id);
+        setSelectedBookType(targetBook.type);
+        setActiveView(targetBook.type === 'case-study' ? 'case-study' : 'project');
+        pushDetailToHistory(targetBook, fromTab);
+        setIsHomeTransitioning(false);
+      },
     }).then(() => {
       if (entryRequestRef.current !== requestId) return;
-
-      setSelectedBookId(id);
-      setSelectedBookType(targetBook.type);
-      setActiveView(targetBook.type === 'case-study' ? 'case-study' : 'project');
-      pushDetailToHistory(targetBook, fromTab);
-
-      window.requestAnimationFrame(() => {
-        if (entryRequestRef.current !== requestId) return;
-        setIsHomeTransitioning(false);
-        setEntryOverlay({ visible: false, title: null, progress: 100, phase: 'ready' });
-        setHeavyMotion('project-entry', false, 'book-select-complete');
-      });
+      // Managed video is playing (or timed out) — dismiss the overlay.
+      setEntryOverlay({ visible: false, title: null, progress: 100, phase: 'ready' });
+      setHeavyMotion('project-entry', false, 'book-select-complete');
     });
   };
 

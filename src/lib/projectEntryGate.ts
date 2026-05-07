@@ -39,6 +39,9 @@ type PrepareProjectEntryInput = {
   minDurationMs?: number;
   maxDurationMs?: number;
   onProgress?: (progress: ProjectEntryProgress) => void;
+  // Called as soon as content is loaded so the caller can render the page behind
+  // the overlay. The gate continues waiting for the managed video to play.
+  onContentReady?: () => void;
 };
 
 function isMobile(): boolean {
@@ -89,6 +92,7 @@ export async function prepareProjectEntry({
   minDurationMs = 900,
   maxDurationMs,
   onProgress,
+  onContentReady,
 }: PrepareProjectEntryInput): Promise<ProjectEntryResult> {
   const mobile = isMobile();
   const effectiveMaxMs = maxDurationMs ?? (mobile ? 3500 : 6000);
@@ -99,15 +103,36 @@ export async function prepareProjectEntry({
   let lastVideoSnap: VideoReadinessSnapshot | null = null;
   let rafId: number | null = null;
   const hasVideo = Boolean(videoSrc);
+  let contentReadyAt: number | null = null;
 
   const reportProgress = (finalOverride?: Partial<ProjectEntryProgress>) => {
     if (!onProgress) return;
     const elapsed = Date.now() - startedAt;
     const minFraction = Math.min(1, elapsed / minDurationMs);
     const contentFraction = projectReady ? 1 : 0;
-    const videoFraction = lastVideoSnap
+
+    // Raw video fraction from tracker milestones (0–89% max until playing)
+    const rawVideoFraction = lastVideoSnap
       ? lastVideoSnap.progress / 100
       : hasVideo ? 0 : 1;
+
+    // Once content is ready and we're waiting for the managed video to play,
+    // slowly creep the bar from its current position toward 99% so the user
+    // sees steady per-second movement instead of a frozen number.
+    let videoFraction = rawVideoFraction;
+    if (
+      contentReadyAt !== null &&
+      lastVideoSnap !== null &&
+      (lastVideoSnap.phase === 'canplay' || lastVideoSnap.phase === 'buffering') &&
+      rawVideoFraction >= 0.35 // only creep once buffering is underway
+    ) {
+      const waitedMs = Date.now() - contentReadyAt;
+      const creepDuration = Math.max(3000, effectiveMaxMs * 0.5);
+      const creepFraction = Math.min(1, waitedMs / creepDuration);
+      // Ease-in: starts slow, accelerates gently
+      const eased = creepFraction * creepFraction;
+      videoFraction = rawVideoFraction + (0.99 - rawVideoFraction) * eased;
+    }
 
     const overall = contentFraction * 0.25 + videoFraction * 0.65 + minFraction * 0.10;
     const phase = derivePhase(projectReady, lastVideoSnap, hasVideo);
@@ -151,19 +176,22 @@ export async function prepareProjectEntry({
 
   const videoReadyPromise: Promise<boolean> = hasVideo && videoSrc
     ? new Promise<boolean>((resolve) => {
-        // Start the tracker (no-op if already started for this src)
+        // Start the tracker (no-op if already started for this src).
+        // The warmup video buffers only — it never calls play().
         prepareVideoForEntry(videoSrc, { maxWaitMs: effectiveMaxMs });
 
-        // Subscribe once: drives both progress reporting and gate resolution
+        // Subscribe once: drives both progress reporting and gate resolution.
+        // We resolve on isPlaying (set by markManagedVideoPlaying from the visible
+        // ManagedHeroVideo element) rather than on phase === 'playing' (which the
+        // warmup element would have set). This ensures the overlay stays up until
+        // the video the user can actually see has started playing.
         const unsub = subscribeVideoReadiness(videoSrc, (snap) => {
           lastVideoSnap = snap;
           reportProgress();
-          if (
-            snap.phase === 'playing' ||
-            snap.phase === 'timeout' ||
-            snap.phase === 'error'
-          ) {
-            resolve(snap.phase === 'playing');
+          if (snap.isPlaying) {
+            resolve(true);
+          } else if (snap.phase === 'timeout' || snap.phase === 'error') {
+            resolve(false);
           }
         });
         unsubVideo = unsub;
@@ -172,6 +200,10 @@ export async function prepareProjectEntry({
 
   const readyPromise = (async () => {
     await projectPromise;
+    // Content is ready — fire the callback so the caller can render the page
+    // behind the overlay. The gate continues waiting for the managed video.
+    contentReadyAt = Date.now();
+    onContentReady?.();
     await videoReadyPromise;
     return 'ready' as const;
   })();

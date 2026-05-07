@@ -10,6 +10,10 @@ export type HeavyMotionDetail = {
 
 const activeSources = new Set<string>();
 
+export function isHeavyMotionActive() {
+  return activeSources.size > 0;
+}
+
 function dispatchHeavyMotion(source?: string, reason?: string) {
   if (typeof window === 'undefined') return;
 

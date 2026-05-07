@@ -140,11 +140,11 @@ export const Bookshelf = ({
     // Play page-turn sound immediately on click
     playPageTurnSound();
 
-    // Let the 3D book opening animation play for ~2s, then notify parent
-    // (parent will fire the paper curtain and navigate)
-    setTimeout(() => {
+    // Hand control back to the route gate on the next frame so the overlay can
+    // appear immediately without removing the opening state from this instance.
+    window.requestAnimationFrame(() => {
       onSelectBook(id);
-    }, 2000);
+    });
   };
 
   const spine = 72;

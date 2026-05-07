@@ -98,9 +98,9 @@ export const HomeView = ({
     if (openingId || isTransitioning) return;
     setOpeningId(id);
     playPageTurnSound();
-    setTimeout(() => {
+    window.requestAnimationFrame(() => {
       onSelectBook(id);
-    }, 2000);
+    });
   };
 
   const step = 262; // Matches Bookshelf.tsx

@@ -41,6 +41,9 @@ export function ManagedHeroVideo({
 }: ManagedHeroVideoProps) {
   const hostRef = useRef<HTMLDivElement | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  // Tracks the current play intent so event-driven retries (canplay, progress,
+  // poll) only call play() when the video should be playing.
+  const shouldPlayRef = useRef(false);
   // Default to true to prevent the hero video from pausing for 1 frame while waiting for observer
   const [nearViewport, setNearViewport] = useState(true);
   const [visibleEnough, setVisibleEnough] = useState(true);
@@ -79,20 +82,74 @@ export function ManagedHeroVideo({
       }
     };
 
+    // Require 700ms of uninterrupted playback before signalling the entry gate.
+    // If the video stalls (waiting/stalled) within that window, the timer resets
+    // so the overlay stays up until playback is genuinely sustained.
+    let sustainedTimer: number | null = null;
+
+    const cancelSustained = () => {
+      if (sustainedTimer !== null) {
+        window.clearTimeout(sustainedTimer);
+        sustainedTimer = null;
+      }
+    };
+
     const onPlaying = () => {
       setVideoReady(true);
-      markManagedVideoPlaying(src);
+      cancelSustained();
+      sustainedTimer = window.setTimeout(() => {
+        sustainedTimer = null;
+        markManagedVideoPlaying(src);
+      }, 700);
     };
+
+    const onWaitingOrStalled = () => {
+      cancelSustained();
+    };
+
+    // The visible <video> is keyed on videoId, so when src changes the element
+    // remounts fresh with no buffered data. The first play() call from the
+    // visibility effect can silently reject because the browser hasn't loaded
+    // enough data yet — and since the visibility deps don't change, no retry
+    // happens until the user scrolls. These retry handlers fire on every
+    // loading milestone so play() resumes as soon as the browser is ready,
+    // gated by shouldPlayRef so we never play while the video should be paused.
+    const retryPlay = () => {
+      if (!shouldPlayRef.current) return;
+      if (!video.paused) return;
+      void requestManagedVideoPlayback(videoId);
+    };
+
+    // Polling fallback: catches the case where neither canplay nor progress
+    // fires after our handlers attach (e.g., events fired before mount).
+    const pollId = window.setInterval(retryPlay, 600);
 
     video.addEventListener('loadeddata', markReady);
     video.addEventListener('canplay', markReady);
+    video.addEventListener('loadeddata', retryPlay);
+    video.addEventListener('canplay', retryPlay);
+    video.addEventListener('canplaythrough', retryPlay);
+    video.addEventListener('progress', retryPlay);
     video.addEventListener('playing', onPlaying);
+    video.addEventListener('waiting', onWaitingOrStalled);
+    video.addEventListener('stalled', onWaitingOrStalled);
     markReady();
+    // If the element already has data buffered when we attach (events fired
+    // before mount), kick off a retry immediately.
+    retryPlay();
 
     return () => {
+      cancelSustained();
+      window.clearInterval(pollId);
       video.removeEventListener('loadeddata', markReady);
       video.removeEventListener('canplay', markReady);
+      video.removeEventListener('loadeddata', retryPlay);
+      video.removeEventListener('canplay', retryPlay);
+      video.removeEventListener('canplaythrough', retryPlay);
+      video.removeEventListener('progress', retryPlay);
       video.removeEventListener('playing', onPlaying);
+      video.removeEventListener('waiting', onWaitingOrStalled);
+      video.removeEventListener('stalled', onWaitingOrStalled);
     };
   }, [src, videoId]);
 
@@ -151,6 +208,8 @@ export function ManagedHeroVideo({
       !visibleEnough ||
       !documentVisible ||
       (pauseDuringHeavyMotion && heavyMotionActive);
+
+    shouldPlayRef.current = !shouldPause;
 
     if (shouldPause) {
       pauseManagedVideo(videoId);

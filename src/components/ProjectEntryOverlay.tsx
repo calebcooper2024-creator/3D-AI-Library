@@ -2,13 +2,13 @@ import React from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 
 const PHASE_MESSAGES: Record<string, string> = {
-  starting:             'Opening case study',
-  'loading-content':    'Loading project brief',
-  'loading-video':      'Preparing hero video',
-  'waiting-for-playback': 'Starting video',
-  ready:                'Opening now',
-  timeout:              'Opening case study',
-  error:                'Opening case study',
+  starting:               'Your book is loading, please be patient',
+  'loading-content':      'Your book is loading, please be patient',
+  'loading-video':        'Your book is loading, please be patient',
+  'waiting-for-playback': 'Almost ready, hang tight',
+  ready:                  'Opening now',
+  timeout:                'Opening now',
+  error:                  'Opening now',
 };
 
 type ProjectEntryOverlayProps = {
