@@ -85,7 +85,11 @@ const getLegacyCanonicalRoute = (pathname: string, search: string) => {
   const project = params.get('project');
   const caseStudy = params.get('caseStudy');
 
-  if (normalizedPath === '/' || normalizedPath === '/about') {
+  if (normalizedPath === '/') {
+    return ROUTES.standalone404;
+  }
+
+  if (normalizedPath === '/about') {
     return ROUTES.about;
   }
 
