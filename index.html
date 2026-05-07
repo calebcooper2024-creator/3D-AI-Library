@@ -20,15 +20,19 @@
     <div id="root">
       <style>
         .app-loader{position:fixed;inset:0;z-index:9998;display:flex;align-items:center;justify-content:center;background:#cdc6be}
-        .app-loader svg{width:48px;height:48px;opacity:0.55;animation:loader-pulse 1.8s ease-in-out infinite}
-        @keyframes loader-pulse{0%,100%{opacity:0.3;transform:scale(0.96)}50%{opacity:0.6;transform:scale(1)}}
+        .app-loader-ring{position:relative;width:72px;height:72px;display:flex;align-items:center;justify-content:center}
+        .app-loader-ring::before{content:'';position:absolute;inset:0;border-radius:50%;border:2px solid rgba(0,0,0,0.08);border-top-color:rgba(0,0,0,0.4);animation:loader-spin 0.9s linear infinite}
+        .app-loader-ring svg{width:32px;height:32px;opacity:0.45}
+        @keyframes loader-spin{to{transform:rotate(360deg)}}
       </style>
       <div class="app-loader">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/>
-          <path d="M8 7h6"/>
-          <path d="M8 11h8"/>
-        </svg>
+        <div class="app-loader-ring">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/>
+            <path d="M8 7h6"/>
+            <path d="M8 11h8"/>
+          </svg>
+        </div>
       </div>
     </div>
     <!-- Full-screen WebGL canvas for PaperCurtainEffect -->

@@ -45,6 +45,7 @@ const createMassiveSections = (
             muted
             loop
             playsInline
+            preload="none"
             className="absolute inset-0 h-full w-full object-cover opacity-85 z-0"
           >
             <source src={theme.heroVideo} type="video/mp4" />

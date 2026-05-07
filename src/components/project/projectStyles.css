@@ -469,6 +469,16 @@
   z-index: 1;
 }
 
+
+/* When hero video is active, suppress the panel gradient so the
+   old heroImage PNG can never bleed through */
+.project-horizontal-panel--has-video::before {
+  display: none;
+}
+
+.project-horizontal-panel--has-video .project-horizontal-intro-stack {
+  background: transparent;
+}
 .project-horizontal-panel--intro {
   flex-basis: min(96vw, 1320px);
   align-items: stretch;
@@ -848,9 +858,7 @@
 .project-hero-fieldnotes {
   position: relative;
   background: rgba(243, 237, 229, 0.2);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  min-height: 0;
+    min-height: 0;
   flex: 1 1 auto;
   padding: clamp(1.5rem, 2.8vh, 2.4rem) clamp(1.4rem, 4.5vw, 5rem);
   display: grid;

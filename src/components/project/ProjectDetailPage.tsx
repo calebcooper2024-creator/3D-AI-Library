@@ -513,7 +513,7 @@ export const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({
 
       <main ref={railRef} className="project-horizontal-shell">
         <section 
-          className="project-horizontal-panel project-horizontal-panel--intro project-horizontal-panel--tone-1"
+          className={"project-horizontal-panel project-horizontal-panel--intro project-horizontal-panel--tone-1${detail.heroVideo ? ' project-horizontal-panel--has-video' : ''}"}
           style={detail.heroVideo ? { background: 'transparent' } : {}}
         >
           <div 
@@ -527,6 +527,7 @@ export const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({
                   muted
                   loop
                   playsInline
+                  preload="none"
                   className="absolute inset-0 h-full w-full object-cover opacity-85 z-0 pointer-events-none"
                 >
                   <source src={detail.heroVideo} type="video/mp4" />

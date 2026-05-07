@@ -272,8 +272,9 @@ export const Bookshelf = ({
     <div 
       ref={shelfRef}
       className={`min-h-screen flex flex-col justify-center pt-20 overflow-hidden bg-transparent hide-scrollbar ${isTransitioning ? 'pointer-events-none' : ''}`}
+      style={{ touchAction: 'pan-x' }}
     >
-      <div className={`bookshelf-container px-32 flex items-center${openingInstanceKey ? ' has-opening-book' : ''}`}>
+      <div className={`bookshelf-container px-4 md:px-16 flex items-center${openingInstanceKey ? ' has-opening-book' : ''}`}>
           <div ref={stageRef} className="book-stage relative flex transform-gpu will-change-transform" style={{ 
               width: `${displayedBooks.length * step}px`, 
               height: '540px'
