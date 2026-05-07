@@ -1,3 +1,4 @@
+import { ManagedHeroVideo } from '../components/ManagedHeroVideo';
 import React from 'react';
 import { BookProject } from './portfolio';
 import { works } from './works';
@@ -96,16 +97,12 @@ export const brokieV1Book: BookProject = {
       id: 'brokie-v1-hero',
       fullWidthContent: (
         <div className="relative flex min-h-screen w-full flex-col justify-end overflow-hidden bg-[#07111d] px-8 py-16 text-white md:px-24">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            poster="/images/books/brokie_v1_1777746500531.png"
-            className="absolute inset-0 h-full w-full object-cover opacity-[0.92]"
-          >
-            <source src="/videos/brokie-v1-4k.mp4" type="video/mp4" />
-          </video>
+          <ManagedHeroVideo
+            src="/videos/brokie-v1-4k.mp4"
+            idSeed={`managed-${Math.random().toString(36).substring(7)}`}
+            className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
+            videoClassName="h-full w-full object-cover opacity-[0.92]"
+          />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(94,242,255,0.12),transparent_24%),radial-gradient(circle_at_82%_24%,rgba(201,255,91,0.08),transparent_22%),radial-gradient(circle_at_60%_80%,rgba(255,183,107,0.08),transparent_26%),linear-gradient(180deg,rgba(5,10,18,0.06),rgba(5,10,18,0.54))]" />
 
           <div className="relative z-10 max-w-6xl">
@@ -337,16 +334,12 @@ export const brokieV1Book: BookProject = {
       id: 'brokie-v1-footer',
       fullWidthContent: (
         <div className="relative flex min-h-[88vh] w-full items-end overflow-hidden bg-[#07111d] px-8 py-16 text-white md:px-24">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            poster="/images/books/brokie_v1_1777746500531.png"
-            className="absolute inset-0 h-full w-full object-cover opacity-[0.94]"
-          >
-            <source src="/videos/brokie-v1-4k.mp4" type="video/mp4" />
-          </video>
+          <ManagedHeroVideo
+            src="/videos/brokie-v1-4k.mp4"
+            idSeed={`managed-${Math.random().toString(36).substring(7)}`}
+            className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
+            videoClassName="h-full w-full object-cover opacity-[0.94]"
+          />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(94,242,255,0.1),transparent_24%),linear-gradient(180deg,rgba(5,10,18,0.06),rgba(5,10,18,0.52)_78%)]" />
           <div className="relative z-10 max-w-5xl">
             <p className="mb-6 font-mono text-[10px] uppercase tracking-[0.34em] text-[#8eeeff]/80">Brokie V1 / Closing Read</p>

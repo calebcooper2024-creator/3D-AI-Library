@@ -1,3 +1,4 @@
+import { ManagedHeroVideo } from '../components/ManagedHeroVideo';
 import React from 'react';
 import { BookProject } from './portfolio';
 
@@ -125,16 +126,12 @@ export const aboutMeBook: BookProject = {
       id: 'caleb-hero',
       fullWidthContent: (
         <div className="relative flex min-h-screen w-full flex-col justify-end overflow-hidden bg-[#090705] px-8 py-16 text-white md:px-24">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            poster="/images/books/about_me_cover.png"
-            className="absolute inset-0 h-full w-full object-cover opacity-[0.84]"
-          >
-            <source src="/videos/about-bg.mp4" type="video/mp4" />
-          </video>
+          <ManagedHeroVideo
+            src="/videos/about-bg.mp4"
+            idSeed={`managed-${Math.random().toString(36).substring(7)}`}
+            className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
+            videoClassName="h-full w-full object-cover opacity-[0.84]"
+          />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(201,160,78,0.18),transparent_36%),linear-gradient(180deg,rgba(5,4,3,0.18),rgba(5,4,3,0.9))]" />
           <div className="absolute inset-0 bg-[url('/paper-texture.jpg')] bg-center opacity-[0.05] mix-blend-soft-light" />
 
@@ -366,16 +363,12 @@ export const aboutMeBook: BookProject = {
       fullWidthContent: (
         <div className="relative overflow-hidden bg-[#0d0a08] text-white">
           <div className="absolute inset-y-0 right-0 w-full lg:w-[58%]">
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              poster="/images/books/about_me_cover.png"
-              className="absolute inset-0 h-full w-full object-cover"
-            >
-              <source src="/videos/about-bg.mp4" type="video/mp4" />
-            </video>
+            <ManagedHeroVideo
+            src="/videos/about-bg.mp4"
+            idSeed={`managed-${Math.random().toString(36).substring(7)}`}
+            className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
+            videoClassName="h-full w-full object-cover"
+          />
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(13,10,8,0.22),rgba(13,10,8,0.4))] lg:bg-[linear-gradient(90deg,rgba(13,10,8,0.97)_0%,rgba(13,10,8,0.86)_18%,rgba(13,10,8,0.42)_44%,rgba(13,10,8,0.16)_100%)]" />
           </div>
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_left_center,rgba(201,160,78,0.1),transparent_40%)]" />

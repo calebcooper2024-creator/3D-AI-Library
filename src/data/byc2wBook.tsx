@@ -1,3 +1,4 @@
+import { ManagedHeroVideo } from '../components/ManagedHeroVideo';
 import React from 'react';
 import { BookProject } from './portfolio';
 import { works } from './works';
@@ -104,16 +105,12 @@ export const byc2wBook: BookProject = {
       id: 'byc2w-hero',
       fullWidthContent: (
         <div className="relative flex min-h-screen w-full flex-col justify-end overflow-hidden bg-[#120a2c] px-8 py-16 text-white md:px-24">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            poster="/images/books/byc2w_1777746475201.png"
-            className="absolute inset-0 h-full w-full object-cover opacity-[0.9]"
-          >
-            <source src="/videos/byc2w-4k.mp4" type="video/mp4" />
-          </video>
+          <ManagedHeroVideo
+            src="/videos/byc2w-4k.mp4"
+            idSeed={`managed-${Math.random().toString(36).substring(7)}`}
+            className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
+            videoClassName="h-full w-full object-cover opacity-[0.9]"
+          />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(255,220,84,0.14),transparent_22%),radial-gradient(circle_at_78%_18%,rgba(87,142,255,0.14),transparent_20%),radial-gradient(circle_at_60%_76%,rgba(255,97,140,0.1),transparent_24%),linear-gradient(180deg,rgba(12,6,28,0.1),rgba(12,6,28,0.66))]" />
 
           <div className="relative z-10 max-w-6xl">
@@ -261,16 +258,12 @@ export const byc2wBook: BookProject = {
       id: 'byc2w-footer',
       fullWidthContent: (
         <div className="relative min-h-[72vh] overflow-hidden bg-[#100a28] px-8 py-20 text-white md:px-24">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            poster="/images/books/byc2w_1777746475201.png"
-            className="absolute inset-0 h-full w-full object-cover opacity-[0.84]"
-          >
-            <source src="/videos/byc2w-4k.mp4" type="video/mp4" />
-          </video>
+          <ManagedHeroVideo
+            src="/videos/byc2w-4k.mp4"
+            idSeed={`managed-${Math.random().toString(36).substring(7)}`}
+            className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
+            videoClassName="h-full w-full object-cover opacity-[0.84]"
+          />
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(9,6,22,0.26),rgba(9,6,22,0.62))]" />
           <div className="relative z-10 mx-auto flex min-h-[60vh] max-w-5xl flex-col justify-end">
             <Kicker n="05" label="Closing Note" />

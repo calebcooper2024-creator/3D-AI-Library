@@ -1,3 +1,4 @@
+import { ManagedHeroVideo } from '../components/ManagedHeroVideo';
 import React from 'react';
 import { BookProject } from './portfolio';
 import { works } from './works';
@@ -94,16 +95,12 @@ export const bonnieBook: BookProject = {
       id: 'bonnie-hero',
       fullWidthContent: (
         <div className="relative flex min-h-screen w-full flex-col justify-end overflow-hidden bg-[#12040d] px-8 py-16 text-white md:px-24">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            poster="/images/books/bonnie_1777746458866.png"
-            className="absolute inset-0 h-full w-full object-cover opacity-[0.9]"
-          >
-            <source src="/videos/bonnie-bg.mp4" type="video/mp4" />
-          </video>
+          <ManagedHeroVideo
+            src="/videos/bonnie-bg.mp4"
+            idSeed={`managed-${Math.random().toString(36).substring(7)}`}
+            className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
+            videoClassName="h-full w-full object-cover opacity-[0.9]"
+          />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(242,163,199,0.2),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(95,14,53,0.24),transparent_34%),linear-gradient(180deg,rgba(10,3,7,0.08),rgba(10,3,7,0.66))]" />
           <div className="absolute inset-0 bg-[url('/paper-texture.jpg')] bg-center opacity-[0.04] mix-blend-soft-light" />
 
@@ -295,16 +292,12 @@ export const bonnieBook: BookProject = {
       id: 'bonnie-footer',
       fullWidthContent: (
         <div className="relative flex min-h-[88vh] w-full items-end overflow-hidden bg-[#12040d] px-8 py-16 text-white md:px-24">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            poster="/images/books/bonnie_1777746458866.png"
-            className="absolute inset-0 h-full w-full object-cover opacity-[0.88]"
-          >
-            <source src="/videos/bonnie-bg.mp4" type="video/mp4" />
-          </video>
+          <ManagedHeroVideo
+            src="/videos/bonnie-bg.mp4"
+            idSeed={`managed-${Math.random().toString(36).substring(7)}`}
+            className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
+            videoClassName="h-full w-full object-cover opacity-[0.88]"
+          />
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(18,4,13,0.08),rgba(18,4,13,0.68)_78%)]" />
           <div className="relative z-10 max-w-5xl">
             <p className="mb-6 font-mono text-[10px] uppercase tracking-[0.34em] text-[#f2a3c7]/82">Bonnie / Closing Read</p>

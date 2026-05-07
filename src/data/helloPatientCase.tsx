@@ -1,3 +1,4 @@
+import { ManagedHeroVideo } from '../components/ManagedHeroVideo';
 import React from 'react';
 import { SectionContent } from './portfolio';
 import { STANDARD_SOURCE_NOTE_LABEL, STANDARD_SOURCE_NOTE_TEXT } from './caseStudyMeta';
@@ -111,15 +112,12 @@ const helloPatientSections: SectionContent[] = [
     fullWidthContent: (
       <div className="relative flex min-h-screen w-full flex-col justify-end overflow-hidden bg-red-600 p-8 text-white md:p-24">
         {/* Video Background */}
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="absolute inset-0 h-full w-full object-cover opacity-70"
-        >
-          <source src="/videos/hero-bg.mp4" type="video/mp4" />
-        </video>
+        <ManagedHeroVideo
+            src="/videos/hero-bg.mp4"
+            idSeed={`managed-${Math.random().toString(36).substring(7)}`}
+            className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
+            videoClassName="h-full w-full object-cover opacity-70"
+          />
 
         {/* Dark Overlay for legibility - fine-tuned */}
         <div className="absolute inset-0 bg-gradient-to-t from-red-950/85 via-red-950/30 to-transparent z-0" />
@@ -1118,16 +1116,12 @@ const helloPatientSections: SectionContent[] = [
     fullWidthContent: (
       <div className="relative overflow-hidden bg-red-950 text-white">
         <div className="absolute inset-y-0 right-0 w-full lg:w-[60%]">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            poster="/images/books/summit_health_cover.jpg"
-            className="absolute inset-0 h-full w-full object-cover"
-          >
-            <source src="/videos/hero-bg.mp4" type="video/mp4" />
-          </video>
+          <ManagedHeroVideo
+            src="/videos/hero-bg.mp4"
+            idSeed={`managed-${Math.random().toString(36).substring(7)}`}
+            className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
+            videoClassName="h-full w-full object-cover"
+          />
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(69,10,10,0.3),rgba(69,10,10,0.52))] lg:bg-[linear-gradient(90deg,rgba(69,10,10,0.97)_0%,rgba(69,10,10,0.84)_18%,rgba(69,10,10,0.42)_48%,rgba(69,10,10,0.14)_100%)]" />
         </div>
 

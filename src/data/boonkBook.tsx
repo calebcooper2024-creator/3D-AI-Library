@@ -1,3 +1,4 @@
+import { ManagedHeroVideo } from '../components/ManagedHeroVideo';
 import React from 'react';
 import { BookProject } from './portfolio';
 import { works } from './works';
@@ -92,16 +93,12 @@ export const boonkBook: BookProject = {
       id: 'boonk-hero',
       fullWidthContent: (
         <div className="relative flex min-h-screen w-full flex-col justify-end overflow-hidden bg-[#14110b] px-8 py-16 text-white md:px-24">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            poster="/images/books/boonk_1777746488106.png"
-            className="absolute inset-0 h-full w-full object-cover opacity-[0.9]"
-          >
-            <source src="/videos/boonk-4k.mp4" type="video/mp4" />
-          </video>
+          <ManagedHeroVideo
+            src="/videos/boonk-4k.mp4"
+            idSeed={`managed-${Math.random().toString(36).substring(7)}`}
+            className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
+            videoClassName="h-full w-full object-cover opacity-[0.9]"
+          />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(224,171,112,0.16),transparent_22%),radial-gradient(circle_at_78%_22%,rgba(91,199,187,0.14),transparent_20%),linear-gradient(180deg,rgba(10,10,12,0.12),rgba(10,10,12,0.72))]" />
 
           <div className="relative z-10 max-w-6xl">
@@ -289,16 +286,12 @@ export const boonkBook: BookProject = {
       id: 'boonk-footer',
       fullWidthContent: (
         <div className="relative flex min-h-[88vh] w-full items-end overflow-hidden bg-[#14110b] px-8 py-16 text-white md:px-24">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            poster="/images/books/boonk_1777746488106.png"
-            className="absolute inset-0 h-full w-full object-cover opacity-[0.86]"
-          >
-            <source src="/videos/boonk-4k.mp4" type="video/mp4" />
-          </video>
+          <ManagedHeroVideo
+            src="/videos/boonk-4k.mp4"
+            idSeed={`managed-${Math.random().toString(36).substring(7)}`}
+            className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
+            videoClassName="h-full w-full object-cover opacity-[0.86]"
+          />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_20%,rgba(224,171,112,0.12),transparent_24%),radial-gradient(circle_at_76%_24%,rgba(91,199,187,0.1),transparent_20%),linear-gradient(180deg,rgba(11,11,12,0.12),rgba(11,11,12,0.72)_78%)]" />
           <div className="relative z-10 max-w-5xl">
             <p className="mb-6 font-mono text-[10px] uppercase tracking-[0.34em] text-[#e5c28f]/78">Boonk / Closing Read</p>

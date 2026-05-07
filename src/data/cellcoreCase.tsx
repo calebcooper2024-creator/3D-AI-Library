@@ -1,3 +1,4 @@
+import { ManagedHeroVideo } from '../components/ManagedHeroVideo';
 import React from 'react';
 import type { SectionContent } from './portfolio';
 
@@ -123,9 +124,12 @@ const cellcoreSections: SectionContent[] = [
     id: 'cellcore-hero',
     fullWidthContent: (
       <div className="relative flex min-h-screen w-full flex-col justify-end overflow-hidden bg-[#0e3a31] p-8 text-white md:p-24">
-        <video autoPlay muted loop playsInline className="absolute inset-0 h-full w-full object-cover opacity-[0.74]">
-          <source src="/videos/cellcore-bg.mp4" type="video/mp4" />
-        </video>
+        <ManagedHeroVideo
+            src="/videos/cellcore-bg.mp4"
+            idSeed={`managed-${Math.random().toString(36).substring(7)}`}
+            className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
+            videoClassName="h-full w-full object-cover opacity-[0.74]"
+          />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,25,22,0.26),rgba(8,28,24,0.58),rgba(6,20,17,0.88))]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(196,255,218,0.18),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(230,255,171,0.1),transparent_28%)]" />
 
@@ -462,9 +466,12 @@ const cellcoreSections: SectionContent[] = [
     id: 'cellcore-grounding',
     fullWidthContent: (
       <div className="relative w-full overflow-hidden bg-[#eef5ea] px-8 py-24 text-black md:px-20 md:py-28">
-        <video autoPlay muted loop playsInline className="absolute inset-0 h-full w-full object-cover opacity-[0.18]">
-          <source src="/videos/cellcore-bg.mp4" type="video/mp4" />
-        </video>
+        <ManagedHeroVideo
+            src="/videos/cellcore-bg.mp4"
+            idSeed={`managed-${Math.random().toString(36).substring(7)}`}
+            className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
+            videoClassName="h-full w-full object-cover opacity-[0.18]"
+          />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(238,245,234,0.9),rgba(238,245,234,0.94))]" />
         <div className="relative z-10 mx-auto max-w-7xl">
           <Kicker n="11" label="Method Grounding And Claim Boundary" tone="text-emerald-700" />

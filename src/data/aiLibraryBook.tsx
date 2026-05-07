@@ -1,3 +1,4 @@
+import { ManagedHeroVideo } from '../components/ManagedHeroVideo';
 import React from 'react';
 import { BookProject } from './portfolio';
 
@@ -151,16 +152,12 @@ export const aiLibraryBook: BookProject = {
       id: 'ai-library-hero',
       fullWidthContent: (
         <div className="relative flex min-h-screen w-full flex-col justify-end overflow-hidden bg-[#0a0e19] px-8 py-16 text-white md:px-24">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            poster="/images/books/stuttgart_library.jpg"
-            className="absolute inset-0 h-full w-full object-cover opacity-[0.8]"
-          >
-            <source src="/videos/library-4k.mp4" type="video/mp4" />
-          </video>
+          <ManagedHeroVideo
+            src="/videos/library-4k.mp4"
+            idSeed={`managed-${Math.random().toString(36).substring(7)}`}
+            className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
+            videoClassName="h-full w-full object-cover opacity-[0.8]"
+          />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,87,51,0.24),transparent_28%),radial-gradient(circle_at_top_right,rgba(56,125,255,0.26),transparent_34%),radial-gradient(circle_at_bottom_center,rgba(243,202,98,0.18),transparent_38%),linear-gradient(180deg,rgba(6,7,14,0.18),rgba(6,7,14,0.88))]" />
           <div className="absolute inset-0 bg-[url('/paper-texture.jpg')] bg-center opacity-[0.05] mix-blend-soft-light" />
 
@@ -383,16 +380,12 @@ export const aiLibraryBook: BookProject = {
       fullWidthContent: (
         <div className="relative overflow-hidden bg-[#0c1120] text-white">
           <div className="absolute inset-y-0 right-0 w-full lg:w-[60%]">
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              poster="/images/books/stuttgart_library.jpg"
-              className="absolute inset-0 h-full w-full object-cover"
-            >
-              <source src="/videos/library-4k.mp4" type="video/mp4" />
-            </video>
+            <ManagedHeroVideo
+            src="/videos/library-4k.mp4"
+            idSeed={`managed-${Math.random().toString(36).substring(7)}`}
+            className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
+            videoClassName="h-full w-full object-cover"
+          />
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(12,17,32,0.26),rgba(12,17,32,0.44))] lg:bg-[linear-gradient(90deg,rgba(12,17,32,0.97)_0%,rgba(12,17,32,0.84)_18%,rgba(12,17,32,0.4)_48%,rgba(12,17,32,0.12)_100%)]" />
           </div>
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_left_center,rgba(243,202,98,0.12),transparent_36%),radial-gradient(circle_at_left_top,rgba(47,98,255,0.14),transparent_26%)]" />
