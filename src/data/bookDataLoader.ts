@@ -57,6 +57,10 @@ const resolvers: Record<string, () => Promise<BookProject>> = {
     const m = await import('./panopticonBook');
     return m.panopticonBook;
   },
+  resume: async () => {
+    const m = await import('./resumeBook');
+    return m.resumeBook;
+  },
 };
 
 /** In-memory cache so we don't re-import after first open. */

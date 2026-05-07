@@ -1,16 +1,16 @@
 # Graph Report - calebs-3d-case-study  (2026-05-07)
 
 ## Corpus Check
-- 168 files · ~303,730 words
+- 169 files · ~305,141 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1009 nodes · 1812 edges · 118 communities (96 shown, 22 thin omitted)
-- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 45 edges (avg confidence: 0.8)
+- 1011 nodes · 1816 edges · 118 communities (95 shown, 23 thin omitted)
+- Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 46 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `d706396b`
+- Built from commit: `474c0a8d`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -34,7 +34,7 @@
 - [[_COMMUNITY_Community 17|Community 17]]
 - [[_COMMUNITY_Community 18|Community 18]]
 - [[_COMMUNITY_Community 19|Community 19]]
-- [[_COMMUNITY_Community 21|Community 21]]
+- [[_COMMUNITY_Community 20|Community 20]]
 - [[_COMMUNITY_Community 22|Community 22]]
 - [[_COMMUNITY_Community 23|Community 23]]
 - [[_COMMUNITY_Community 24|Community 24]]
@@ -62,7 +62,7 @@
 - [[_COMMUNITY_Community 46|Community 46]]
 - [[_COMMUNITY_Community 47|Community 47]]
 - [[_COMMUNITY_Community 48|Community 48]]
-- [[_COMMUNITY_Community 49|Community 49]]
+- [[_COMMUNITY_Community 50|Community 50]]
 - [[_COMMUNITY_Community 51|Community 51]]
 - [[_COMMUNITY_Community 52|Community 52]]
 - [[_COMMUNITY_Community 53|Community 53]]
@@ -82,9 +82,9 @@
 ## God Nodes (most connected - your core abstractions)
 1. `Draggable()` - 26 edges
 2. `t()` - 20 edges
-3. `n()` - 18 edges
-4. `E()` - 18 edges
-5. `ManagedHeroVideo()` - 18 edges
+3. `ManagedHeroVideo()` - 19 edges
+4. `n()` - 18 edges
+5. `E()` - 18 edges
 6. `cn()` - 17 edges
 7. `Tween()` - 16 edges
 8. `r()` - 16 edges
@@ -92,18 +92,18 @@
 10. `BeforeAfter()` - 14 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `Draggable()` --calls--> `he()`  [INFERRED]
-  public/assets/js/Draggable.min-2c75b760fb.js → public/assets/js/jquery-3.5.1.min.dc5e7f18c8-e07f811afa.js
-- `Draggable()` --calls--> `K()`  [INFERRED]
-  public/assets/js/Draggable.min-2c75b760fb.js → public/assets/js/locomotive-scroll.min-cc8f42dcb9.js
 - `handleBookSelect()` --calls--> `prepareProjectEntry()`  [INFERRED]
   src/App.tsx → src/lib/projectEntryGate.ts
 - `clampOffset()` --calls--> `getMaxOffset()`  [EXTRACTED]
   src/components/project/ProjectDetailPage.tsx → performance-context-for-chatgpt/files/src/components/project/ProjectDetailPage.tsx
 - `animateRail()` --calls--> `getMaxOffset()`  [EXTRACTED]
   src/components/project/ProjectDetailPage.tsx → performance-context-for-chatgpt/files/src/components/project/ProjectDetailPage.tsx
+- `animateRail()` --calls--> `getSnapPoints()`  [EXTRACTED]
+  src/components/project/ProjectDetailPage.tsx → performance-context-for-chatgpt/files/src/components/project/ProjectDetailPage.tsx
+- `w()` --calls--> `c()`  [INFERRED]
+  public/assets/js/Draggable.min-2c75b760fb.js → public/assets/js/locomotive-scroll.min-cc8f42dcb9.js
 
-## Communities (118 total, 22 thin omitted)
+## Communities (118 total, 23 thin omitted)
 
 ### Community 1 - "Community 1"
 Cohesion: 0.05
@@ -111,111 +111,111 @@ Nodes (73): $(), $a(), aa(), ad(), Animation(), _assertThisInitialized(), ba(), 
 
 ### Community 2 - "Community 2"
 Cohesion: 0.05
-Nodes (31): Book(), Bookshelf(), CaseStudyDetail(), FactoryScene(), handleBookClick(), playPageTurnSound(), getScrollThreshold(), handleNavigate() (+23 more)
+Nodes (37): Book(), Bookshelf(), CaseStudyDetail(), FactoryScene(), handleBookClick(), playPageTurnSound(), getScrollThreshold(), handleNavigate() (+29 more)
 
 ### Community 3 - "Community 3"
 Cohesion: 0.09
-Nodes (33): A(), Ae(), b(), ce(), D(), Dt(), Ee(), ft() (+25 more)
+Nodes (33): A(), Ae(), b(), be(), ce(), D(), Dt(), Ee() (+25 more)
 
 ### Community 4 - "Community 4"
-Cohesion: 0.12
-Nodes (29): getWorkDetail(), clearAllHeavyMotion(), createHeavyMotionSettler(), dispatchHeavyMotion(), isHeavyMotionActive(), setHeavyMotion(), curtainIn(), curtainOut() (+21 more)
-
-### Community 5 - "Community 5"
 Cohesion: 0.1
 Nodes (27): BeforeAfter(), BubbleDiagram(), HandwrittenNote(), ProcessFlow(), ImagePlaceholder(), Choice(), Metric(), Risk() (+19 more)
 
+### Community 5 - "Community 5"
+Cohesion: 0.08
+Nodes (38): aq(), b(), bD(), $C(), d(), dq(), E(), eM() (+30 more)
+
 ### Community 6 - "Community 6"
-Cohesion: 0.13
-Nodes (31): A(), ba(), Ca(), da(), Draggable(), Ea(), Fa(), Ga() (+23 more)
+Cohesion: 0.12
+Nodes (32): A(), ba(), Ca(), da(), Draggable(), Ea(), Fa(), Ga() (+24 more)
 
 ### Community 7 - "Community 7"
-Cohesion: 0.09
-Nodes (32): onReady(), Af(), df(), Ef(), ff(), fN(), gf(), hf() (+24 more)
+Cohesion: 0.16
+Nodes (24): getWorkDetail(), curtainIn(), curtainOut(), nextFrame(), preparePaperCurtain(), runPaperCurtainSwap(), animateRail(), applyOffset() (+16 more)
 
 ### Community 8 - "Community 8"
 Cohesion: 0.12
 Nodes (21): captureAndAnalyze(), drawDetections(), startCapture(), stopCapture(), cancelRecordingInternal(), handleVoiceInput(), monitorAudio(), playRawAudio() (+13 more)
 
 ### Community 9 - "Community 9"
-Cohesion: 0.1
-Nodes (31): aq(), bD(), cD(), dq(), eD(), eM(), fM(), h() (+23 more)
+Cohesion: 0.09
+Nodes (30): ke(), onReady(), Af(), EU(), fN(), gf(), hf(), hs() (+22 more)
 
 ### Community 10 - "Community 10"
-Cohesion: 0.11
-Nodes (29): a(), b(), bS(), $C(), d(), d1(), E(), f() (+21 more)
-
-### Community 11 - "Community 11"
 Cohesion: 0.16
 Nodes (23): applyDetailPage(), applyLinkList(), applySharedChrome(), applySidebarCard(), applyWorkIndexPage(), fitAllTitles(), fitTitleNode(), getProject() (+15 more)
 
+### Community 11 - "Community 11"
+Cohesion: 0.18
+Nodes (23): $(), a(), B(), c(), d(), e(), f(), G() (+15 more)
+
 ### Community 12 - "Community 12"
-Cohesion: 0.17
-Nodes (24): $(), a(), B(), c(), d(), e(), f(), G() (+16 more)
+Cohesion: 0.1
+Nodes (22): bL(), bS(), dS(), eL(), hL(), I1(), iP(), je() (+14 more)
 
 ### Community 13 - "Community 13"
 Cohesion: 0.15
-Nodes (18): delay(), getPhaseMessage(), isMobile(), prepareProjectEntry(), computeBufferedRatio(), computeProgress(), getVideoReadinessSnapshot(), markManagedVideoPlaying() (+10 more)
-
-### Community 14 - "Community 14"
-Cohesion: 0.15
 Nodes (14): componentDidCatch(), constructor(), getDerivedStateFromError(), VisualEditor(), CustomCursor(), downloadAsFolder(), downloadZip(), handleClone() (+6 more)
 
+### Community 14 - "Community 14"
+Cohesion: 0.16
+Nodes (18): delay(), getPhaseMessage(), isMobile(), prepareProjectEntry(), computeBufferedRatio(), computeProgress(), getVideoReadinessSnapshot(), markManagedVideoPlaying() (+10 more)
+
 ### Community 15 - "Community 15"
-Cohesion: 0.13
-Nodes (18): AS(), AU(), Dy(), EU(), fS(), gU(), Is(), Ly() (+10 more)
+Cohesion: 0.14
+Nodes (18): cP(), DE(), FE(), Fy(), GE(), IU(), ME(), mU() (+10 more)
 
 ### Community 17 - "Community 17"
-Cohesion: 0.12
-Nodes (16): dS(), Fy(), I1(), IU(), je(), LG(), mU(), OU() (+8 more)
+Cohesion: 0.14
+Nodes (16): AS(), AU(), Dy(), fS(), gU(), Ly(), Ms(), My() (+8 more)
 
 ### Community 18 - "Community 18"
-Cohesion: 0.13
-Nodes (15): ke(), di(), dx(), fx(), gx(), lx(), nI(), Oa() (+7 more)
+Cohesion: 0.22
+Nodes (15): a(), cD(), eD(), hD(), Lh(), mD(), nD(), o() (+7 more)
 
 ### Community 19 - "Community 19"
-Cohesion: 0.29
-Nodes (9): handleHeavyMotion(), handleVisibilityChange(), ManagedHeroVideo(), safeId(), getActiveManagedVideoId(), pauseAllManagedVideos(), pauseManagedVideo(), registerManagedVideo() (+1 more)
+Cohesion: 0.14
+Nodes (14): bF(), d1(), E1(), jF(), Jx(), kl(), p1(), R1() (+6 more)
 
-### Community 22 - "Community 22"
+### Community 20 - "Community 20"
+Cohesion: 0.31
+Nodes (8): handleHeavyMotion(), handleVisibilityChange(), safeId(), getActiveManagedVideoId(), pauseAllManagedVideos(), pauseManagedVideo(), registerManagedVideo(), requestManagedVideoPlayback()
+
+### Community 23 - "Community 23"
 Cohesion: 0.3
 Nodes (10): AcceptanceMetric(), FooterCard(), GateRow(), Kicker(), Phase(), ReviewField(), StackRow(), StatBlock() (+2 more)
 
-### Community 23 - "Community 23"
-Cohesion: 0.18
-Nodes (11): bL(), eL(), hL(), iP(), jL(), ML(), oe(), oL() (+3 more)
-
 ### Community 24 - "Community 24"
-Cohesion: 0.27
-Nodes (11): cP(), DE(), FE(), GE(), ME(), Py(), u(), UP() (+3 more)
+Cohesion: 0.18
+Nodes (11): di(), dx(), fx(), gx(), lx(), Oa(), pI(), px() (+3 more)
 
 ### Community 25 - "Community 25"
 Cohesion: 0.39
 Nodes (8): boot(), ensureCanvas(), initEffect(), loadGsapIfNeeded(), loadScript(), rewriteLegacyProjectLinks(), setCanvasSize(), shouldShowArrivalCover()
 
 ### Community 26 - "Community 26"
-Cohesion: 0.43
-Nodes (6): addWidget(), handleKeyDown(), openAddModal(), removeWidget(), renderPlaceholder(), resetWidgets()
+Cohesion: 0.32
+Nodes (8): df(), Ef(), ff(), K2(), mf(), pf(), vf(), y2()
 
 ### Community 27 - "Community 27"
 Cohesion: 0.43
-Nodes (4): installBackAllFix(), installGlobalPageTransitionFix(), isPlainInternalNavigation(), navigateWithCurtain()
+Nodes (6): addWidget(), handleKeyDown(), openAddModal(), removeWidget(), renderPlaceholder(), resetWidgets()
 
 ### Community 28 - "Community 28"
+Cohesion: 0.43
+Nodes (4): installBackAllFix(), installGlobalPageTransitionFix(), isPlainInternalNavigation(), navigateWithCurtain()
+
+### Community 29 - "Community 29"
 Cohesion: 0.48
 Nodes (5): Byc2wMosaic(), Kicker(), MetricTile(), SignalCard(), SystemCard()
 
-### Community 30 - "Community 30"
-Cohesion: 0.53
-Nodes (4): Kicker(), MetricTile(), SignalCard(), SystemCard()
-
 ### Community 31 - "Community 31"
 Cohesion: 0.53
-Nodes (4): Kicker(), MetricTile(), SignalCard(), SystemCard()
+Nodes (4): Kicker(), MetricTile(), ProjectCard(), RoleCard()
 
 ### Community 32 - "Community 32"
 Cohesion: 0.53
-Nodes (4): FeatureCard(), Kicker(), MetricTile(), SignalCard()
+Nodes (4): Kicker(), MetricTile(), SignalCard(), SystemCard()
 
 ### Community 33 - "Community 33"
 Cohesion: 0.53
@@ -223,7 +223,7 @@ Nodes (4): Kicker(), MetricTile(), SignalCard(), SystemCard()
 
 ### Community 34 - "Community 34"
 Cohesion: 0.53
-Nodes (4): Kicker(), MetricTile(), ProjectCard(), RoleCard()
+Nodes (4): Kicker(), MetricTile(), SignalCard(), SystemCard()
 
 ### Community 35 - "Community 35"
 Cohesion: 0.53
@@ -235,7 +235,7 @@ Nodes (4): Kicker(), MetricTile(), SignalCard(), SystemCard()
 
 ### Community 37 - "Community 37"
 Cohesion: 0.53
-Nodes (4): Kicker(), MetricTile(), SignalCard(), SystemCard()
+Nodes (4): FeatureCard(), Kicker(), MetricTile(), SignalCard()
 
 ### Community 38 - "Community 38"
 Cohesion: 0.53
@@ -250,36 +250,32 @@ Cohesion: 0.53
 Nodes (4): Kicker(), MetricTile(), SignalCard(), SystemCard()
 
 ### Community 41 - "Community 41"
+Cohesion: 0.53
+Nodes (4): Kicker(), MetricTile(), SignalCard(), SystemCard()
+
+### Community 42 - "Community 42"
 Cohesion: 0.6
 Nodes (3): boot(), clearRevealFlag(), releaseCover()
 
-### Community 42 - "Community 42"
-Cohesion: 0.4
-Nodes (5): bF(), E1(), jF(), R1(), u1()
-
-### Community 44 - "Community 44"
-Cohesion: 0.5
-Nodes (4): Hx(), jG(), wG(), _x()
+### Community 47 - "Community 47"
+Cohesion: 0.67
+Nodes (3): bq(), Kv(), Mq()
 
 ### Community 48 - "Community 48"
 Cohesion: 0.67
 Nodes (3): DP(), FP(), vP()
 
-### Community 49 - "Community 49"
-Cohesion: 0.67
-Nodes (3): bq(), Kv(), Mq()
-
 ## Knowledge Gaps
-- **22 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **23 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `ManagedHeroVideo()` connect `Community 19` to `Community 32`, `Community 33`, `Community 34`, `Community 35`, `Community 4`, `Community 37`, `Community 38`, `Community 39`, `Community 5`, `Community 36`, `Community 40`, `Community 20`, `Community 22`, `Community 28`, `Community 30`, `Community 31`?**
-  _High betweenness centrality (0.055) - this node is a cross-community bridge._
-- **Why does `c()` connect `Community 12` to `Community 1`, `Community 10`, `Community 6`?**
+- **Why does `ManagedHeroVideo()` connect `Community 56` to `Community 32`, `Community 33`, `Community 34`, `Community 35`, `Community 36`, `Community 37`, `Community 4`, `Community 7`, `Community 40`, `Community 39`, `Community 38`, `Community 41`, `Community 20`, `Community 21`, `Community 23`, `Community 29`, `Community 31`?**
+  _High betweenness centrality (0.057) - this node is a cross-community bridge._
+- **Why does `c()` connect `Community 11` to `Community 1`, `Community 18`, `Community 6`?**
   _High betweenness centrality (0.030) - this node is a cross-community bridge._
-- **Why does `Ie()` connect `Community 3` to `Community 0`, `Community 6`?**
+- **Why does `Ie()` connect `Community 3` to `Community 0`?**
   _High betweenness centrality (0.030) - this node is a cross-community bridge._
 - **Are the 5 inferred relationships involving `Draggable()` (e.g. with `be()` and `he()`) actually correct?**
   _`Draggable()` has 5 INFERRED edges - model-reasoned connections that need verification._

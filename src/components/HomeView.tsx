@@ -4,6 +4,7 @@ import { ShelfBook } from './Bookshelf';
 import { aboutMeBook } from '../data/aboutMe';
 import { aiLibraryBook } from '../data/aiLibraryBook';
 import { projects } from '../data/portfolio';
+import { works } from '../data/works';
 import { motion, AnimatePresence } from 'motion/react';
 
 export const HomeView = ({
@@ -19,12 +20,14 @@ export const HomeView = ({
 
   const cellcoreBook = projects.find(p => p.id === 'cellcore') || projects[0];
   const summitHealthBook = projects.find(p => p.id === 'summit-health') || projects[0];
+  const resumeWork = works.find(w => w.id === 'resume');
 
   const featuredBooks = [
     { ...aboutMeBook },
     { ...aiLibraryBook },
     { ...cellcoreBook },
-    { ...summitHealthBook }
+    { ...summitHealthBook },
+    ...(resumeWork ? [{ ...resumeWork }] : []),
   ];
 
   const playPageTurnSound = () => {

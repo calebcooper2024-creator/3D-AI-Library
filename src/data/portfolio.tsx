@@ -32,7 +32,7 @@ export const projects: BookProject[] = [
   {
     id: 'cellcore', textureClass: 'texture-leather',
     title: 'CellCore Biosciences',
-    subtitle: 'Internal Systems',
+    subtitle: 'Product Journey Intelligence',
     author: 'Caleb Cooper',
     showAuthorBadge: false,
     spineColor: '#0a150f', coverColor: '#166534', textColor: '#fecdd3', fontTitle: 'font-serif',
@@ -40,7 +40,7 @@ export const projects: BookProject[] = [
     coverContent: (
       <div className="absolute inset-0 bg-cover bg-center shadow-[inset_0_0_100px_rgba(0,0,0,0.9)]" style={{ backgroundImage: "url('/images/books/cellcore_cover.jpg')" }}>
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent p-10 flex flex-col justify-end">
-          <span className="font-mono text-[10px] text-emerald-400 tracking-[0.3em] uppercase mb-4 drop-shadow-md">Case Study / Internal Systems</span>
+          <span className="font-mono text-[10px] text-emerald-400 tracking-[0.3em] uppercase mb-4 drop-shadow-md">Case Study / Product Analytics · ML · Data Engineering</span>
           <h2 className="font-serif text-5xl text-white leading-[0.9] tracking-tight mb-4 drop-shadow-lg">CellCore<br/>Biosciences</h2>
           <div className="w-12 h-[1px] bg-emerald-500/50 mb-4" />
           <p className="font-mono text-[9px] text-white/60 tracking-[0.2em] uppercase drop-shadow-md">By Caleb Cooper</p>
@@ -52,7 +52,7 @@ export const projects: BookProject[] = [
         <div className="absolute inset-0 bg-[url('/images/books/cellcore_cover.jpg')] bg-cover bg-center opacity-10 mix-blend-luminosity" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black/80" />
         <span className="[writing-mode:vertical-rl] rotate-180 font-mono text-[7px] text-emerald-400 uppercase tracking-[0.2em] relative z-10 opacity-80 mt-2">
-          Internal Systems
+          Product Analytics
         </span>
         <div className="flex flex-col items-center gap-6 relative z-10 mb-2">
           <span className="[writing-mode:vertical-rl] rotate-180 font-serif text-[15px] text-white tracking-[0.15em] drop-shadow-md">

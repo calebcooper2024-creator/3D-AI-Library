@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState, Suspense } from 'react';
+import React, { useEffect, useRef, useState, Suspense } from 'react';
 import { Bookshelf } from './components/Bookshelf';
 import { HomeView } from './components/HomeView';
 import { ProjectEntryOverlay } from './components/ProjectEntryOverlay';
@@ -17,6 +17,7 @@ import { ShelfBook } from './components/Bookshelf';
 import { prepareProjectEntry } from './lib/projectEntryGate';
 import { setHeavyMotion } from './lib/heavyMotion';
 import { getWorkDetail } from './data/workDetails';
+import { clearVideoReadiness } from './lib/videoReadinessTracker';
 
 // ---------- Lazy-loaded detail views ----------
 // These are code-split into their own chunks and only loaded when a book is opened.
@@ -261,15 +262,8 @@ export default function App() {
   // Lazily-resolved book data for the detail view
   const [resolvedBookData, setResolvedBookData] = useState<PortfolioBook | null>(null);
   const [isLoadingBookData, setIsLoadingBookData] = useState(false);
-  // True once Bookshelf has finished preloading its cover images. Drives the
-  // library loading overlay so covers paint together instead of staggering.
-  const [libraryReady, setLibraryReady] = useState(false);
   const transitionTimerRef = useRef<number | null>(null);
   const entryRequestRef = useRef(0);
-
-  const handleShelfReady = useCallback(() => {
-    setLibraryReady(true);
-  }, []);
 
   const syncHistoryForView = (tab: ActiveView, mode: 'push' | 'replace' = 'replace') => {
     const nextUrl = getActiveViewUrl(tab);
@@ -544,38 +538,7 @@ export default function App() {
     };
   }, [allBooks]);
 
-  // Drive the library loading overlay. Show it whenever the library shelf is
-  // mounted but its cover images haven't finished preloading yet, so covers
-  // paint together when revealed instead of staggering in. We piggyback on
-  // the same entryOverlay state used by the case-study entry gate — the two
-  // never overlap (selecting a book unmounts the shelf).
-  const libraryShelfMounted =
-    activeView === 'project' &&
-    !selectedBookId &&
-    standalonePageId !== PLACEHOLDER_404_ID;
 
-  useEffect(() => {
-    if (!libraryShelfMounted) {
-      // Reset the ready flag so the next visit shows the overlay again.
-      setLibraryReady(false);
-      return;
-    }
-    if (!libraryReady) {
-      setEntryOverlay({
-        visible: true,
-        title: 'Library',
-        progress: 0,
-        phase: 'loading-library',
-      });
-      return;
-    }
-    // Shelf is ready — drop the overlay only if it's still the library one.
-    setEntryOverlay((prev) =>
-      prev.phase === 'loading-library'
-        ? { visible: false, title: null, progress: 100, phase: 'ready' }
-        : prev
-    );
-  }, [libraryShelfMounted, libraryReady]);
 
   const handleBookSelect = (id: string) => {
     if (isHomeTransitioning) return;
@@ -640,9 +603,13 @@ export default function App() {
       },
     }).then(() => {
       if (entryRequestRef.current !== requestId) return;
-      // Managed video is playing (or timed out) — dismiss the overlay.
-      setEntryOverlay({ visible: false, title: null, progress: 100, phase: 'ready' });
-      setHeavyMotion('project-entry', false, 'book-select-complete');
+      // Show 100% briefly so the user sees the bar complete, then dismiss.
+      setEntryOverlay((prev) => ({ ...prev, progress: 100, phase: 'ready' }));
+      window.setTimeout(() => {
+        if (entryRequestRef.current !== requestId) return;
+        setEntryOverlay({ visible: false, title: null, progress: 100, phase: 'ready' });
+        setHeavyMotion('project-entry', false, 'book-select-complete');
+      }, 380);
     });
   };
 
@@ -650,6 +617,14 @@ export default function App() {
     entryRequestRef.current += 1;
     setEntryOverlay({ visible: false, title: null, progress: 0, phase: 'starting' });
     setHeavyMotion('project-entry', false, 'detail-close');
+    // Clear the readiness record so re-opening the same book waits for the
+    // video to actually play again rather than resolving instantly from cache.
+    if (selectedBookId) {
+      const videoSrc = selectedBookType === 'work'
+        ? getWorkDetail(selectedBookId)?.heroVideo ?? null
+        : null;
+      if (videoSrc) clearVideoReadiness(videoSrc);
+    }
     if (window.history.state?.detailView) {
       window.history.back();
       return;
@@ -745,7 +720,6 @@ export default function App() {
                 <div style={{ position: 'relative' }}>
                   <Bookshelf
                     books={allBooks}
-                    onReady={handleShelfReady}
                     onSelectBook={handleBookSelect}
                     canOpenBook={(id) => {
                       const targetBook = allBooks.find((book) => book.id === id);
@@ -766,6 +740,47 @@ export default function App() {
                     isTransitioning={isHomeTransitioning}
                   />
                 </div>
+              )}
+
+              {/* LinkedIn logo — fixed bottom-left on About and Library pages */}
+              {standalonePageId !== PLACEHOLDER_404_ID && (
+                <a
+                  href="https://www.linkedin.com/in/calebcooper21/"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Caleb Cooper on LinkedIn"
+                  style={{
+                    position: 'fixed',
+                    bottom: '1.5rem',
+                    left: '1.5rem',
+                    zIndex: 60,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    width: '2.2rem',
+                    height: '2.2rem',
+                    borderRadius: '6px',
+                    background: 'rgba(255,255,255,0.82)',
+                    border: '1px solid rgba(0,0,0,0.10)',
+                    boxShadow: '0 2px 12px rgba(0,0,0,0.10)',
+                    backdropFilter: 'blur(6px)',
+                    transition: 'transform 0.18s ease, box-shadow 0.18s ease',
+                    textDecoration: 'none',
+                    color: '#0a66c2',
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLAnchorElement).style.transform = 'scale(1.08)';
+                    (e.currentTarget as HTMLAnchorElement).style.boxShadow = '0 4px 18px rgba(0,0,0,0.16)';
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLAnchorElement).style.transform = 'scale(1)';
+                    (e.currentTarget as HTMLAnchorElement).style.boxShadow = '0 2px 12px rgba(0,0,0,0.10)';
+                  }}
+                >
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                  </svg>
+                </a>
               )}
             </motion.div>
           )}

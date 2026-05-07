@@ -144,6 +144,18 @@ export const aboutMeBook: BookProject = {
               In April 2026, I decided to see how far I could actually push my skills with AI. This site, the books, and the systems behind them are the result. They are still ongoing.
             </p>
 
+            <div className="mt-10">
+              <a
+                href="https://www.linkedin.com/in/calebcooper21/"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-3 border border-[#c9a04e]/40 bg-[#c9a04e]/10 px-8 py-4 font-mono text-[11px] uppercase tracking-[0.2em] text-[#c9a04e] transition-colors hover:bg-[#c9a04e]/20"
+              >
+                LinkedIn Profile
+                <span aria-hidden="true" className="text-[14px] leading-none mb-[2px]">↗</span>
+              </a>
+            </div>
+
             <div className="mt-20 grid gap-6 border-t border-white/16 pt-8 md:grid-cols-4">
               <MetricTile value="5" label="Active Workspaces" note="I am building across five core local codebases right now." />
               <MetricTile value="~411k" label="Lines of Source" note="Approximate source-text scale across the active workspaces on this machine." />

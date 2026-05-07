@@ -332,7 +332,7 @@ export const WebflowNav = ({
           </a>
 
           {/* Right — hamburger */}
-          <div style={{ flex: 1, display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+          <div style={{ flex: 1, display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '1.5rem' }}>
             <div
               onClick={() => setMenuOpen(!menuOpen)}
               style={{
@@ -423,6 +423,7 @@ export const WebflowNav = ({
               )}
             </a>
           ))}
+
         </div>
 
         {/* Close button — top right inside overlay */}

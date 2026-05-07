@@ -636,4 +636,92 @@ export const works: WorkProject[] = [
       </div>
     ),
   },
+  {
+    id: 'resume', slug: 'resume', year: '2026', isNew: true,
+    title: 'Resume', subtitle: 'AI Systems Engineer',
+    author: 'Caleb Cooper', fontTitle: 'font-serif',
+    spineColor: '#0d0d0d', coverColor: '#111111', textColor: '#e8d5b0', textureClass: 'texture-leather',
+    detailHref: '/CalebCooper/Library/resume',
+    coverContent: (
+      <div className="absolute inset-0 bg-cover bg-center shadow-[inset_0_0_110px_rgba(0,0,0,0.82)]"
+        style={{ backgroundImage: "url('/images/books/resume_cover.jpg')" }}>
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.10),rgba(0,0,0,0.72)_55%,rgba(0,0,0,0.96))] p-10">
+          <div className="flex h-full flex-col justify-between">
+            <div className="flex justify-end">
+              <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-white/50">2026</span>
+            </div>
+            <div>
+              <p className="mb-2 font-mono text-[9px] uppercase tracking-[0.32em] text-[#e8d5b0]/70">Caleb Cooper</p>
+              <h2 className="font-serif text-4xl leading-[0.92] tracking-tight text-white">Resume</h2>
+              <div className="mt-3 h-px w-10 bg-[#e8d5b0]/40" />
+              <p className="mt-3 font-mono text-[8px] uppercase tracking-[0.28em] text-white/50 leading-relaxed max-w-[14rem]">
+                AI Systems Engineer · Agentic Infrastructure · Voice · Data
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    ),
+    spineContent: (
+      <div className="absolute inset-0 overflow-hidden" style={{ background: '#0a0a08' }}>
+        {/* Subtle warm grain texture overlay */}
+        <div className="absolute inset-0 opacity-[0.07]" style={{
+          backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(232,213,176,0.5) 3px, rgba(232,213,176,0.5) 4px)',
+        }} />
+        {/* Gold foil cap — top */}
+        <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: 'linear-gradient(90deg, #c9a04e, #f0d98c, #c9a04e)' }} />
+        {/* Monogram stamp */}
+        <div className="absolute top-[10px] left-1/2 -translate-x-1/2 flex items-center justify-center"
+          style={{
+            width: '34px', height: '34px',
+            border: '1px solid rgba(201,160,78,0.55)',
+            background: 'rgba(201,160,78,0.06)',
+          }}>
+          <span style={{
+            fontFamily: "'Playfair Display', serif",
+            fontSize: '13px',
+            fontWeight: 700,
+            color: '#c9a04e',
+            letterSpacing: '0.06em',
+            lineHeight: 1,
+          }}>CC</span>
+        </div>
+        {/* Thin gold rule below monogram */}
+        <div className="absolute left-[10px] right-[10px]" style={{ top: '54px', height: '1px', background: 'rgba(201,160,78,0.28)' }} />
+        {/* Title — vertical serif */}
+        <div className="absolute left-1/2 -translate-x-1/2" style={{ top: '68px', bottom: '108px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <span style={{
+            writingMode: 'vertical-rl',
+            textOrientation: 'mixed',
+            transform: 'rotate(180deg)',
+            fontFamily: "'Playfair Display', serif",
+            fontSize: '21px',
+            fontWeight: 700,
+            color: '#f5ede0',
+            letterSpacing: '0.16em',
+            textTransform: 'uppercase',
+            lineHeight: 1,
+          }}>Résumé</span>
+        </div>
+        {/* Diagonal accent — geometric slash */}
+        <div className="absolute left-1/2 -translate-x-1/2" style={{ bottom: '104px', width: '32px', height: '1px', background: 'linear-gradient(90deg, transparent, #c9a04e, transparent)', transform: 'translateX(-50%) rotate(-30deg)' }} />
+        <div className="absolute left-1/2 -translate-x-1/2" style={{ bottom: '98px', width: '20px', height: '1px', background: 'rgba(201,160,78,0.35)', transform: 'translateX(-50%) rotate(-30deg)' }} />
+        {/* Author — vertical mono */}
+        <div className="absolute bottom-[18px] left-1/2 -translate-x-1/2" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
+          <span style={{
+            writingMode: 'vertical-rl',
+            transform: 'rotate(180deg)',
+            fontFamily: "'Space Grotesk', ui-monospace, monospace",
+            fontSize: '8.5px',
+            fontWeight: 500,
+            color: 'rgba(201,160,78,0.65)',
+            letterSpacing: '0.24em',
+            textTransform: 'uppercase',
+          }}>Caleb Cooper</span>
+        </div>
+        {/* Gold foil cap — bottom */}
+        <div className="absolute bottom-0 left-0 right-0 h-[3px]" style={{ background: 'linear-gradient(90deg, #c9a04e, #f0d98c, #c9a04e)' }} />
+      </div>
+    ),
+  },
 ];
