@@ -122,7 +122,9 @@ export async function runPaperCurtainSwap(
     
     // Release the lock before opening so videos buffer and play immediately as it reveals
     setHeavyMotion('paper-curtain', false, 'curtain-end');
-    curtainOut(effect);
+    setTimeout(() => {
+      curtainOut(effect);
+    }, 400);
   } else {
     // No curtain available — fade-only fallback
     await new Promise<void>((resolve) => setTimeout(resolve, FALLBACK_SWAP_DELAY_MS));

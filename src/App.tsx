@@ -286,7 +286,10 @@ export default function App() {
         setResolvedBookData(null);
         setActiveView(nextView);
         syncHistoryForView(nextView, 'push');
-        effect.out();
+        
+        window.setTimeout(() => {
+          effect.out();
+        }, 400);
       }, durationMs);
     } else {
       setSelectedBookId(null);
@@ -544,7 +547,11 @@ export default function App() {
         pushDetailToHistory(targetBook, activeView);
         setIsHomeTransitioning(false);
         transitionTimerRef.current = null;
-        effect.out();
+        
+        // Delay opening the curtain by 400ms so the new video has time to buffer its first frame
+        window.setTimeout(() => {
+          effect.out();
+        }, 400);
       }, durationMs);
     } else {
       if (transitionTimerRef.current !== null) window.clearTimeout(transitionTimerRef.current);
@@ -592,7 +599,9 @@ export default function App() {
       effect.in();
       window.setTimeout(() => {
         completeNavigation();
-        effect.out();
+        window.setTimeout(() => {
+          effect.out();
+        }, 400);
       }, durationMs);
       return;
     }
