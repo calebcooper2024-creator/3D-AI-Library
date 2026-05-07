@@ -6,7 +6,9 @@ import {
 } from './caseStudies';
 
 
-import { SectionContent } from './caseStudyMeta';
+import type { SectionContent } from './caseStudyMeta';
+
+export type { SectionContent } from './caseStudyMeta';
 
 export interface BookProject {
   id: string;
@@ -26,216 +28,233 @@ export interface BookProject {
   textureClass?: string;
 }
 
-const TableOfContents = ({ items }: { items: { step: string; chapters: string[] }[] }) => (
-  <div className="space-y-12 font-mono text-sm max-w-md">
-    {items.map((item, i) => (
-      <div key={i} className="flex flex-col group">
-        <div className="flex border-b border-black/20 pb-2 mb-4">
-           <span className="w-16 font-bold">0{i+1}</span>
-           <span className="font-bold uppercase tracking-wider">{item.step}</span>
-        </div>
-        <div className="space-y-3 pl-16">
-          {item.chapters.map((chapter, j) => (
-            <div key={j} className="flex justify-between text-black/70 hover:text-black transition-transform cursor-pointer">
-              <span>{`0${i+1}.${j+1} / ${chapter}`}</span>
-              <span>{String(i*3 + j + 1).padStart(2, '0')}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    ))}
-  </div>
-);
-
-const ImagePlaceholder = ({ title, desc }: { title: string, desc: string }) => (
-  <div className="w-full bg-black/5 aspect-video flex flex-col items-center justify-center border border-black/10 rounded-lg p-8 text-center mt-8">
-     <div className="w-12 h-12 rounded-full border-2 border-dashed border-black/20 flex items-center justify-center mb-4">
-        <span className="text-black/30">IMG</span>
-     </div>
-     <h4 className="font-bold text-sm text-black/70">{title}</h4>
-     <p className="text-xs text-black/50 mt-2 max-w-sm">{desc}</p>
-  </div>
-);
-
 export const projects: BookProject[] = [
   {
-    id: 'cellcore', textureClass: 'texture-paper',
+    id: 'cellcore', textureClass: 'texture-leather',
     title: 'CellCore Biosciences',
     subtitle: 'Internal Systems',
     author: 'Caleb Cooper',
     showAuthorBadge: false,
-    spineColor: '#ef4444', coverColor: '#166534', textColor: '#fecdd3', fontTitle: 'font-serif',
+    spineColor: '#0a150f', coverColor: '#166534', textColor: '#fecdd3', fontTitle: 'font-serif',
+    coverImage: '/images/books/cellcore_cover.jpg',
     coverContent: (
-      <div className="absolute inset-0 flex">
-        <div className="w-1/2 h-full bg-[#ef4444]" />
-        <div className="w-1/2 h-full bg-[#166534] relative">
-          <div className="absolute bottom-16 -left-12 w-24 h-24 bg-[#ef4444] rounded-full mix-blend-multiply" />
+      <div className="absolute inset-0 bg-cover bg-center shadow-[inset_0_0_100px_rgba(0,0,0,0.9)]" style={{ backgroundImage: "url('/images/books/cellcore_cover.jpg')" }}>
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent p-10 flex flex-col justify-end">
+          <span className="font-mono text-[10px] text-emerald-400 tracking-[0.3em] uppercase mb-4 drop-shadow-md">Case Study / Internal Systems</span>
+          <h2 className="font-serif text-5xl text-white leading-[0.9] tracking-tight mb-4 drop-shadow-lg">CellCore<br/>Biosciences</h2>
+          <div className="w-12 h-[1px] bg-emerald-500/50 mb-4" />
+          <p className="font-mono text-[9px] text-white/60 tracking-[0.2em] uppercase drop-shadow-md">By Caleb Cooper</p>
         </div>
-        <div className="absolute inset-0 p-8 flex justify-between">
-           <div className="[writing-mode:vertical-rl] rotate-180 text-5xl font-serif text-white tracking-widest leading-none pt-4">
-             CellCore<br/>Biosciences
-           </div>
-           <div className="flex flex-col justify-end text-right text-[#fecdd3]">
-              <span className="font-mono text-sm tracking-widest uppercase">Internal Systems</span>
-              <span className="mt-3 font-mono text-[11px] tracking-[0.18em] text-[#fecdd3]/70">By Caleb Cooper</span>
-            </div>
-         </div>
       </div>
     ),
     spineContent: (
-      <div className="absolute inset-0 flex items-center justify-center">
-        <span className="[writing-mode:vertical-rl] rotate-180 text-xl font-serif text-white tracking-widest">CellCore Biosciences</span>
-        <div className="absolute bottom-8 w-2 h-2 rounded-full bg-white opacity-50" />
-        <span className="absolute top-8 text-xs font-mono text-white opacity-50 rotate-90">No. 01</span>
+      <div className="absolute inset-0 bg-[#0a150f] flex flex-col items-center justify-between py-10 overflow-hidden border-r border-emerald-500/10">
+        <div className="absolute inset-0 bg-[url('/images/books/cellcore_cover.jpg')] bg-cover bg-center opacity-10 mix-blend-luminosity" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black/80" />
+        <span className="[writing-mode:vertical-rl] rotate-180 font-mono text-[7px] text-emerald-400 uppercase tracking-[0.2em] relative z-10 opacity-80 mt-2">
+          Internal Systems
+        </span>
+        <div className="flex flex-col items-center gap-6 relative z-10 mb-2">
+          <span className="[writing-mode:vertical-rl] rotate-180 font-serif text-[15px] text-white tracking-[0.15em] drop-shadow-md">
+            CELLCORE
+          </span>
+          <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)]" />
+        </div>
+        <span className="font-mono text-[10px] text-emerald-400/40 font-bold uppercase tracking-widest relative z-10 rotate-90 mb-4">No. 08</span>
       </div>
     ),
     sections: cellcoreSections
   },
   {
-    id: 'maybe-mortgage', textureClass: 'texture-canvas',
-    title: 'Mortgage Operations',
+    id: 'rocket-mortgage', textureClass: 'texture-leather',
+    title: 'Rocket Mortgage',
     subtitle: 'Loan Readiness AI',
     author: 'Caleb Cooper',
-    spineColor: '#171717', coverColor: '#ffffff', textColor: '#171717', spineTextColor: '#ffffff', fontTitle: 'font-sans',
+    spineColor: '#18181b', coverColor: '#0f0f12', textColor: '#ffffff', fontTitle: 'font-sans',
+    coverImage: '/images/books/mortgage_cover.jpg',
     coverContent: (
-      <div className="absolute inset-0 bg-white">
-         <div className="absolute inset-0 grid grid-cols-4 grid-rows-6 opacity-10">
-            {Array.from({length: 24}).map((_, i) => (
-              <div key={i} className="border-[0.5px] border-black" />
-            ))}
-         </div>
-         <div className="absolute top-1/4 right-1/4 w-32 h-32 rounded-full bg-black" />
-         <div className="absolute top-1/3 left-1/4 w-16 h-16 rounded-full border-4 border-black" />
-         <div className="absolute bottom-1/4 right-8 flex gap-2">
-            <div className="w-4 h-4 bg-black rounded-full" />
-            <div className="w-4 h-4 border border-black rounded-full" />
-            <div className="w-4 h-4 border border-black rounded-full" />
-         </div>
-         <div className="absolute inset-0 p-8 flex flex-col justify-center">
-            <h2 className="text-6xl font-sans font-black tracking-tighter uppercase leading-[0.8] mb-4 mix-blend-difference text-white">Mortgage<br/>Operations</h2>
-            <div className="[writing-mode:vertical-rl] text-xs font-mono tracking-widest absolute top-8 right-8">LOAN READINESS AI</div>
-         </div>
+      <div className="absolute inset-0 bg-cover bg-center shadow-[inset_0_0_120px_rgba(0,0,0,0.5)]" style={{ backgroundImage: "url('/images/books/mortgage_cover.jpg')" }}>
+        <div className="absolute inset-0 border border-white/20 m-6 flex flex-col items-center justify-center bg-black/10">
+          <span className="font-mono text-[8px] text-white/72 tracking-[0.38em] uppercase mb-5 drop-shadow-[0_0_10px_rgba(0,0,0,0.9)]">Case Study</span>
+          <h2 className="font-sans font-black text-5xl text-white tracking-tighter uppercase text-center leading-[0.85] drop-shadow-[0_0_20px_rgba(0,0,0,0.9)]">ROCKET<br/>MORTGAGE</h2>
+          <div className="w-12 h-[2px] bg-white/80 my-6 drop-shadow-[0_0_10px_rgba(0,0,0,0.9)]"></div>
+          <span className="font-mono text-[9px] text-white font-bold tracking-[0.3em] uppercase text-center drop-shadow-[0_0_10px_rgba(0,0,0,0.9)]">Loan Readiness AI</span>
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
       </div>
     ),
     spineContent: (
-      <div className="absolute inset-0 flex items-center justify-center">
-        <span className="[writing-mode:vertical-rl] rotate-180 text-lg font-sans font-bold text-white tracking-widest uppercase">Mortgage Operations</span>
-        <div className="absolute bottom-8 w-2 h-2 rounded-full bg-white opacity-50" />
-        <span className="absolute top-8 text-xs font-mono text-white opacity-50 rotate-90">No. 02</span>
+      <div className="absolute inset-0 bg-[#f4f4f0] flex flex-col items-center justify-center overflow-hidden border-r border-stone-300">
+        <div className="absolute inset-0 bg-[url('/images/books/mortgage_cover.jpg')] bg-cover bg-center opacity-10 mix-blend-multiply grayscale" />
+        <div className="absolute top-8 w-full flex justify-center">
+            <div className="w-1.5 h-1.5 bg-stone-400 rotate-45"></div>
+        </div>
+        <span className="[writing-mode:vertical-rl] rotate-180 font-sans font-black text-[15px] text-stone-900 tracking-[0.15em] uppercase relative z-10">
+          ROCKET MORTGAGE
+        </span>
+        <div className="absolute bottom-8 w-full flex flex-col items-center">
+            <span className="font-mono text-[8px] text-stone-500 font-bold rotate-90 tracking-[0.3em] uppercase">No. 21</span>
+        </div>
       </div>
     ),
     sections: maybeMortgageSections
   },
   {
-    id: 'nextera', textureClass: 'texture-leather',
+    id: 'nextera', textureClass: 'texture-rough',
     title: 'NextEra Energy',
     subtitle: 'Field Operations AI',
     author: 'Caleb Cooper',
-    spineColor: '#1e3a8a', coverColor: '#3b82f6', textColor: '#ffffff', fontTitle: 'font-serif',
+    spineColor: '#041d27', coverColor: '#041d27', textColor: '#ffffff', fontTitle: 'font-sans',
+    coverImage: '/images/books/nextera_cover.jpg',
     coverContent: (
-      <div className="absolute inset-0 bg-blue-500 overflow-hidden">
-        <div className="absolute -top-20 -right-20 w-64 h-64 border-[1px] border-white/30 rounded-full" />
-        <div className="absolute -top-10 -right-10 w-48 h-48 border-[2px] border-white/20 rounded-full" />
-        <div className="absolute top-0 -right-0 w-32 h-32 border-[4px] border-white/10 rounded-full" />
-        <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-blue-700 to-transparent" />
-        <div className="absolute inset-0 p-8 flex flex-col justify-between">
-           <div className="text-right">
-              <span className="text-sm font-mono tracking-widest text-white/70 uppercase">Field Operations AI</span>
-           </div>
-           <div>
-              <h2 className="text-5xl font-serif text-white tracking-tight mb-2">NextEra<br/>Energy</h2>
-              <div className="w-12 h-1 bg-white mb-6" />
+      <div className="absolute inset-0 bg-cover bg-center shadow-[inset_0_0_80px_rgba(0,0,0,0.9)]" style={{ backgroundImage: "url('/images/books/nextera_cover.jpg')" }}>
+        <div className="absolute inset-0 bg-gradient-to-r from-cyan-950/95 via-cyan-950/60 to-transparent p-6 flex flex-col justify-start">
+          <div className="border-l-[3px] border-cyan-400 pl-4 py-1 self-start mb-8">
+            <span className="font-mono text-[8px] text-cyan-200/86 tracking-[0.38em] uppercase font-bold drop-shadow-md">Case Study</span><br/>
+            <span className="font-mono text-[10px] text-cyan-300 tracking-[0.3em] uppercase font-bold drop-shadow-md">FPL Predictive</span><br/>
+            <span className="font-mono text-[10px] text-white tracking-[0.3em] uppercase font-black drop-shadow-md">Storm Intelligence</span>
+          </div>
+          <h2 className="font-sans font-bold text-5xl text-white tracking-tight leading-[0.9] drop-shadow-lg max-w-[80%]">NextEra<br/>Energy</h2>
+          <div className="mt-auto flex justify-between items-end">
+            <span className="font-mono text-[8px] text-white tracking-[0.2em] uppercase bg-black/80 px-3 py-1.5 font-bold border border-cyan-500/30 shadow-lg">FPL's Self Healing Grid</span>
+            <div className="w-6 h-6 rounded-full border border-cyan-500/50 flex items-center justify-center bg-cyan-900/40">
+               <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.8)]"></div>
             </div>
-         </div>
+          </div>
+        </div>
       </div>
     ),
     spineContent: (
-      <div className="absolute inset-0 flex items-center justify-center">
-        <span className="[writing-mode:vertical-rl] rotate-180 text-xl font-serif text-white tracking-wide">NextEra Energy</span>
-        <div className="absolute bottom-8 w-2 h-2 rounded-full bg-white opacity-50" />
-        <span className="absolute top-8 text-xs font-mono text-white opacity-50 rotate-90">No. 03</span>
+      <div className="absolute inset-0 bg-[#041d27] flex flex-col items-center justify-center overflow-hidden border-r border-cyan-900">
+        <div className="absolute inset-0 bg-[url('/images/books/nextera_cover.jpg')] bg-cover bg-center opacity-30 mix-blend-luminosity grayscale" />
+        <div className="flex flex-col items-center gap-6 relative z-10 h-full justify-center">
+          <span className="[writing-mode:vertical-rl] rotate-180 font-mono text-[8px] text-cyan-400 font-bold tracking-[0.3em] uppercase drop-shadow-md">
+            FPL's Self Healing Grid
+          </span>
+          <span className="[writing-mode:vertical-rl] rotate-180 font-sans font-black text-[46px] text-white/95 tracking-tighter uppercase whitespace-nowrap drop-shadow-2xl leading-none">
+            NEXTERA
+          </span>
+        </div>
       </div>
     ),
     sections: nextEraSections
   },
   {
-    id: 'light-wonder', textureClass: 'texture-rough',
+    id: 'light-wonder', textureClass: 'texture-leather',
     title: 'Light & Wonder',
     subtitle: 'Operator Intelligence',
     author: 'Caleb Cooper',
-    spineColor: '#fef08a', coverColor: '#fbcfe8', textColor: '#8b5cf6', fontTitle: 'font-sans',
+    spineColor: '#2e1065', coverColor: '#2e1065', textColor: '#ffffff', fontTitle: 'font-sans',
+    coverImage: '/images/books/light_wonder_cover.jpg',
     coverContent: (
-      <div className="absolute inset-0 bg-pink-200">
-         <div className="absolute inset-0 flex justify-around p-8 opacity-20">
-            <div className="w-1 h-32 bg-purple-500 rounded-full animate-pulse" />
-            <div className="w-1 h-48 bg-purple-500 rounded-full mt-12" />
-            <div className="w-1 h-24 bg-purple-500 rounded-full mt-32 animate-pulse" />
-            <div className="w-1 h-56 bg-purple-500 rounded-full" />
-         </div>
-         <div className="absolute inset-0 p-12 flex flex-col items-center justify-center text-center">
-            <h2 className="text-5xl font-sans font-black text-purple-600 tracking-tighter uppercase mb-2">Light &<br/>Wonder</h2>
-            <p className="text-purple-500/70 font-mono text-xs uppercase tracking-widest">Operator Intelligence</p>
-         </div>
+      <div className="absolute inset-0 bg-cover bg-center shadow-[inset_0_0_80px_rgba(30,20,50,0.8)]" style={{ backgroundImage: "url('/images/books/light_wonder_cover.jpg')" }}>
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/80 via-transparent to-amber-900/60 p-8 flex flex-col justify-end">
+          <span className="font-mono text-[8px] text-amber-200/88 tracking-[0.38em] uppercase font-bold mb-4 drop-shadow-md">Case Study</span>
+          <div className="w-full flex justify-between items-end mb-4 border-b border-amber-400/40 pb-4">
+             <h2 className="font-sans font-black text-[54px] text-white tracking-tighter uppercase leading-[0.85] drop-shadow-[0_0_15px_rgba(168,85,247,0.8)]">Light<br/><span className="text-amber-300">&</span><br/>Wonder</h2>
+             <div className="flex flex-col items-end gap-2 pb-2">
+                <div className="w-1.5 h-1.5 rounded-full bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.9)]" />
+                <div className="w-1.5 h-1.5 rounded-full border border-amber-400/50" />
+             </div>
+          </div>
+          <span className="font-mono text-[9px] text-amber-200 tracking-[0.4em] uppercase font-bold drop-shadow-md">Operator Intelligence</span>
+        </div>
       </div>
     ),
     spineContent: (
-      <div className="absolute inset-0 flex items-center justify-center">
-        <span className="[writing-mode:vertical-rl] rotate-180 text-lg font-sans font-bold text-purple-600 tracking-widest uppercase">Light & Wonder</span>
-        <div className="absolute bottom-8 w-2 h-2 rounded-full bg-purple-400 opacity-50" />
-        <span className="absolute top-8 text-xs font-mono text-purple-400 opacity-50 rotate-90">No. 04</span>
+      <div className="absolute inset-0 bg-[#2e1065] flex flex-col items-center justify-between py-10 overflow-hidden border-r border-purple-500/30 shadow-[inset_0_0_20px_rgba(0,0,0,0.5)]">
+        <div className="absolute inset-0 bg-[url('/images/books/light_wonder_cover.jpg')] bg-cover bg-center opacity-30 mix-blend-color-dodge grayscale" />
+        
+        <div className="flex flex-col items-center gap-3 relative z-10">
+          <div className="w-3 h-[1px] bg-amber-400/50" />
+          <span className="font-mono text-[8px] text-purple-300 uppercase tracking-widest rotate-90 my-1">No. 16</span>
+          <div className="w-3 h-[1px] bg-amber-400/50" />
+        </div>
+
+        <span className="[writing-mode:vertical-rl] rotate-180 font-sans font-black text-[18px] text-white tracking-[0.1em] uppercase relative z-10 drop-shadow-[0_0_10px_rgba(168,85,247,0.8)]">
+          LIGHT & WONDER
+        </span>
+
+        <div className="relative z-10">
+          <div className="w-1.5 h-1.5 rounded-full bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.8)]" />
+        </div>
       </div>
     ),
     sections: lightWonderSections
   },
   {
-    id: 'jm-family', textureClass: 'texture-leather',
+    id: 'jm-family', textureClass: 'texture-paper',
     title: 'JM Family Enterprises',
-    subtitle: 'Dealer Operations AI',
+    subtitle: 'Autonomous Logistics',
     author: 'Caleb Cooper',
-    spineColor: '#6b21a8', coverColor: '#9333ea', textColor: '#ffffff', fontTitle: 'font-serif',
+    spineColor: '#f8fafc', coverColor: '#0f0f12', textColor: '#ffffff', fontTitle: 'font-serif',
+    coverImage: '/images/books/jm_family_cover.jpg',
     coverContent: (
-      <div className="absolute inset-0 bg-purple-600 overflow-hidden">
-        <div className="absolute -bottom-20 -right-10 text-[250px] font-serif text-purple-800 opacity-50 leading-none">JM</div>
-        <div className="absolute inset-0 p-10 flex flex-col justify-start">
-           <h2 className="text-4xl font-serif text-white tracking-wide leading-tight">JM Family<br/>Enterprises</h2>
-           <p className="mt-4 text-purple-200 font-mono text-sm tracking-widest uppercase">Dealer Operations AI</p>
-           <div className="mt-12 w-8 h-[1px] bg-white/50" />
-         </div>
+      <div className="absolute inset-0 bg-cover bg-center shadow-[inset_0_0_60px_rgba(0,0,0,0.3)]" style={{ backgroundImage: "url('/images/books/jm_family_cover.jpg')" }}>
+        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-zinc-900 via-zinc-900/80 to-transparent pt-32 pb-8 px-8 flex flex-col items-center text-center">
+          <span className="font-mono text-[8px] text-zinc-300/78 tracking-[0.38em] uppercase font-bold mb-4 drop-shadow-md">Case Study</span>
+          <h2 className="font-serif text-[42px] text-white tracking-tight leading-none mb-3 drop-shadow-lg">JM Family<br/>Enterprises</h2>
+          <div className="w-8 h-[1px] bg-zinc-400 mb-3" />
+          <span className="font-sans text-[10px] text-zinc-300 tracking-[0.3em] uppercase font-bold drop-shadow-md">Autonomous Logistics</span>
+        </div>
       </div>
     ),
     spineContent: (
-      <div className="absolute inset-0 flex items-center justify-center">
-        <span className="[writing-mode:vertical-rl] rotate-180 text-xl font-serif text-white tracking-widest">JM Family Enterprises</span>
-        <div className="absolute bottom-8 w-2 h-2 rounded-full bg-white opacity-50" />
-        <span className="absolute top-8 text-xs font-mono text-white opacity-50 rotate-90">No. 05</span>
+      <div className="absolute inset-0 bg-[#f8fafc] flex flex-col items-center justify-between py-10 overflow-hidden border-r border-zinc-300 shadow-[inset_-2px_0_10px_rgba(0,0,0,0.05)]">
+        <span className="[writing-mode:vertical-rl] font-sans font-bold text-[8px] text-zinc-400 uppercase tracking-[0.3em] relative z-10 mt-2">
+          Autonomous Logistics
+        </span>
+        
+        <div className="flex flex-col items-center gap-6 relative z-10 my-auto">
+          <span className="[writing-mode:vertical-rl] font-serif text-[18px] text-zinc-800 tracking-[0.1em] uppercase">
+            JM Family
+          </span>
+          <div className="w-[1px] h-6 bg-zinc-400" />
+        </div>
+
+        <span className="font-mono text-[10px] text-zinc-400 uppercase tracking-widest relative z-10 rotate-90 mb-4">
+          No. 15
+        </span>
       </div>
     ),
     sections: jmFamilySections
   },
   {
-    id: 'nvidia', textureClass: 'texture-rough',
+    id: 'nvidia', textureClass: 'texture-leather',
     title: 'NVIDIA AI Factory',
     subtitle: 'Operations Agent',
     author: 'Caleb Cooper',
-    spineColor: '#000000', coverColor: '#111111', textColor: '#22c55e', fontTitle: 'font-mono',
+    spineColor: '#0a0a0c', coverColor: '#000000', textColor: '#22c55e', fontTitle: 'font-sans',
+    coverImage: '/images/books/nvidia_cover.png',
     coverContent: (
-      <div className="absolute inset-0 bg-[#111] overflow-hidden">
-        <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(#22c55e 1px, transparent 1px)', backgroundSize: '20px 20px', opacity: 0.1 }} />
-        <div className="absolute top-1/2 left-0 w-full h-[1px] bg-green-500/30" />
-        <div className="absolute top-0 left-1/4 w-[1px] h-full bg-green-500/30" />
-        <div className="absolute inset-0 p-8 flex flex-col justify-end">
-           <div className="bg-black/80 backdrop-blur-sm p-6 border border-green-500/20">
-              <h2 className="text-4xl font-sans font-black text-white tracking-tighter uppercase mb-1">NVIDIA<br/>AI Factory</h2>
-              <p className="text-green-500 font-mono text-xs tracking-widest uppercase">Operations Agent</p>
+      <div className="absolute inset-0 bg-cover bg-center shadow-[inset_0_0_60px_rgba(0,0,0,0.4)]" style={{ backgroundImage: "url('/images/books/nvidia_cover.png')" }}>
+        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/90 to-transparent pt-32 pb-8 px-8 flex flex-col justify-end">
+           <div className="border-l-4 border-green-500 pl-4 mt-8">
+              <p className="text-green-300/82 font-mono text-[8px] tracking-[0.38em] uppercase font-bold drop-shadow-md mb-3">Case Study</p>
+              <h2 className="text-[44px] font-sans font-black text-white tracking-tighter uppercase leading-[0.85] drop-shadow-lg mb-2">NVIDIA<br/>AI Factory</h2>
+              <p className="text-green-400 font-mono text-[10px] tracking-[0.3em] uppercase font-bold drop-shadow-md">Operations Agent</p>
            </div>
         </div>
       </div>
     ),
     spineContent: (
-      <div className="absolute inset-0 flex items-center justify-center">
-        <span className="[writing-mode:vertical-rl] rotate-180 text-lg font-sans font-black text-white tracking-widest uppercase">NVIDIA AI Factory</span>
-        <div className="absolute bottom-8 w-2 h-2 rounded-full bg-green-500 opacity-80" />
-        <span className="absolute top-8 text-xs font-mono text-green-500 opacity-50 rotate-90">No. 06</span>
+      <div className="absolute inset-0 bg-[#0a0a0c] flex flex-col items-center justify-between py-10 overflow-hidden border-r border-zinc-800 shadow-[inset_-2px_0_10px_rgba(0,0,0,1)]">
+        <div className="absolute inset-0 bg-[url('/images/books/nvidia_cover.png')] bg-cover bg-center opacity-10 mix-blend-luminosity grayscale" />
+        
+        <span className="[writing-mode:vertical-rl] font-mono font-bold text-[8px] text-green-500 uppercase tracking-[0.3em] relative z-10 mt-2">
+          Operations Agent
+        </span>
+        
+        <div className="flex flex-col items-center gap-6 relative z-10 my-auto">
+          <span className="[writing-mode:vertical-rl] font-sans font-black text-[20px] text-white tracking-[0.1em] uppercase drop-shadow-[0_0_8px_rgba(34,197,94,0.3)]">
+            NVIDIA
+          </span>
+          <div className="w-1.5 h-[16px] bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.8)]" />
+        </div>
+
+        <span className="font-mono text-[10px] text-zinc-500 font-bold uppercase tracking-widest relative z-10 rotate-90 mb-4">
+          No. 19
+        </span>
       </div>
     ),
     sections: nvidiaSections
@@ -243,173 +262,229 @@ export const projects: BookProject[] = [
   {
     id: 'flow', textureClass: 'texture-canvas',
     title: 'Flow',
-    subtitle: 'Case Study',
+    subtitle: 'Flow House Case Study',
     author: 'Caleb Cooper',
-    spineColor: '#0f766e', coverColor: '#14b8a6', textColor: '#ffffff', fontTitle: 'font-sans',
+    spineColor: '#e7e5e4', coverColor: '#1c1917', textColor: '#ffffff', fontTitle: 'font-serif',
+    coverImage: '/images/books/flow_cover.jpg',
     coverContent: (
-      <div className="absolute inset-0 bg-teal-500 overflow-hidden">
-         <svg className="absolute top-0 left-0 w-full h-full opacity-20" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <path d="M0,50 Q25,30 50,50 T100,50 L100,100 L0,100 Z" fill="white" />
-            <path d="M0,70 Q25,50 50,70 T100,70 L100,100 L0,100 Z" fill="white" opacity="0.5" />
-         </svg>
-         <div className="absolute inset-0 p-12 flex flex-col items-center justify-center">
-            <h2 className="text-6xl font-serif text-white italic tracking-tighter mb-4">Flow</h2>
-            <div className="w-full flex items-center gap-4">
-              <div className="h-[1px] flex-1 bg-white/50" />
-              <span className="font-mono text-xs text-white/80 uppercase tracking-widest">Case Study</span>
-              <div className="h-[1px] flex-1 bg-white/50" />
-            </div>
-         </div>
+      <div className="absolute inset-0 bg-cover bg-center shadow-[inset_0_0_100px_rgba(0,0,0,0.9)]" style={{ backgroundImage: "url('/images/books/flow_cover.jpg')" }}>
+        <div className="absolute inset-0 bg-gradient-to-t from-stone-900 via-stone-900/40 to-transparent p-12 flex flex-col items-center justify-center text-center">
+          <h2 className="text-7xl font-serif text-white italic tracking-tighter mb-4 drop-shadow-2xl">Flow</h2>
+          <div className="w-24 h-[1px] bg-white/30 mb-6" />
+          <p className="font-mono text-[10px] text-white/60 tracking-[0.4em] uppercase font-bold">Autonomous Living Systems</p>
+        </div>
       </div>
     ),
     spineContent: (
-      <div className="absolute inset-0 flex items-center justify-center">
-        <span className="[writing-mode:vertical-rl] rotate-180 text-xl font-serif italic text-white tracking-widest">Flow</span>
-        <div className="absolute bottom-8 w-2 h-2 rounded-full bg-white opacity-50" />
-        <span className="absolute top-8 text-xs font-mono text-white opacity-50 rotate-90">No. 07</span>
+      <div className="absolute inset-0 bg-[#e7e5e4] flex flex-col items-center justify-between py-10 overflow-hidden border-r border-stone-300 shadow-[inset_-2px_0_10px_rgba(0,0,0,0.05)]">
+        <span className="[writing-mode:vertical-rl] font-mono font-bold text-[8px] text-stone-500 uppercase tracking-[0.3em] relative z-10 mt-2">
+          Flow House
+        </span>
+        
+        <div className="flex flex-col items-center gap-6 relative z-10 my-auto">
+          <span className="[writing-mode:vertical-rl] font-serif italic text-[24px] text-stone-800 tracking-[0.1em] drop-shadow-sm">
+            Flow
+          </span>
+          <div className="w-1.5 h-1.5 rounded-full bg-stone-400" />
+        </div>
+
+        <span className="font-mono text-[10px] text-stone-400 font-bold uppercase tracking-widest relative z-10 rotate-90 mb-4">
+          No. 12
+        </span>
       </div>
     ),
     sections: flowSections
   },
   {
-    id: 'global-management', textureClass: 'texture-paper',
-    title: 'Consulting Co.',
-    subtitle: 'Miramar',
+    id: 'vsp-vision', textureClass: 'texture-paper',
+    title: 'VSP Vision',
+    subtitle: 'Eyewear Journey Copilot',
     author: 'Caleb Cooper',
-    spineColor: '#334155', coverColor: '#e2e8f0', textColor: '#0f172a', fontTitle: 'font-serif',
+    spineColor: '#ffffff', coverColor: '#000000', textColor: '#0f172a', fontTitle: 'font-sans',
+    coverImage: '/images/books/vsp_cover.jpg',
     coverContent: (
-      <div className="absolute inset-0 bg-slate-200 p-6">
-         <div className="w-full h-full border border-slate-400 p-1">
-            <div className="w-full h-full border border-slate-400 flex flex-col justify-center items-center text-center p-8 bg-slate-100">
-               <div className="w-8 h-8 border-b border-r border-slate-400 mb-8 transform rotate-45" />
-               <h2 className="text-3xl font-serif text-slate-800 uppercase tracking-widest leading-relaxed">Global<br/>Management<br/>Consulting</h2>
-               <div className="mt-8 w-12 h-[1px] bg-slate-400" />
-               <p className="mt-4 font-mono text-xs text-slate-500 tracking-widest uppercase">Miramar Case Study</p>
-            </div>
-         </div>
+      <div className="absolute inset-0 bg-cover bg-center shadow-[inset_0_0_80px_rgba(0,0,0,0.6)]" style={{ backgroundImage: "url('/images/books/vsp_cover.jpg')" }}>
+        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-white via-white/95 to-transparent pt-32 pb-10 px-10 flex flex-col justify-end">
+           <p className="font-mono text-[8px] text-slate-700/72 tracking-[0.38em] uppercase font-bold mb-4">Case Study</p>
+           <h2 className="font-sans font-black text-6xl text-slate-900 tracking-tighter uppercase leading-[0.8] mb-4">VSP<br/>Vision</h2>
+           <div className="w-12 h-[3px] bg-blue-600 mb-4" />
+           <p className="font-mono text-[10px] text-blue-600 tracking-[0.3em] uppercase font-bold">Eyewear Journey Copilot</p>
+        </div>
       </div>
     ),
     spineContent: (
-      <div className="absolute inset-0 flex items-center justify-center">
-        <span className="[writing-mode:vertical-rl] rotate-180 text-sm font-serif text-slate-200 tracking-widest uppercase">Consulting Co.</span>
-        <div className="absolute bottom-8 w-2 h-2 rounded-full bg-slate-400 opacity-50" />
-        <span className="absolute top-8 text-xs font-mono text-slate-400 opacity-50 rotate-90">No. 08</span>
+      <div className="absolute inset-0 bg-white flex flex-col items-center justify-between py-10 overflow-hidden border-r border-slate-200">
+        <span className="[writing-mode:vertical-rl] font-mono font-bold text-[8px] text-blue-600 uppercase tracking-[0.3em] relative z-10 mt-2">
+          Eyewear Journey Copilot
+        </span>
+        
+        <div className="flex flex-col items-center gap-6 relative z-10 my-auto">
+          <span className="[writing-mode:vertical-rl] font-sans font-black text-[22px] text-slate-800 tracking-[0.1em] uppercase">
+            VSP VISION
+          </span>
+          <div className="w-1.5 h-1.5 bg-blue-600 shadow-[0_0_8px_rgba(37,99,235,0.6)]" />
+        </div>
+
+        <span className="font-mono text-[10px] text-slate-400 font-bold uppercase tracking-widest relative z-10 rotate-90 mb-4">
+          No. 23
+        </span>
       </div>
     ),
     sections: globalManagementSections
   },
   {
     id: 'fintech-aws', textureClass: 'texture-leather',
-    title: 'Fintech',
-    subtitle: 'AWS AI/ML',
+    title: 'Fintech AWS',
+    subtitle: 'Autonomous Trading Infrastructure',
     author: 'Caleb Cooper',
-    spineColor: '#c2410c', coverColor: '#f97316', textColor: '#ffffff', fontTitle: 'font-sans',
+    spineColor: '#f97316', coverColor: '#0c0a09', textColor: '#ffffff', fontTitle: 'font-sans',
+    coverImage: '/images/books/fintech_cover.jpg',
     coverContent: (
-      <div className="absolute inset-0 bg-orange-500 overflow-hidden">
-         <svg className="absolute inset-0 w-full h-full opacity-30" viewBox="0 0 100 100">
-            <circle cx="20" cy="20" r="2" fill="white" />
-            <circle cx="80" cy="30" r="3" fill="white" />
-            <circle cx="50" cy="80" r="2" fill="white" />
-            <circle cx="30" cy="60" r="1.5" fill="white" />
-            <line x1="20" y1="20" x2="80" y2="30" stroke="white" strokeWidth="0.5" />
-            <line x1="80" y1="30" x2="50" y2="80" stroke="white" strokeWidth="0.5" />
-            <line x1="50" y1="80" x2="30" y2="60" stroke="white" strokeWidth="0.5" />
-            <line x1="30" y1="60" x2="20" y2="20" stroke="white" strokeWidth="0.5" />
-         </svg>
-         <div className="absolute bottom-12 left-8">
-            <h2 className="text-5xl font-sans font-black text-white tracking-tighter mb-2">Fintech</h2>
-            <div className="bg-white text-orange-600 px-3 py-1 inline-block font-mono text-xs font-bold tracking-widest rounded-sm">AWS AI/ML</div>
-         </div>
+      <div className="absolute inset-0 bg-cover bg-center shadow-[inset_0_0_100px_rgba(0,0,0,0.9)]" style={{ backgroundImage: "url('/images/books/fintech_cover.jpg')" }}>
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent p-10 flex flex-col justify-end">
+          <div className="flex items-center gap-3 mb-4">
+             <div className="w-2 h-2 rounded-full bg-orange-500 shadow-[0_0_8px_rgba(249,115,22,0.8)]" />
+             <span className="font-mono text-[10px] text-orange-500 tracking-[0.4em] uppercase font-bold">AWS AI/ML</span>
+          </div>
+          <h2 className="font-sans font-black text-5xl text-white tracking-tighter uppercase leading-[0.85] mb-4 drop-shadow-2xl">Fintech<br/>Trading</h2>
+          <div className="w-12 h-[1px] bg-orange-500/50 mb-4" />
+          <p className="font-mono text-[9px] text-white/40 tracking-[0.2em] uppercase">Autonomous Infrastructure Case Study</p>
+        </div>
       </div>
     ),
     spineContent: (
-      <div className="absolute inset-0 flex items-center justify-center">
-        <span className="[writing-mode:vertical-rl] rotate-180 text-xl font-sans font-black text-white tracking-widest uppercase">Fintech</span>
-        <div className="absolute bottom-8 w-2 h-2 rounded-full bg-white opacity-50" />
-        <span className="absolute top-8 text-xs font-mono text-white opacity-50 rotate-90">No. 09</span>
+      <div className="absolute inset-0 bg-[#f97316] flex flex-col items-center justify-between py-10 overflow-hidden border-r border-orange-700 shadow-[inset_-2px_0_15px_rgba(0,0,0,0.2)]">
+        <span className="[writing-mode:vertical-rl] font-mono font-bold text-[8px] text-white uppercase tracking-[0.3em] relative z-10 mt-2 opacity-80">
+          Autonomous Trading
+        </span>
+        
+        <div className="flex flex-col items-center gap-6 relative z-10 my-auto">
+          <span className="[writing-mode:vertical-rl] font-sans font-black text-[22px] text-white tracking-[0.1em] uppercase drop-shadow-lg">
+            FINTECH
+          </span>
+          <div className="w-[1px] h-12 bg-white/40" />
+        </div>
+
+        <span className="font-mono text-[10px] text-white font-bold uppercase tracking-widest relative z-10 rotate-90 mb-4 opacity-60">
+          No. 11
+        </span>
       </div>
     ),
     sections: fintechAwsSections
   },
   {
-    id: 'gwn', textureClass: 'texture-canvas',
-    title: 'GWN Securities',
-    subtitle: 'Voice Agents',
+    id: 'ifp-advisor', textureClass: 'texture-canvas',
+    title: 'Independent Financial Partners',
+    subtitle: 'Advisor AI Intelligence',
     author: 'Caleb Cooper',
-    spineColor: '#1e3a8a', coverColor: '#1e40af', textColor: '#ffffff', fontTitle: 'font-serif',
+    spineColor: '#e4e4e7', coverColor: '#f8fafc', textColor: '#1e293b', fontTitle: 'font-serif',
+    coverImage: '/images/books/ifp_cover.jpg',
     coverContent: (
-      <div className="absolute inset-0 bg-blue-800">
-         <div className="absolute bottom-0 left-0 w-full h-1/2 flex items-end opacity-20 gap-1 px-4">
-            <div className="w-1/4 h-1/4 bg-white" />
-            <div className="w-1/4 h-2/4 bg-white" />
-            <div className="w-1/4 h-3/4 bg-white" />
-            <div className="w-1/4 h-full bg-white" />
-         </div>
-         <div className="absolute inset-0 p-8 flex flex-col justify-start text-center">
-            <h2 className="text-4xl font-serif text-white tracking-widest uppercase mt-12 border-b border-white/20 pb-4">GWN<br/>Securities</h2>
-            <p className="font-mono text-xs text-blue-200 mt-4 tracking-widest">Voice Agents & Compliance</p>
-         </div>
+      <div className="absolute inset-0 bg-cover bg-center shadow-[inset_0_0_80px_rgba(255,255,255,0.4)]" style={{ backgroundImage: "url('/images/books/ifp_cover.jpg')" }}>
+        <div className="absolute inset-0 bg-gradient-to-t from-white via-white/60 to-transparent p-10 flex flex-col justify-end">
+          <div className="mb-4">
+             <span className="font-mono text-[9px] text-red-600 tracking-[0.3em] uppercase font-black border-l-2 border-red-600 pl-3">IFP Case Study</span>
+          </div>
+          <h2 className="font-serif text-[42px] text-slate-900 tracking-tight leading-[0.9] mb-4">Independent<br/>Financial<br/>Partners</h2>
+          <p className="font-mono text-[10px] text-slate-500 tracking-wide leading-relaxed max-w-[240px]">AI-assisted workflows for advisors and compliance teams</p>
+        </div>
       </div>
     ),
     spineContent: (
-      <div className="absolute inset-0 flex items-center justify-center">
-        <span className="[writing-mode:vertical-rl] rotate-180 text-lg font-serif text-white tracking-widest uppercase">GWN Securities</span>
-        <div className="absolute bottom-8 w-2 h-2 rounded-full bg-white opacity-50" />
-        <span className="absolute top-8 text-xs font-mono text-white opacity-50 rotate-90">No. 10</span>
+      <div className="absolute inset-0 bg-[#e4e4e7] flex flex-col items-center justify-between py-10 overflow-hidden border-r border-zinc-300">
+        <span className="[writing-mode:vertical-rl] font-mono font-bold text-[8px] text-zinc-500 uppercase tracking-[0.3em] relative z-10 mt-2">
+          AI-Assisted Workflows
+        </span>
+        
+        <div className="flex flex-col items-center gap-6 relative z-10 my-auto">
+          <span className="[writing-mode:vertical-rl] font-sans font-black text-[38px] text-slate-900 tracking-tighter uppercase leading-none drop-shadow-sm">
+            IFP
+          </span>
+          <div className="flex gap-1.5">
+             <div className="w-1.5 h-1.5 rounded-full bg-yellow-400" />
+             <div className="w-1.5 h-1.5 rounded-full bg-red-600 shadow-[0_0_8px_rgba(220,38,38,0.4)]" />
+          </div>
+        </div>
+
+        <span className="font-mono text-[10px] text-zinc-400 font-bold uppercase tracking-widest relative z-10 rotate-90 mb-4">
+          No. 14
+        </span>
       </div>
     ),
     sections: gwnSections
   },
   {
-    id: 'hello-patient', textureClass: 'texture-paper',
-    title: 'Hello Patient',
-    subtitle: 'Plummet Health',
+    id: 'summit-health', textureClass: 'texture-paper',
+    title: 'Summit Health',
+    subtitle: 'Voice Agents for Multi-Location Orthopedic Care',
     author: 'Caleb Cooper',
-    showAuthorBadge: false,
-    spineColor: '#991b1b', coverColor: '#fca5a5', textColor: '#991b1b', fontTitle: 'font-sans',
+    spineColor: '#991b1b', coverColor: '#fef2f2', textColor: '#991b1b', fontTitle: 'font-sans',
+    coverImage: '/images/books/summit_health_cover.jpg',
     coverContent: (
-      <div className="absolute inset-0 bg-red-300">
-         <div className="absolute -left-16 top-1/4 text-[200px] text-red-500 opacity-20 font-sans leading-none">+</div>
-         <div className="absolute inset-0 p-8 flex flex-col justify-end text-red-900">
-            <h2 className="text-5xl font-sans font-bold tracking-tight leading-none mb-2">Hello<br/>Patient</h2>
-            <p className="font-mono text-sm opacity-70">Plummet Health Voice Agents</p>
-            <p className="mt-4 font-mono text-[11px] tracking-[0.18em] text-red-900/60">By Caleb Cooper</p>
-         </div>
+      <div className="absolute inset-0 bg-cover bg-center shadow-[inset_0_0_100px_rgba(255,255,255,0.6)]" style={{ backgroundImage: "url('/images/books/summit_health_cover.jpg')" }}>
+        <div className="absolute inset-0 bg-gradient-to-t from-white via-white/40 to-transparent p-10 flex flex-col justify-end">
+          <p className="font-mono text-[8px] text-red-800/72 tracking-[0.38em] uppercase font-bold mb-4">Case Study</p>
+          <h2 className="font-sans font-black text-5xl text-red-900 tracking-tighter leading-[0.85] mb-3 uppercase">Summit<br/>Health</h2>
+          <p className="font-mono text-[10px] text-red-800 tracking-wide font-bold mb-4 uppercase">Voice Agents for Multi-Location Orthopedic Care</p>
+          <div className="w-12 h-[2px] bg-red-600 mb-2" />
+        </div>
       </div>
     ),
     spineContent: (
-      <div className="absolute inset-0 flex items-center justify-center">
-        <span className="[writing-mode:vertical-rl] rotate-180 text-xl font-sans font-bold text-red-200 tracking-wider">Hello Patient</span>
-        <div className="absolute bottom-8 w-2 h-2 rounded-full bg-red-300 opacity-50" />
-        <span className="absolute top-8 text-xs font-mono text-red-300 opacity-50 rotate-90">No. 11</span>
+      <div className="absolute inset-0 bg-[#991b1b] flex flex-col items-center justify-between py-10 overflow-hidden border-r border-red-800 shadow-[inset_-2px_0_15px_rgba(0,0,0,0.3)]">
+        <span className="[writing-mode:vertical-rl] font-mono font-bold text-[8px] text-red-200/60 uppercase tracking-[0.3em] relative z-10 mt-2">
+          Healthcare Systems
+        </span>
+        
+        <div className="flex flex-col items-center gap-6 relative z-10 my-auto">
+          <span className="[writing-mode:vertical-rl] font-sans font-black text-[22px] text-red-100 tracking-[0.1em] uppercase drop-shadow-lg">
+            SUMMIT HEALTH
+          </span>
+          <div className="w-1.5 h-16 bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.6)]" />
+        </div>
+
+        <span className="font-mono text-[10px] text-red-300 font-bold uppercase tracking-widest relative z-10 rotate-90 mb-4 opacity-50">
+          No. 22
+        </span>
       </div>
     ),
     sections: helloPatientSections
   },
   {
     id: 'milestone', textureClass: 'texture-rough',
-    title: 'Milestone',
+    title: 'Milestone Motors',
     subtitle: 'Service Advisor AI',
     author: 'Caleb Cooper',
-    spineColor: '#064e3b', coverColor: '#10b981', textColor: '#ffffff', fontTitle: 'font-mono',
+    spineColor: '#0a0a0a', coverColor: '#0f172a', textColor: '#ffffff', fontTitle: 'font-mono',
+    coverImage: '/images/books/milestone_motors_cover.jpg',
     coverContent: (
-      <div className="absolute inset-0 bg-emerald-500 overflow-hidden">
-         <div className="absolute inset-0 opacity-10 flex flex-col gap-2 transform -rotate-45 scale-150 justify-center">
-            {Array.from({length: 20}).map((_, i) => (
-              <div key={i} className="w-full h-4 bg-black border-dashed border-x-4 border-transparent" />
-            ))}
-         </div>
-         <div className="absolute inset-0 p-8 flex flex-col items-center justify-center text-center">
-            <h2 className="text-5xl font-mono font-bold text-white italic tracking-tighter uppercase shadow-black drop-shadow-md">Milestone</h2>
-            <div className="bg-black text-emerald-400 px-4 py-1 mt-4 font-mono text-xs uppercase tracking-widest font-bold">Service Advisor AI</div>
-         </div>
+      <div className="absolute inset-0 bg-cover bg-center shadow-[inset_0_0_120px_rgba(0,0,0,0.9)]" style={{ backgroundImage: "url('/images/books/milestone_motors_cover.jpg')" }}>
+        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/80 to-transparent pt-32 pb-10 px-10 flex flex-col items-center text-center">
+          <p className="font-mono text-[8px] text-white/74 tracking-[0.38em] uppercase font-bold mb-4">Case Study</p>
+          <h2 className="font-sans font-black text-[42px] text-white tracking-tighter leading-none mb-3 drop-shadow-2xl uppercase">Milestone<br/>Motors</h2>
+          <div className="w-12 h-[1px] bg-red-600 mb-4 shadow-[0_0_8px_rgba(220,38,38,0.8)]" />
+          <span className="font-mono text-[9px] text-white/72 tracking-[0.3em] uppercase font-bold mb-2">AI Service Advisor</span>
+          <span className="font-mono text-[9px] text-white/40 tracking-[0.2em] uppercase">Autonomous Service Systems</span>
+        </div>
       </div>
     ),
     spineContent: (
-      <div className="absolute inset-0 flex items-center justify-center">
-        <span className="[writing-mode:vertical-rl] rotate-180 text-lg font-mono font-bold italic text-white tracking-widest uppercase">Milestone</span>
-        <div className="absolute bottom-8 w-2 h-2 rounded-full bg-white opacity-50" />
-        <span className="absolute top-8 text-xs font-mono text-white opacity-50 rotate-90">No. 12</span>
+      <div className="absolute inset-0 bg-[#0a0a0a] flex flex-col items-center justify-between py-10 overflow-hidden border-r border-stone-800 shadow-[inset_-2px_0_15px_rgba(0,0,0,0.6)]">
+        <div className="absolute inset-0 bg-[url('/images/books/milestone_motors_cover.jpg')] bg-cover bg-center opacity-20 mix-blend-multiply grayscale" />
+        <span className="[writing-mode:vertical-rl] font-mono font-bold text-[8px] text-zinc-500 uppercase tracking-[0.3em] relative z-10 mt-2">
+          Service Copilot
+        </span>
+        
+        <div className="flex flex-col items-center gap-6 relative z-10 my-auto">
+          <span className="[writing-mode:vertical-rl] font-sans font-black text-[22px] text-white tracking-[0.1em] uppercase drop-shadow-xl">
+            MILESTONE
+          </span>
+          <div className="w-1.5 h-16 bg-red-600 shadow-[0_0_100px_rgba(220,38,38,0.8)]" />
+        </div>
+
+        <span className="font-mono text-[10px] text-zinc-500 font-bold uppercase tracking-widest relative z-10 rotate-90 mb-4">
+          No. 12
+        </span>
       </div>
     ),
     sections: milestoneSections

@@ -1,6 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, useInView, animate } from 'motion/react';
-import { getWorkDetail } from '../../data/workDetails';
+import { getWorkDetail, type WorkDetail } from '../../data/workDetails';
+import type {
+  FullWidthSection,
+  NarrativeSection,
+  SectionContent,
+  SplitSection,
+} from '../../data/caseStudyMeta';
 import { WebflowNav } from '../Navigation';
 import ProjectFooterStamp from './ProjectFooterStamp';
 import ProjectGallery from './ProjectGallery';
@@ -10,11 +16,25 @@ import './projectStyles.css';
 
 interface ProjectDetailPageProps {
   slug: string;
+  sectionsOverride?: SectionContent[];
   onBackAll: () => void;
   onNavigateToLibraryItem: (id: string) => void;
   onMenuNavigate: (tab: string) => void;
   isTransitioning?: boolean;
 }
+
+type ProjectDetailData = Omit<WorkDetail, 'sections'> & {
+  sections: SectionContent[];
+};
+
+const isFullWidthSection = (section: SectionContent): section is FullWidthSection =>
+  'fullWidthContent' in section;
+
+const isSplitSection = (section: SectionContent): section is SplitSection =>
+  'leftContent' in section || 'rightContent' in section;
+
+const getNarrativeSectionBody = (section: NarrativeSection) =>
+  'body' in section ? section.body : section.content;
 
 function CountUp({ to, suffix = '' }: { to: number; suffix?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -227,12 +247,58 @@ function ArchetypeC({
 
 export const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({
   slug,
+  sectionsOverride,
   onBackAll,
   onNavigateToLibraryItem,
   onMenuNavigate,
   isTransitioning = false,
 }) => {
-  const detail = getWorkDetail(slug);
+  const detail: ProjectDetailData | null = (() => {
+    const existingDetail = getWorkDetail(slug);
+
+    if (existingDetail) {
+      return sectionsOverride
+        ? { ...existingDetail, sections: sectionsOverride }
+        : existingDetail;
+    }
+
+    if (slug === 'about-caleb') {
+      return {
+        slug: 'about-caleb',
+        title: 'Caleb Cooper',
+        subtitle: 'Architecture, Integrations, & World Models',
+        year: '2026',
+        client: 'Caleb Cooper',
+        tags: ['Agentic Systems', 'World Models', 'Enterprise AI'],
+        heroImage: '/images/books/about_me_cover.png',
+        heroVideo: '/videos/about-bg.mp4',
+        intro: 'AI Systems Engineer focused on agentic architecture and world model integrations.',
+        gallery: [],
+        sections: sectionsOverride ?? [],
+      };
+    }
+
+    if (sectionsOverride) {
+      return {
+        slug,
+        title: slug
+          .split('-')
+          .map((segment) => segment.charAt(0).toUpperCase() + segment.slice(1))
+          .join(' '),
+        subtitle: '',
+        year: '2026',
+        client: 'Caleb Cooper',
+        tags: [],
+        heroImage: '',
+        intro: '',
+        gallery: [],
+        sections: sectionsOverride,
+      };
+    }
+
+    return null;
+  })();
+
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [clicking, setClicking] = useState(false);
   const railRef = useRef<HTMLElement | null>(null);
@@ -388,21 +454,22 @@ export const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({
 
   if (!detail) {
     return (
-      <div
-        className={`project-body project-theme-default ${isTransitioning ? 'pointer-events-none' : ''}`}
-        style={{ minHeight: '100svh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-      >
-        <div style={{ textAlign: 'center' }}>
-          <h2 className="project-empty-title">Project not found</h2>
-          <button className="project-back-pill" onClick={onBackAll}>
-            Back to AI Library
+      <div className="min-h-screen bg-black text-white flex items-center justify-center font-mono p-8 text-center">
+        <div>
+          <h1 className="text-4xl mb-4 font-serif">Book Not Found</h1>
+          <p className="opacity-50 mb-8">The requested book could not be loaded.</p>
+          <button
+            onClick={onBackAll}
+            className="text-[#c9a04e] border border-[#c9a04e]/30 px-6 py-2 hover:bg-[#c9a04e]/10 transition-colors"
+          >
+            Back to Library
           </button>
         </div>
       </div>
     );
   }
 
-  const hasGallery = detail.gallery.length > 0;
+  const hasGallery = detail.gallery && detail.gallery.length > 0;
   const heroVisualImage = detail.heroBackdropImage ?? detail.heroImage;
   const hasPlayground = !!detail.playgroundHref;
 
@@ -418,7 +485,7 @@ export const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({
 
     // Special case: If the playground is just a link back to the library shelf,
     // use the internal menu navigation to ensure the full curtain transition plays.
-    if (detail.playgroundHref === '/?tab=library') {
+    if (detail.playgroundHref === '/CalebCooper/Library') {
       onMenuNavigate('library');
       return;
     }
@@ -441,12 +508,18 @@ export const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({
         revealOnHover
         onMenuNavigate={onMenuNavigate}
         onBack={onBackAll}
-        backLabel="Back to AI Library"
+        backLabel="Back To Library"
       />
 
       <main ref={railRef} className="project-horizontal-shell">
-        <section className="project-horizontal-panel project-horizontal-panel--intro project-horizontal-panel--tone-1">
-          <div className="project-horizontal-intro-stack">
+        <section 
+          className="project-horizontal-panel project-horizontal-panel--intro project-horizontal-panel--tone-1"
+          style={detail.heroVideo ? { background: 'transparent' } : {}}
+        >
+          <div 
+            className="project-horizontal-intro-stack"
+            style={detail.heroVideo ? { background: 'transparent' } : {}}
+          >
             {detail.heroVideo && (
               <>
                 <video
@@ -549,8 +622,44 @@ export const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({
         {detail.sections.map((section, index) => {
           const archetype = index % 3;
           const galleryPreview = hasGallery ? detail.gallery[index % detail.gallery.length] : null;
+
+          if (isFullWidthSection(section)) {
+            return (
+              <section
+                key={section.id || `custom-${index}`}
+                className="project-horizontal-panel project-horizontal-panel--custom"
+                style={{ width: '100vw', flexShrink: 0 }}
+              >
+                {section.fullWidthContent}
+              </section>
+            );
+          }
+
+          if (isSplitSection(section)) {
+            return (
+              <section
+                key={section.id || `split-${index}`}
+                className="project-horizontal-panel project-horizontal-panel--split"
+                style={{ width: '100vw', flexShrink: 0, display: 'flex' }}
+              >
+                <div className={`w-1/2 ${section.bgColorLeft || 'bg-black'} ${section.textColorLeft || 'text-white'} p-12 md:p-24 flex flex-col justify-center`}>
+                   {section.leftTitle && <h3 className="font-serif text-3xl mb-8">{section.leftTitle}</h3>}
+                   <div className="font-mono text-sm opacity-80 leading-relaxed">
+                     {section.leftContent}
+                   </div>
+                </div>
+                <div className={`w-1/2 ${section.bgColorRight || 'bg-zinc-900'} ${section.textColorRight || 'text-white'} p-12 md:p-24 flex flex-col justify-center`}>
+                   {section.rightTitle && <h3 className="font-serif text-3xl mb-8">{section.rightTitle}</h3>}
+                   <div className="font-mono text-sm opacity-80 leading-relaxed">
+                     {section.rightContent}
+                   </div>
+                </div>
+              </section>
+            );
+          }
+
           const sectionVisualSrc =
-            section.media?.type === 'image' && section.media.src
+            section.media?.type === 'image'
               ? section.media.src
               : galleryPreview?.src ?? heroVisualImage;
           const sectionVisualAlt =
@@ -558,7 +667,7 @@ export const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({
               ? section.media.alt
               : galleryPreview?.alt ?? detail.title;
 
-          if (section.media?.type === 'custom' && section.media.node) {
+          if (section.media?.type === 'custom') {
             return (
               <section
                 key={section.id}
@@ -597,7 +706,7 @@ export const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({
                         letterSpacing: '-0.02em',
                       }}
                     >
-                      {section.title}
+                      {section.title ?? ''}
                     </h2>
                     <div
                       style={{
@@ -614,10 +723,11 @@ export const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({
               </section>
             );
           }
+          const sectionBody = getNarrativeSectionBody(section);
 
           return (
             <section
-              key={section.id}
+              key={section.id || `story-${index}`}
               className={`project-horizontal-panel project-horizontal-panel--story project-horizontal-panel--tone-${
                 (index % 4) + 1
               }`}
@@ -625,8 +735,8 @@ export const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({
               {archetype === 0 && (
                 <ArchetypeA
                   eyebrow={section.eyebrow}
-                  title={section.title}
-                  body={section.body}
+                  title={section.title ?? ''}
+                  body={sectionBody}
                   imageSrc={sectionVisualSrc}
                   imageAlt={sectionVisualAlt}
                   sectionNum={index + 1}
@@ -635,8 +745,8 @@ export const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({
               {archetype === 1 && (
                 <ArchetypeB
                   eyebrow={section.eyebrow}
-                  title={section.title}
-                  body={section.body}
+                  title={section.title ?? ''}
+                  body={sectionBody}
                   imageSrc={sectionVisualSrc}
                   imageAlt={sectionVisualAlt}
                   sectionNum={index + 1}
@@ -645,8 +755,8 @@ export const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({
               {archetype === 2 && (
                 <ArchetypeC
                   eyebrow={section.eyebrow}
-                  title={section.title}
-                  body={section.body}
+                  title={section.title ?? ''}
+                  body={sectionBody}
                   imageSrc={sectionVisualSrc}
                   imageAlt={sectionVisualAlt}
                   imageCaption={galleryPreview?.caption}

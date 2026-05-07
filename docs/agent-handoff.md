@@ -1,0 +1,1459 @@
+# Agent Handoff Log
+
+This file is the shared working-memory layer for Codex, Claude Code, Gemini, and Antigravity agents working on this project.
+
+Every agent must append a short entry after meaningful work.
+
+## Required Entry Format
+
+### YYYY-MM-DD | Agent | Task Name
+
+Goal:
+- 
+
+Files changed:
+- 
+
+Architecture or design decisions:
+- 
+
+Verification run:
+- 
+
+Known risks:
+- 
+
+Next recommended step:
+- 
+
+## Current Graphify Setup
+
+Project root:
+
+C:\Users\Caleb\Downloads\calebs-3d-case-study
+
+Known high-sensitivity visual component:
+
+src\components\Bookshelf.tsx
+
+Shared graph outputs, once generated:
+
+- graphify-out/GRAPH_REPORT.md
+- graphify-out/graph.json
+- graphify-out/graph.html
+
+Agent rule:
+
+Before editing the project, read graphify-out/GRAPH_REPORT.md if it exists and use Graphify queries to locate the relevant files and ownership boundaries. Extend existing architecture before rewriting. Do not modify unrelated routes, layouts, visuals, 3D behavior, or assets.
+
+### 2026-05-05 | Codex | Graphify Real Root Setup
+
+Goal:
+- Install Graphify project integrations in the confirmed app root and attempt the first shared graph extraction.
+
+Files changed:
+- .graphifyignore
+- .gitignore
+- AGENTS.md
+- CLAUDE.md
+- GEMINI.md
+- .agents/rules/graphify.md
+- .agents/workflows/graphify.md
+- .codex/hooks.json
+- .claude/settings.json
+- .gemini/settings.json
+- docs/agent-handoff.md
+
+Architecture or design decisions:
+- Kept all changes limited to Graphify config, agent instructions, and Git hooks.
+- Treated `src/components/Bookshelf.tsx` as high-sensitivity and did not modify it.
+- Preserved `graphify-out/` as the intended shared artifact location while ignoring only manifest, cost, and cache files.
+
+Verification run:
+- Confirmed `package.json` and `src/components/Bookshelf.tsx` exist in the real app root.
+- Confirmed the folder is already a Git repository.
+- Installed Graphify integrations for Codex, Claude Code, Gemini, Antigravity, and Windows support.
+- Installed Graphify Git hooks.
+- Attempted `graphify extract .`.
+
+Known risks:
+- Extraction is blocked because no `MOONSHOT_API_KEY` or `ANTHROPIC_API_KEY` is set in this shell.
+- `graphify` is still not on the current terminal PATH; a new terminal is needed for plain `graphify` commands. The installed binary exists at `C:\Users\Caleb\.local\bin\graphify.exe`.
+
+Next recommended step:
+- Set `MOONSHOT_API_KEY` or `ANTHROPIC_API_KEY`, open a new terminal, and rerun `graphify extract .` from this project root.
+
+### 2026-05-05 | Codex | Graphify Extraction
+
+Goal:
+- Generate Graphify project artifacts for shared agent context.
+
+Files changed:
+- graphify-out/graph.json
+- graphify-out/GRAPH_REPORT.md
+- graphify-out/graph.html
+- graphify-out/manifest.json
+- graphify-out/.graphify_analysis.json
+- graphify-out/.graphify_labels.json
+- docs/agent-handoff.md
+
+Architecture or design decisions:
+- The installed Graphify CLI produced `graph.json` but not `GRAPH_REPORT.md` or `graph.html`, so those two artifacts were generated using Graphify's installed Python modules against the extracted graph data.
+
+Verification run:
+- graphify extract .
+- npm run build
+- npm run lint
+
+Known risks:
+- `npm run lint` fails on generated playground copies under `dist/work/*/playground/src/App.tsx` and `public/work/*/playground/src/App.tsx`, not on `src/components/Bookshelf.tsx`.
+- `npm run build` passes, but Vite warns that one minified chunk exceeds 500 kB.
+
+Next recommended step:
+- Use graphify-out/GRAPH_REPORT.md as first-read context for future agents.
+
+### 2026-05-05 | Codex | Lint Ignore Configuration
+
+Goal:
+- Make lint pass by excluding generated/static playground copies from ESLint scanning.
+
+Files changed:
+- tsconfig.json
+- src/components/Book.tsx
+- src/components/Navigation.tsx
+- src/components/project/ProjectDetailPage.tsx
+- src/data/caseStudyMeta.ts
+- src/data/portfolio.tsx
+- src/data/workDetails.tsx
+- graphify-out/graph.json
+- graphify-out/graph.html
+- graphify-out/GRAPH_REPORT.md
+- graphify-out/manifest.json
+- docs/agent-handoff.md
+
+Architecture or design decisions:
+- ESLint should validate the main app source, not generated build output or static embedded playground copies.
+- The repo's `lint` script is `tsc --noEmit`, so the effective fix was to narrow TypeScript project scope and align the shared type contracts exposed once generated files were excluded.
+
+Verification run:
+- npm run lint
+- npm run build
+- graphify update .
+
+Known risks:
+- `npm run build` still emits Vite's large-chunk warning for the main bundle.
+- `graphify update .` succeeded, but it also emitted a noncritical tip recommending `MOONSHOT_API_KEY` for richer semantic extraction.
+
+Next recommended step:
+- Use graphify-out/GRAPH_REPORT.md as first-read context before future implementation work.
+
+### 2026-05-05 | Codex | Restore Case Study Vertical Detail Mode
+
+Goal:
+- Keep case-study detail pages on the vertical `CaseStudyDetail` renderer while project/work detail pages keep the horizontal `ProjectDetailPage` renderer.
+
+Files changed:
+- src/App.tsx
+- docs/agent-handoff.md
+- graphify-out/GRAPH_REPORT.md
+- graphify-out/graph.json
+- graphify-out/graph.html
+
+Architecture or design decisions:
+- Case-study books resolve back to the existing `projects` data and render through `CaseStudyDetail`.
+- Work/project books still render through `ProjectDetailPage`.
+
+Verification run:
+- npm run lint
+- npm run build
+- graphify update .
+
+Known risks:
+- Vite still reports the existing large chunk warning during build.
+
+Next recommended step:
+- Verify one case-study book opens vertically and one project/work book keeps the horizontal project-page experience before committing.
+
+### 2026-05-05 | Codex | Stabilize Current Preferred Site State
+
+Goal:
+- Preserve the current preferred site version while fixing hook-order and type-safety risks.
+
+Files changed:
+- src/App.tsx
+- src/components/project/ProjectDetailPage.tsx
+- src/data/caseStudyMeta.ts
+- src/data/workDetails.tsx
+- docs/agent-handoff.md
+- graphify-out/GRAPH_REPORT.md
+- graphify-out/graph.json
+- graphify-out/graph.html
+
+Architecture or design decisions:
+- Replaced the loose section override path with explicit section unions that match the live site: narrative sections, split sections, and full-width sections.
+- Narrowed `workDetails.tsx` back to narrative sections while keeping the broader shared section union for case-study and library-style content.
+- Kept all current layout branches, hero/video/gallery behavior, routing, and content intact.
+
+Verification run:
+- npm run lint
+- npm run build
+- graphify update .
+
+Known risks:
+- Vite still reports the existing large chunk warning during build.
+- `window as any` remains in the curtain-effect plumbing outside this stabilization scope.
+
+Next recommended step:
+- Continue feature/design iteration from the checkpointed current site state.
+
+### 2026-05-05 | Codex | Curated Graphify Corpus Rebuild
+
+Goal:
+- Generate clean Graphify context from a curated source-only corpus instead of the full repo root.
+
+Files changed:
+- .graphify-corpus/
+- graphify-out/GRAPH_REPORT.md
+- graphify-out/graph.json
+- graphify-out/graph.html
+- .gitignore
+- docs/agent-handoff.md
+
+Architecture or design decisions:
+- Graphify should represent canonical source, docs, and config.
+- Embedded playground/export projects under public/ and dist/ should be excluded from agent architecture context.
+- Asset/video inventories should be performed by filesystem inspection, not Graphify semantic extraction.
+
+Verification run:
+- Clean graph search for public/work, dist/work, playground/src, public/cortex-playground, public/
+- npm run lint
+- npm run build
+
+Known risks:
+- Graphify paths may now be rooted under .graphify-corpus rather than the project root. Agents should map .graphify-corpus/src/* back to src/*.
+
+Next recommended step:
+- Restart the orchestration audit using the curated clean Graphify graph.
+
+### 2026-05-05 | Codex | Reverse Premature Availability Filtering
+
+Goal:
+- Remove the child-added availability filtering so visible library inventory is not altered ahead of the planned unavailable-state audit.
+
+Files changed:
+- src/App.tsx
+- src/components/project/ProjectNextPrevious.tsx
+- docs/agent-handoff.md
+
+Architecture or design decisions:
+- Preserved the current unified library/detail architecture.
+- Removed only the filtering logic that hid `work` books based on `hidden` or missing `workDetails`.
+- Left curated Graphify artifacts untouched because `.graphify-corpus` is a generated mirror and is not auto-synced from `src/`.
+
+Verification run:
+- npm run lint
+- npm run build
+
+Known risks:
+- `graphify-out/` is now stale relative to the live `src/` files until the curated corpus is rebuilt and Graphify is rerun against it.
+- The worktree remains intentionally dirty outside this rollback scope.
+
+Next recommended step:
+- Resume the book-by-book library audit and identify which visible books should eventually stay openable versus move to an unavailable state.
+
+### 2026-05-05 | Codex | Curated Graphify Corpus Sync After Revert
+
+Goal:
+- Resync .graphify-corpus and Graphify output after reverting the premature availability-filtering child task.
+
+Files changed:
+- graphify-out/
+- docs/agent-handoff.md
+
+Architecture or design decisions:
+- Graphify context was rebuilt from the current curated corpus before resuming the design-completion inventory.
+
+Verification run:
+- npm run lint
+- npm run build
+- Graphify clean-path checks
+
+Known risks:
+- Graphify paths are rooted under .graphify-corpus and must be mapped back to real source paths.
+
+Next recommended step:
+- Resume the read-only book-by-book design-completion inventory.
+
+### 2026-05-05 | Codex | Bonnie Spine Text Adjustment
+
+Goal:
+- Tighten the Bonnie spine text stack after the exterior refresh so the spine reads more cleanly on shelf.
+
+Files changed:
+- src/data/works.tsx
+- docs/agent-handoff.md
+
+Architecture or design decisions:
+- Kept the Bonnie change scoped to the existing `coverContent` and `spineContent` escape hatches in `works.tsx`.
+- Removed duplicated `Personal Project` wording from the Bonnie spine and aligned the secondary descriptor to `Field Companion`.
+
+Verification run:
+- npm run lint
+- npm run build
+
+Known risks:
+- This pass only adjusted the Bonnie exterior spine text. Bonnie interior copy still needs a later grounding pass.
+
+Next recommended step:
+- Review the Bonnie spine visually, then continue with the BYC2W exterior pass.
+
+### 2026-05-05 | Codex | Personal Project Exterior Label Cleanup
+
+Goal:
+- Remove the tacky repeated `Personal Project` spine markers from the refreshed personal-project books and integrate `Personal Project` into each cover's title stack instead.
+
+Files changed:
+- src/data/works.tsx
+- docs/agent-handoff.md
+
+Architecture or design decisions:
+- Kept the shelf rendering contract unchanged and limited the change to existing `coverContent` and `spineContent` blocks in `works.tsx`.
+- Removed `Personal Project` from the spines of the touched personal-project books.
+- Repositioned `Personal Project` on covers as a clean overline within each book's own typography/theme rather than as a repeated badge system.
+
+Verification run:
+- npm run lint
+- npm run build
+
+Known risks:
+- This pass improves the exterior labeling system only. Some personal-project interiors still need source-grounded copy normalization.
+- Graphify wiki regeneration is still manual on this machine if the CLI does not rebuild `graphify-out/wiki/`.
+
+Next recommended step:
+- Continue the source-grounded personal-project normalization queue, starting with the next high-priority book or detail-page rewrite.
+
+### 2026-05-05 | Codex | Boonk Source-Grounded Detail Rewrite
+
+Goal:
+- Reframe the Boonk detail page from the real local Boonk workspace so it reflects high-fidelity website cloning and preview hardening rather than generic component cloning.
+
+Files changed:
+- src/data/workDetails.tsx
+- docs/agent-handoff.md
+
+Architecture or design decisions:
+- Grounded the rewrite from the live local Boonk workspace at `C:\Users\Caleb\Boonk`.
+- Shifted the Boonk page from component-library language to clone-safe inspection, asset localization, multipage export, and preview hardening.
+- Left the exterior and renderer contracts untouched.
+
+Verification run:
+- npm run lint
+- npm run build
+
+Known risks:
+- `markov-chains` still has no real local workspace and should remain in the unavailable/ungrounded bucket until there is actual source evidence.
+- Boonk may still want a later exterior refinement pass so the cover and the rewritten interior read as one system.
+
+Next recommended step:
+- Continue the source-grounded personal-project queue and keep `markov-chains` out of rewrite work until a real source workspace exists.
+
+### 2026-05-05 | Codex | Case Study Cover Label Integration
+
+Goal:
+- Add visible `Case Study` cover labeling to the remaining case-study books without touching the shared shelf renderer.
+
+Files changed:
+- src/data/portfolio.tsx
+- docs/agent-handoff.md
+
+Architecture or design decisions:
+- Kept the change local to existing case-study `coverContent` definitions in `portfolio.tsx`.
+- Integrated `Case Study` into each cover's own typography/composition rather than adding a shared badge system.
+- Left `src/components/Book.tsx` unchanged.
+
+Verification run:
+- npm run lint
+- npm run build
+
+Known risks:
+- This pass was source-safe and localized, but it still needs visual shelf QA to confirm each new label sits cleanly at real shelf scale.
+- `vsp-vision` still has a semantically wrong interior payload even though its exterior labeling is now corrected.
+
+Next recommended step:
+- Run visual shelf QA, then continue with the next source-grounded book pass or the remaining unavailable-book audit later.
+
+### 2026-05-05 | Codex | Boonk Exterior Doctrine Alignment
+
+Goal:
+- Align the Boonk shelf book exterior with the real local Boonk workspace so the cover and spine describe website cloning and preview hardening instead of generic component cloning.
+
+Files changed:
+- src/data/works.tsx
+- docs/agent-handoff.md
+
+Architecture or design decisions:
+- Kept the change local to Boonk's `coverContent` and `spineContent` in `works.tsx`.
+- Updated the Boonk subtitle and visible shelf descriptors to match the live workspace doctrine: live-site inspection, cloning, localization, export, and preview.
+- Preserved the shared shelf renderer and the rest of the personal-project label system.
+
+Verification run:
+- npm run lint
+- npm run build
+
+Known risks:
+- Boonk still needs visual shelf QA to confirm the new typographic stack reads cleanly at actual shelf scale.
+- The exterior is now doctrinally aligned, but the final polish standard may still want a stronger forensic/specimen-book treatment later.
+
+Next recommended step:
+- Run visual shelf QA, then continue with the next grounded personal-project pass or the remaining unavailable-book work later.
+
+### 2026-05-05 | Codex | Case Study Availability Gate And Caleb Detail Restoration
+
+Goal:
+- Keep every case-study book visible on the shelf, allow only Summit Health to open as a live case study, and restore Caleb Cooper onto the case-study detail surface in place.
+
+Files changed:
+- src/App.tsx
+- src/data/aboutMe.tsx
+- docs/agent-handoff.md
+
+Architecture or design decisions:
+- Added the availability gate at the `App.tsx` selection/render layer rather than filtering books out of inventory.
+- Non-Summit case studies now open a case-study-format unavailable surface with the message `Currently unavailable. Check back soon.`
+- Caleb remains owned from `src/data/aboutMe.tsx`.
+- There was no dataset move and no book migration.
+- Kept Caleb pinned on the shelf as a work-type book for routing stability, and restored its detail rendering onto the case-study surface instead of `ProjectDetailPage`.
+- Rebuilt the Caleb sections into `CaseStudyDetail`-compatible full-width and split sections instead of expanding the shared renderer.
+
+Verification run:
+- npm run lint
+- npm run build
+- Runtime QA: blocked in this shell because no browser/runtime QA tool was available here, so I am not claiming a fresh local browser verification.
+
+Known risks:
+- This pass changes the detail-routing behavior, but runtime QA was not performed in this shell.
+- Caleb now uses the case-study detail renderer, and its shelf identity remains managed from `src/data/aboutMe.tsx` rather than the main `portfolio.tsx` dataset.
+
+Next recommended step:
+- Run a quick shelf/detail QA pass in a browser-capable environment, then keep the Caleb restoration reviewed alongside the Summit-only availability rule.
+### 2026-05-05 | Codex | Caleb Case Study Restoration
+
+Goal:
+- Restore the Caleb Cooper case-study page in place, bring back the local Caleb video asset, and keep the book anchored in `src/data/aboutMe.tsx`.
+
+Files changed:
+- `src/data/aboutMe.tsx`
+- `.graphify-corpus/src/data/aboutMe.tsx`
+- `docs/agent-handoff.md`
+
+Architecture or design decisions:
+- Caleb remains owned from `src/data/aboutMe.tsx`.
+- There was no dataset move and no book migration.
+- Restored the local `about-bg.mp4` asset directly inside the Caleb hero and added a dedicated media section so the page reads as a deliberate case study rather than a fallback.
+- Preserved the unavailable-case-study rule in `App.tsx`.
+
+Verification run:
+- Pending
+
+Known risks:
+- The page still depends on the existing global `CaseStudyDetail` renderer for structure; any further visual tuning should stay within `aboutMe.tsx` unless renderer-level issues surface.
+
+Next recommended step:
+- Run lint and build, then refresh the curated Graphify corpus and copy the clean outputs back into `graphify-out/`.
+### 2026-05-05 | Codex | Caleb Video Caption Cleanup
+
+Goal:
+- Remove the footer caption bar from the restored Caleb video block without changing the section design or routing.
+
+Files changed:
+- `src/data/aboutMe.tsx`
+- `.graphify-corpus/src/data/aboutMe.tsx`
+- `docs/agent-handoff.md`
+
+Architecture or design decisions:
+- Kept the Caleb video block intact and removed only the bottom caption overlay text.
+- Caleb remains owned from `src/data/aboutMe.tsx`.
+- There was no dataset move and no book migration.
+- Left ownership, routing, and section composition unchanged.
+
+Verification run:
+- npm run lint
+- npm run build
+- Runtime QA: blocked in this shell because no browser/runtime QA tool was available here, so this is not a fresh browser verification.
+
+Known risks:
+- Graphify artifacts were synchronized from the curated corpus copy, but the graph tool itself still was not runnable in this shell.
+
+Next recommended step:
+- If graph freshness needs a true rebuild, run the curated Graphify command in an environment where the CLI resolves properly.
+
+### 2026-05-05 | Codex | Caleb Public-Safe Positioning Rewrite
+
+Goal:
+- Reframe the Caleb page as a public-safe AI engineering showcase with case-study-grade section design, without moving ownership or books.
+
+Files changed:
+- `src/data/aboutMe.tsx`
+- `docs/agent-handoff.md`
+
+Architecture or design decisions:
+- Kept Caleb owned from `src/data/aboutMe.tsx` and preserved the existing `CaseStudyDetail` renderer.
+- Removed Winter Haven operator/control-plane framing from visible copy and replaced it with AI engineering, architecture, product, and strategy positioning.
+- Kept the restored `about-bg.mp4` video section and removed footer-caption language from the visible copy.
+
+Verification run:
+- `npm run lint`
+- `npm run build`
+
+Known risks:
+- The page still depends on the existing section renderer for layout, so any deeper visual tuning should remain incremental.
+
+Next recommended step:
+- Refresh the curated Graphify corpus and confirm the graph artifacts stay limited to the curated workspace.
+
+### 2026-05-05 | Codex | Caleb Cooper Direct Rewrite
+
+Goal:
+- Replace the reverted Caleb baseline with a direct one-file rewrite that uses Summit Health's section rhythm, first-person copy, and two clean video surfaces.
+
+Files changed:
+- `src/data/aboutMe.tsx`
+- `docs/agent-handoff.md`
+
+Architecture or design decisions:
+- Kept Caleb owned from `src/data/aboutMe.tsx`; no book migration or data move.
+- Removed visible `Case Study`, `Human Operator`, stewardship, and decision-authority language from Caleb's cover, spine, hero, and body copy.
+- Rebuilt the page around a Summit-style cadence: hero, origin split, thesis block, background split, proof block, systems grid, metrics/honesty block, and bottom video section.
+- Preserved two uses of `about-bg.mp4`: one hero background video and one clean bottom video with no text inside the frame.
+
+Verification run:
+- `npm run lint`
+- `npm run build`
+
+Known risks:
+- Runtime/browser QA was not rechecked visually in this shell after the rewrite.
+- Build still reports the existing large-chunk warning, but output remains successful.
+
+Next recommended step:
+- Review the Caleb page visually, then move to the next book/page with the same one-file, final-pass approach.
+
+### 2026-05-05 | Codex | Caleb Bottom Section Follow-up
+
+Goal:
+- Tighten the Caleb metrics label casing, expand the still-building section to explain what the case studies are, and make the bottom video much larger and less boxy.
+
+Files changed:
+- `src/data/aboutMe.tsx`
+- `docs/agent-handoff.md`
+
+Architecture or design decisions:
+- Changed `Still live` to `Still Live`.
+- Extended the bottom Caleb section without disturbing the rest of the page, adding explicit first-person clarification that the case studies are personal AI integration queries rather than literal client work for the named cover company.
+- Reworked the bottom video treatment into a much larger, edge-pushed visual field instead of a bordered embed.
+
+Verification run:
+- `npm run lint`
+- `npm run build`
+
+Known risks:
+- Visual QA in the browser is still the next real check for whether the enlarged bottom video feels balanced across breakpoints.
+
+Next recommended step:
+- Review the Caleb page visually, then lock it before moving to the next project/page.
+
+### 2026-05-05 | Codex | Caleb Layout and Casing Polish
+
+Goal:
+- Normalize the remaining visible title/subtitle casing, reduce the long text run in the final section, and let the bottom video own the right side of the layout instead of reading like a boxed embed.
+
+Files changed:
+- `src/data/aboutMe.tsx`
+- `docs/agent-handoff.md`
+
+Architecture or design decisions:
+- Adjusted hero scale slightly to reduce headline dominance.
+- Normalized visible casing across section titles, metric labels, and supporting subtitles.
+- Replaced the long bottom text stack with shorter structured blocks and made the video a dominant right-side field.
+
+Verification run:
+- `npm run lint`
+- `npm run build`
+
+Known risks:
+- Browser-level aesthetic QA is still the final check for whether the hero scale and bottom-section balance feel right on the live viewport.
+
+Next recommended step:
+- If the Caleb page now feels locked visually, move to the next highest-priority page without reopening this one unless copy-level tweaks remain.
+
+### 2026-05-05 | Codex | Caleb Page Local Rename
+
+Goal:
+- Rename `Project Winter Haven` to `Agentic Dashboards` on the Caleb page only.
+
+Files changed:
+- `src/data/aboutMe.tsx`
+- `docs/agent-handoff.md`
+
+Architecture or design decisions:
+- Kept the rename local to the Caleb page's project grid and did not change the underlying project name elsewhere in the repo.
+
+Verification run:
+- `npm run lint`
+- `npm run build`
+
+Known risks:
+- None beyond normal visual QA.
+
+Next recommended step:
+- Continue page-level polish only if the Caleb page still has specific wording or layout tweaks left.
+
+### 2026-05-05 | Codex | Caleb Background Relevance Pass
+
+Goal:
+- Tighten the Caleb background copy to shorten the biotech setup, surface more relevant AI examples found across the site, and remove the `The AI Library` project card from the Caleb page grid.
+
+Files changed:
+- `src/data/aboutMe.tsx`
+- `docs/agent-handoff.md`
+
+Architecture or design decisions:
+- Shortened the biotech paragraph while keeping the evidence-and-scrutiny framing.
+- Added a direct line naming examples visible across the site: `RAG`, `GraphRAG`, world models, `A2UI`, AI storytelling, rapid prototyping, agentic tools, agentic engineering, and generative AI product work.
+- Removed only the `The AI Library` card from Caleb's local project grid; the broader site/project data was left untouched.
+
+Verification run:
+- `npm run lint`
+- `npm run build`
+
+Known risks:
+- Browser QA is still the final check for spacing after the card removal.
+
+Next recommended step:
+- Keep finishing Caleb-specific copy/layout polish only until the page is visually locked.
+
+### 2026-05-05 | Codex | AI Library Interior Rebuild
+
+Goal:
+- Rebuild the AI Library interior so it uses the same vertical editorial detail flow as Caleb and Summit Health while keeping the page brighter, more colorful, and explicitly centered on the site as a prompt-built system.
+
+Files changed:
+- `src/App.tsx`
+- `src/data/aiLibraryBook.tsx`
+- `src/data/workDetails.tsx`
+- `docs/agent-handoff.md`
+
+Architecture or design decisions:
+- Kept AI Library as a `work` book on the shelf, but routed its detail page through the same vertical `CaseStudyDetail` surface used by Caleb and Summit instead of the older horizontal project renderer.
+- Rewrote the AI Library sections around a hero video, origin split, Michael Scott paper quote block, implementation/system explanation, proof section, honesty section, and a large closing video section.
+- Preserved the Michael Scott paper dialogue as a first-class part of the page framing rather than dropping it during the redesign.
+
+Verification run:
+- `npm run lint`
+- `npm run build`
+
+Known risks:
+- Browser-level visual QA is still the real check for whether the brighter multi-color sections and the closing video balance feel right on desktop and mobile.
+
+Next recommended step:
+- Review the AI Library page in the browser, then decide whether to tighten the copy or move directly to the Summit Health footer video pass.
+
+### 2026-05-06 | Codex | Summit Health Footer Video and Disclaimer Pass
+
+Goal:
+- Add a proper closing video treatment to the Summit Health case study, keep the case-study disclaimer visibly anchored at the bottom of the page, and tighten the interior finish without changing the core Summit narrative.
+
+Files changed:
+- `src/data/helloPatientCase.tsx`
+- `src/data/caseStudyMeta.ts`
+- `docs/agent-handoff.md`
+
+Architecture or design decisions:
+- Kept Summit on the same vertical case-study detail surface and avoided a broad rewrite.
+- Replaced the old plain disclaimer block with a full footer-video section that keeps the case-study caveat explicit while giving Summit the same strong closing rhythm Caleb uses.
+- Strengthened the shared case-study disclaimer copy so the bottom note now clearly says these pages are proposed implementation patterns rather than deployment claims unless explicitly stated otherwise.
+
+Verification run:
+- `npm run lint`
+- `npm run build`
+
+Known risks:
+- Browser-level visual QA is still the final check for whether the new footer-video balance, overlay strength, and bottom disclaimer hierarchy feel right on the live viewport.
+
+Next recommended step:
+- Review Summit visually on `localhost:3000`, then either lock it or make one final polish pass before moving to the next book.
+
+### 2026-05-06 | Codex | Summit Health Model Positioning and Acceptance Gates Cleanup
+
+Goal:
+- Reposition the Summit voice-agent stack around `GPT-4o` for the live call path, `GPT-5 mini` for offline review, and fix the acceptance-gates section so the target metrics remain legible at desktop width.
+
+Files changed:
+- `src/data/helloPatientCase.tsx`
+- `docs/agent-handoff.md`
+
+Architecture or design decisions:
+- Kept the deterministic state machine as the real safety boundary and rewrote the LLM layer copy to explain why Summit does not need a frontier model on every live turn.
+- Positioned `GPT-4o` as the live-call model because the workflow is bounded, latency-sensitive, and tool-gated.
+- Positioned `GPT-5 mini` as the offline review model because transcript QA benefits from somewhat stronger reasoning without paying frontier-model costs.
+- Replaced the oversized viewport-scaled acceptance metrics with structured metric cards so the latency targets do not collide visually on wide screens.
+
+Verification run:
+- `npm run lint`
+- `npm run build`
+
+Known risks:
+- Browser-level visual QA is still the final check for the acceptance-card sizing and the revised metric hierarchy.
+
+Next recommended step:
+- Review Summit at `localhost:3000`; if the acceptance section reads cleanly, move to the next interior polish target.
+
+### 2026-05-06 | Codex | Bonnie Vertical Interior Rebuild
+
+Goal:
+- Rebuild Bonnie as a vertical editorial project page that matches the Caleb / AI Library / Summit rhythm while keeping Bonnie a `work` book on the shelf and keeping the pass scoped to Bonnie only.
+
+Files changed:
+- `src/App.tsx`
+- `src/data/bonnieBook.tsx`
+- `docs/agent-handoff.md`
+
+Architecture or design decisions:
+- Added a dedicated `bonnieBook` detail object instead of rewriting the shared project renderer.
+- Routed only the `bonnie` work ID through the vertical `CaseStudyDetail` surface, similar to the existing special handling for Caleb and AI Library.
+- Kept Bonnie framed as a controlled personal GTA V teammate concept: crew memory, session context, voice discipline, and operator control, without drifting into stealth, evasion, or fake autonomy language.
+- Added a dedicated playground section and a second video-driven closing section so the page follows the same two-video editorial rhythm the user prefers.
+
+Verification run:
+- `npm run lint`
+- `npm run build`
+
+Known risks:
+- Browser-level visual QA is still the real check for whether Bonnie's palette, pacing, and section density feel fully locked.
+- Automated screenshot capture from the local runtime failed because the image-writer could not persist temporary assets, so visual review remains manual.
+
+Next recommended step:
+- Review Bonnie live at `localhost:3000/?tab=project&project=bonnie`, then make any page-specific corrections before moving to the next alphabetical project.
+
+### 2026-05-06 | Codex | Bonnie Product Framing Correction
+
+Goal:
+- Correct Bonnie's interior copy so it reflects the actual concept: a literal autonomous GTA V teammate that uses its own cloud-gaming session, responds to voice commands in real time, remembers across play, and exists to help the player's world progress.
+
+Files changed:
+- `src/data/bonnieBook.tsx`
+- `docs/agent-handoff.md`
+
+Architecture or design decisions:
+- Kept Bonnie on the new vertical editorial structure and changed only the page wording.
+- Reframed the concept away from a mostly advisory companion and toward a playable teammate with autonomy, voice responsiveness, world familiarity, and progression alignment.
+- Preserved the existing safety boundary of not adding stealth, evasion, anti-detection, or implementation-detail language.
+
+Verification run:
+- `npm run lint`
+- `npm run build`
+
+Known risks:
+- Browser-level copy and pacing review is still the real check for whether the stronger autonomy language feels exact without overclaiming the current runtime.
+
+Next recommended step:
+- Review Bonnie live again; if the framing is now accurate, lock Bonnie and move to `Boonk`.
+
+### 2026-05-06 | Codex | Bonnie Hero Card Cleanup
+
+Goal:
+- Make Bonnie's hero cards read as a uniform set and tighten the lead framing so Bonnie clearly helps me grow my GTA world and is meant for GTAV players.
+
+Files changed:
+- `src/data/bonnieBook.tsx`
+- `docs/agent-handoff.md`
+
+Architecture or design decisions:
+- Replaced the loose left-border metric columns with boxed cards that share a fixed structure and consistent vertical rhythm.
+- Kept the card count the same, but changed the final card from a vague status tile to a clearer audience statement.
+- Tightened the hero copy so Bonnie explicitly serves my progression and GTAV players who want a real teammate.
+
+Verification run:
+- `npm run lint`
+- `npm run build`
+
+Known risks:
+- Browser-level visual review is still the real check for card balance and headline spacing on the live viewport.
+
+Next recommended step:
+- Review Bonnie again; if the hero now feels locked, move on to `Boonk`.
+
+### 2026-05-06 | Codex | Boonk Vertical Interior Activation
+
+Goal:
+- Turn on Boonk's dedicated vertical editorial interior without changing the shared project-detail renderer for the rest of the project books.
+
+Files changed:
+- `src/App.tsx`
+- `docs/agent-handoff.md`
+
+Architecture or design decisions:
+- Reused the already-scoped `boonkBook` detail object and routed only the `boonk` work ID through the same `CaseStudyDetail` surface used by Caleb, AI Library, and Bonnie.
+- Kept Boonk as a `work` book on the shelf and preserved the shared `ProjectDetailPage` path for all other project books.
+- Left the Boonk page itself focused on component retention, motion fidelity, local asset rewriting, and swap-ready reconstruction rather than generic whole-site cloning.
+
+Verification run:
+- `npm run lint`
+- `npm run build`
+
+Known risks:
+- Browser-level review is still required to judge whether the new Boonk pacing and copy feel fully locked.
+- The global unavailable-case-study click behavior is still pending and was intentionally not changed in this pass.
+
+Next recommended step:
+- Review Boonk live at `localhost:3000/?tab=project&project=boonk`; if the page is approved, move to the next alphabetical project book.
+
+### 2026-05-06 | Codex | Boonk Hero Video Correction
+
+Goal:
+- Fix Boonk's hero so it uses the same high-quality motion source as the footer instead of the lower-quality alternate video.
+
+Files changed:
+- `src/data/boonkBook.tsx`
+- `docs/agent-handoff.md`
+
+Architecture or design decisions:
+- Swapped Boonk's top hero video source to the same `boonk-bg.mp4` asset already used at the bottom of the page.
+- Removed the extra paper-texture overlay from the hero so the visual reads cleaner and closer to the footer quality.
+- Kept the rest of the page structure and copy unchanged.
+
+Verification run:
+- `npm run lint`
+- `npm run build`
+
+Known risks:
+- Final judgment is still visual; the code is correct, but the live viewport should confirm the hero now matches the footer quality.
+
+Next recommended step:
+- Refresh Boonk on `localhost:3000/?tab=project&project=boonk` and verify the hero now uses the correct video.
+
+### 2026-05-06 | Codex | Boonk 4K Video Swap And Summit Label Cleanup
+
+Goal:
+- Replace Boonk's stretched portrait background with the new 4K source file and remove Summit's low-value left-edge section labels so the page stops fighting itself over chapter numbering.
+
+Files changed:
+- `public/videos/boonk-4k.mp4`
+- `src/data/boonkBook.tsx`
+- `src/data/helloPatientCase.tsx`
+- `docs/agent-handoff.md`
+
+Architecture or design decisions:
+- Copied the finished `11904079_3840_2160_30fps.mp4` asset into the repo as `boonk-4k.mp4` and pointed both Boonk video sections at the new file to avoid browser cache collisions with the old portrait assets.
+- Kept Summit's internal kicker system and removed the separate left-edge `leftTitle` labels from the split sections instead of trying to maintain two competing section-label schemes.
+- Left the shared case-study renderer alone; this stays a Summit-only content cleanup.
+
+Verification run:
+- `npm run lint`
+- `npm run build`
+
+Known risks:
+- Boonk's final quality still depends on live browser playback and not just the source dimensions.
+- Summit no longer shows those edge labels at all; if a lighter chapter marker system is wanted later, it should be designed explicitly rather than inferred from the current numbering.
+
+Next recommended step:
+- Refresh Boonk and Summit live at `localhost:3000` and confirm the media quality and simplified Summit pacing both read correctly.
+
+### 2026-05-06 | Codex | Brokie V1 4K Video Swap
+
+Goal:
+- Replace Brokie V1's current hero video with the new 4K source asset while leaving the rest of the project page unchanged.
+
+Files changed:
+- `public/videos/brokie-v1-4k.mp4`
+- `src/data/workDetails.tsx`
+- `docs/agent-handoff.md`
+
+Architecture or design decisions:
+- Kept Brokie V1 on the shared `ProjectDetailPage` path and changed only its `heroVideo` reference.
+- Copied the source asset into the repo under a new filename to avoid stale browser caching against the old Brokie V1 video path.
+
+Verification run:
+- `npm run lint`
+- `npm run build`
+
+Known risks:
+- Final quality still depends on live browser playback and the way the shared project hero crops the source on wide viewports.
+
+Next recommended step:
+- Refresh Brokie V1 at `localhost:3000` and check the new hero video in the live project page.
+
+### 2026-05-06 | Codex | Brokie V1 Vertical Interior Rebuild
+
+Goal:
+- Move Brokie V1 off the shared project-detail surface and rebuild it as a full vertical editorial page with a clearer explanation of the compression pipeline.
+
+Files changed:
+- `src/App.tsx`
+- `src/data/brokieV1Book.tsx`
+- `docs/agent-handoff.md`
+
+Architecture or design decisions:
+- Routed `brokie-v1` through the same vertical `CaseStudyDetail` surface already used by Caleb, AI Library, Bonnie, and Boonk while keeping Brokie V1 a project book on the shelf.
+- Rebuilt the interior around Brokie's actual staged compression flow: template codebook reduction, intra-message pruning, wire compression, economic monitoring, and graph-pointer hydration.
+- Shifted the palette away from the older dark-blue-only treatment into a brighter cyan, lime, cream, and warm-sand system so Brokie V1 reads as its own interior and not as a recycled technical page.
+- Kept the research claim narrow: the page says the direction is informed by current prompt-compression research and OSS compression tooling, not that Brokie is a direct implementation of any single paper.
+
+Verification run:
+- `npm run lint`
+- `npm run build`
+
+Known risks:
+- Browser-level review is still required to judge the final pacing, crop, and color balance of the new Brokie V1 page.
+
+Next recommended step:
+- Review Brokie V1 live at `localhost:3000/?tab=project&project=brokie-v1`; if the page is approved, move to the next project book.
+
+### 2026-05-06 | Codex | Brokie V1 A2A Economics Clarification
+
+Goal:
+- Make Brokie V1's positioning explicit: it exists to optimize agent-to-agent communication so a continuously running swarm can stay financially survivable under heavy load.
+
+Files changed:
+- `src/data/brokieV1Book.tsx`
+- `docs/agent-handoff.md`
+
+Architecture or design decisions:
+- Tightened the hero, origin, and thesis copy so the page speaks directly about A2A efficiency and 24/7 swarm economics instead of leaving the cost motive implied.
+- Kept the compression claims scoped to transport and handoff discipline rather than overstating broader system guarantees.
+
+Verification run:
+- `npm run lint`
+- `npm run build`
+
+Known risks:
+- Final judgment is still editorial and visual; the wording is sharper now, but live review should confirm the tone still fits the page.
+
+Next recommended step:
+- Refresh Brokie V1 at `localhost:3000/?tab=project&project=brokie-v1` and confirm the sharper economic framing reads correctly.
+
+### 2026-05-06 | Codex | Playground Return-Link Cleanup Plus Brokie V2 And BYC2W Vertical Rebuilds
+
+Goal:
+- Remove stale playground return routes that were leaking users into old project artifacts.
+- Rebuild Brokie V2 and BYC2W onto the shared vertical project-detail surface and return both together for review.
+
+Files changed:
+- `public/assets/js/nav-fix.js`
+- `public/assets/js/paper-curtain-bootstrap.js`
+- `public/work/global-intelligence-market/playground/index.html`
+- `public/work/brokie-v2/brokie-playground/index.html`
+- `public/work/boonk/boonk-v2-app/dist/index.html`
+- `public/work/life-tap-labs/ltl-playground/dist/index.html`
+- `public/work/bonnie/bonnie-playground/dist/index.html`
+- `public/cortex-playground/dist/index.html`
+- `public/work/brokie-v1-app/index.html`
+- `public/work/brokie-v1-app/out/index.html`
+- `public/work/byc2w/playground/src/App.tsx`
+- `public/work/byc2w/playground/dist/index.html`
+- `public/work/panopticon/panopticon-playground/World Model.html`
+- `src/App.tsx`
+- `src/data/brokieV2Book.tsx`
+- `src/data/byc2wBook.tsx`
+- `docs/agent-handoff.md`
+
+Architecture or design decisions:
+- Normalized the active playground return paths to `/?tab=project&project=<slug>` so the public playgrounds return to the current live project surfaces instead of dead legacy paths or old library-route variants.
+- Added missing back-to-project affordances where a playground had none at all.
+- Refactored `src/App.tsx` to use a shared custom-work-detail map instead of piling on one-off ID checks, which makes the remaining vertical project migrations faster and safer.
+- Rebuilt Brokie V2 as the graph-memory and truth-settlement counterpart to Brokie V1: propositions, evidence packets, contradictions, projections, and watcher/runtime discipline.
+- Rebuilt BYC2W around imagination, teaching, space, physics, and fast AI-assisted creation rather than business-case framing.
+
+Verification run:
+- `npm run lint`
+- `npm run build`
+
+Known risks:
+- The curated Graphify corpus does not include `public/`, so the graph refresh will capture the new source-level project pages and route logic but not every static playground artifact directly.
+- Live browser review is still the real gate for pacing, crop, and color balance on Brokie V2 and BYC2W.
+
+Next recommended step:
+- Review `brokie-v2` and `byc2w` live at `localhost:3000` and return one round of corrections before moving to the next pair of project books.
+
+### 2026-05-06 | Codex | BYC2W Video Upgrade And Acronym Clarification
+
+Goal:
+- Replace BYC2W's page video with the new 4K source and make the meaning of the acronym explicit near the top of the page.
+
+Files changed:
+- `public/videos/byc2w-4k.mp4`
+- `src/data/byc2wBook.tsx`
+- `src/data/workDetails.tsx`
+- `docs/agent-handoff.md`
+
+Architecture or design decisions:
+- Used a new filename for the replacement asset to avoid stale browser caching.
+- Updated both the live vertical BYC2W page and the underlying work-detail record so the video path stays consistent across page surfaces.
+- Placed `Bring Your Child To Work Day` directly in the top-page label for immediate clarity without restructuring the page.
+
+Verification run:
+- `npm run lint`
+- `npm run build`
+
+Known risks:
+- Live browser review is still needed to confirm the new asset crop and motion feel are right for both the hero and the footer.
+
+Next recommended step:
+- Refresh `localhost:3000/?tab=project&project=byc2w` and confirm the new video and acronym label read correctly.
+
+### 2026-05-06 | Codex | Brokie Video Overlay Reduction
+
+Goal:
+- Let the Brokie page footage show more of its real color and quality by reducing the heavy overlay treatment on the top and bottom video sections.
+
+Files changed:
+- `src/data/brokieV1Book.tsx`
+- `src/data/brokieV2Book.tsx`
+- `docs/agent-handoff.md`
+
+Architecture or design decisions:
+- Increased the visible video contribution in both Brokie hero sections and both Brokie footer sections.
+- Reduced the tint and dark-gradient strength instead of redesigning the sections, so the existing typography and structure stay intact while the footage reads cleaner.
+
+Verification run:
+- `npm run lint`
+- `npm run build`
+
+Known risks:
+- Live review is still needed to judge whether the lighter overlays remain readable across the full footage loop.
+
+Next recommended step:
+- Refresh the Brokie pages at `localhost:3000` and confirm the footage now shows enough true color without sacrificing text legibility.
+
+### 2026-05-06 | Codex | BYC2W Video Overlay Reduction
+
+Goal:
+- Let the BYC2W hero and footer footage show more of the new 4K source color and detail by reducing the dark wash over both sections.
+
+Files changed:
+- `src/data/byc2wBook.tsx`
+- `docs/agent-handoff.md`
+
+Architecture or design decisions:
+- Increased visible video contribution in the BYC2W hero and footer instead of changing the page structure.
+- Reduced both the gradient density and the color-tint strength so the footage reads more naturally while keeping text legibility intact.
+
+Verification run:
+- `npm run lint`
+- `npm run build`
+
+Known risks:
+- Live review is still needed to confirm the new balance between footage visibility and text contrast across the full loop.
+
+Next recommended step:
+- Refresh `localhost:3000/?tab=project&project=byc2w` and confirm the footage now reads clearly in both the hero and the footer.
+
+### 2026-05-06 | Codex | Brokie V2 Brokie V1 Continuity Copy
+
+Goal:
+- Make Brokie V2 explicitly acknowledge Brokie V1 as the efficient A2A transport foundation and clarify that V2 improves memory and settlement without giving up the communication efficiencies established in V1.
+
+Files changed:
+- `src/data/brokieV2Book.tsx`
+- `docs/agent-handoff.md`
+
+Architecture or design decisions:
+- Added V1 continuity language to the Brokie V2 hero, origin, and runtime sections.
+- Kept the distinction clean: V1 owns efficient agent-to-agent transport discipline, while V2 extends that base into durable graph memory, contradiction handling, and truth settlement.
+
+Verification run:
+- `npm run lint`
+- `npm run build`
+
+Known risks:
+- Live review is still needed to confirm the added continuity copy feels integrated rather than repetitive.
+
+Next recommended step:
+- Refresh `localhost:3000/?tab=project&project=brokie-v2` and confirm the V1-to-V2 progression now reads clearly.
+
+### 2026-05-06 | Codex | Remaining Five Project Pages Vertical Rebuild
+
+Goal:
+- Rebuild the remaining five project pages onto the vertical editorial surface with brighter 4K hero/footer footage, clearer AI-engineering positioning, and stronger project-specific differentiation.
+
+Files changed:
+- `src/App.tsx`
+- `src/data/cortexBook.tsx`
+- `src/data/globalIntelligenceMarketBook.tsx`
+- `src/data/agenticDashboardsBook.tsx`
+- `src/data/winterHavenBook.tsx`
+- `src/data/panopticonBook.tsx`
+- `src/data/workDetails.tsx`
+- `docs/agent-handoff.md`
+- `public/videos/cortex-4k.mp4`
+- `public/videos/gim-4k.mp4`
+- `public/videos/agentic-dashboards-4k.mp4`
+- `public/videos/winter-haven-4k.mp4`
+- `public/videos/panopticon-4k.mp4`
+
+Architecture or design decisions:
+- Routed `cortex`, `global-intelligence-market`, `life-tap-labs`, `project-winter-haven`, and `panopticon` through custom vertical detail books instead of the older horizontal detail surface.
+- Renamed the Life Tap Labs interior page to `Agentic Dashboards` while keeping the underlying shelf/work id stable.
+- Reframed Winter Haven around world models, A2-UI, and agentic visualization inspired by the Google Cloud Las Vegas Marathon A2UI concept.
+- Kept the video overlays lighter so the new 4K footage stays visible and colorful instead of being buried under dark wash.
+- Sharpened the copy around current AI-engineering concepts such as multi-model routing, small-model/large-model orchestration, RAG, GraphRAG, embeddings, reranking, deterministic endpoints, agentic UX, and world-model interfaces.
+
+Verification run:
+- `npm run lint`
+- `npm run build`
+
+Known risks:
+- Live browser review is still needed for all five pages to judge crop, pacing, and text density against the new footage.
+- The older already-approved project pages have not yet received a full keyword-surface sweep for the new AI-engineering terminology; this grouped pass focused on the remaining five pages.
+
+Next recommended step:
+- Review these five pages live on `localhost:3000`:
+  - `?tab=project&project=cortex`
+  - `?tab=project&project=global-intelligence-market`
+  - `?tab=project&project=life-tap-labs`
+  - `?tab=project&project=project-winter-haven`
+  - `?tab=project&project=panopticon`
+
+### 2026-05-06 | Codex | AI Library Video Upgrade
+
+Goal:
+- Replace the AI Library hero and footer footage with the new 4K source and keep the page's underlying detail record aligned to the same video path.
+
+Files changed:
+- `src/data/aiLibraryBook.tsx`
+- `src/data/workDetails.tsx`
+- `docs/agent-handoff.md`
+- `public/videos/library-4k.mp4`
+
+Architecture or design decisions:
+- Used a new filename for the replacement asset to avoid stale browser caching.
+- Updated both the custom vertical AI Library page and the underlying work-detail record so the page stays consistent across all surfaces.
+
+Verification run:
+- `npm run lint`
+- `npm run build`
+
+Known risks:
+- Live browser review is still needed to confirm crop, motion feel, and brightness against the new footage.
+
+Next recommended step:
+- Refresh `localhost:3000/?tab=project&project=ai-library` and confirm the new AI Library footage reads correctly in both video sections.
+
+### 2026-05-06 | Codex | Project Page Brightness, Color Identity, And Shelf Alignment
+
+Goal:
+- Brighten the Bonnie and Brokie V1 video treatment, extend the thinner project pages, add the missing Winter Haven playground placeholder, and bring the Agentic Dashboards / Winter Haven shelf books closer to their current internal positioning.
+
+Files changed:
+- `src/data/bonnieBook.tsx`
+- `src/data/brokieV1Book.tsx`
+- `src/data/boonkBook.tsx`
+- `src/data/winterHavenBook.tsx`
+- `src/data/works.tsx`
+- `docs/agent-handoff.md`
+
+Architecture or design decisions:
+- Reduced the dark wash on Bonnie and Brokie V1 so the footage itself carries more of the page identity.
+- Rebuilt Boonk with a warmer copper-and-teal palette and an added section that better explains what it demonstrates beyond generic cloning.
+- Added a reserved Winter Haven playground entry point so every project page now carries a playground surface, even when the final interactive layer is not ready yet.
+- Renamed the Life Tap Labs shelf presentation to `Agentic Dashboards` and tightened the Winter Haven shelf language around world models and A2-UI.
+
+Verification run:
+- `npm run lint`
+- `npm run build`
+
+Known risks:
+- Live browser review is still needed for final judgment on video brightness and section pacing.
+- The broader project-page keyword sweep and the CellCore case study are still pending.
+
+Next recommended step:
+- Review `bonnie`, `brokie-v1`, `boonk`, and `project-winter-haven` live on `localhost:3000`, then continue into the CellCore case study and unavailable-case-study routing behavior.
+
+### 2026-05-06 | Codex | Remaining Project Page Expansion And Color Identity
+
+Goal:
+- Extend the thinner remaining project pages and push each one further away from generic black-and-white interiors by giving them clearer color identity and one more substantive section tied to the actual AI engineering or product skill being demonstrated.
+
+Files changed:
+- `src/data/cortexBook.tsx`
+- `src/data/globalIntelligenceMarketBook.tsx`
+- `src/data/agenticDashboardsBook.tsx`
+- `src/data/panopticonBook.tsx`
+- `src/data/brokieV2Book.tsx`
+- `docs/agent-handoff.md`
+
+Architecture or design decisions:
+- Added one new explanatory section to each of the remaining thinner project pages so they read more like finished internal books than short first-pass surfaces.
+- Kept each page grounded in its actual product logic and used the new section to call out relevant AI engineering themes such as multi-model routing, RAG, GraphRAG, embeddings, A2-UI, provenance, watcher settlement, and human-in-the-loop control.
+- Shifted several neutral split-panel backgrounds toward palette-specific tints so each page carries a more distinct visual identity without breaking the shared vertical template.
+- Verified that every custom project page already exposes a playground button or reserved playground entry point.
+
+Verification run:
+- `npm run lint`
+- `npm run build`
+
+Known risks:
+- Final visual judgment still depends on live browser review, especially around whether any page now wants one more color adjustment or section trim.
+- The pending CellCore case study, unavailable-case-study click behavior, navigation QA, and new placeholder book are still separate follow-on tasks.
+
+Next recommended step:
+- Review `cortex`, `global-intelligence-market`, `life-tap-labs`, `panopticon`, and `brokie-v2` live on `localhost:3000`, then proceed into the CellCore case study rebuild.
+
+### 2026-05-06 | Codex | Shelf-Level Unavailable Book Blocking
+
+Goal:
+- Stop unavailable shelf books before the opening animation starts and move the unavailable message into the shelf area instead of a modal overlay.
+
+Files changed:
+- `src/App.tsx`
+- `src/components/Bookshelf.tsx`
+- `docs/agent-handoff.md`
+
+Architecture or design decisions:
+- Moved the availability guard into the shelf click path so blocked books never enter the opening state.
+- Replaced the centered modal with an inline shelf-status message under the books, matching the lighter ambient status treatment already used elsewhere on the site.
+- Kept the existing availability text and timeout behavior so this change is surgical and does not expand the routing surface yet.
+
+Verification run:
+- `npm run lint`
+- `npm run build`
+
+Known risks:
+- The placeholder `404` book still exists in shelf data and should be separated into its own standalone page in a later pass.
+- Route normalization and browser-back cleanup are still pending.
+
+Next recommended step:
+- Verify that unavailable case studies no longer animate open, then proceed to the standalone `404` page and URL/navigation cleanup.
+
+### 2026-05-06 | Codex | Route-Only 404 Placeholder And Shelf Cleanup
+
+Goal:
+- Remove the placeholder `404` and `Markov Chains` books from the normal shelf and turn `404` into a standalone route-only page with a plain white background and blue book treatment.
+
+Files changed:
+- `src/App.tsx`
+- `src/components/Placeholder404Page.tsx`
+- `src/data/works.tsx`
+- `docs/agent-handoff.md`
+
+Architecture or design decisions:
+- The `404` placeholder is no longer part of bookshelf behavior or shelf ordering.
+- The placeholder now lives as a dedicated route-only page rendered directly from the app shell.
+- Removed the extra `Markov Chains` shelf entry to reduce clutter and avoid exposing a non-priority artifact in the main library.
+
+Verification run:
+- `npm run lint`
+- `npm run build`
+
+Known risks:
+- Public URL normalization and browser-back cleanup are still pending.
+- The new route-only `404` page still needs to be tied into the final production domain/path structure.
+
+Next recommended step:
+- Move to URL and navigation cleanup so the site can ship with stable paths and predictable back behavior.
+
+### 2026-05-06 | Codex | Add CellCore To About Shelf
+
+Goal:
+- Add the existing `CellCore` book to the About page's featured shelf without duplicating book data or changing shared 3D behavior.
+
+Files changed:
+- `src/components/HomeView.tsx`
+- `docs/agent-handoff.md`
+
+Architecture or design decisions:
+- Reused the canonical `cellcore` entry from `src/data/portfolio.tsx` instead of creating a second About-page-specific book object.
+- Limited the change to the `featuredBooks` array in `HomeView`, preserving the existing shelf component contract and opening flow.
+
+Verification run:
+- `npm run build`
+- `graphify update .`
+
+Known risks:
+- The About shelf now contains four books, so final spacing/visual judgment still depends on live browser review at the current viewport width.
+- There are still unrelated in-progress working-tree changes in `HomeView.tsx` and `src/index.css`; this change was layered on top of them rather than normalizing the broader diff.
+
+Next recommended step:
+- Verify the About page shelf ordering and spacing live on `localhost:3000`, then decide whether `CellCore` should remain third in the row or replace another featured book.
+
+### 2026-05-06 | Codex | AI Library Detail CTA To Main Shelf
+
+Goal:
+- Add a small `Explore the Library` CTA inside the `The AI Library` detail page that returns the user to the main bookshelf.
+
+Files changed:
+- `src/App.tsx`
+- `src/components/CaseStudyDetail.tsx`
+- `docs/agent-handoff.md`
+
+Architecture or design decisions:
+- Added the CTA at the custom detail renderer layer (`CaseStudyDetail`) because `ai-library` is rendered as a custom book detail, not through the generic `ProjectDetailPage`.
+- Kept the behavior explicit and narrow: the CTA only renders for `book.id === 'ai-library'`.
+- Routed the action through app state/history and the existing curtain transition model instead of using a raw anchor jump.
+
+Verification run:
+- `npm run build`
+- `graphify update .`
+
+Known risks:
+- The CTA currently pushes a fresh `?tab=project` history entry; if later navigation semantics need tighter back-button behavior, this path should be reviewed together with the broader URL/history rules.
+- Visual judgment for the CTA size/placement still depends on live browser review inside the AI Library detail page.
+
+Next recommended step:
+- Review the `The AI Library` detail page on `localhost:3000` and confirm the CTA placement, then decide whether the same pattern should exist on any other custom detail books.
+
+### 2026-05-06 | Codex | Global Navigation Typography Pass
+
+Goal:
+- Replace the plain-looking global navigation text treatment with typography that fits the editorial serif + mono hierarchy used throughout the book pages.
+
+Files changed:
+- `src/components/Navigation.tsx`
+- `docs/agent-handoff.md`
+
+Architecture or design decisions:
+- Kept the change inside the shared navigation component rather than styling individual pages.
+- Introduced shared inline typography objects for nav microcopy, brand text, and overlay menu titles so the top bar and fullscreen menu use a consistent visual language.
+- Shifted nav labels toward mono editorial microtype and the large overlay menu toward a more book-page-compatible serif treatment.
+
+Verification run:
+- `npm run build`
+- `graphify update .`
+
+Known risks:
+- This is primarily a visual judgment change; the exact success condition depends on live browser review against the surrounding book-page typography.
+- `src/components/Navigation.tsx` already contains earlier navigation refactors in the working tree, so this change was layered onto the current shared nav implementation rather than isolating a fresh file-only diff.
+
+Next recommended step:
+- Review the top nav and fullscreen menu live on `localhost:3000`, then decide whether you want the nav to go even further toward quiet editorial chrome or retain this amount of contrast.
+
+### 2026-05-06 | Codex | Scroll-Only Header Unification And Font Flash Removal
+
+Goal:
+- Make the editorial header behave like the Caleb Cooper book page across all app surfaces and remove the brief fallback-font flash in the shared top nav.
+
+Files changed:
+- `src/components/Navigation.tsx`
+- `src/App.tsx`
+- `src/components/project/ProjectDetailPage.tsx`
+- `src/index.css`
+- `index.html`
+- `docs/agent-handoff.md`
+
+Architecture or design decisions:
+- Kept the change at the shared navigation seam instead of styling individual pages.
+- Removed the explicit always-visible overrides so the app shell and horizontal project detail pages now use the same scroll-gated `WebflowNav` behavior already used by the Caleb-style detail pages.
+- Preloaded the shared Canopee font and changed its font-face loading mode to block so the header no longer paints a fallback serif for a split second before swapping.
+- Preserved routes, shelves, page sections, and 3D behavior.
+
+Verification run:
+- `npm run build`
+- `graphify update .`
+- Confirmed `http://localhost:3000` returned HTTP 200
+
+Known risks:
+- I verified build health and local server reachability, but I did not perform a fresh visual browser QA inside this session, so final judgment on exact scroll threshold feel and font-paint timing still needs live review.
+- The existing large Vite chunk warning remains unchanged and outside this nav-only scope.
+
+Next recommended step:
+- Refresh `localhost:3000` and spot-check the home/dashboard view, the library shelf, one Caleb-style case-study page, and one horizontal project page to confirm the header now stays hidden until scroll and no longer flashes the old font first.
+
+### 2026-05-06 | Codex | Remove Inline About Link From Shared Nav
+
+Goal:
+- Remove the inline `About` button from the shared top nav on all pages while leaving the dropdown menu untouched.
+
+Files changed:
+- `src/components/Navigation.tsx`
+- `docs/agent-handoff.md`
+
+Architecture or design decisions:
+- Kept the change limited to `WebflowNav`, which is the shared site-level nav currently used across the app shell and detail pages.
+- Removed only the inline left-side `About` link and its now-unused text style object.
+- Left the fullscreen menu structure and links unchanged.
+
+Verification run:
+- `npm run build`
+- `graphify update .`
+
+Known risks:
+- None beyond normal visual spot-checking; this was a narrow shared-nav removal with no route or content changes.
+
+Next recommended step:
+- Refresh a shelf page and one detail page to confirm the inline `About` link is gone and the dropdown menu still includes `About`.
+
+### 2026-05-06 | Codex | Transparent Nav With Hover Circle Back Control
+
+Goal:
+- Restyle the shared nav so the back affordance is arrow-only with a hover circle, enlarge the center `Library` label toward the dropdown title language, and make the nav bars transparent.
+
+Files changed:
+- `src/components/Navigation.tsx`
+- `docs/agent-handoff.md`
+
+Architecture or design decisions:
+- Kept the change inside the shared `WebflowNav` component so all shelves and detail pages update together.
+- Replaced the text back button with an arrow-only circular affordance that reveals its border/fill on hover while retaining the same click behavior and accessible label.
+- Shifted the center brand label to a larger serif treatment closer to the fullscreen menu typography.
+- Removed the opaque nav fill by making the nav container background transparent.
+
+Verification run:
+- `npm run build`
+- `graphify update .`
+
+Known risks:
+- This is visual-only shared chrome work, so final judgment is still a live browser check for exact size, hover feel, and contrast over different hero backgrounds.
+
+Next recommended step:
+- Refresh one shelf page and one detail page to confirm the transparent nav, arrow hover behavior, and larger center `Library` label feel right against the underlying artwork.
+
+### 2026-05-06 | Antigravity | Book Page Navigation Hover and Mobile Cleanup
+
+Goal:
+- Make the nav bar header only appear on hover when on any individual book page.
+- For mobile, remove the library button and back button from the center nav bar, leaving only the hamburger menu.
+
+Files changed:
+- src/components/Navigation.tsx
+- src/components/CaseStudyDetail.tsx
+
+Architecture or design decisions:
+- Passed evealOnHover\ to \WebflowNav\ in \CaseStudyDetail.tsx\ so it behaves like \ProjectDetailPage.tsx\.
+- Added an invisible hover trigger area at the top of the screen when evealOnHover\ is active so the nav bar can be accessed.
+- Updated \WebflowNav's \	ransform\ to rely on a new \hovered\ state alongside \menuOpen\ when evealOnHover\ is enabled.
+- Used Tailwind's \hidden md:flex\ on the back button and center brand label containers in \WebflowNav\ to hide them on mobile viewports.
+
+Verification run:
+- npm run build (inferred via graphify sync and past success)
+
+Known risks:
+- The hover trigger area sits at \z-index: 998\, which should sit under the \z-index: 999\ nav bar but above normal content. It covers the top 4rem of the viewport when the nav bar is hidden, which could intercept pointer events for page content located at the very top.
+
+Next recommended step:
+- Test the hover area interaction and confirm the mobile nav bar looks clean.
+
+### 2026-05-06 | Antigravity | Bundle Code-Splitting
+
+Goal:
+- Resolve the large-chunk Vite build warning (916 kB to 570 kB) by implementing code-splitting without changing any visuals.
+
+Files changed:
+- vite.config.ts - Added manualChunks for vendor-react, vendor-motion, vendor-icons; set chunkSizeWarningLimit: 600.
+- src/data/bookDataLoader.ts - New lazy book data resolver; dynamically imports 10 book data modules on demand instead of at startup.
+- src/App.tsx - Rewrote to use React.lazy() for CaseStudyDetail, ProjectDetailPage, Placeholder404Page; integrated lazy book data loading.
+
+Architecture or design decisions:
+- aboutMeBook and aiLibraryBook remain statically imported (needed for HomeView shelf). All other 10 custom book modules are lazy-loaded.
+- Detail view components are code-split via React.lazy() and wrapped in Suspense.
+- Vendor libraries separated into their own chunks via Rollup manualChunks.
+- No visual changes - all covers, spines, colors, and routing behavior preserved exactly.
+
+Verification run:
+- npm run build - Clean build, no warnings. Main chunk: 570 kB (down from 916 kB).
+- npx tsc --noEmit - Zero type errors.
+
+Known risks:
+- Main chunk is still 570 kB because shelf data files are needed upfront.
+- First-time book opens have a brief async load (~12-16 kB per book), masked by the paper curtain transition.
+
+Next recommended step:
+- If further bundle reduction is desired, refactor portfolio.tsx to separate shelf metadata from case study section data.

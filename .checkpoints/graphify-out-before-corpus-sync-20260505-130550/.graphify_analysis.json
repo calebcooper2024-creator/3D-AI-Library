@@ -1,0 +1,350 @@
+{
+  "communities": {
+    "0": [
+      "components_visuals_beforeafter",
+      "components_visuals_bubblediagram",
+      "components_visuals_handwrittennote",
+      "components_visuals_processflow",
+      "data_casestudies_imageplaceholder",
+      "data_jmfamilycase_choice",
+      "data_jmfamilycase_metric",
+      "data_jmfamilycase_risk",
+      "data_jmfamilycase_signal",
+      "data_jmfamilycase_step",
+      "data_lightwondercase_boundary",
+      "data_lightwondercase_evidence",
+      "data_lightwondercase_risk",
+      "data_lightwondercase_row",
+      "data_maybemortgagecase_evidencecard",
+      "data_maybemortgagecase_flowstep",
+      "data_maybemortgagecase_riskcard",
+      "data_maybemortgagecase_stat",
+      "data_nexteracase_metric",
+      "data_nexteracase_risk",
+      "data_nexteracase_signal",
+      "data_nexteracase_step",
+      "src_components_visuals_tsx",
+      "src_data_casestudies_tsx",
+      "src_data_jmfamilycase_tsx",
+      "src_data_lightwondercase_tsx",
+      "src_data_maybemortgagecase_tsx",
+      "src_data_nexteracase_tsx"
+    ],
+    "1": [
+      "agent_antigravity",
+      "agent_claude",
+      "agent_codex",
+      "agent_gemini",
+      "agent_handoff_doc",
+      "agents_md",
+      "app_tsx",
+      "book_component",
+      "bookshelf_component",
+      "casestudydetail_concept",
+      "casestudymeta_data",
+      "claude_md",
+      "claude_settings",
+      "codex_hooks",
+      "gemini_md",
+      "gemini_settings",
+      "graph_html",
+      "graph_json",
+      "graph_report_md",
+      "graphify_concept",
+      "graphify_rules",
+      "graphify_workflows",
+      "graphifyignore_config",
+      "navigation_component",
+      "portfolio_data",
+      "projectdetailpage_component",
+      "tsconfig_json",
+      "workdetails_data"
+    ],
+    "2": [
+      "components_book_book",
+      "components_bookshelf_bookshelf",
+      "components_casestudydetail_casestudydetail",
+      "components_homeview_handlebookclick",
+      "components_homeview_playpageturnsound",
+      "components_navigation_handlenavigate",
+      "components_navigation_topbar",
+      "lib_utils_cn",
+      "src_app_getactiveviewfromlocation",
+      "src_app_getactiveviewurl",
+      "src_app_handlebookselect",
+      "src_app_handleclosedetail",
+      "src_app_handlepopstate",
+      "src_app_handletabchange",
+      "src_app_synchistoryforview",
+      "src_app_tsx",
+      "src_components_book_tsx",
+      "src_components_bookshelf_tsx",
+      "src_components_casestudydetail_tsx",
+      "src_components_homeview_tsx",
+      "src_components_libraryshelfpick_tsx",
+      "src_components_navigation_tsx",
+      "src_lib_utils_ts",
+      "src_main_tsx"
+    ],
+    "3": [
+      "agents_agent_handoff",
+      "agents_bookshelf_tsx",
+      "agents_graph_report",
+      "agents_graphify_explain",
+      "agents_graphify_path",
+      "agents_graphify_project",
+      "agents_graphify_query",
+      "agents_graphify_update",
+      "agents_wiki_index",
+      "claude_agent_handoff",
+      "claude_bookshelf_tsx",
+      "claude_graph_report",
+      "claude_graphify_project",
+      "concept_agent_handoff_doc",
+      "concept_bookshelf_tsx",
+      "concept_graph_report_md",
+      "concept_graphify_out",
+      "concept_wiki_index_md",
+      "gemini_agent_handoff",
+      "gemini_bookshelf_tsx",
+      "gemini_graph_report",
+      "gemini_graphify_project"
+    ],
+    "4": [
+      "project_projectdetailpage_animaterail",
+      "project_projectdetailpage_applyoffset",
+      "project_projectdetailpage_clampoffset",
+      "project_projectdetailpage_countup",
+      "project_projectdetailpage_fadeup",
+      "project_projectdetailpage_getmaxoffset",
+      "project_projectdetailpage_getnarrativesectionbody",
+      "project_projectdetailpage_getsnappoints",
+      "project_projectdetailpage_handleresize",
+      "project_projectdetailpage_handlescroll",
+      "project_projectdetailpage_handlewheel",
+      "project_projectdetailpage_isfullwidthsection",
+      "project_projectdetailpage_issplitsection",
+      "project_projectdetailpage_stoprailanimation",
+      "src_components_project_projectdetailpage_tsx"
+    ],
+    "5": [
+      "index_above_canvas",
+      "index_caleb_cooper",
+      "index_google_fonts_caveat",
+      "index_gsap",
+      "index_html",
+      "index_init_effect",
+      "index_main_tsx",
+      "index_paper_curtain_effect",
+      "index_root_div",
+      "index_set_canvas_size"
+    ],
+    "6": [
+      "data_hellopatientcase_gaterow",
+      "data_hellopatientcase_kicker",
+      "data_hellopatientcase_phase",
+      "data_hellopatientcase_reviewfield",
+      "data_hellopatientcase_stackrow",
+      "data_hellopatientcase_statblock",
+      "data_hellopatientcase_statblockdark",
+      "data_hellopatientcase_threshrow",
+      "src_data_hellopatientcase_tsx"
+    ],
+    "7": [
+      "lib_papercurtaintransition_curtainin",
+      "lib_papercurtaintransition_curtainout",
+      "lib_papercurtaintransition_nextframe",
+      "lib_papercurtaintransition_preparepapercurtain",
+      "lib_papercurtaintransition_runpapercurtainswap",
+      "project_projectdetailpage_handlelabclick",
+      "project_projectplaygroundcta_projectplaygroundcta",
+      "src_components_project_projectplaygroundcta_tsx",
+      "src_lib_papercurtaintransition_ts"
+    ],
+    "8": [
+      "data_nvidiacase_choice",
+      "data_nvidiacase_metric",
+      "data_nvidiacase_risk",
+      "data_nvidiacase_signal",
+      "data_nvidiacase_step",
+      "src_data_nvidiacase_tsx"
+    ],
+    "9": [
+      "project_projectemailmarquee_marqueecontent",
+      "src_components_project_projectemailmarquee_tsx"
+    ],
+    "10": [
+      "project_projectfooterstamp_projectfooterstamp",
+      "src_components_project_projectfooterstamp_tsx"
+    ],
+    "11": [
+      "project_projectgallery_onkey",
+      "src_components_project_projectgallery_tsx"
+    ],
+    "12": [
+      "project_projectnextprevious_projectnextprevious",
+      "src_components_project_projectnextprevious_tsx"
+    ],
+    "13": [
+      "lib_bookopening_playbookopeningsound",
+      "src_lib_bookopening_ts"
+    ],
+    "14": [
+      "vite_config_ts"
+    ],
+    "15": [
+      "src_data_aboutme_tsx"
+    ],
+    "16": [
+      "src_data_ailibrarybook_tsx"
+    ],
+    "17": [
+      "src_data_casestudymeta_ts"
+    ],
+    "18": [
+      "src_data_portfolio_tsx"
+    ],
+    "19": [
+      "src_data_workdetails_tsx"
+    ],
+    "20": [
+      "src_data_works_tsx"
+    ]
+  },
+  "cohesion": {
+    "0": 0.09,
+    "1": 0.11,
+    "2": 0.1,
+    "3": 0.14,
+    "4": 0.21,
+    "5": 0.29,
+    "6": 0.22,
+    "7": 0.33,
+    "8": 0.33,
+    "9": 1.0,
+    "10": 1.0,
+    "11": 1.0,
+    "12": 1.0,
+    "13": 1.0,
+    "14": 1.0,
+    "15": 1.0,
+    "16": 1.0,
+    "17": 1.0,
+    "18": 1.0,
+    "19": 1.0,
+    "20": 1.0
+  },
+  "gods": [
+    {
+      "id": "agent_codex",
+      "label": "Codex Agent",
+      "degree": 25
+    },
+    {
+      "id": "agents_graphify_project",
+      "label": "Graphify Project (AGENTS.md)",
+      "degree": 10
+    },
+    {
+      "id": "lib_papercurtaintransition_runpapercurtainswap",
+      "label": "runPaperCurtainSwap()",
+      "degree": 8
+    },
+    {
+      "id": "components_visuals_beforeafter",
+      "label": "BeforeAfter()",
+      "degree": 7
+    },
+    {
+      "id": "components_visuals_bubblediagram",
+      "label": "BubbleDiagram()",
+      "degree": 7
+    },
+    {
+      "id": "concept_graphify_out",
+      "label": "graphify-out/ directory",
+      "degree": 6
+    },
+    {
+      "id": "app_tsx",
+      "label": "App Entry Point",
+      "degree": 6
+    },
+    {
+      "id": "project_projectdetailpage_animaterail",
+      "label": "animateRail()",
+      "degree": 5
+    },
+    {
+      "id": "lib_utils_cn",
+      "label": "cn()",
+      "degree": 5
+    },
+    {
+      "id": "claude_graphify_project",
+      "label": "Graphify Project (CLAUDE.md)",
+      "degree": 5
+    }
+  ],
+  "surprises": [
+    {
+      "source": "TypeScript Config",
+      "target": "App Entry Point",
+      "source_files": [
+        "tsconfig.json",
+        "src/App.tsx"
+      ],
+      "confidence": "INFERRED",
+      "relation": "references",
+      "why": "inferred connection - not explicitly stated in source; crosses file types (code \u2194 doc); connects across different repos/directories; peripheral node `TypeScript Config` unexpectedly reaches hub `App Entry Point`"
+    },
+    {
+      "source": "Graphify Project (AGENTS.md)",
+      "target": "Graphify Project (CLAUDE.md)",
+      "source_files": [
+        "AGENTS.md",
+        "CLAUDE.md"
+      ],
+      "confidence": "INFERRED",
+      "relation": "semantically_similar_to",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories; semantically similar concepts with no structural link"
+    },
+    {
+      "source": "Graphify Project (AGENTS.md)",
+      "target": "Graphify Project (GEMINI.md)",
+      "source_files": [
+        "AGENTS.md",
+        "GEMINI.md"
+      ],
+      "confidence": "INFERRED",
+      "relation": "semantically_similar_to",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories; semantically similar concepts with no structural link"
+    },
+    {
+      "source": "Graphify Project (CLAUDE.md)",
+      "target": "Graphify Project (GEMINI.md)",
+      "source_files": [
+        "CLAUDE.md",
+        "GEMINI.md"
+      ],
+      "confidence": "INFERRED",
+      "relation": "semantically_similar_to",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories; semantically similar concepts with no structural link"
+    },
+    {
+      "source": "Graph Report",
+      "target": "Bookshelf Component",
+      "source_files": [
+        "graphify-out/GRAPH_REPORT.md",
+        "src/components/Bookshelf.tsx"
+      ],
+      "confidence": "INFERRED",
+      "relation": "references",
+      "why": "inferred connection - not explicitly stated in source; crosses file types (code \u2194 doc); connects across different repos/directories"
+    }
+  ],
+  "tokens": {
+    "input": 11305,
+    "output": 15952
+  }
+}

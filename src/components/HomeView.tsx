@@ -2,7 +2,9 @@ import React, { useRef, useState } from 'react';
 import { Book } from './Book';
 import { ShelfBook } from './Bookshelf';
 import { aboutMeBook } from '../data/aboutMe';
-import { motion } from 'motion/react';
+import { aiLibraryBook } from '../data/aiLibraryBook';
+import { projects } from '../data/portfolio';
+import { motion, AnimatePresence } from 'motion/react';
 
 export const HomeView = ({
   onSelectBook,
@@ -11,8 +13,19 @@ export const HomeView = ({
   onSelectBook: (id: string) => void;
   isTransitioning?: boolean;
 }) => {
-  const [isOpening, setIsOpening] = useState(false);
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const [openingId, setOpeningId] = useState<string | null>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
+
+  const cellcoreBook = projects.find(p => p.id === 'cellcore') || projects[0];
+  const summitHealthBook = projects.find(p => p.id === 'summit-health') || projects[0];
+
+  const featuredBooks = [
+    { ...aboutMeBook },
+    { ...aiLibraryBook },
+    { ...cellcoreBook },
+    { ...summitHealthBook }
+  ];
 
   const playPageTurnSound = () => {
     try {
@@ -81,69 +94,89 @@ export const HomeView = ({
     }
   };
 
-  const handleClick = () => {
-    if (isOpening || isTransitioning) return;
-    setIsOpening(true);
+  const handleBookClick = (id: string) => {
+    if (openingId || isTransitioning) return;
+    setOpeningId(id);
     playPageTurnSound();
     setTimeout(() => {
-      onSelectBook(aboutMeBook.id);
+      onSelectBook(id);
     }, 2000);
   };
 
+  const step = 262; // Matches Bookshelf.tsx
+  const totalWidth = featuredBooks.length * step;
+
   return (
     <div
-      className={`min-h-screen flex flex-col items-center justify-center bg-transparent relative overflow-hidden pt-20 ${
+      className={`h-screen w-screen flex flex-col items-center justify-center bg-transparent relative overflow-hidden ${
         isTransitioning ? 'pointer-events-none' : ''
       }`}
     >
-      {/* Ambient concentric rings */}
+      {/* Ambient decorative rings */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="w-[720px] h-[720px] border border-black/[0.028] rounded-full absolute" />
-        <div className="w-[520px] h-[520px] border border-black/[0.038] rounded-full absolute" />
-        <div className="w-[320px] h-[320px] border border-black/[0.048] rounded-full absolute" />
+        <div className="w-[800px] h-[800px] border border-[#c9a04e]/5 rounded-full" />
+        <div className="absolute w-[600px] h-[600px] border border-[#c9a04e]/5 rounded-full" />
+        <div className="absolute w-[400px] h-[400px] border border-[#c9a04e]/5 rounded-full" />
       </div>
 
-      {/* Top label */}
-      <motion.div
-        initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: isOpening ? 0 : 1, y: isOpening ? -8 : 0 }}
-        transition={{ duration: 0.55, delay: 0.9 }}
-        className="mb-14 text-center"
-      >
-        <p className="font-mono text-[10px] tracking-[0.55em] uppercase" style={{ color: 'rgba(0,0,0,0.2)' }}>
-          Caleb Cooper · Portfolio · 2026
-        </p>
-      </motion.div>
-
-      {/* The single book */}
-      <div
-        className={`bookshelf-container flex justify-center items-end${isOpening ? ' has-opening-book' : ''}`}
-        style={{ height: '540px' }}
-      >
-        <div
-          className="book-item-wrapper relative transition-transform duration-500 ease-out transform-gpu"
-          style={{ height: '100%', zIndex: isOpening ? 200 : 10 }}
+      <div className="relative z-10 w-full flex flex-col items-center justify-center h-full">
+        {/* Using the same structure as Bookshelf.tsx for consistent hover and spacing */}
+        <div 
+          className={`bookshelf-container flex items-center justify-center ${openingId ? 'has-opening-book' : ''}`}
+          style={{ width: '100%', height: '540px' }}
         >
-          <Book
-            book={aboutMeBook as unknown as ShelfBook}
-            onClick={handleClick}
-            index={0}
-            isOpening={isOpening}
-          />
+          <div 
+            className="book-stage relative flex transform-gpu will-change-transform" 
+            style={{ width: `${totalWidth}px`, height: '100%' }}
+          >
+            {featuredBooks.map((book, idx) => {
+              const isOpening = openingId === book.id;
+              return (
+                <div
+                  key={book.id}
+                  className="book-item-wrapper absolute top-0 transition-transform duration-500 ease-out transform-gpu z-10 hover:z-[60]"
+                  style={{ 
+                    left: `${idx * step}px`, 
+                    height: '100%',
+                    zIndex: isOpening ? 200 : featuredBooks.length - idx 
+                  }}
+                  onMouseEnter={() => setHoveredId(book.id)}
+                  onMouseLeave={() => setHoveredId(null)}
+                >
+                  <div 
+                    className="cursor-pointer"
+                    onClick={() => handleBookClick(book.id)}
+                  >
+                    <Book 
+                      book={book as ShelfBook} 
+                      isOpening={isOpening}
+                      isHovered={hoveredId === book.id}
+                    />
+                  </div>
+
+                  <div className="absolute -bottom-16 h-6 w-full flex justify-center pointer-events-none">
+                    <AnimatePresence>
+                      {hoveredId === book.id && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: 10 }}
+                          className="font-mono text-[9px] text-[#c9a04e] tracking-[0.3em] uppercase whitespace-nowrap"
+                        >
+                          Open to Explore
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
 
-      {/* Bottom hint */}
-      <motion.div
-        initial={{ opacity: 0, y: -8 }}
-        animate={{ opacity: isOpening ? 0 : 1, y: isOpening ? 8 : 0 }}
-        transition={{ duration: 0.55, delay: 1.1 }}
-        className="mt-14 text-center"
-      >
-        <p className="font-mono text-[10px] tracking-widest uppercase" style={{ color: 'rgba(0,0,0,0.17)' }}>
-          Open to Explore
-        </p>
-      </motion.div>
+      {/* Decorative vertical line */}
+      <div className="absolute left-1/2 bottom-0 w-[1px] h-20 bg-gradient-to-t from-[#c9a04e]/10 to-transparent -translate-x-1/2" />
     </div>
   );
 };

@@ -4,14 +4,16 @@ import { ShelfBook } from './Bookshelf';
 
 export const Book = ({ 
   book, 
-  onClick,
-  index,
-  isOpening = false
+  onClick = () => undefined,
+  index = 0,
+  isOpening = false,
+  isHovered = false,
 }: { 
   book: ShelfBook; 
-  onClick: () => void;
-  index: number;
+  onClick?: () => void;
+  index?: number;
   isOpening?: boolean;
+  isHovered?: boolean;
 }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const [openingOffset, setOpeningOffset] = useState({ x: 0, y: 0, scale: 1.85 });

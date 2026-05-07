@@ -23,10 +23,16 @@ export interface ShelfBook {
 export const Bookshelf = ({ 
   books, 
   onSelectBook,
+  canOpenBook,
+  onBlockedSelectBook,
+  shelfMessage,
   isTransitioning = false
 }: { 
   books: ShelfBook[];
   onSelectBook: (id: string) => void;
+  canOpenBook?: (id: string) => boolean;
+  onBlockedSelectBook?: (id: string) => void;
+  shelfMessage?: string | null;
   isTransitioning?: boolean;
 }) => {
   const audioContextRef = useRef<AudioContext | null>(null);
@@ -122,6 +128,10 @@ export const Bookshelf = ({
 
   const handleSelectInstance = (id: string, instanceKey: string) => {
     if (isTransitioning || openingInstanceKey) return;
+    if (canOpenBook && !canOpenBook(id)) {
+      onBlockedSelectBook?.(id);
+      return;
+    }
 
     // Mark this instance as opening (triggers is-opening CSS)
     setOpeningInstanceKey(instanceKey);
@@ -208,7 +218,6 @@ export const Bookshelf = ({
       ref={shelfRef}
       className={`min-h-screen flex flex-col justify-center pt-20 overflow-hidden bg-transparent hide-scrollbar ${isTransitioning ? 'pointer-events-none' : ''}`}
     >
-      
       <div className={`bookshelf-container px-32 flex items-center${openingInstanceKey ? ' has-opening-book' : ''}`}>
           <div ref={stageRef} className="book-stage relative flex transform-gpu will-change-transform" style={{ 
               width: `${displayedBooks.length * step}px`, 
@@ -238,6 +247,19 @@ export const Bookshelf = ({
               );
             })}
           </div>
+      </div>
+
+      <div className="mt-10 flex h-8 items-center justify-center px-10">
+        <motion.div
+          key={shelfMessage ?? 'shelf-idle'}
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: shelfMessage ? 1 : 0, y: shelfMessage ? 0 : 8 }}
+          exit={{ opacity: 0, y: 8 }}
+          transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+          className="font-mono text-xs md:text-sm uppercase tracking-[0.2em] text-black text-center whitespace-nowrap"
+        >
+          {shelfMessage ?? ''}
+        </motion.div>
       </div>
     </div>
   );

@@ -19,33 +19,69 @@ export interface WorkProject {
   spineContent?: React.ReactNode;
 }
 
-const allWorks: WorkProject[] = [
+export const works: WorkProject[] = [
   {
     id: 'project-winter-haven', slug: 'project-winter-haven', year: '2026', isNew: true, hidden: true,
-    title: 'Project Winter Haven', subtitle: 'World Model to Agentic UI',
+    title: 'Winter Haven', subtitle: 'World Models and A2-UI',
     author: 'Caleb Cooper', fontTitle: 'font-serif',
     spineColor: '#0a0a0f', coverColor: '#0d0d1a', textColor: '#c8b8ff', textureClass: 'texture-leather',
-    detailHref: '/work/project-winter-haven/index.html',
+    detailHref: '/CalebCooper/Library/project-winter-haven',
     coverContent: (
-      <div className="absolute inset-0 bg-[#0d0d1a] overflow-hidden">
-        <div className="absolute inset-0" style={{background:'radial-gradient(ellipse at 70% 30%, #2d1b69 0%, transparent 60%)'}} />
-        <div className="absolute top-8 right-8 w-32 h-32 border border-purple-500/20 rounded-full" />
-        <div className="absolute top-12 right-12 w-24 h-24 border border-purple-400/15 rounded-full" />
-        <div className="absolute top-16 right-16 w-16 h-16 border border-purple-300/10 rounded-full" />
-        <div className="absolute bottom-0 left-0 w-full h-1/3" style={{background:'linear-gradient(to top, #1a0a3a, transparent)'}} />
-        <div className="absolute inset-0 p-10 flex flex-col justify-end">
-          <span className="font-mono text-[10px] tracking-[0.3em] text-purple-400/60 uppercase mb-4">No. 01 -- 2026</span>
-          <h2 className="font-serif text-5xl text-white leading-[0.9] tracking-tight mb-3">Project<br/>Winter<br/>Haven</h2>
-          <div className="w-8 h-[1px] bg-purple-400/50 mb-3" />
-          <p className="font-mono text-xs text-purple-300/50 tracking-widest uppercase">World Model to Agentic UI -- 2026</p>
+      <div className="absolute inset-0 bg-cover bg-center shadow-[inset_0_0_100px_rgba(0,0,0,0.8)]" style={{ backgroundImage: "url('/images/books/winter_haven_1777746369741.png')" }}>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_24%_18%,rgba(125,211,252,0.08),transparent_20%),radial-gradient(circle_at_76%_20%,rgba(56,189,248,0.06),transparent_18%),linear-gradient(180deg,rgba(3,7,18,0.06)_0%,rgba(3,7,18,0.42)_46%,rgba(0,0,0,0.94)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.025)_0%,transparent_18%,transparent_82%,rgba(255,255,255,0.025)_100%)]" />
+        <div className="absolute inset-0 p-8 md:p-10 flex flex-col justify-between">
+          <div className="flex justify-end">
+            <div className="text-right font-mono uppercase">
+              <span className="block text-[10px] text-sky-200/84 tracking-[0.32em]">No. 01</span>
+              <span className="block mt-1 text-[9px] text-sky-300/50 tracking-[0.26em]">2026</span>
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-5">
+            <div className="flex flex-wrap items-center gap-2 text-[8px] font-mono uppercase tracking-[0.34em] text-sky-100/68">
+              <span>operator intent</span>
+              <span className="h-px w-6 bg-sky-300/30" />
+              <span>routing substrate</span>
+              <span className="h-px w-6 bg-sky-300/30" />
+              <span>truth-state</span>
+            </div>
+            <div className="max-w-[20rem]">
+              <p className="font-mono text-[8px] text-sky-100/78 tracking-[0.38em] uppercase mb-2">Personal Project</p>
+              <p className="font-mono text-[9px] text-sky-100/58 tracking-[0.34em] uppercase mb-3">World models, A2-UI, and agentic visualization</p>
+              <h2 className="font-serif text-5xl md:text-[3.4rem] text-white leading-[0.9] tracking-tight mb-3 drop-shadow-[0_2px_16px_rgba(0,0,0,0.45)]">Winter<br/>Haven</h2>
+              <div className="w-10 h-[1px] bg-sky-300/55 shadow-[0_0_12px_rgba(56,189,248,0.28)] mb-3" />
+              <p className="font-mono text-[9px] text-sky-100/62 tracking-[0.3em] uppercase leading-relaxed max-w-[15rem]">
+                World-model interface surface for A2-UI, retrace, simulation, and agentic state projection.
+              </p>
+            </div>
+            <div className="flex items-center gap-3 text-[8px] font-mono uppercase tracking-[0.28em] text-sky-100/52">
+              <span>governance</span>
+              <span className="h-px w-8 bg-sky-300/24" />
+              <span>evidence</span>
+              <span className="h-px w-8 bg-sky-300/24" />
+              <span>telemetry</span>
+            </div>
+          </div>
         </div>
       </div>
     ),
     spineContent: (
-      <div className="absolute inset-0 bg-[#0a0a0f] flex items-center justify-center">
-        <span className="[writing-mode:vertical-rl] rotate-180 font-serif text-lg text-purple-300 tracking-widest">Project Winter Haven</span>
-        <div className="absolute bottom-8 w-1.5 h-1.5 rounded-full bg-purple-400/60" />
-        <span className="absolute top-8 text-[10px] font-mono text-purple-400/40 rotate-90">No. 01</span>
+      <div className="absolute inset-0 bg-[#e2e8f0] flex flex-col items-center justify-start py-6 overflow-hidden border-r border-slate-300 shadow-[inset_-3px_0_15px_rgba(0,0,0,0.1)]">
+        <div className="w-full h-8 bg-slate-900 flex items-center justify-center mb-6">
+          <span className="font-mono text-[8px] text-slate-100 font-bold tracking-widest">REF</span>
+        </div>
+        <span className="[writing-mode:vertical-rl] font-sans font-black text-[24px] text-slate-900 tracking-tight uppercase">
+          WINTER HAVEN
+        </span>
+        <div className="w-full px-2 mt-auto pb-4">
+          <div className="w-full h-[2px] bg-slate-900 mb-2" />
+          <span className="block font-mono text-[6px] text-slate-600 text-center uppercase tracking-widest">
+            A2-UI
+            <br />
+            SYS
+          </span>
+        </div>
       </div>
     ),
   },
@@ -53,30 +89,54 @@ const allWorks: WorkProject[] = [
     id: 'global-intelligence-market', slug: 'global-intelligence-market', year: '2026', isNew: true,
     title: 'Global Intelligence Market', subtitle: 'Compute Endpoints, Not Subscriptions',
     author: 'Caleb Cooper', fontTitle: 'font-sans',
-    spineColor: '#0f1923', coverColor: '#111d2b', textColor: '#38bdf8', textureClass: 'texture-canvas',
-    detailHref: '/work/global-intelligence-market/index.html',
+    spineColor: '#171717', coverColor: '#262626', textColor: '#facc15', textureClass: 'texture-paper',
+    detailHref: '/CalebCooper/Library/global-intelligence-market',
     coverContent: (
-      <div className="absolute inset-0 bg-[#111d2b] overflow-hidden">
-        <svg className="absolute inset-0 w-full h-full opacity-10" viewBox="0 0 100 100" preserveAspectRatio="none">
-          {[0,20,40,60,80,100].map(y=><line key={y} x1="0" y1={y} x2="100" y2={y} stroke="#38bdf8" strokeWidth="0.3"/>)}
-          {[0,20,40,60,80,100].map(x=><line key={x} x1={x} y1="0" x2={x} y2="100" stroke="#38bdf8" strokeWidth="0.3"/>)}
-        </svg>
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 rounded-full border border-sky-400/30 flex items-center justify-center">
-          <div className="w-16 h-16 rounded-full border border-sky-400/20 flex items-center justify-center">
-            <div className="w-8 h-8 rounded-full bg-sky-400/10 border border-sky-400/40" />
+      <div className="absolute inset-0 bg-cover bg-center shadow-[inset_0_0_80px_rgba(0,0,0,0.4)]" style={{ backgroundImage: "url('/images/books/gim_cover_new.jpg')" }}>
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.1)_0%,rgba(0,0,0,0.6)_60%,rgba(0,0,0,0.95)_100%)]" />
+        <div className="absolute inset-0 p-8 md:p-10 flex flex-col justify-between">
+          <div className="flex justify-end">
+            <div className="text-right font-mono uppercase">
+              <span className="block text-[10px] text-white/80 tracking-[0.32em]">No. 13</span>
+              <span className="block mt-1 text-[9px] text-white/50 tracking-[0.26em]">2026</span>
+            </div>
           </div>
-        </div>
-        <div className="absolute inset-0 p-8 flex flex-col justify-end">
-          <h2 className="font-sans font-black text-3xl text-sky-300 tracking-tighter uppercase leading-tight mb-2">Global<br/>Intelligence<br/>Market</h2>
-          <p className="font-mono text-[10px] text-sky-400/50 tracking-widest uppercase">Compute Endpoints, Not Subscriptions -- 2026</p>
+
+          <div className="grid grid-cols-[1fr_auto] items-end gap-4">
+            <div className="min-w-0">
+              <p className="mb-3 font-mono text-[8px] uppercase tracking-[0.38em] text-yellow-400">Personal Project</p>
+              <div className="mb-3 flex items-center gap-3 text-[9px] font-mono uppercase tracking-[0.34em] text-white/70">
+                <span>bid</span>
+                <span className="h-px w-6 bg-white/30" />
+                <span>route</span>
+                <span className="h-px w-6 bg-white/30" />
+                <span>settle</span>
+              </div>
+              <h2 className="font-sans font-black text-[2.55rem] md:text-5xl text-white tracking-[-0.02em] uppercase leading-[0.9] drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+                Global<br/>Intelligence<br/>Market
+              </h2>
+              <div className="mt-4 h-px w-14 bg-yellow-400/80 shadow-[0_0_12px_rgba(250,204,21,0.5)]" />
+              <p className="mt-3 max-w-[15rem] font-mono text-[9px] text-white/80 tracking-[0.3em] uppercase leading-relaxed">
+                Compute Endpoints, Not Subscriptions
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     ),
     spineContent: (
-      <div className="absolute inset-0 bg-[#0f1923] flex items-center justify-center">
-        <span className="[writing-mode:vertical-rl] rotate-180 font-sans font-bold text-base text-sky-400 tracking-widest uppercase">Global Intelligence</span>
-        <div className="absolute bottom-8 w-1.5 h-1.5 rounded-full bg-sky-400/60" />
-        <span className="absolute top-8 text-[10px] font-mono text-sky-400/40 rotate-90">No. 02</span>
+      <div className="absolute inset-0 bg-[#171717] flex flex-col items-center justify-between py-8 overflow-hidden border-r border-black shadow-[inset_-3px_0_15px_rgba(0,0,0,0.6)]">
+        <div className="w-full flex justify-center mb-4">
+          <span className="font-mono text-[8px] text-yellow-400/80 font-bold tracking-widest">13</span>
+        </div>
+        <div className="my-auto">
+          <span className="[writing-mode:vertical-rl] font-sans font-black text-[42px] text-white tracking-[-0.02em]">
+            GIM
+          </span>
+        </div>
+        <div className="w-full flex flex-col items-center mt-4 gap-2">
+          <div className="w-4 h-[2px] bg-yellow-400" />
+        </div>
       </div>
     ),
   },
@@ -85,28 +145,63 @@ const allWorks: WorkProject[] = [
     title: 'Brokie V2', subtitle: 'Graph-Backed Agent Memory Engine',
     author: 'Caleb Cooper', fontTitle: 'font-mono',
     spineColor: '#0c1a0e', coverColor: '#0f2412', textColor: '#4ade80', textureClass: 'texture-rough',
-    detailHref: '/work/brokie-v2/index.html',
+    detailHref: '/CalebCooper/Library/brokie-v2',
     coverContent: (
-      <div className="absolute inset-0 bg-[#0f2412] overflow-hidden">
-        <div className="absolute inset-0 opacity-5" style={{backgroundImage:'repeating-linear-gradient(0deg,#4ade80 0px,#4ade80 1px,transparent 1px,transparent 24px),repeating-linear-gradient(90deg,#4ade80 0px,#4ade80 1px,transparent 1px,transparent 24px)'}} />
-        <div className="absolute top-10 left-10 right-10 bottom-10 border border-green-500/10" />
-        <div className="absolute inset-0 p-10 flex flex-col justify-center">
-          <div className="text-green-400/20 font-mono text-[80px] font-black leading-none absolute -right-2 top-1/2 -translate-y-1/2">$</div>
-          <span className="font-mono text-[10px] text-green-400/50 tracking-[0.3em] uppercase mb-6">Graph-Backed Agent Memory Engine</span>
-          <h2 className="font-mono font-black text-6xl text-green-400 tracking-tighter mb-2">Brokie</h2>
-          <span className="font-mono font-black text-2xl text-green-300/70 tracking-widest mb-4">V2</span>
-          <div className="flex gap-2 items-center">
-            <div className="w-12 h-[1px] bg-green-400/40" />
-            <span className="font-mono text-[10px] text-green-400/40 tracking-widest">2026</span>
+      <div className="absolute inset-0 bg-cover bg-center shadow-[inset_0_0_100px_rgba(0,0,0,0.8)]" style={{ backgroundImage: "url('/images/books/brokie_v2_cover_new.jpg')" }}>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_18%,rgba(74,222,128,0.12),transparent_22%),radial-gradient(circle_at_78%_24%,rgba(187,247,208,0.08),transparent_18%),linear-gradient(180deg,rgba(6,18,8,0.08)_0%,rgba(6,18,8,0.46)_44%,rgba(0,0,0,0.94)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.03)_0%,transparent_16%,transparent_84%,rgba(255,255,255,0.03)_100%)]" />
+        <div className="absolute inset-0 p-8 md:p-10 flex flex-col justify-between">
+          <div className="flex justify-end">
+            <div className="text-right font-mono uppercase">
+              <span className="block text-[10px] text-green-200/86 tracking-[0.32em]">No. 06</span>
+              <span className="block mt-1 text-[9px] text-green-300/56 tracking-[0.26em]">2026</span>
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-5">
+            <p className="font-mono text-[8px] text-green-100/80 tracking-[0.38em] uppercase">Personal Project</p>
+            <div className="flex flex-wrap items-center gap-2 text-[8px] font-mono uppercase tracking-[0.34em] text-green-100/72">
+              <span>graph substrate</span>
+              <span className="h-px w-6 bg-green-300/30" />
+              <span>truth settlement</span>
+              <span className="h-px w-6 bg-green-300/30" />
+              <span>watcher ring</span>
+            </div>
+            <div className="max-w-[19rem]">
+              <p className="font-mono text-[9px] text-green-100/60 tracking-[0.34em] uppercase mb-3">Mindball / retrace surface / evidence packets</p>
+              <h2 className="font-mono font-black text-5xl md:text-6xl text-white tracking-tighter leading-[0.92] mb-3 drop-shadow-[0_2px_16px_rgba(0,0,0,0.45)]">
+                Brokie
+              </h2>
+              <div className="flex items-end gap-3">
+                <span className="font-mono font-black text-2xl text-green-300/72 tracking-[0.34em]">V2</span>
+                <div className="h-[1px] flex-1 bg-green-300/60 shadow-[0_0_12px_rgba(74,222,128,0.35)] mb-2" />
+              </div>
+              <p className="mt-4 max-w-[16rem] font-mono text-[9px] text-green-100/66 tracking-[0.3em] uppercase leading-relaxed">
+                Local graph, memory, truth-settlement, watcher-runtime, and projection substrate for Winter Haven.
+              </p>
+            </div>
+            <div className="grid grid-cols-[auto_1fr] items-center gap-3 rounded border border-green-200/14 bg-black/24 px-3 py-2 backdrop-blur-[2px]">
+              <div className="flex flex-col gap-1 text-[7px] font-mono uppercase tracking-[0.22em] text-green-100/52">
+                <span>projection lens</span>
+                <span>runtime health</span>
+              </div>
+              <div className="h-px bg-green-300/24" />
+            </div>
           </div>
         </div>
       </div>
     ),
     spineContent: (
-      <div className="absolute inset-0 bg-[#0c1a0e] flex items-center justify-center">
-        <span className="[writing-mode:vertical-rl] rotate-180 font-mono font-black text-xl text-green-400 tracking-widest">Brokie V2</span>
-        <div className="absolute bottom-8 w-1.5 h-1.5 rounded-full bg-green-400/60" />
-        <span className="absolute top-8 text-[10px] font-mono text-green-400/40 rotate-90">No. 03</span>
+      <div className="absolute inset-0 bg-[#0f2412] flex flex-col items-center justify-center py-2 overflow-hidden border-r border-green-900/60 shadow-[inset_-4px_0_12px_rgba(0,0,0,0.8)]">
+        <span className="[writing-mode:vertical-rl] font-mono font-black text-[54px] text-green-500/10 tracking-tighter uppercase whitespace-nowrap overflow-hidden">
+          BROKIE V2 BROKIE V2
+        </span>
+        <div className="absolute inset-0 flex flex-col items-center justify-center">
+          <span className="[writing-mode:vertical-rl] font-sans font-black text-[28px] text-[#4ade80] tracking-[0.2em] uppercase drop-shadow-[0_0_8px_rgba(74,222,128,0.8)]">
+            BROKIE<br/>
+            <span className="text-white text-[20px] ml-2">V2</span>
+          </span>
+        </div>
       </div>
     ),
   },
@@ -115,54 +210,114 @@ const allWorks: WorkProject[] = [
     title: 'Cortex', subtitle: 'Pure-Math Agent Routing',
     author: 'Caleb Cooper', fontTitle: 'font-mono',
     spineColor: '#0a0010', coverColor: '#0d0018', textColor: '#e879f9', textureClass: 'texture-leather',
-    detailHref: '/work/cortex/index.html',
+    detailHref: '/CalebCooper/Library/cortex',
     coverContent: (
-      <div className="absolute inset-0 bg-[#0d0018] overflow-hidden">
-        <div className="absolute inset-0" style={{background:'radial-gradient(ellipse at 50% 60%, #3b0764 0%, transparent 70%)'}} />
-        <svg className="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 100 150">
-          <polygon points="50,10 90,35 90,85 50,110 10,85 10,35" fill="none" stroke="#e879f9" strokeWidth="0.5"/>
-          <polygon points="50,25 75,40 75,70 50,85 25,70 25,40" fill="none" stroke="#e879f9" strokeWidth="0.3"/>
-          <line x1="50" y1="10" x2="50" y2="110" stroke="#e879f9" strokeWidth="0.2"/>
-          <line x1="10" y1="35" x2="90" y2="85" stroke="#e879f9" strokeWidth="0.2"/>
-          <line x1="90" y1="35" x2="10" y2="85" stroke="#e879f9" strokeWidth="0.2"/>
-        </svg>
-        <div className="absolute inset-0 p-8 flex flex-col justify-end">
-          <h2 className="font-mono font-black text-6xl text-fuchsia-300 tracking-tighter mb-2">CORTEX</h2>
-          <p className="font-mono text-[10px] text-fuchsia-400/50 tracking-[0.3em] uppercase">Pure-Math Agent Routing -- 2026</p>
+      <div className="absolute inset-0 bg-cover bg-center shadow-[inset_0_0_100px_rgba(0,0,0,0.8)]" style={{ backgroundImage: "url('/images/books/cortex_1777746414041.png')" }}>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_24%_20%,rgba(232,121,249,0.14),transparent_20%),radial-gradient(circle_at_76%_22%,rgba(216,180,254,0.08),transparent_18%),linear-gradient(180deg,rgba(8,0,16,0.08)_0%,rgba(8,0,16,0.45)_46%,rgba(0,0,0,0.96)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.025)_0%,transparent_16%,transparent_84%,rgba(255,255,255,0.025)_100%)]" />
+        <div className="absolute inset-0 p-8 md:p-10 flex flex-col justify-between">
+          <div className="flex justify-end">
+            <div className="text-right font-mono uppercase">
+              <span className="block text-[10px] text-fuchsia-200/84 tracking-[0.32em]">No. 09</span>
+              <span className="block mt-1 text-[9px] text-fuchsia-300/56 tracking-[0.26em]">2026</span>
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-5">
+            <p className="font-mono text-[8px] text-fuchsia-100/80 tracking-[0.38em] uppercase">Personal Project</p>
+            <div className="flex flex-wrap items-center gap-2 text-[8px] font-mono uppercase tracking-[0.34em] text-fuchsia-100/72">
+              <span>endpoint slotting</span>
+              <span className="h-px w-6 bg-fuchsia-300/30" />
+              <span>backup route</span>
+              <span className="h-px w-6 bg-fuchsia-300/30" />
+              <span>telemetry ledger</span>
+            </div>
+            <div className="max-w-[18rem]">
+              <h2 className="font-mono font-black text-5xl md:text-6xl text-white tracking-tighter mb-3 drop-shadow-[0_2px_16px_rgba(0,0,0,0.45)]">CORTEX</h2>
+              <div className="grid grid-cols-[1fr_auto] items-end gap-4">
+                <div>
+                  <div className="w-10 h-[1px] bg-fuchsia-300/60 shadow-[0_0_12px_rgba(232,121,249,0.35)] mb-3" />
+                  <p className="font-mono text-[9px] text-fuchsia-200/68 tracking-[0.32em] uppercase leading-relaxed">
+                    Routing substrate for model endpoints, failover, quota, latency, and execution policy.
+                  </p>
+                </div>
+                <div className="rounded border border-fuchsia-200/12 bg-black/24 px-3 py-2 backdrop-blur-[2px]">
+                  <p className="font-mono text-[7px] uppercase tracking-[0.28em] text-fuchsia-100/58">status</p>
+                  <p className="mt-1 font-mono text-[8px] uppercase tracking-[0.22em] text-fuchsia-100/82">slot health / route</p>
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 text-[8px] font-mono uppercase tracking-[0.28em] text-fuchsia-100/55">
+              <span>WinterMarket bridge</span>
+              <span className="h-px w-8 bg-fuchsia-300/24" />
+              <span>Brokie telemetry</span>
+            </div>
+          </div>
         </div>
       </div>
     ),
     spineContent: (
-      <div className="absolute inset-0 bg-[#0a0010] flex items-center justify-center">
-        <span className="[writing-mode:vertical-rl] rotate-180 font-mono font-black text-xl text-fuchsia-400 tracking-widest">CORTEX</span>
-        <div className="absolute bottom-8 w-1.5 h-1.5 rounded-full bg-fuchsia-400/60" />
-        <span className="absolute top-8 text-[10px] font-mono text-fuchsia-400/40 rotate-90">No. 04</span>
+      <div className="absolute inset-0 bg-[#0a0010] flex flex-col items-center justify-end py-8 overflow-hidden border-r border-fuchsia-900/30 shadow-[inset_-2px_0_18px_rgba(0,0,0,0.45)]">
+        <div className="w-4 h-4 rounded-full border border-fuchsia-500/40 mb-3" />
+        <span className="[writing-mode:vertical-rl] font-mono text-[9px] text-fuchsia-200/80 tracking-[0.4em] uppercase mb-4">
+          CORTEX
+        </span>
+        <div className="w-full border-t border-fuchsia-500/20 pt-3">
+          <span className="block font-sans text-[6px] text-fuchsia-400/60 text-center uppercase tracking-widest">09</span>
+        </div>
       </div>
     ),
   },
   {
     id: 'life-tap-labs', slug: 'life-tap-labs', year: '2026',
-    title: 'Life Tap Labs', subtitle: 'Agentic Cost Observability',
+    title: 'Agentic Dashboards', subtitle: 'Operator Surfaces for Agentic Systems',
     author: 'Caleb Cooper', fontTitle: 'font-serif',
-    spineColor: '#1c1200', coverColor: '#221600', textColor: '#fbbf24', textureClass: 'texture-paper',
-    detailHref: '/work/life-tap-labs/index.html',
+    spineColor: '#ffffff', coverColor: '#f8fafc', textColor: '#0f172a', textureClass: 'texture-paper',
+    detailHref: '/CalebCooper/Library/life-tap-labs',
     coverContent: (
-      <div className="absolute inset-0 bg-[#221600] overflow-hidden">
-        <div className="absolute inset-0 opacity-5" style={{backgroundImage:'radial-gradient(circle, #fbbf24 1px, transparent 1px)', backgroundSize:'18px 18px'}} />
-        <div className="absolute top-12 left-1/2 -translate-x-1/2 w-20 h-20 border-2 border-amber-400/30 rounded-full" />
-        <div className="absolute top-16 left-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-amber-400/10 border border-amber-300/40" />
-        <div className="absolute inset-0 p-10 flex flex-col justify-end">
-          <h2 className="font-serif text-4xl text-amber-300 leading-tight mb-2">Life Tap<br/>Labs</h2>
-          <div className="w-6 h-[1px] bg-amber-400/40 mb-3" />
-          <p className="font-mono text-[10px] text-amber-400/50 tracking-[0.25em] uppercase">Agentic Cost Observability -- 2026</p>
+      <div className="absolute inset-0 bg-cover bg-center shadow-[inset_0_0_80px_rgba(0,0,0,0.2)] border-8 border-white" style={{ backgroundImage: "url('/images/books/agentic_dashboards_cover.jpg')" }}>
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.1)_0%,rgba(255,255,255,0.7)_40%,rgba(255,255,255,0.95)_100%)]" />
+        <div className="absolute inset-0 p-8 md:p-10 flex flex-col justify-between">
+          <div className="flex justify-end">
+            <div className="text-right font-mono uppercase">
+              <span className="block text-[10px] text-slate-800 tracking-[0.32em]">No. 05</span>
+              <span className="block mt-1 text-[9px] text-slate-500 tracking-[0.26em]">2026</span>
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-5">
+            <p className="font-mono text-[8px] text-blue-600 tracking-[0.38em] uppercase">Personal Project</p>
+            <div className="flex flex-wrap items-center gap-2 text-[8px] font-mono uppercase tracking-[0.34em] text-slate-500">
+              <span>control plane</span>
+              <span className="h-px w-6 bg-slate-300" />
+              <span>trace telemetry</span>
+            </div>
+            <div className="max-w-[18rem]">
+              <h2 className="font-serif text-4xl md:text-[3.35rem] text-slate-900 leading-[0.9] tracking-tight mb-3">
+                Agentic<br/>Dashboards
+              </h2>
+              <div className="w-10 h-[2px] bg-blue-600 mb-3" />
+              <p className="font-mono text-[9px] text-slate-600 tracking-[0.32em] uppercase leading-relaxed">
+                Operator surface for traces, prompts, approvals, artifacts, and live execution visibility.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     ),
     spineContent: (
-      <div className="absolute inset-0 bg-[#1c1200] flex items-center justify-center">
-        <span className="[writing-mode:vertical-rl] rotate-180 font-serif text-lg text-amber-400 tracking-widest">Life Tap Labs</span>
-        <div className="absolute bottom-8 w-1.5 h-1.5 rounded-full bg-amber-400/60" />
-        <span className="absolute top-8 text-[10px] font-mono text-amber-400/40 rotate-90">No. 05</span>
+      <div className="absolute inset-0 bg-white flex flex-col items-center justify-between py-6 overflow-hidden border-r border-slate-200 shadow-[inset_-2px_0_10px_rgba(0,0,0,0.05)]">
+        <span className="font-sans font-black text-[10px] text-blue-600 tracking-widest uppercase mb-4">
+          05
+        </span>
+        <div className="my-auto flex items-center justify-center">
+          <span className="[writing-mode:vertical-rl] font-serif font-bold text-[22px] text-slate-900 tracking-tight uppercase">
+            AGENTIC DASHBOARDS
+          </span>
+        </div>
+        <div className="w-full flex justify-center mt-4">
+          <div className="w-2 h-2 bg-blue-600" />
+        </div>
       </div>
     ),
   },
@@ -171,33 +326,70 @@ const allWorks: WorkProject[] = [
     title: 'The Panopticon', subtitle: 'Agentic Observability at the Edge',
     author: 'Caleb Cooper', fontTitle: 'font-sans',
     spineColor: '#120000', coverColor: '#0d0000', textColor: '#ff4444', textureClass: 'texture-rough',
-    detailHref: '/work/panopticon/index.html',
+    detailHref: '/CalebCooper/Library/panopticon',
     coverContent: (
-      <div className="absolute inset-0 bg-black overflow-hidden">
-        <div className="absolute inset-0" style={{background:'radial-gradient(circle at 50% 40%, #3f0000 0%, #000 60%)'}} />
-        <svg className="absolute inset-0 w-full h-full opacity-25" viewBox="0 0 100 150">
-          <circle cx="50" cy="55" r="35" fill="none" stroke="#ff4444" strokeWidth="0.4"/>
-          <circle cx="50" cy="55" r="25" fill="none" stroke="#ff4444" strokeWidth="0.3"/>
-          <circle cx="50" cy="55" r="12" fill="none" stroke="#ff4444" strokeWidth="0.5"/>
-          <circle cx="50" cy="55" r="3" fill="#ff4444" opacity="0.6"/>
-          {[0,30,60,90,120,150,180,210,240,270,300,330].map(a=>(
-            <line key={a} x1="50" y1="55"
-              x2={50+35*Math.cos(a*Math.PI/180)}
-              y2={55+35*Math.sin(a*Math.PI/180)}
-              stroke="#ff4444" strokeWidth="0.2"/>
-          ))}
-        </svg>
-        <div className="absolute inset-0 p-8 flex flex-col justify-end">
-          <h2 className="font-sans font-black text-4xl text-red-400 tracking-tight uppercase mb-2">The<br/>Panopticon</h2>
-          <p className="font-mono text-[10px] text-red-500/50 tracking-[0.3em] uppercase">Agentic Observability at the Edge -- 2026</p>
+      <div className="absolute inset-0 bg-cover bg-center shadow-[inset_0_0_100px_rgba(0,0,0,0.8)]" style={{ backgroundImage: "url('/images/books/panopticon_1777746444071.png')" }}>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_24%,rgba(255,255,255,0.08),transparent_22%),linear-gradient(180deg,rgba(3,2,4,0.04)_0%,rgba(3,2,4,0.42)_48%,rgba(0,0,0,0.92)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.03)_0%,transparent_16%,transparent_84%,rgba(255,255,255,0.03)_100%)]" />
+        <div className="absolute inset-0 p-8 md:p-10 flex flex-col justify-between">
+          <div className="flex justify-end">
+            <div className="text-right font-mono uppercase">
+              <span className="block text-[10px] text-red-200/82 tracking-[0.32em]">No. 12</span>
+              <span className="block mt-1 text-[9px] text-red-300/56 tracking-[0.26em]">2026</span>
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-5">
+            <p className="font-mono text-[8px] text-red-50/82 tracking-[0.38em] uppercase">Personal Project</p>
+            <div className="flex flex-wrap items-center gap-2 text-[8px] font-mono uppercase tracking-[0.34em] text-red-100/70">
+              <span>source status</span>
+              <span className="h-px w-6 bg-red-300/30" />
+              <span>timeline</span>
+              <span className="h-px w-6 bg-red-300/30" />
+              <span>local evidence</span>
+            </div>
+            <div className="max-w-[18rem]">
+              <p className="font-mono text-[9px] text-red-100/60 tracking-[0.34em] uppercase mb-3">Observatory / read-only inspection</p>
+              <h2 className="font-sans font-black text-4xl md:text-5xl text-white tracking-tight uppercase leading-[0.9] drop-shadow-[0_2px_16px_rgba(0,0,0,0.45)]">
+                The<br/>Panopticon
+              </h2>
+              <div className="mt-4 h-px w-14 bg-red-300/60 shadow-[0_0_12px_rgba(255,68,68,0.28)]" />
+              <p className="mt-3 max-w-[15rem] font-mono text-[9px] text-red-100/64 tracking-[0.3em] uppercase leading-relaxed">
+                Local-first voice companion for grounding, freshness checks, and evidence-led inspection.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     ),
     spineContent: (
-      <div className="absolute inset-0 bg-[#120000] flex items-center justify-center">
-        <span className="[writing-mode:vertical-rl] rotate-180 font-sans font-black text-lg text-red-400 tracking-widest uppercase">The Panopticon</span>
-        <div className="absolute bottom-8 w-1.5 h-1.5 rounded-full bg-red-400/60" />
-        <span className="absolute top-8 text-[10px] font-mono text-red-400/40 rotate-90">No. 06</span>
+      <div className="absolute inset-0 bg-[#120000] flex flex-col items-center justify-between py-9 overflow-hidden border-r border-red-900/30 shadow-[inset_-2px_0_15px_rgba(0,0,0,0.6)]">
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.05)_0%,transparent_22%,transparent_78%,rgba(255,255,255,0.03)_100%)]" />
+        <span className="[writing-mode:vertical-rl] rotate-180 font-mono text-[7px] text-red-300/62 uppercase tracking-[0.36em] relative z-10 mt-4">
+          observatory / source status / timeline
+        </span>
+        <div className="flex flex-col items-center gap-4 relative z-10 my-auto">
+          <div className="rounded-sm border border-red-200/14 bg-black/22 px-2 py-1">
+            <span className="[writing-mode:vertical-rl] rotate-180 font-sans font-black text-[18px] text-white tracking-[0.12em] uppercase">
+              THE PANOPTICON
+            </span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-[1px] h-14 bg-gradient-to-b from-red-400/70 via-red-400/28 to-transparent shadow-[0_0_10px_rgba(255,68,68,0.42)]" />
+            <div className="flex flex-col gap-1">
+              <div className="h-[1px] w-8 bg-red-300/28" />
+              <div className="h-[1px] w-5 bg-red-300/20" />
+              <div className="h-[1px] w-7 bg-red-300/18" />
+            </div>
+          </div>
+          <span className="[writing-mode:vertical-rl] rotate-180 font-mono text-[6px] text-red-100/50 uppercase tracking-[0.28em]">
+            grounding / read-only inspection / local evidence
+          </span>
+        </div>
+        <div className="mb-4 flex flex-col items-center gap-1 relative z-10">
+          <span className="font-mono text-[9px] text-red-100/66 uppercase tracking-[0.26em]">No. 12</span>
+          <span className="font-mono text-[8px] text-red-300/42 uppercase tracking-[0.22em]">2026</span>
+        </div>
       </div>
     ),
   },
@@ -206,27 +398,55 @@ const allWorks: WorkProject[] = [
     title: 'Bonnie', subtitle: 'Your AI Gaming Companion',
     author: 'Caleb Cooper', fontTitle: 'font-serif',
     spineColor: '#1a0010', coverColor: '#200015', textColor: '#f9a8d4', textureClass: 'texture-paper',
-    detailHref: '/work/bonnie/index.html',
+    detailHref: '/CalebCooper/Library/bonnie',
     coverContent: (
-      <div className="absolute inset-0 bg-[#200015] overflow-hidden">
-        <div className="absolute inset-0" style={{background:'radial-gradient(ellipse at 30% 50%, #5b0030 0%, transparent 60%)'}} />
-        <div className="absolute top-16 right-10 w-28 h-40 border border-pink-400/15 rounded-full" />
-        <div className="absolute top-20 right-14 w-20 h-32 border border-pink-300/10 rounded-full" />
-        <div className="absolute inset-0 p-10 flex flex-col justify-between">
-          <span className="font-serif italic text-4xl text-pink-300/20">B</span>
-          <div>
-            <h2 className="font-serif italic text-6xl text-pink-200 tracking-tight mb-3">Bonnie</h2>
-            <div className="w-10 h-[1px] bg-pink-400/40 mb-3" />
-            <p className="font-mono text-[10px] text-pink-300/40 tracking-[0.3em] uppercase">AI Gaming Companion -- GTAV Online -- 2026</p>
+      <div className="absolute inset-0 bg-cover bg-center shadow-[inset_0_0_120px_rgba(0,0,0,0.9)]" style={{ backgroundImage: "url('/images/books/bonnie_cover_new.jpg')" }}>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(249,168,212,0.18),transparent_42%),linear-gradient(180deg,rgba(3,2,7,0.08)_0%,rgba(3,2,7,0.55)_48%,rgba(0,0,0,0.96)_100%)]" />
+        <div className="absolute inset-0 p-8 md:p-10 flex flex-col justify-between">
+          <div className="flex justify-end">
+            <div className="text-right">
+              <span className="block font-mono text-[9px] text-pink-300/70 tracking-[0.28em] uppercase">No. 03</span>
+              <span className="block font-mono text-[9px] text-pink-300/40 tracking-[0.22em] uppercase mt-1">2026</span>
+            </div>
+          </div>
+
+          <div className="flex flex-col justify-end">
+            <div className="max-w-[82%]">
+              <p className="font-mono text-[8px] text-pink-100/78 tracking-[0.38em] uppercase mb-3">Personal Project</p>
+              <p className="font-mono text-[10px] text-pink-200/70 tracking-[0.34em] uppercase mb-4">GTAV FIELD COMPANION</p>
+              <h2 className="font-serif italic text-6xl md:text-7xl text-white tracking-tight leading-[0.88] mb-4 drop-shadow-[0_2px_20px_rgba(0,0,0,0.5)]">Bonnie</h2>
+              <div className="w-12 h-[1px] bg-pink-300/70 mb-4 shadow-[0_0_14px_rgba(249,168,212,0.35)]" />
+              <p className="font-mono text-[9px] text-pink-100/55 tracking-[0.34em] uppercase leading-relaxed max-w-[16rem]">
+                Tactical teammate for live crew calls, mission reads, and underworld support.
+              </p>
+            </div>
+            <div className="mt-7 flex items-center gap-3">
+              <span className="h-px w-10 bg-pink-200/30" />
+              <span className="font-mono text-[9px] text-pink-100/45 tracking-[0.26em] uppercase">Crew-aware / session-first / controlled</span>
+            </div>
           </div>
         </div>
       </div>
     ),
     spineContent: (
-      <div className="absolute inset-0 bg-[#1a0010] flex items-center justify-center">
-        <span className="[writing-mode:vertical-rl] rotate-180 font-serif italic text-xl text-pink-300 tracking-widest">Bonnie</span>
-        <div className="absolute bottom-8 w-1.5 h-1.5 rounded-full bg-pink-300/60" />
-        <span className="absolute top-8 text-[10px] font-mono text-pink-300/40 rotate-90">No. 07</span>
+      <div className="absolute inset-0 bg-[#16000f] flex flex-col items-center justify-between py-10 overflow-hidden border-r border-pink-900/30 shadow-[inset_-2px_0_18px_rgba(0,0,0,0.45)]">
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.04)_0%,transparent_20%,transparent_80%,rgba(0,0,0,0.2)_100%)]" />
+        <div className="flex flex-col items-center gap-5 relative z-10 my-auto">
+          <span className="[writing-mode:vertical-rl] rotate-180 font-serif italic text-[23px] text-white tracking-[0.08em] drop-shadow-[0_1px_8px_rgba(0,0,0,0.45)]">
+            Bonnie
+          </span>
+          <div className="flex items-center gap-2">
+            <div className="w-1.5 h-1.5 rounded-full bg-pink-400/70 shadow-[0_0_10px_rgba(249,168,212,0.6)]" />
+            <div className="w-8 h-px bg-pink-300/20" />
+          </div>
+          <span className="[writing-mode:vertical-rl] rotate-180 font-mono text-[8px] text-pink-100/55 uppercase tracking-[0.28em]">
+            Field Companion
+          </span>
+        </div>
+        <div className="flex flex-col items-center gap-1 relative z-10 mb-4">
+          <span className="font-mono text-[9px] text-pink-200/55 font-bold uppercase tracking-[0.3em]">No. 03</span>
+          <span className="font-mono text-[8px] text-pink-300/40 uppercase tracking-[0.24em]">2026</span>
+        </div>
       </div>
     ),
   },
@@ -235,113 +455,185 @@ const allWorks: WorkProject[] = [
     title: 'BYC2W', subtitle: '3 Hours. 5 Laffy Taffys. One Vision.',
     author: 'Caleb Cooper', fontTitle: 'font-serif',
     spineColor: '#1a0f00', coverColor: '#1e1200', textColor: '#fcd34d', textureClass: 'texture-canvas',
-    detailHref: '/work/byc2w/index.html',
+    detailHref: '/CalebCooper/Library/byc2w',
     coverContent: (
-      <div className="absolute inset-0 bg-[#1e1200] overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-full opacity-5" style={{backgroundImage:'repeating-linear-gradient(45deg,#fcd34d 0,#fcd34d 1px,transparent 0,transparent 50%)',backgroundSize:'12px 12px'}} />
-        <div className="absolute inset-8 border border-amber-400/10" />
-        <div className="absolute inset-0 p-10 flex flex-col justify-center items-center text-center">
-          <span className="font-mono text-[10px] text-amber-400/40 tracking-[0.4em] uppercase mb-6">3 Hours. 5 Laffy Taffys. One Vision.</span>
-          <h2 className="font-serif text-6xl text-amber-300 tracking-tighter mb-4">BYC2W</h2>
-          <div className="w-12 h-[1px] bg-amber-400/40 mb-4" />
-          <p className="font-mono text-[10px] text-amber-400/40 tracking-widest uppercase">2025</p>
+      <div
+        className="absolute inset-0 bg-cover bg-center shadow-[inset_0_0_100px_rgba(0,0,0,0.82)]"
+        style={{ backgroundImage: "url('/images/books/byc2w_1777746475201.png')" }}
+      >
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_24%_18%,rgba(255,245,182,0.12),transparent_22%),radial-gradient(circle_at_76%_28%,rgba(125,211,252,0.1),transparent_18%),linear-gradient(to_bottom,rgba(4,10,24,0.02),rgba(4,10,24,0.18)_55%,rgba(10,6,0,0.42))]" />
+        <div className="absolute inset-0">
+          <div className="absolute left-8 top-8 h-24 w-24 rounded-full border border-amber-200/22 shadow-[0_0_14px_rgba(251,191,36,0.1)]" />
+          <div className="absolute left-[5.75rem] top-14 h-[1px] w-20 rotate-[-22deg] bg-amber-100/22" />
+          <div className="absolute right-7 top-12 h-28 w-28 rounded-full border border-sky-200/18 shadow-[0_0_18px_rgba(125,211,252,0.08)]" />
+          <div className="absolute right-20 top-28 h-[1px] w-16 rotate-[18deg] bg-sky-100/22" />
+          <div className="absolute left-10 bottom-28 h-24 w-px bg-gradient-to-b from-transparent via-amber-200/22 to-transparent" />
+          <div className="absolute right-14 bottom-32 h-16 w-px bg-gradient-to-b from-transparent via-sky-200/18 to-transparent" />
         </div>
-      </div>
-    ),
-    spineContent: (
-      <div className="absolute inset-0 bg-[#1a0f00] flex items-center justify-center">
-        <span className="[writing-mode:vertical-rl] rotate-180 font-serif text-xl text-amber-300 tracking-widest">BYC2W</span>
-        <div className="absolute bottom-8 w-1.5 h-1.5 rounded-full bg-amber-300/60" />
-        <span className="absolute top-8 text-[10px] font-mono text-amber-300/40 rotate-90">No. 08</span>
-      </div>
-    ),
-  },
-  {
-    id: 'boonk', slug: 'boonk', year: '2025', title: 'Boonk', subtitle: 'High-Fidelity Component Cloning',
-    author: 'Caleb Cooper', fontTitle: 'font-sans',
-    spineColor: '#0a0a0a', coverColor: '#111111', textColor: '#ffffff', textureClass: 'texture-leather',
-    detailHref: '/work/boonk/index.html',
-    coverContent: (<div className="absolute inset-0 bg-black overflow-hidden"><div className="absolute inset-6 border border-white/5" /><div className="absolute inset-10 border border-white/5" /><div className="absolute top-1/2 left-0 w-full h-[1px] bg-white/5" /><div className="absolute left-1/2 top-0 w-[1px] h-full bg-white/5" /><div className="absolute inset-0 p-10 flex flex-col justify-between"><span className="font-sans font-black text-[80px] text-white/5 leading-none">B</span><div><h2 className="font-sans font-black text-5xl text-white tracking-tighter uppercase mb-2">Boonk</h2><div className="w-8 h-[1px] bg-white/30 mb-3" /><p className="font-mono text-[10px] text-white/30 tracking-[0.3em] uppercase">High-Fidelity Component Cloning -- 2025</p></div></div></div>),
-    spineContent: (<div className="absolute inset-0 bg-[#0a0a0a] flex items-center justify-center"><span className="[writing-mode:vertical-rl] rotate-180 font-sans font-black text-xl text-white tracking-widest uppercase">Boonk</span><div className="absolute bottom-8 w-1.5 h-1.5 rounded-full bg-white/40" /><span className="absolute top-8 text-[10px] font-mono text-white/30 rotate-90">No. 09</span></div>),
-  },
-  {
-    id: 'brokie-v1', slug: 'brokie-v1', year: '2026', isNew: true, title: 'Brokie V1', subtitle: 'Premium Token Compression for Multi-Agent Workflows',
-    author: 'Caleb Cooper', fontTitle: 'font-mono',
-    spineColor: '#0a0f1a', coverColor: '#0d1420', textColor: '#38bdf8', textureClass: 'texture-leather',
-    detailHref: '/work/brokie-v1/index.html',
-    coverContent: (
-      <div className="absolute inset-0 bg-[#0d1420] overflow-hidden">
-        <div className="absolute inset-0 opacity-5" style={{backgroundImage:'repeating-linear-gradient(0deg,#38bdf8 0px,#38bdf8 1px,transparent 1px,transparent 32px),repeating-linear-gradient(90deg,#38bdf8 0px,#38bdf8 1px,transparent 1px,transparent 32px)'}} />
-        <div className="absolute inset-0" style={{background:'radial-gradient(ellipse at 70% 20%, #0c3a5a 0%, transparent 60%)'}} />
-        <div className="absolute top-10 left-10 right-10 bottom-10 border border-sky-500/10" />
-        <div className="absolute inset-0 p-10 flex flex-col justify-center">
-          <div className="text-sky-400/10 font-mono text-[72px] font-black leading-none absolute -right-1 top-1/2 -translate-y-1/2">V1</div>
-          <span className="font-mono text-[9px] text-sky-400/50 tracking-[0.35em] uppercase mb-5">Intelligence Should Not Cost a Fortune</span>
-          <h2 className="font-mono font-black text-5xl text-sky-300 tracking-tighter mb-1">Brokie</h2>
-          <span className="font-mono font-black text-xl text-sky-400/60 tracking-widest mb-4">V1</span>
-          <div className="flex gap-2 items-center">
-            <div className="w-12 h-[1px] bg-sky-400/40" />
-            <span className="font-mono text-[10px] text-sky-400/40 tracking-widest">2026</span>
+        <div className="absolute inset-0 flex flex-col justify-between p-10">
+          <div className="flex items-start justify-between gap-4">
+            <div className="max-w-[10rem] rounded-2xl border border-amber-200/12 bg-black/14 px-3 py-2 backdrop-blur-[1px]">
+              <p className="font-mono text-[8px] uppercase tracking-[0.34em] text-amber-50/80">Astrolab Notebook</p>
+              <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.24em] text-sky-50/78">Kid ideas. AI. Gravity.</p>
+            </div>
+            <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-amber-50/92">
+              No. 07 -- 2025
+            </span>
+          </div>
+          <div className="relative">
+            <div className="absolute -left-2 -top-5 h-12 w-12 rounded-full border border-amber-100/14" />
+            <div className="absolute -left-1 top-1 h-8 w-8 rounded-full border border-sky-100/14" />
+            <p className="relative z-10 mb-3 font-mono text-[8px] uppercase tracking-[0.38em] text-amber-50/92">Personal Project</p>
+            <h2 className="relative z-10 font-serif text-6xl text-white tracking-tighter drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)]">
+              BYC2W
+            </h2>
+            <div className="mt-3 h-[1px] w-20 bg-gradient-to-r from-amber-200/40 via-amber-300/20 to-transparent" />
+            <p className="mt-3 max-w-[14rem] font-mono text-[9px] uppercase tracking-[0.28em] text-amber-50/82">
+              A young inventor&apos;s space notebook, built with AI in about 3 hours.
+            </p>
           </div>
         </div>
       </div>
     ),
     spineContent: (
-      <div className="absolute inset-0 bg-[#0a0f1a] flex items-center justify-center">
-        <span className="[writing-mode:vertical-rl] rotate-180 font-mono font-black text-lg text-sky-400 tracking-widest">Brokie V1</span>
-        <div className="absolute bottom-8 w-1.5 h-1.5 rounded-full bg-sky-400/60" />
-        <span className="absolute top-8 text-[10px] font-mono text-sky-400/40 rotate-90">No. 10</span>
+      <div className="absolute inset-0 overflow-hidden border-r border-amber-900/30 bg-[#ead36c]">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_16%,rgba(255,255,255,0.34),transparent_24%),linear-gradient(to_bottom,rgba(255,255,255,0.16),rgba(181,138,26,0.14))]" />
+        <div className="absolute inset-0 flex flex-col items-center justify-between py-10">
+          <span className="[writing-mode:vertical-rl] rotate-180 font-mono text-[7px] text-amber-950/60 uppercase tracking-[0.32em] relative z-10">
+            Space + Physics Notebook
+          </span>
+          <div className="flex flex-col items-center gap-4 relative z-10 my-auto">
+            <span className="[writing-mode:vertical-rl] rotate-180 font-serif text-[22px] text-amber-950 tracking-[0.12em] drop-shadow-[0_1px_10px_rgba(255,255,255,0.18)]">
+              BYC2W
+            </span>
+            <div className="w-[1px] h-11 bg-gradient-to-b from-amber-950/45 via-amber-800/30 to-transparent shadow-[0_0_8px_rgba(120,86,0,0.2)]" />
+            <span className="[writing-mode:vertical-rl] rotate-180 font-mono text-[6px] text-amber-950/65 uppercase tracking-[0.34em]">
+              AI-made wonder
+            </span>
+          </div>
+          <div className="relative z-10 mb-4 flex items-center gap-2">
+            <span className="font-mono text-[8px] uppercase tracking-[0.26em] text-amber-950/70">
+              No. 07
+            </span>
+            <span className="h-px w-8 bg-amber-950/25" />
+            <span className="font-mono text-[8px] uppercase tracking-[0.26em] text-amber-950/60">
+              2025
+            </span>
+          </div>
+        </div>
       </div>
     ),
   },
   {
-    id: 'aquerone', slug: 'aquerone', year: '2024', title: 'FISHeye', subtitle: 'Luxury CBD Store', hidden: true,
-    author: 'Caleb Cooper', fontTitle: 'font-serif',
-    spineColor: '#001a16', coverColor: '#00201a', textColor: '#2dd4bf', textureClass: 'texture-canvas',
-    detailHref: '/work/aquerone/index.html',
-    coverContent: (<div className="absolute inset-0 bg-[#00201a] overflow-hidden"><div className="absolute inset-0" style={{background:'radial-gradient(ellipse at 50% 30%,#004d3a 0%,transparent 65%)'}} /><div className="absolute inset-0 p-10 flex flex-col justify-end"><h2 className="font-serif italic text-6xl text-teal-200 tracking-tight mb-3">FISHeye</h2><div className="w-8 h-[1px] bg-teal-400/40 mb-3" /><p className="font-mono text-[10px] text-teal-300/40 tracking-[0.3em] uppercase">Luxury CBD Store -- 2024</p></div></div>),
-    spineContent: (<div className="absolute inset-0 bg-[#001a16] flex items-center justify-center"><span className="[writing-mode:vertical-rl] rotate-180 font-serif italic text-xl text-teal-300 tracking-widest">FISHeye</span><div className="absolute bottom-8 w-1.5 h-1.5 rounded-full bg-teal-300/60" /><span className="absolute top-8 text-[10px] font-mono text-teal-300/40 rotate-90">No. 11</span></div>),
-  },
-  {
-    id: 'sal-parasuco', slug: 'sal-parasuco', year: '2022', title: 'Sentiment Analysis', subtitle: 'Luxury eCommerce AI', hidden: true,
+    id: 'boonk', slug: 'boonk', year: '2025', title: 'Boonk', subtitle: 'High-Fidelity Website Cloning',
     author: 'Caleb Cooper', fontTitle: 'font-sans',
-    spineColor: '#1a0030', coverColor: '#1e003a', textColor: '#c084fc', textureClass: 'texture-leather',
-    detailHref: '/work/sal-parasuco/index.html',
-    coverContent: (<div className="absolute inset-0 bg-[#1e003a] overflow-hidden"><div className="absolute inset-0" style={{background:'linear-gradient(160deg,#3b0060 0%,#1e003a 50%,#0d001a 100%)'}} /><div className="absolute inset-0 p-10 flex flex-col justify-end"><h2 className="font-sans font-black text-3xl text-purple-200 tracking-tight uppercase leading-tight mb-3">Sentiment<br/>Analysis</h2><div className="flex items-center gap-2 mb-3"><div className="w-2 h-2 rounded-full bg-purple-400" /><div className="w-2 h-2 rounded-full bg-purple-500/60" /><div className="w-2 h-2 rounded-full bg-purple-600/40" /></div><p className="font-mono text-[10px] text-purple-300/40 tracking-[0.25em] uppercase">Luxury eCommerce AI -- 2022</p></div></div>),
-    spineContent: (<div className="absolute inset-0 bg-[#1a0030] flex items-center justify-center"><span className="[writing-mode:vertical-rl] rotate-180 font-sans font-black text-base text-purple-300 tracking-widest uppercase">Sentiment</span><div className="absolute bottom-8 w-1.5 h-1.5 rounded-full bg-purple-300/60" /><span className="absolute top-8 text-[10px] font-mono text-purple-300/40 rotate-90">No. 12</span></div>),
+    spineColor: '#0a0a0a', coverColor: '#111111', textColor: '#ffffff', textureClass: 'texture-leather',
+    detailHref: '/CalebCooper/Library/boonk',
+    coverContent: (
+      <div className="absolute inset-0 bg-cover bg-center shadow-[inset_0_0_100px_rgba(0,0,0,0.8)]" style={{ backgroundImage: "url('/images/books/boonk_1777746488106.png')" }}>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(255,255,255,0.06),transparent_18%),linear-gradient(180deg,rgba(0,0,0,0.04)_0%,rgba(0,0,0,0.38)_44%,rgba(0,0,0,0.92)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.03)_0%,transparent_18%,transparent_82%,rgba(255,255,255,0.03)_100%)] p-10 flex flex-col justify-between">
+          <div className="flex justify-end">
+            <span className="font-mono text-[10px] text-zinc-300/72 tracking-[0.3em] uppercase">No. 04 -- 2025</span>
+          </div>
+          <div className="max-w-[16rem]">
+            <p className="font-mono text-[8px] text-zinc-200/78 tracking-[0.38em] uppercase mb-3">Personal Project</p>
+            <p className="font-mono text-[8px] text-zinc-300/56 tracking-[0.34em] uppercase mb-3">Inspect / Clone / Localize / Preview</p>
+            <h2 className="font-sans font-black text-5xl text-white tracking-tighter uppercase mb-2">Boonk</h2>
+            <div className="w-8 h-[1px] bg-zinc-300/45 mb-3" />
+            <p className="font-mono text-[9px] text-zinc-100/70 tracking-[0.34em] uppercase mb-4">High-Fidelity Website Cloning</p>
+            <p className="font-mono text-[8px] text-zinc-300/46 tracking-[0.24em] uppercase leading-relaxed">Live-site inspection, asset rewriting, multipage export, and local preview hardening.</p>
+          </div>
+        </div>
+      </div>
+    ),
+    spineContent: (
+      <div className="absolute inset-0 bg-[#0a0a0a] flex flex-col items-center justify-between py-0 overflow-hidden border-r border-zinc-900 shadow-[inset_-2px_0_15px_rgba(0,0,0,0.8)]">
+        <div className="w-full bg-zinc-100 py-3 flex items-center justify-center shadow-md">
+          <span className="font-mono text-[8px] text-zinc-900 font-bold uppercase tracking-widest">
+            04
+          </span>
+        </div>
+        <div className="my-auto flex flex-col gap-2 w-full px-1">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <div key={i} className={`w-full bg-zinc-800 ${i % 2 === 0 ? 'py-1' : 'py-2'} flex items-center justify-center`}>
+              <span className="[writing-mode:vertical-rl] rotate-180 font-sans font-black text-[12px] text-white tracking-widest uppercase opacity-70">
+                BOONK
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    ),
   },
   {
-    id: 'edoardo-smerilli', slug: 'edoardo-smerilli', year: '2022', title: 'Markov Chains', subtitle: 'Film Director Portfolio', hidden: true,
+    id: 'brokie-v1', slug: 'brokie-v1', year: '2026', isNew: true, title: 'Brokie V1', subtitle: 'Premium Token Compression for Multi-Agent Workflows',
     author: 'Caleb Cooper', fontTitle: 'font-mono',
-    spineColor: '#080820', coverColor: '#0a0a28', textColor: '#a5b4fc', textureClass: 'texture-leather',
-    detailHref: '/work/edoardo-smerilli/index.html',
-    coverContent: (<div className="absolute inset-0 bg-[#0a0a28] overflow-hidden"><div className="absolute inset-0 p-8 flex flex-col justify-end"><h2 className="font-mono font-bold text-4xl text-indigo-200 tracking-tighter mb-2">Markov<br/>Chains</h2><div className="w-6 h-[1px] bg-indigo-300/40 mb-2" /><p className="font-mono text-[10px] text-indigo-300/40 tracking-[0.25em] uppercase">Film Director Portfolio -- 2022</p></div></div>),
-    spineContent: (<div className="absolute inset-0 bg-[#080820] flex items-center justify-center"><span className="[writing-mode:vertical-rl] rotate-180 font-mono font-bold text-lg text-indigo-300 tracking-widest">Markov Chains</span><div className="absolute bottom-8 w-1.5 h-1.5 rounded-full bg-indigo-300/60" /><span className="absolute top-8 text-[10px] font-mono text-indigo-300/40 rotate-90">No. 13</span></div>),
-  },
-  {
-    id: 'chiara-luzzana', slug: 'chiara-luzzana', year: '2021', title: 'Data Science', subtitle: 'Sound Design Experience', hidden: true,
-    author: 'Caleb Cooper', fontTitle: 'font-mono',
-    spineColor: '#001a08', coverColor: '#001209', textColor: '#4ade80', textureClass: 'texture-rough',
-    detailHref: '/work/chiara-luzzana/index.html',
-    coverContent: (<div className="absolute inset-0 bg-black overflow-hidden"><div className="absolute bottom-0 left-0 right-0 h-2/3" style={{background:'linear-gradient(to top,black,transparent)'}} /><div className="absolute inset-0 p-8 flex flex-col justify-end"><h2 className="font-mono font-black text-4xl text-green-400 tracking-tighter mb-2">Data<br/>Science</h2><div className="flex items-center gap-2 mb-2"><span className="text-green-500/60 text-xs">&#9654;</span><div className="flex-1 h-[1px] bg-green-400/20" /></div><p className="font-mono text-[10px] text-green-400/40 tracking-[0.25em] uppercase">Sound Design -- 2021</p></div></div>),
-    spineContent: (<div className="absolute inset-0 bg-[#001a08] flex items-center justify-center"><span className="[writing-mode:vertical-rl] rotate-180 font-mono font-black text-lg text-green-400 tracking-widest">Data Science</span><div className="absolute bottom-8 w-1.5 h-1.5 rounded-full bg-green-400/60" /><span className="absolute top-8 text-[10px] font-mono text-green-400/40 rotate-90">No. 14</span></div>),
-  },
-  {
-    id: 'loftgarten', slug: 'loftgarten', year: '2020', title: 'Biotech 2 + Lab', subtitle: 'Spatial Experiences', hidden: true,
-    author: 'Caleb Cooper', fontTitle: 'font-serif',
-    spineColor: '#001a20', coverColor: '#001e28', textColor: '#67e8f9', textureClass: 'texture-canvas',
-    detailHref: '/work/loftgarten/index.html',
-    coverContent: (<div className="absolute inset-0 bg-[#001e28] overflow-hidden"><div className="absolute inset-0" style={{background:'radial-gradient(ellipse at 50% 80%,#004060 0%,transparent 60%)'}} /><div className="absolute inset-0 p-8 flex flex-col justify-end"><h2 className="font-serif text-4xl text-cyan-200 tracking-tight mb-2">Biotech 2<br/>+ Lab</h2><div className="w-6 h-[1px] bg-cyan-400/40 mb-2" /><p className="font-mono text-[10px] text-cyan-300/40 tracking-[0.25em] uppercase">Spatial Experiences -- 2020</p></div></div>),
-    spineContent: (<div className="absolute inset-0 bg-[#001a20] flex items-center justify-center"><span className="[writing-mode:vertical-rl] rotate-180 font-serif text-lg text-cyan-300 tracking-widest">Biotech 2 + Lab</span><div className="absolute bottom-8 w-1.5 h-1.5 rounded-full bg-cyan-300/60" /><span className="absolute top-8 text-[10px] font-mono text-cyan-300/40 rotate-90">No. 15</span></div>),
-  },
-  {
-    id: 'deplace-maison', slug: 'deplace-maison', year: '2020', title: 'Biotech 1 + Lab', subtitle: 'Urban Trekking eCommerce', hidden: true,
-    author: 'Caleb Cooper', fontTitle: 'font-serif',
-    spineColor: '#1a0030', coverColor: '#1e0038', textColor: '#e879f9', textureClass: 'texture-canvas',
-    detailHref: '/work/deplace-maison/index.html',
-    coverContent: (<div className="absolute inset-0 bg-[#1e0038] overflow-hidden"><div className="absolute inset-0" style={{background:'linear-gradient(135deg,#400060 0%,#1e0038 60%,#0a0018 100%)'}} /><div className="absolute inset-0 p-8 flex flex-col justify-end"><h2 className="font-serif text-4xl text-fuchsia-200 tracking-tight mb-2">Biotech 1<br/>+ Lab</h2><div className="w-6 h-[1px] bg-fuchsia-400/40 mb-2" /><p className="font-mono text-[10px] text-fuchsia-300/40 tracking-[0.25em] uppercase">Urban Trekking -- 2020</p></div></div>),
-    spineContent: (<div className="absolute inset-0 bg-[#1a0030] flex items-center justify-center"><span className="[writing-mode:vertical-rl] rotate-180 font-serif text-lg text-fuchsia-300 tracking-widest">Biotech 1 + Lab</span><div className="absolute bottom-8 w-1.5 h-1.5 rounded-full bg-fuchsia-300/60" /><span className="absolute top-8 text-[10px] font-mono text-fuchsia-300/40 rotate-90">No. 16</span></div>),
+    spineColor: '#0a0f1a', coverColor: '#0d1420', textColor: '#38bdf8', textureClass: 'texture-leather',
+    detailHref: '/CalebCooper/Library/brokie-v1',
+    coverContent: (
+      <div className="absolute inset-0 bg-cover bg-center shadow-[inset_0_0_100px_rgba(0,0,0,0.8)]" style={{ backgroundImage: "url('/images/books/brokie_v1_custom.jpg')" }}>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_24%_18%,rgba(56,189,248,0.12),transparent_22%),radial-gradient(circle_at_76%_26%,rgba(147,197,253,0.08),transparent_18%),linear-gradient(180deg,rgba(5,10,18,0.06)_0%,rgba(5,10,18,0.44)_46%,rgba(0,0,0,0.95)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.03)_0%,transparent_16%,transparent_84%,rgba(255,255,255,0.03)_100%)]" />
+        <div className="absolute inset-0 p-8 md:p-10 flex flex-col justify-between">
+          <div className="flex justify-end">
+            <div className="text-right font-mono uppercase">
+              <span className="block text-[10px] text-sky-200/86 tracking-[0.32em]">No. 05</span>
+              <span className="block mt-1 text-[9px] text-sky-300/56 tracking-[0.26em]">2026</span>
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-5">
+            <p className="font-mono text-[8px] text-sky-100/80 tracking-[0.38em] uppercase">Personal Project</p>
+            <div className="flex flex-wrap items-center gap-2 text-[8px] font-mono uppercase tracking-[0.34em] text-sky-100/72">
+              <span>compression pipeline</span>
+              <span className="h-px w-6 bg-sky-300/30" />
+              <span>protocol discipline</span>
+              <span className="h-px w-6 bg-sky-300/30" />
+              <span>cost control</span>
+            </div>
+            <div className="max-w-[18rem]">
+              <p className="font-mono text-[9px] text-sky-100/60 tracking-[0.34em] uppercase mb-3">Token budget / agent handoff / slot hygiene</p>
+              <h2 className="font-mono font-black text-5xl md:text-6xl text-white tracking-tighter mb-2 drop-shadow-[0_2px_16px_rgba(0,0,0,0.45)]">Brokie</h2>
+              <div className="flex items-end gap-3">
+                <span className="font-mono font-black text-2xl text-sky-300/72 tracking-[0.34em]">V1</span>
+                <div className="h-[1px] flex-1 bg-sky-300/60 shadow-[0_0_12px_rgba(56,189,248,0.35)] mb-2" />
+              </div>
+              <p className="mt-4 max-w-[16rem] font-mono text-[9px] text-sky-100/66 tracking-[0.3em] uppercase leading-relaxed">
+                Premium token compression for multi-agent workflows and disciplined routing handoffs.
+              </p>
+            </div>
+            <div className="grid grid-cols-[auto_1fr] items-center gap-3 rounded border border-sky-200/14 bg-black/24 px-3 py-2 backdrop-blur-[2px]">
+              <div className="flex flex-col gap-1 text-[7px] font-mono uppercase tracking-[0.22em] text-sky-100/52">
+                <span>protocol</span>
+                <span>throughput</span>
+              </div>
+              <div className="h-px bg-sky-300/24" />
+            </div>
+          </div>
+        </div>
+      </div>
+    ),
+    spineContent: (
+      <div className="absolute inset-0 bg-[#162130] flex flex-col items-center justify-between py-6 overflow-hidden border-r border-sky-900/40 shadow-[inset_-3px_0_15px_rgba(0,0,0,0.6)]">
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.08)_0%,transparent_10%,transparent_90%,rgba(0,0,0,0.4)_100%)]" />
+        <div className="w-full px-2">
+          <div className="h-0.5 w-full bg-sky-500/80 mb-1" />
+          <div className="h-[1px] w-full bg-sky-500/40" />
+        </div>
+        <div className="flex flex-col items-center gap-2 relative z-10 w-full px-1">
+          <span className="font-sans font-black text-[12px] text-white tracking-widest uppercase text-center break-words leading-tight">
+            BROKIE<br/>V1
+          </span>
+          <span className="font-serif italic text-[7px] text-sky-200/80 tracking-widest mt-2">
+            Cooper
+          </span>
+        </div>
+        <div className="w-full px-2 mt-auto">
+          <div className="h-[1px] w-full bg-sky-500/40 mb-1" />
+          <div className="h-0.5 w-full bg-sky-500/80" />
+        </div>
+      </div>
+    ),
   },
 ];
-
-export const works: WorkProject[] = allWorks.filter(w => !w.hidden);

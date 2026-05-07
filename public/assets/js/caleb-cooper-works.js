@@ -30,7 +30,7 @@
     var path = window.location.pathname.replace(/\/index\.html$/, '').replace(/\/$/, '');
     var slug = path.split('/').pop();
     if (path.indexOf('/work/') === 0 && HIDDEN_SLUGS.indexOf(slug) !== -1) {
-      window.location.replace('/work?tab=project');
+      window.location.replace('/CalebCooper/Library');
       return;
     }
   })();
@@ -111,7 +111,7 @@
       var leftItem = document.querySelector('.sidebar.f .s-grid.left .item.fl');
       if (leftItem) {
         var link = leftItem.querySelector('.item-link');
-        if (link) link.href = '/work/' + prev.slug + '/index.html';
+        if (link) link.href = '/CalebCooper/Library/' + prev.slug;
         var img = leftItem.querySelector('.item-img img');
         if (img) {
           img.src = prev.hero;
@@ -133,7 +133,7 @@
       // Find the "Next project!" link in the center
       var headWrap = document.querySelector('.sidebar.f .head-wrap');
       if (headWrap) {
-        headWrap.href = '/work/' + next.slug + '/index.html';
+        headWrap.href = '/CalebCooper/Library/' + next.slug;
       }
 
       // Find the right sidebar item (next project)
@@ -141,7 +141,7 @@
       var rightItem = rightGrid.length > 1 ? rightGrid[1].querySelector('.item.fr') : null;
       if (rightItem) {
         var rLink = rightItem.querySelector('.item-link');
-        if (rLink) rLink.href = '/work/' + next.slug + '/index.html';
+        if (rLink) rLink.href = '/CalebCooper/Library/' + next.slug;
         var rImg = rightItem.querySelector('.item-img img');
         if (rImg) {
           rImg.src = next.hero;

@@ -1,0 +1,82 @@
+# Dependency and build output
+node_modules/
+dist/
+dist/**
+build/
+build/**
+.next/
+.vercel/
+coverage/
+.cache/
+
+# Graphify output and local checkpoints
+graphify-out/
+graphify-out/**
+.checkpoints/
+.checkpoints/**
+.tmp-transition-check/
+.tmp-transition-check/**
+
+# Embedded/exported playground projects that pollute architecture discovery
+public/work/
+public/work/**
+**/playground/
+**/playground/**
+**/playground/src/
+**/playground/src/**
+public/*-playground/
+public/*-playground/**
+public/*playground*/
+public/*playground*/**
+public/cortex-playground/
+public/cortex-playground/**
+
+# Secrets and local files
+.env
+.env.*
+*.log
+.DS_Store
+
+# Large binary/media assets should be inventoried by filesystem, not semantically indexed
+public/videos/
+public/videos/**
+public/images/
+public/images/**
+*.mp4
+*.mov
+*.webm
+*.avi
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+*.woff
+*.woff2
+*.ttf
+*.otf
+*.zip
+
+# One-off migration/update scripts should not dominate architecture graph
+update_*.cjs
+full_restore.cjs
+cleanup-backup-before-revert.patch
+*.patch
+
+# Keep canonical app source, docs, and config
+!src/
+!src/**
+!docs/
+!docs/**
+!AGENTS.md
+!CLAUDE.md
+!GEMINI.md
+!PROJECT_PAGES_REACT_REBUILD_HANDOFF.md
+!package.json
+!package-lock.json
+!vite.config.*
+!tsconfig.*
+!eslint.config.*
+!postcss.config.*
+!tailwind.config.*
+!index.html

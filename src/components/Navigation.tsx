@@ -16,8 +16,8 @@ export const TopBar = ({
   showBack?: boolean;
   title?: string;
   headerTitle?: string;
-  activeTab?: 'case-study' | 'project' | 'dashboard';
-  onTabChange?: (tab: 'case-study' | 'project' | 'dashboard') => void;
+  activeTab?: 'case-study' | 'project' | 'dashboard' | 'library';
+  onTabChange?: (tab: 'case-study' | 'project' | 'dashboard' | 'library') => void;
   hideOnTop?: boolean;
 }) => {
   const { scrollY } = useScroll();
@@ -62,25 +62,16 @@ export const TopBar = ({
               activeTab === 'dashboard' ? "bg-black text-white shadow-sm" : "text-gray-500 hover:text-black"
             )}
           >
-            Dashboard
+            About
           </button>
           <button 
             onClick={() => onTabChange?.('project')}
             className={cn(
               "px-6 py-1.5 text-sm font-medium rounded-full transition-colors",
-              activeTab === 'project' ? "bg-black text-white shadow-sm" : "text-gray-500 hover:text-black"
+              (activeTab === 'project' || activeTab === 'case-study' || activeTab === 'library') ? "bg-black text-white shadow-sm" : "text-gray-500 hover:text-black"
             )}
           >
-            Project
-          </button>
-          <button 
-            onClick={() => onTabChange?.('case-study')}
-            className={cn(
-              "px-6 py-1.5 text-sm font-medium rounded-full transition-colors",
-              activeTab === 'case-study' ? "bg-black text-white shadow-sm" : "text-gray-500 hover:text-black"
-            )}
-          >
-            Case Study
+            Library
           </button>
         </nav>
 
@@ -128,9 +119,9 @@ export const BottomBar = ({
       </div>
 
       <div className="flex items-center gap-6 hidden md:flex">
-         <span className="flex items-center gap-2 hover:text-black cursor-pointer"><span className="w-4 h-4 rounded border border-current flex items-center justify-center">D</span> Dashboard</span>
-         <span className="flex items-center gap-2 hover:text-black cursor-pointer"><span className="w-4 h-4 rounded border border-current flex items-center justify-center">P</span> Project</span>
-         <span className="flex items-center gap-2 hover:text-black cursor-pointer"><span className="w-4 h-4 rounded border border-current flex items-center justify-center">C</span> Case Study</span>
+         <span className="flex items-center gap-2 hover:text-black cursor-pointer"><span className="w-4 h-4 rounded border border-current flex items-center justify-center">A</span> About</span>
+         <span className="flex items-center gap-2 hover:text-black cursor-pointer"><span className="w-4 h-4 rounded border border-current flex items-center justify-center">L</span> Library</span>
+
       </div>
 
       <div className="flex items-center gap-4">
@@ -157,22 +148,34 @@ export const WebflowNav = ({
   activeItem = 'case-study',
   brandTab,
   hideUntilScroll = true,
+  revealOnHover,
+  backLabel,
   onMenuNavigate,
 }: {
   onBack?: () => void;
-  activeItem?: 'dashboard' | 'project' | 'case-study';
+  activeItem?: 'dashboard' | 'project' | 'case-study' | 'library';
   brandTab?: string;
   hideUntilScroll?: boolean;
+  revealOnHover?: boolean;
+  backLabel?: string;
   onMenuNavigate?: (tab: string) => void;
 }) => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [backHovered, setBackHovered] = useState(false);
+  const [hovered, setHovered] = useState(false);
   const { scrollY } = useScroll();
-  const [navVisible, setNavVisible] = useState(!hideUntilScroll);
+  const getScrollThreshold = () =>
+    typeof window === 'undefined' ? 0 : window.innerHeight * 0.9;
+  const [navVisible, setNavVisible] = useState(() =>
+    hideUntilScroll
+      ? (typeof window !== 'undefined' ? window.scrollY > getScrollThreshold() : false)
+      : true
+  );
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     if (hideUntilScroll) {
       // Show after scrolling past ~90vh (first section)
-      const threshold = window.innerHeight * 0.9;
+      const threshold = getScrollThreshold();
       setNavVisible(latest > threshold);
     }
   });
@@ -186,23 +189,75 @@ export const WebflowNav = ({
     }
   };
 
+  const backLabelText = backLabel ?? 'Back To Library';
+  const brandHref = brandTab === 'dashboard' ? '/CalebCooper' : '/CalebCooper/Library';
+  const brandLabel = activeItem === 'dashboard' ? 'Caleb Cooper' : 'Library';
   const menuItems = [
-    { key: 'dashboard', label: 'About', href: '/work?tab=dashboard' },
-    { key: 'project', label: 'Projects', href: '/work?tab=project' },
-    { key: 'case-study', label: 'Case Studies', href: '/work?tab=case-study' },
+    { key: 'dashboard', label: 'About', href: '/CalebCooper' },
+    { key: 'project', label: 'Library', href: '/CalebCooper/Library' },
+
   ];
+
+  const navBrandTextStyle: React.CSSProperties = {
+    fontFamily: "'Playfair Display', serif",
+    fontSize: 'clamp(1.7rem, 3.4vw, 3.3rem)',
+    lineHeight: 0.92,
+    letterSpacing: '-0.035em',
+    color: '#1d1d1b',
+    whiteSpace: 'nowrap',
+    textAlign: 'center',
+    textTransform: 'uppercase',
+    fontWeight: 700,
+  };
+
+  const overlayLabelStyle: React.CSSProperties = {
+    fontFamily: "'Space Grotesk', ui-monospace, monospace",
+    fontSize: '0.72rem',
+    lineHeight: 1,
+    letterSpacing: '0.24em',
+    textTransform: 'uppercase',
+    color: 'rgba(205,198,190,0.56)',
+    marginBottom: '0.8rem',
+  };
+
+  const overlayTitleStyle: React.CSSProperties = {
+    color: '#cdc6be',
+    fontSize: 'clamp(4.5rem, 11vw, 9rem)',
+    lineHeight: 0.9,
+    fontFamily: "'Playfair Display', 'Canopee', serif",
+    fontWeight: 700,
+    letterSpacing: '-0.035em',
+    transition: 'letter-spacing 0.3s ease-in-out, color 0.3s ease-in-out',
+  };
 
   return (
     <>
+      {revealOnHover && !menuOpen && (
+        <div
+          onMouseEnter={() => setHovered(true)}
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '4rem',
+            zIndex: 998,
+          }}
+        />
+      )}
       {/* ── Fixed Nav Bar — slides in/out ── */}
       <nav
+        onMouseEnter={() => revealOnHover && setHovered(true)}
+        onMouseLeave={() => revealOnHover && setHovered(false)}
         style={{
           zIndex: 999,
           width: '100%',
           position: 'fixed',
           top: 0,
           left: 0,
-          transform: navVisible || menuOpen ? 'translateY(0)' : 'translateY(-100%)',
+          transform: revealOnHover
+            ? (hovered || menuOpen ? 'translateY(0)' : 'translateY(-100%)')
+            : (navVisible || menuOpen ? 'translateY(0)' : 'translateY(-100%)'),
           transition: 'transform 0.5s cubic-bezier(.65,0,.35,1)',
         }}
       >
@@ -210,7 +265,7 @@ export const WebflowNav = ({
           style={{
             width: '100%',
             height: '10.8vh',
-            backgroundColor: '#cdc6be',
+            backgroundColor: 'transparent',
             display: 'flex',
             flexDirection: 'row',
             justifyContent: 'space-between',
@@ -218,47 +273,61 @@ export const WebflowNav = ({
             padding: '4vh 2vw',
           }}
         >
-          {/* Left — location: navigates to About/dashboard */}
-          <div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
-            <a
-              href="/work?tab=dashboard"
-              onClick={(e) => { e.preventDefault(); handleNavigate('/work?tab=dashboard', 'dashboard'); }}
-              style={{
-                letterSpacing: 0,
-                fontSize: '1.8vh',
-                lineHeight: '2vh',
-                color: '#1d1d1b',
-                cursor: 'pointer',
-                textDecoration: 'none',
-              }}
-            >
-              South Florida, USA
-            </a>
+          <div className="hidden md:flex" style={{ flex: 1, alignItems: 'center', gap: '1rem' }}>
+            {onBack && (
+              <button
+                type="button"
+                onClick={onBack}
+                onMouseEnter={() => setBackHovered(true)}
+                onMouseLeave={() => setBackHovered(false)}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '2.8rem',
+                  height: '2.8rem',
+                  padding: 0,
+                  borderRadius: '999px',
+                  border: backHovered ? '1px solid rgba(29,29,27,0.2)' : '1px solid transparent',
+                  background: backHovered ? 'rgba(255,255,255,0.22)' : 'transparent',
+                  color: '#1d1d1b',
+                  cursor: 'pointer',
+                  textDecoration: 'none',
+                  transition: 'background 0.22s ease, border-color 0.22s ease, transform 0.22s ease',
+                  transform: backHovered ? 'scale(1.04)' : 'scale(1)',
+                }}
+                aria-label={backLabelText}
+              >
+                <span
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    transition: 'transform 0.22s ease',
+                    transform: backHovered ? 'translateX(-1px)' : 'translateX(0)',
+                  }}
+                >
+                  <ArrowLeft className="w-4 h-4" />
+                </span>
+              </button>
+            )}
           </div>
 
           {/* Center — brand: navigates to brandTab if set, else current tab */}
           <a
-            href={`/work?tab=${brandTab ?? activeItem}`}
-            onClick={(e) => { e.preventDefault(); handleNavigate(`/work?tab=${brandTab ?? activeItem}`, brandTab ?? activeItem); }}
+            href={brandHref}
+            className="hidden md:flex"
+            onClick={(e) => { e.preventDefault(); handleNavigate(brandHref, brandTab ?? activeItem); }}
             style={{
-              display: 'flex',
               position: 'relative',
               textDecoration: 'none',
               width: 'auto',
             }}
           >
             <div
-              style={{
-                fontFamily: "'Canopee', sans-serif",
-                fontSize: '3.5vh',
-                lineHeight: 1,
-                color: '#1d1d1b',
-                whiteSpace: 'nowrap',
-                textAlign: 'center',
-                marginTop: '0.5vh',
-              }}
+              style={navBrandTextStyle}
             >
-              The AI Library
+              {brandLabel}
             </div>
           </a>
 
@@ -306,34 +375,36 @@ export const WebflowNav = ({
         }}
       >
         <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', position: 'relative' }}>
-          {menuItems.map((item) => (
+          {menuItems.map((item, index) => (
             <a
               key={item.key}
               href={item.href}
               onClick={(e) => { e.preventDefault(); handleNavigate(item.href, item.key); }}
               style={{
                 display: 'flex',
+                flexDirection: 'column',
                 justifyContent: 'center',
                 alignItems: 'center',
                 position: 'relative',
                 overflow: 'hidden',
                 textDecoration: 'none',
                 cursor: 'pointer',
+                padding: '1.2rem 0',
               }}
             >
+              <span style={overlayLabelStyle}>
+                {String(index + 1).padStart(2, '0')} / Navigate
+              </span>
               <h1
-                style={{
-                  color: '#cdc6be',
-                  paddingTop: '3vh',
-                  paddingRight: '2vh',
-                  fontSize: '30vh',
-                  lineHeight: '20vh',
-                  fontFamily: "'Canopee', sans-serif",
-                  letterSpacing: '-0.02em',
-                  transition: 'letter-spacing 0.3s ease-in-out',
+                style={overlayTitleStyle}
+                onMouseEnter={(e) => {
+                  (e.target as HTMLElement).style.letterSpacing = '-0.01em';
+                  (e.target as HTMLElement).style.color = '#f3ca62';
                 }}
-                onMouseEnter={(e) => { (e.target as HTMLElement).style.letterSpacing = '0.05em'; }}
-                onMouseLeave={(e) => { (e.target as HTMLElement).style.letterSpacing = '-0.02em'; }}
+                onMouseLeave={(e) => {
+                  (e.target as HTMLElement).style.letterSpacing = '-0.035em';
+                  (e.target as HTMLElement).style.color = '#cdc6be';
+                }}
               >
                 {item.label}
               </h1>

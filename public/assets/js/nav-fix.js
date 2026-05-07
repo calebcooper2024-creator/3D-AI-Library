@@ -1,20 +1,20 @@
 (function () {
   var legacyProjectRoutes = {
-    '/work/the-roger-hub': '/work/global-intelligence-market',
-    '/work/avroko': '/work/brokie-v2',
-    '/work/cobo': '/work/cortex',
-    '/work/thinkers': '/work/life-tap-labs',
-    '/work/argor-heraeus': '/work/panopticon',
-    '/work/om-swami': '/work/bonnie',
-    '/work/prada': '/work/boonk',
-    '/work/the-books-of-ye': '/work/byc2w',
-    '/work/the-hiring-chain': '/work/brokie-v1',
-    '/work/wow-concept': '/work/project-winter-haven'
+    '/work/the-roger-hub': '/CalebCooper/Library/global-intelligence-market',
+    '/work/avroko': '/CalebCooper/Library/brokie-v2',
+    '/work/cobo': '/CalebCooper/Library/cortex',
+    '/work/thinkers': '/CalebCooper/Library/life-tap-labs',
+    '/work/argor-heraeus': '/CalebCooper/Library/panopticon',
+    '/work/om-swami': '/CalebCooper/Library/bonnie',
+    '/work/prada': '/CalebCooper/Library/boonk',
+    '/work/the-books-of-ye': '/CalebCooper/Library/byc2w',
+    '/work/the-hiring-chain': '/CalebCooper/Library/brokie-v1',
+    '/work/wow-concept': '/CalebCooper/Library/project-winter-haven'
   };
 
   var currentProjectPath = window.location.pathname.replace(/\/index\.html$/, '').replace(/\/$/, '');
   if (legacyProjectRoutes[currentProjectPath]) {
-    window.location.replace(legacyProjectRoutes[currentProjectPath] + '/index.html' + window.location.search + window.location.hash);
+    window.location.replace(legacyProjectRoutes[currentProjectPath] + window.location.hash);
     return;
   }
 
@@ -158,11 +158,11 @@
     if (!backBtn || backBtn.dataset.navFixBound === '1') return;
 
     backBtn.dataset.navFixBound = '1';
-    backBtn.href = '/work?tab=project';
+    backBtn.href = '/CalebCooper/Library';
 
     backBtn.addEventListener('click', function (e) {
       e.preventDefault();
-      navigateWithCurtain('/work?tab=project', window.paperCurtainEffect ? 1800 : 50);
+      navigateWithCurtain('/CalebCooper/Library', window.paperCurtainEffect ? 1800 : 50);
     }, true);
   }
 
@@ -182,7 +182,7 @@
         if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
 
         var href = link.href;
-        if (!href || href.indexOf('/work?tab=project') !== -1) return;
+        if (!href || href.indexOf('/?tab=project') !== -1) return;
 
         e.preventDefault();
         e.stopPropagation();

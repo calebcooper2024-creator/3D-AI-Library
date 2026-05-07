@@ -1,0 +1,2914 @@
+{
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\fix_portfolio.py": {
+    "mtime": 1777489800.8634064,
+    "hash": "dd797977a210ade1db3ced9c6bcfffec"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\process_stamp.py": {
+    "mtime": 1777582381.268516,
+    "hash": "89954e64f05afabe4c5a39287d67e749"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\vite.config.ts": {
+    "mtime": 1777470632.347397,
+    "hash": "60785666fc59d0906be7385d87a7e2c1"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\js\\caleb-cooper-works.js": {
+    "mtime": 1777851911.465429,
+    "hash": "ed35729d26f0080ad5994a86907fdece"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\js\\Draggable.min-2c75b760fb.js": {
+    "mtime": 1777466277.123549,
+    "hash": "071b0dc357fd18be03d858d3183c016c"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\js\\gsap.min-85b2c7594d.js": {
+    "mtime": 1777466266.5168195,
+    "hash": "7f2b3bdb990fbf8053a7343d4581b52b"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\js\\jquery-3.5.1.min.dc5e7f18c8-e07f811afa.js": {
+    "mtime": 1777466266.6384673,
+    "hash": "dc5e7f18c8d36ac1d3d4753a87c98d0a"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\js\\locomotive-scroll.min-cc8f42dcb9.js": {
+    "mtime": 1777466266.200624,
+    "hash": "fbfa9c0b7c13e970bf4ab6f62043e7f0"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\js\\nav-fix.js": {
+    "mtime": 1777851911.4679632,
+    "hash": "41bdf936cfc9f5a293b4c2c0713a5c0f"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\js\\paper-curtain-bootstrap.js": {
+    "mtime": 1777777049.6893556,
+    "hash": "afb4bbe93eb84940416d8bd2c411e5c6"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\js\\paper-curtain.mjs": {
+    "mtime": 1777740184.4220648,
+    "hash": "4b807bb4900272bd1fbaafdb1e336950"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\js\\paper-slide-in.js": {
+    "mtime": 1777760361.4857557,
+    "hash": "d2c3b17a026671e37e58d569539e40bd"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\js\\webflow.07467efa9-52e4f0421f.js": {
+    "mtime": 1777466266.7758217,
+    "hash": "07467efa9f6935fefdaf4db985b2853d"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\cortex-playground\\vite.config.ts": {
+    "mtime": 1777475216.0,
+    "hash": "60785666fc59d0906be7385d87a7e2c1"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\cortex-playground\\src\\App.tsx": {
+    "mtime": 1777475216.0,
+    "hash": "7e57092609dd58670cced8daaea3f02d"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\cortex-playground\\src\\main.tsx": {
+    "mtime": 1777475216.0,
+    "hash": "2b36426d5ad7e08ef79746aa524f4fb7"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\cortex-playground\\src\\store.ts": {
+    "mtime": 1777475216.0,
+    "hash": "e185802de573b75b07aff4f48d5298a2"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\cortex-playground\\src\\components\\ChatInterface.tsx": {
+    "mtime": 1777475216.0,
+    "hash": "300e27ecf288127197df42ffb0bd99b8"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\cortex-playground\\src\\components\\FactoryScene.tsx": {
+    "mtime": 1777475216.0,
+    "hash": "cdfef5a752fb0991f641ea23423ee4fb"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\cortex-playground\\src\\components\\L2LanesNode.tsx": {
+    "mtime": 1777475216.0,
+    "hash": "c30b40948b14cf6cbb98a2eb233ea066"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\cortex-playground\\src\\components\\L3EvidenceNode.tsx": {
+    "mtime": 1777475216.0,
+    "hash": "a230ad5d36d53ef2b8833fc54311d740"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\cortex-playground\\src\\components\\ProcessGraph.tsx": {
+    "mtime": 1777475216.0,
+    "hash": "6d35edc1c33f6b4cefc03144965ae127"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\cortex-playground\\src\\components\\ProcessNode.tsx": {
+    "mtime": 1777475216.0,
+    "hash": "319eaf23d3f1e664f5262d31812cff31"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\cortex-playground\\src\\components\\TubePath.tsx": {
+    "mtime": 1777475216.0,
+    "hash": "dc2c50d856084de1c44dc98262b933c1"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\cortex-playground\\src\\components\\UIManager.tsx": {
+    "mtime": 1777475216.0,
+    "hash": "4492ddfacfc3cf9ed022243bdf038ee6"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\cortex-playground\\src\\lib\\utils.ts": {
+    "mtime": 1777475216.0,
+    "hash": "ea1c194ee828369e6fcdde84b4d8b8ba"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\argor-heraeus\\panopticon-playground\\app.js": {
+    "mtime": 1777851911.4844122,
+    "hash": "1859a2e09e284487dac8c9fa5f087e52"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\argor-heraeus\\panopticon-playground\\data.js": {
+    "mtime": 1777851911.4859195,
+    "hash": "772baef217c0d37790125d26dded16b5"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\argor-heraeus\\panopticon-playground\\globe.js": {
+    "mtime": 1777851911.4874983,
+    "hash": "32bb9930e697509e96e0104efd27b05e"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\argor-heraeus\\panopticon-playground\\panels.js": {
+    "mtime": 1777851911.4885087,
+    "hash": "a11c23c6d81cf6b4a44778394c4bea1a"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\argor-heraeus\\panopticon-playground\\timeline.js": {
+    "mtime": 1777851911.4897795,
+    "hash": "399bd980b88b71c070c9f08bfecf4ff8"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\bonnie\\bonnie-playground\\bridge.py": {
+    "mtime": 1777609344.0,
+    "hash": "d007f32f3f63b6ef91be81b44f26aa58"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\bonnie\\bonnie-playground\\server.ts": {
+    "mtime": 1777609344.0,
+    "hash": "6587ca462c2e3be913ebff3b808c4275"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\bonnie\\bonnie-playground\\vite.config.ts": {
+    "mtime": 1777851911.7312512,
+    "hash": "b14c10a2a3daa1bb38ca7d5e4c6ecbe9"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\bonnie\\bonnie-playground\\src\\App.tsx": {
+    "mtime": 1777609344.0,
+    "hash": "5280eed7a454d50b18cb845c774933f1"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\bonnie\\bonnie-playground\\src\\main.tsx": {
+    "mtime": 1777609344.0,
+    "hash": "2b36426d5ad7e08ef79746aa524f4fb7"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\bonnie\\bonnie-playground\\src\\components\\ControllerDisplay.tsx": {
+    "mtime": 1777609344.0,
+    "hash": "dc88bcd6b1547b1ecd008cfa9e380c23"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\bonnie\\bonnie-playground\\src\\components\\TacticalRadar.tsx": {
+    "mtime": 1777609344.0,
+    "hash": "b7ebb1a3d9695c9d1b6bc90abce6f2f4"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\bonnie\\bonnie-playground\\src\\components\\TelemetryPanel.tsx": {
+    "mtime": 1777609344.0,
+    "hash": "06cb84d42b059a4fa4f280b41a52124f"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\bonnie\\bonnie-playground\\src\\components\\VisionPanel.tsx": {
+    "mtime": 1777609344.0,
+    "hash": "b8da8e9c405debbaa8556bb9a87d724a"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\bonnie\\bonnie-playground\\src\\components\\VoiceChat.tsx": {
+    "mtime": 1777609344.0,
+    "hash": "511226560bfbc89e4774921ae2b7d1a3"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\bonnie\\bonnie-playground\\src\\services\\geminiService.ts": {
+    "mtime": 1777634426.2679443,
+    "hash": "dea376ce214170896e45fa0fa5c4a242"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\boonk\\boonk-v2-app\\server.js": {
+    "mtime": 1777653682.0,
+    "hash": "0ebefd63cbd362a5d02cc17beb2444a1"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\boonk\\boonk-v2-app\\test-edit.js": {
+    "mtime": 1777653682.0,
+    "hash": "6bea8415c36a9ccf814fa8cd2593f2bb"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\boonk\\boonk-v2-app\\test-edit2.js": {
+    "mtime": 1777653682.0,
+    "hash": "6bea8415c36a9ccf814fa8cd2593f2bb"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\boonk\\boonk-v2-app\\test-env.js": {
+    "mtime": 1777653682.0,
+    "hash": "30be2cf6a5d5ef9bb72679ebcd2060bc"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\boonk\\boonk-v2-app\\test-loadenv.js": {
+    "mtime": 1777653682.0,
+    "hash": "26a22ad8001573591c222b2892776a38"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\boonk\\boonk-v2-app\\test-ls.js": {
+    "mtime": 1777653682.0,
+    "hash": "31b250cc17de5355bd394f7f7115fb21"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\boonk\\boonk-v2-app\\test-ls2.js": {
+    "mtime": 1777653682.0,
+    "hash": "6094ac36e3aa08d89c33c65aaf15a5a2"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\boonk\\boonk-v2-app\\vite.config.ts": {
+    "mtime": 1777851911.7411318,
+    "hash": "54c424af6dcdfc1dcfa9302f249ce56c"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\boonk\\boonk-v2-app\\src\\App.tsx": {
+    "mtime": 1777851911.7396233,
+    "hash": "b93d26dd772918b5ae9dc7ee0220aecf"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\boonk\\boonk-v2-app\\src\\main.tsx": {
+    "mtime": 1777653682.0,
+    "hash": "e9cb2fa9a0dc8accf9e881ce67b4ec16"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\boonk\\boonk-v2-app\\src\\components\\ErrorBoundary.tsx": {
+    "mtime": 1777653682.0,
+    "hash": "a246153caffda510b80f5c58623b8c5a"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\boonk\\boonk-v2-app\\src\\components\\VisualEditor.tsx": {
+    "mtime": 1777653682.0,
+    "hash": "4a0fe54578ff806f88380da065bcce2e"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\brokie-v1-app\\eslint.config.mjs": {
+    "mtime": 1777650820.0,
+    "hash": "514279e2189c54adb2442e384cc25404"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\brokie-v1-app\\next-env.d.ts": {
+    "mtime": 1777650820.0,
+    "hash": "ba64ff7d54714a8f64db89b1003207d8"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\brokie-v1-app\\next.config.ts": {
+    "mtime": 1777638662.6770034,
+    "hash": "d6e33e1972e09a6a8f4a0aa00638df41"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\brokie-v1-app\\postcss.config.mjs": {
+    "mtime": 1777650820.0,
+    "hash": "b2f5d23a090943dc40e19a92862cc2c1"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\brokie-v1-app\\app\\layout.tsx": {
+    "mtime": 1777650820.0,
+    "hash": "b7d6c37607a3b33256a8932630a2bec9"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\brokie-v1-app\\app\\page.tsx": {
+    "mtime": 1777650820.0,
+    "hash": "009ead5b29edcb33ab1058c357cda849"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\brokie-v1-app\\hooks\\use-mobile.ts": {
+    "mtime": 1777650820.0,
+    "hash": "209b5193af16624cdd89d3591480dd48"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\brokie-v1-app\\lib\\utils.ts": {
+    "mtime": 1777650820.0,
+    "hash": "5a6fd53fdcf2be529e9cc0b718fde352"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\byc2w\\playground\\vite.config.ts": {
+    "mtime": 1777597131.2751048,
+    "hash": "60785666fc59d0906be7385d87a7e2c1"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\byc2w\\playground\\src\\App.tsx": {
+    "mtime": 1777851911.7635343,
+    "hash": "97f520ce4053c4f4fa4481168ad7bc72"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\byc2w\\playground\\src\\main.tsx": {
+    "mtime": 1777611112.0,
+    "hash": "2b36426d5ad7e08ef79746aa524f4fb7"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\life-tap-labs\\ltl-playground\\vite.config.ts": {
+    "mtime": 1777851911.7857728,
+    "hash": "219382d47c5afc64c6bffa57b688445a"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\life-tap-labs\\ltl-playground\\src\\App.tsx": {
+    "mtime": 1777650458.0,
+    "hash": "b12bb9b01e2ee473535c1bdc84ec494a"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\life-tap-labs\\ltl-playground\\src\\main.tsx": {
+    "mtime": 1777650458.0,
+    "hash": "2b36426d5ad7e08ef79746aa524f4fb7"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\life-tap-labs\\ltl-playground\\src\\components\\AgentDirectory.tsx": {
+    "mtime": 1777650458.0,
+    "hash": "bac6294f2b862a367d6ca7841b356528"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\life-tap-labs\\ltl-playground\\src\\components\\AnalyticsDashboard.tsx": {
+    "mtime": 1777650458.0,
+    "hash": "4b86eb33a6ccaea7d7227b7a96c87ccf"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\life-tap-labs\\ltl-playground\\src\\components\\EconomyDashboard.tsx": {
+    "mtime": 1777650458.0,
+    "hash": "142d88b603538f5c488e6cc0596039f9"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\life-tap-labs\\ltl-playground\\src\\components\\EmbeddingsVisualizer.tsx": {
+    "mtime": 1777650458.0,
+    "hash": "146b8d342cd1605a93b481317f335104"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\life-tap-labs\\ltl-playground\\src\\components\\GlobalCommand.tsx": {
+    "mtime": 1777650458.0,
+    "hash": "95bf8e9f64d96bcbbbdb05f8a1a4ec27"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\life-tap-labs\\ltl-playground\\src\\components\\GovernanceDashboard.tsx": {
+    "mtime": 1777650458.0,
+    "hash": "62b2d236d183da9b24ab4b1e69db0d59"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\life-tap-labs\\ltl-playground\\src\\components\\KnowledgeBase.tsx": {
+    "mtime": 1777650458.0,
+    "hash": "8ef66389850e77c6915589e60a717f52"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\life-tap-labs\\ltl-playground\\src\\components\\NetworkMesh.tsx": {
+    "mtime": 1777650458.0,
+    "hash": "2c79256c0f86f3c37ecd311f28e63210"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\life-tap-labs\\ltl-playground\\src\\components\\PerformanceDashboard.tsx": {
+    "mtime": 1777650458.0,
+    "hash": "c03f16909fe4702f52a7846f7063b9c0"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\life-tap-labs\\ltl-playground\\src\\components\\PromptRegistry.tsx": {
+    "mtime": 1777650458.0,
+    "hash": "873b8db1308ea8792178b579c3580e45"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\life-tap-labs\\ltl-playground\\src\\components\\WorkflowMap.tsx": {
+    "mtime": 1777650458.0,
+    "hash": "98e71e2b23cc2142510e748aa6ba8e3c"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\life-tap-labs\\ltl-playground\\src\\components\\AgentDiagnostics\\BrainTerminal.tsx": {
+    "mtime": 1777650458.0,
+    "hash": "dc47dbc6f6d444260801a9285297e726"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\life-tap-labs\\ltl-playground\\src\\components\\AgentDiagnostics\\NetworkGraph.tsx": {
+    "mtime": 1777650458.0,
+    "hash": "baa5ad3b5c5335a4a8a9fc9dfa497bfa"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\om-swami\\bonnie-playground\\bridge.py": {
+    "mtime": 1777851911.7944057,
+    "hash": "733cdc098276e8a564aa46375efc6a55"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\om-swami\\bonnie-playground\\server.ts": {
+    "mtime": 1777851911.800185,
+    "hash": "3b1f77b76c6ba02f750412a57e225611"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\om-swami\\bonnie-playground\\vite.config.ts": {
+    "mtime": 1777851911.8143198,
+    "hash": "b14c10a2a3daa1bb38ca7d5e4c6ecbe9"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\om-swami\\bonnie-playground\\src\\App.tsx": {
+    "mtime": 1777851911.801232,
+    "hash": "79e3dfbc76e43c31b7565534501ec46c"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\om-swami\\bonnie-playground\\src\\main.tsx": {
+    "mtime": 1777851911.8112645,
+    "hash": "a0bcc3ffa5e95e1965f94969ab488283"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\om-swami\\bonnie-playground\\src\\components\\ControllerDisplay.tsx": {
+    "mtime": 1777851911.803322,
+    "hash": "f58a6d975e9e20683fddd38bdebf5f02"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\om-swami\\bonnie-playground\\src\\components\\TacticalRadar.tsx": {
+    "mtime": 1777851911.8048694,
+    "hash": "73bbc496be3c32be9f62d2b65f4c8ef7"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\om-swami\\bonnie-playground\\src\\components\\TelemetryPanel.tsx": {
+    "mtime": 1777851911.8058715,
+    "hash": "b47a4c6b25f266b74e704c196697330b"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\om-swami\\bonnie-playground\\src\\components\\VisionPanel.tsx": {
+    "mtime": 1777851911.8068569,
+    "hash": "2c5780876ac53aed6cdcc3fd529ac372"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\om-swami\\bonnie-playground\\src\\components\\VoiceChat.tsx": {
+    "mtime": 1777851911.8096397,
+    "hash": "5000db23b7afaa84af2cbd943809807a"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\om-swami\\bonnie-playground\\src\\services\\geminiService.ts": {
+    "mtime": 1777851911.8122756,
+    "hash": "a517b4a77c364241b11351322ab7ec77"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\panopticon\\panopticon-playground\\app.js": {
+    "mtime": 1777851911.8217566,
+    "hash": "1859a2e09e284487dac8c9fa5f087e52"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\panopticon\\panopticon-playground\\data.js": {
+    "mtime": 1777652064.0,
+    "hash": "b0459380a7785e9a355739732beb02c6"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\panopticon\\panopticon-playground\\globe.js": {
+    "mtime": 1777638854.2220683,
+    "hash": "c7f71521edb3897d6686494b86a37566"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\panopticon\\panopticon-playground\\panels.js": {
+    "mtime": 1777652064.0,
+    "hash": "aafa8807afa6e33f13601efa0ab85050"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\panopticon\\panopticon-playground\\timeline.js": {
+    "mtime": 1777652064.0,
+    "hash": "85175ebe6b99cf2d3e6b541e6802bcdb"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\prada\\boonk-v2-app\\server.js": {
+    "mtime": 1777851911.8496547,
+    "hash": "76cfa1539bac146ec868f8cf6ef55924"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\prada\\boonk-v2-app\\test-edit.js": {
+    "mtime": 1777851911.864753,
+    "hash": "673f50169a68ca3d57b5249d599a19b7"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\prada\\boonk-v2-app\\test-edit2.js": {
+    "mtime": 1777851911.8657937,
+    "hash": "673f50169a68ca3d57b5249d599a19b7"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\prada\\boonk-v2-app\\test-env.js": {
+    "mtime": 1777851911.866857,
+    "hash": "5a5aa914c5fc1db395092e11512f5391"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\prada\\boonk-v2-app\\test-loadenv.js": {
+    "mtime": 1777851911.8725247,
+    "hash": "7b375dd708664a7d6cc22c3343c91d48"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\prada\\boonk-v2-app\\test-ls.js": {
+    "mtime": 1777851911.8746505,
+    "hash": "f04aeff6c920c4a623b8f09bd5fe28a7"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\prada\\boonk-v2-app\\test-ls2.js": {
+    "mtime": 1777851911.8761659,
+    "hash": "0942b366da51d1cdc3850c2127f59c48"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\prada\\boonk-v2-app\\vite.config.ts": {
+    "mtime": 1777851911.8807795,
+    "hash": "54c424af6dcdfc1dcfa9302f249ce56c"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\prada\\boonk-v2-app\\src\\App.tsx": {
+    "mtime": 1777851911.8518524,
+    "hash": "b93d26dd772918b5ae9dc7ee0220aecf"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\prada\\boonk-v2-app\\src\\main.tsx": {
+    "mtime": 1777851911.8600109,
+    "hash": "6f5de1585604b26ed3b4286aadcc29a0"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\prada\\boonk-v2-app\\src\\components\\ErrorBoundary.tsx": {
+    "mtime": 1777851911.8539622,
+    "hash": "c24aaf1843c5c8ee8852f1afee92a726"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\prada\\boonk-v2-app\\src\\components\\VisualEditor.tsx": {
+    "mtime": 1777851911.8558004,
+    "hash": "45998e58394dfc8ddea46cb815d2d9e6"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\the-books-of-ye\\playground\\vite.config.ts": {
+    "mtime": 1777851911.9127207,
+    "hash": "17a4a8b0e9b65f611212b80725ac5fd9"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\the-books-of-ye\\playground\\src\\App.tsx": {
+    "mtime": 1777851911.9078267,
+    "hash": "97f520ce4053c4f4fa4481168ad7bc72"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\the-books-of-ye\\playground\\src\\main.tsx": {
+    "mtime": 1777851911.9100955,
+    "hash": "a0bcc3ffa5e95e1965f94969ab488283"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\thinkers\\ltl-playground\\vite.config.ts": {
+    "mtime": 1777851911.9571137,
+    "hash": "219382d47c5afc64c6bffa57b688445a"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\thinkers\\ltl-playground\\src\\App.tsx": {
+    "mtime": 1777851911.932171,
+    "hash": "2632211c45cd4219456acfde13e60617"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\thinkers\\ltl-playground\\src\\main.tsx": {
+    "mtime": 1777851911.955417,
+    "hash": "a0bcc3ffa5e95e1965f94969ab488283"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\thinkers\\ltl-playground\\src\\components\\AgentDirectory.tsx": {
+    "mtime": 1777851911.935822,
+    "hash": "7948e76ce458444a2682a098c19a48e0"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\thinkers\\ltl-playground\\src\\components\\AnalyticsDashboard.tsx": {
+    "mtime": 1777851911.9390402,
+    "hash": "b9edd163f097c6f6d8a20ddc302aa4c7"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\thinkers\\ltl-playground\\src\\components\\EconomyDashboard.tsx": {
+    "mtime": 1777851911.9406445,
+    "hash": "f64246d3a6b7d39bfae3bc7fb03ff278"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\thinkers\\ltl-playground\\src\\components\\EmbeddingsVisualizer.tsx": {
+    "mtime": 1777851911.9419208,
+    "hash": "e810d661e3b371a61a75f0f3b73b0b20"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\thinkers\\ltl-playground\\src\\components\\GlobalCommand.tsx": {
+    "mtime": 1777851911.9453638,
+    "hash": "bee6b50012f8faf4809a33c7f409c396"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\thinkers\\ltl-playground\\src\\components\\GovernanceDashboard.tsx": {
+    "mtime": 1777851911.946988,
+    "hash": "4aa8bded51c0c550afaf0cfa20f0e00d"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\thinkers\\ltl-playground\\src\\components\\KnowledgeBase.tsx": {
+    "mtime": 1777851911.9480536,
+    "hash": "1e1aaa6262388fc66ca00f26a4c42dde"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\thinkers\\ltl-playground\\src\\components\\NetworkMesh.tsx": {
+    "mtime": 1777851911.9501643,
+    "hash": "76624911c132f4b65b2eed2fc582ab03"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\thinkers\\ltl-playground\\src\\components\\PerformanceDashboard.tsx": {
+    "mtime": 1777851911.951215,
+    "hash": "0c8840e73147ff596390f890d52efe3e"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\thinkers\\ltl-playground\\src\\components\\PromptRegistry.tsx": {
+    "mtime": 1777851911.9522617,
+    "hash": "ea4f4b9c3b3e896fb9422a790b19a2cd"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\thinkers\\ltl-playground\\src\\components\\WorkflowMap.tsx": {
+    "mtime": 1777851911.9532993,
+    "hash": "82d7bdabc78165f632f0019f337fe66e"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\thinkers\\ltl-playground\\src\\components\\AgentDiagnostics\\BrainTerminal.tsx": {
+    "mtime": 1777851911.932171,
+    "hash": "fbc8d5b96a4822ae75031b287d6a52b1"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\thinkers\\ltl-playground\\src\\components\\AgentDiagnostics\\NetworkGraph.tsx": {
+    "mtime": 1777851911.935822,
+    "hash": "274e68ae06147825987f377e7ffe1db5"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\App.tsx": {
+    "mtime": 1777984985.433064,
+    "hash": "6089d6c4a7f74b8150440fb5f75cd488"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\main.tsx": {
+    "mtime": 1777470632.2885656,
+    "hash": "2b36426d5ad7e08ef79746aa524f4fb7"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\components\\Book.tsx": {
+    "mtime": 1777980999.0261753,
+    "hash": "2faecdb631f8201f992fb2ed14b1e7bb"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\components\\Bookshelf.tsx": {
+    "mtime": 1777851911.969949,
+    "hash": "c4377af6d8f2dbf02da0868f58304e71"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\components\\CaseStudyDetail.tsx": {
+    "mtime": 1777887214.339222,
+    "hash": "8c70ee5eb646f4457df3ee61ef1e6280"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\components\\HomeView.tsx": {
+    "mtime": 1777982703.5990274,
+    "hash": "29a71891e7654ef16fc197f6c074cb23"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\components\\LibraryShelfPick.tsx": {
+    "mtime": 1777779698.308004,
+    "hash": "acf64e6e36048c163d77fdb8588fda30"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\components\\Navigation.tsx": {
+    "mtime": 1777981044.645397,
+    "hash": "94516b8ad16532a0a98fd565c8051bf4"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\components\\Visuals.tsx": {
+    "mtime": 1777491733.8119636,
+    "hash": "413ea133d91bc2c897ac9f8a714f5b1d"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\components\\project\\ProjectDetailPage.tsx": {
+    "mtime": 1777984994.9590213,
+    "hash": "ca1fe09905721e57fcf4eae1247d5f2c"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\components\\project\\ProjectEmailMarquee.tsx": {
+    "mtime": 1777836437.725018,
+    "hash": "138daf53d86b3e8e62a84b06b42a41c8"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\components\\project\\ProjectFooterStamp.tsx": {
+    "mtime": 1777775390.885696,
+    "hash": "83891fb49ad560867b664d17c70b00a7"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\components\\project\\ProjectGallery.tsx": {
+    "mtime": 1777823987.6038184,
+    "hash": "7b4c92eadac7e49c3671300b9e3ac14a"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\components\\project\\ProjectNextPrevious.tsx": {
+    "mtime": 1777779698.313424,
+    "hash": "4ac2d585862f51c95c64ebd162f524e9"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\components\\project\\ProjectPlaygroundCTA.tsx": {
+    "mtime": 1777763471.6255395,
+    "hash": "0436312f6c27559622c731e769000dbc"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\data\\aboutMe.tsx": {
+    "mtime": 1777982703.5990274,
+    "hash": "db8fe3b49490c2749f01dd7a82d6c5c5"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\data\\aiLibraryBook.tsx": {
+    "mtime": 1777890764.464793,
+    "hash": "b79bfab1b4af7096fd4ddf929172d811"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\data\\caseStudies.tsx": {
+    "mtime": 1777888845.468502,
+    "hash": "6d04823a4712b2d05c201a46ba0b2488"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\data\\caseStudyMeta.ts": {
+    "mtime": 1777984833.217642,
+    "hash": "1f9c5ccc7f017b98482f5224d5fa5258"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\data\\helloPatientCase.tsx": {
+    "mtime": 1777851797.5458615,
+    "hash": "efe04e661cfa142421f9afcd2521d786"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\data\\jmFamilyCase.tsx": {
+    "mtime": 1777504489.4483168,
+    "hash": "4451b925aa820ece9ca92309c2246d14"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\data\\lightWonderCase.tsx": {
+    "mtime": 1777504489.4483168,
+    "hash": "84f5ce1a82d93a8bdf4f6211afc68059"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\data\\maybeMortgageCase.tsx": {
+    "mtime": 1777504489.445956,
+    "hash": "590c6ebd805a50b0679c59db9bcabcb2"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\data\\nextEraCase.tsx": {
+    "mtime": 1777504489.446964,
+    "hash": "8358c00d3ec64c465987eacc926e50a0"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\data\\nvidiaCase.tsx": {
+    "mtime": 1777514927.4469917,
+    "hash": "f2bb4a35d05775ca5bb291a267340378"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\data\\portfolio.tsx": {
+    "mtime": 1777982703.601041,
+    "hash": "2a08b095720639b8c81e4b0487f5da40"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\data\\workDetails.tsx": {
+    "mtime": 1777984841.11881,
+    "hash": "77b833cfe6c3a9b49fa198c3e58463a5"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\data\\works.tsx": {
+    "mtime": 1777982703.6020484,
+    "hash": "588d4444863a42d9c2301dcad272c772"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\lib\\bookOpening.ts": {
+    "mtime": 1777697568.757269,
+    "hash": "75f969f1de68ace10c71b3db0efe8245"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\lib\\paperCurtainTransition.ts": {
+    "mtime": 1777761746.2278044,
+    "hash": "69cb8a6588e2649b37f761e42973df98"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\lib\\utils.ts": {
+    "mtime": 1777470632.3333738,
+    "hash": "8595c2f874aa1ff8c7cc28df2999f354"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\AGENTS.md": {
+    "mtime": 1777978193.2916236,
+    "hash": "814a8f50dd6310f74ab40936dfa19170"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\CLAUDE.md": {
+    "mtime": 1777978193.2921922,
+    "hash": "199a0912c762acdd9ed900bafb95fb6d"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\GEMINI.md": {
+    "mtime": 1777978193.2932155,
+    "hash": "199a0912c762acdd9ed900bafb95fb6d"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\index.html": {
+    "mtime": 1777851911.3494883,
+    "hash": "a2fbc124a9ba6fa45d1f042e76464b22"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\PROJECT_PAGES_REACT_REBUILD_HANDOFF.md": {
+    "mtime": 1777761508.6525867,
+    "hash": "2767db99c60d2fca696c47a9aa643895"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\README.md": {
+    "mtime": 1777470632.3489196,
+    "hash": "3801d35aa755ca245bda597f49e1b336"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\docs\\agent-handoff.md": {
+    "mtime": 1777983097.0347705,
+    "hash": "657abe1193cc3cd5c9ddaecfb7f28d0c"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\robots.txt": {
+    "mtime": 1777851911.471693,
+    "hash": "9e5e0f3c00e036d1694de2e6f678be2b"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\cortex-playground\\index.html": {
+    "mtime": 1777475216.0,
+    "hash": "c6cdc88c3abec682e37d1f35b7b4ad0b"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\cortex-playground\\README.md": {
+    "mtime": 1777475216.0,
+    "hash": "4fbbcd7e0196a2815866377602fa9b85"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\index.html": {
+    "mtime": 1777851911.7812505,
+    "hash": "0b635eb4e5f8b9c26f6b9786500bfcd0"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\aquerone\\index.html": {
+    "mtime": 1777851911.479303,
+    "hash": "1ad30379f9874f5ba5dcef5cb96ccc16"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\argor-heraeus\\index.html": {
+    "mtime": 1777851911.4803994,
+    "hash": "264a7d0556472f77ab97281c4f271c7e"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\argor-heraeus\\panopticon-playground\\Regional View.html": {
+    "mtime": 1777851911.4824057,
+    "hash": "006507309b4914d79a092cf7cba7fad4"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\argor-heraeus\\panopticon-playground\\World Model.html": {
+    "mtime": 1777851911.4834049,
+    "hash": "31f91dc37a9366463dd86af410d2db61"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\avroko\\index.html": {
+    "mtime": 1777851911.7292027,
+    "hash": "882ff33348a1d2d0f142eca4d43e0a72"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\avroko\\brokie-playground\\index.html": {
+    "mtime": 1777851911.7260814,
+    "hash": "192563a8d45aa1965422c97d50926ba7"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\bonnie\\index.html": {
+    "mtime": 1777851911.7358425,
+    "hash": "005aa630971359c5baa96a3a434dd8df"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\bonnie\\bonnie-playground\\index.html": {
+    "mtime": 1777609344.0,
+    "hash": "c6cdc88c3abec682e37d1f35b7b4ad0b"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\bonnie\\bonnie-playground\\README.md": {
+    "mtime": 1777609344.0,
+    "hash": "306108214a7416cb39c16694a48be93d"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\boonk\\index.html": {
+    "mtime": 1777851911.7430642,
+    "hash": "f95bcd7ed2b6c6e24c623a26876e016b"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\boonk\\boonk-v2-app\\index.html": {
+    "mtime": 1777653682.0,
+    "hash": "2eb31a41658c49f9c262f95a6f3b9825"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\boonk\\boonk-v2-app\\README.md": {
+    "mtime": 1777653682.0,
+    "hash": "68f30b5fae3701eeeed9dc1315c6d252"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\boonk\\boonk-v2-app\\dummy\\test.txt": {
+    "mtime": 1777653682.0,
+    "hash": "5d41402abc4b2a76b9719d911017c592"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\boonk\\boonk-v2-app\\dummy\\sub\\test2.txt": {
+    "mtime": 1777653682.0,
+    "hash": "7d793037a0760186574b0282f2f435e7"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\boonk\\boonk-v2-app\\previews\\test\\index.html": {
+    "mtime": 1777653682.0,
+    "hash": "107c30d8ae3ae863480fccb24e9a2d21"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\brokie-v1\\index.html": {
+    "mtime": 1777851911.7524178,
+    "hash": "dcb41b0e2bd6d7d1e8cc6e7c48789efb"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\brokie-v1-app\\index.html": {
+    "mtime": 1777851911.7466154,
+    "hash": "97e4337103745cb639c90342cf016035"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\brokie-v1-app\\README.md": {
+    "mtime": 1777650820.0,
+    "hash": "6916592d01da32ab74d66c982a44eb76"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\brokie-v2\\index.html": {
+    "mtime": 1777851911.759365,
+    "hash": "db84801822e04a3cee03696e074f9342"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\brokie-v2\\brokie-playground\\index.html": {
+    "mtime": 1777851911.7551775,
+    "hash": "192563a8d45aa1965422c97d50926ba7"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\byc2w\\index.html": {
+    "mtime": 1777851911.7604403,
+    "hash": "518175490fe1ea3551c25ddf607ae7c9"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\byc2w\\milky-way-loader.html": {
+    "mtime": 1777605413.6303508,
+    "hash": "508c901036e15bcec71e5373d38daa68"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\byc2w\\playground\\index.html": {
+    "mtime": 1777611112.0,
+    "hash": "c23a4af1f6fe3cf46c2812bbaba2c418"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\byc2w\\playground\\README.md": {
+    "mtime": 1777611112.0,
+    "hash": "f50cdfbcf894d3cba4fb012763ef79b1"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\chiara-luzzana\\index.html": {
+    "mtime": 1777851911.7635343,
+    "hash": "5a91be1e1f8b1cc97824a8761a56f82d"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\cobo\\index.html": {
+    "mtime": 1777851911.7661219,
+    "hash": "c453aaeeb4a220e0be96909ba4aa936c"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\cortex\\index.html": {
+    "mtime": 1777851911.7689896,
+    "hash": "67bd5c4a539ed0631aebba9f7bb0b4dc"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\deplace-maison\\index.html": {
+    "mtime": 1777851911.77123,
+    "hash": "295c721f6b8c65306abddbc165a65976"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\edoardo-smerilli\\index.html": {
+    "mtime": 1777851911.774576,
+    "hash": "c13daf3d301be57ce96f5ea00fd19885"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\global-intelligence-market\\index.html": {
+    "mtime": 1777851911.7770286,
+    "hash": "998ea365f06c771a0ac8f4e93e71425b"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\global-intelligence-market\\playground\\index.html": {
+    "mtime": 1777851911.7791162,
+    "hash": "435a27a755dc9601ccacd2e7460ef6eb"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\life-tap-labs\\index.html": {
+    "mtime": 1777851911.783257,
+    "hash": "f650e8b8191783bd8c4d25e3eeed00be"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\life-tap-labs\\ltl-playground\\index.html": {
+    "mtime": 1777650458.0,
+    "hash": "c6cdc88c3abec682e37d1f35b7b4ad0b"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\life-tap-labs\\ltl-playground\\README.md": {
+    "mtime": 1777650458.0,
+    "hash": "6b88daeaf351ec8b01084f7003a78ede"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\loftgarten\\index.html": {
+    "mtime": 1777851911.7892995,
+    "hash": "4d829c8b31b573e9574fda4bdb89d1fa"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\om-swami\\index.html": {
+    "mtime": 1777851911.8143198,
+    "hash": "288226370753ef1d3e5f5d25855e9c99"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\om-swami\\bonnie-playground\\index.html": {
+    "mtime": 1777851911.7954392,
+    "hash": "f10d287108a715d7981a85d55a4c7dfe"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\om-swami\\bonnie-playground\\README.md": {
+    "mtime": 1777851911.7933474,
+    "hash": "a3cee12128c10d4f9492dbe903beefb5"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\panopticon\\index.html": {
+    "mtime": 1777851911.8168373,
+    "hash": "e6443f4afe22bc09207f85220b52e619"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\panopticon\\panopticon-playground\\Regional View.html": {
+    "mtime": 1777851911.818844,
+    "hash": "006507309b4914d79a092cf7cba7fad4"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\panopticon\\panopticon-playground\\World Model.html": {
+    "mtime": 1777851911.820732,
+    "hash": "31f91dc37a9366463dd86af410d2db61"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\prada\\index.html": {
+    "mtime": 1777851911.8818603,
+    "hash": "646f71ed7b59b5c71c96aaf0d5765328"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\prada\\boonk-v2-app\\index.html": {
+    "mtime": 1777851911.8328176,
+    "hash": "a81bf97a5ce4ded20b7d8300dda30238"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\prada\\boonk-v2-app\\README.md": {
+    "mtime": 1777851911.8255935,
+    "hash": "1a5b60ee319ebd124020171874465b8a"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\prada\\boonk-v2-app\\dummy\\test.txt": {
+    "mtime": 1777851911.8310804,
+    "hash": "5d41402abc4b2a76b9719d911017c592"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\prada\\boonk-v2-app\\dummy\\sub\\test2.txt": {
+    "mtime": 1777851911.829397,
+    "hash": "7d793037a0760186574b0282f2f435e7"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\prada\\boonk-v2-app\\previews\\test\\index.html": {
+    "mtime": 1777851911.846466,
+    "hash": "107c30d8ae3ae863480fccb24e9a2d21"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\project-winter-haven\\index.html": {
+    "mtime": 1777851911.8843982,
+    "hash": "a9e5364a933d03be994f842ec34a9549"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\sal-parasuco\\index.html": {
+    "mtime": 1777851911.8867784,
+    "hash": "20857eb2a593435cee0cb98f3b39d0f9"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\the-books-of-ye\\index.html": {
+    "mtime": 1777851911.8884206,
+    "hash": "af75a3ede030e7732653bde5e7c2973f"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\the-books-of-ye\\milky-way-loader.html": {
+    "mtime": 1777851911.892432,
+    "hash": "475d63dbf706547cdfe76f7a41b58644"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\the-books-of-ye\\playground\\index.html": {
+    "mtime": 1777851911.9007897,
+    "hash": "dd81a79d62f6d4bdd270621d371c2e0d"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\the-books-of-ye\\playground\\README.md": {
+    "mtime": 1777851911.8991833,
+    "hash": "1f8148818ddf3498d93f91cbbd69b631"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\the-hiring-chain\\index.html": {
+    "mtime": 1777851911.9148636,
+    "hash": "85dcd0a3f35c6aa03aa721cb3f51ccef"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\the-roger-hub\\index.html": {
+    "mtime": 1777851911.9166205,
+    "hash": "7bd9f8d7cadbb6c63d850268ba491468"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\the-roger-hub\\playground\\index.html": {
+    "mtime": 1777851911.9188068,
+    "hash": "435a27a755dc9601ccacd2e7460ef6eb"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\thinkers\\index.html": {
+    "mtime": 1777851911.9204123,
+    "hash": "3a465f674f1f2575bee13b884e819642"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\thinkers\\ltl-playground\\index.html": {
+    "mtime": 1777851911.9225326,
+    "hash": "f10d287108a715d7981a85d55a4c7dfe"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\thinkers\\ltl-playground\\README.md": {
+    "mtime": 1777851911.9225326,
+    "hash": "cfc5e2b3b1e13a32d0c48820e5cdfb75"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\wow-concept\\index.html": {
+    "mtime": 1777851911.9597456,
+    "hash": "a2027fae161e63a753a33ace2a38c76a"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\favicon.png": {
+    "mtime": 1777588622.4568841,
+    "hash": "74b94eb507719c2b65846c5bd3bbfbac"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\paper-texture.jpg": {
+    "mtime": 1777466265.1770837,
+    "hash": "318fe5de0bba62ffc186b1700af80431"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\5f7f87c8b81a6e7a214312f0_header-f150e1dd70.svg": {
+    "mtime": 1777466266.838625,
+    "hash": "1fef5952d1f1ad5fb3334ead94cc0e95"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\5f908a8383d77666d092e9ac_edoardo-smerilli-e9fb926f4c.svg": {
+    "mtime": 1777851911.3637102,
+    "hash": "b6f381cce9563751f9404f1d4f88c5de"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\5f908aaaad7295f73a764e52_chiara-luzzana-41790aceff.svg": {
+    "mtime": 1777851911.3745983,
+    "hash": "278e572e2ac18da2a501099455df19eb"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\5f908aaf34dc6285e960f5e9_loftgarten-e5d4200ef9.svg": {
+    "mtime": 1777851911.379155,
+    "hash": "e120bef3119f56df018c169299a00d66"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\5f908ab3ae373ef56d31eefb_deplace-maison-97feefa870.svg": {
+    "mtime": 1777851911.383976,
+    "hash": "cce6dbff366fa0aaeb8acaecf86e3c47"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\5f91e586fc842aed0130218e_web-clip-a7535d1421.png": {
+    "mtime": 1777588639.6326876,
+    "hash": "a105ad6390d871bedd827c230ab266b5"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\5fa1c652d273b319eaf21a8a_avro-ko-d42afbb420.svg": {
+    "mtime": 1777466267.851779,
+    "hash": "cde7ccd3fa59e7b6f5028e3b68aaeac9"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\6000aa69371be067d0031c26_Group-20108-1bc9fdbb47.svg": {
+    "mtime": 1777466278.5645945,
+    "hash": "fca371f5d3fbd58a8b18697e637f637d"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\600fe1e2a33291e71d5b537d_trophy-min-757355046e.png": {
+    "mtime": 1777466279.2460577,
+    "hash": "143edd1957981c8764b46e611f67b2f2"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\600fe1e2a33291e71d5b537d_trophy-min-p-500-cf63fb4e0d.png": {
+    "mtime": 1777466282.8834045,
+    "hash": "b0f0023ae49ff9724ed71ccac75d9703"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\602400d0f06914cfb06f6770_webdesigner-depot-49af1c0379.png": {
+    "mtime": 1777466320.7223635,
+    "hash": "2d834af9ad47335de2ae8eee06ddf4a2"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\6037bca8a235aa99d7071f0e_deplace-maison-bdda96e5e5.svg": {
+    "mtime": 1777851911.3890085,
+    "hash": "6d7e3a706f833b9eb124de0e740af00d"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\6037bcaf8dfb7033537d1844_loftgarten-3024221499.svg": {
+    "mtime": 1777851911.3920524,
+    "hash": "ea248e68e261208a7eedf8ed8dbe668e"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\6037bcb5ce2b0c74b30b5b1f_chiara-luzzana-fefdb019e3.svg": {
+    "mtime": 1777851911.3967605,
+    "hash": "5b440596e79d87640ae261c6b07c3bfd"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\6037bcbbd8289d51c376f76d_edoardo-smerilli-ffe44b0eb3.svg": {
+    "mtime": 1777851911.40145,
+    "hash": "8bb3694bb02c6f6dd425e9214b929ca9"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\604097559eb3c50a15dcf787_avatar-1-76ac761599.jpeg": {
+    "mtime": 1777466264.9391785,
+    "hash": "c5c5ef7d61614a6076efc7805c4ea33d"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\60474834660f934090d42877_stamp-94c7c66056.png": {
+    "mtime": 1777582700.5150406,
+    "hash": "a4bf89dea718d9ca2a4f11407de3b794"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\6047aedcc580d046d3ce4941_open-graph-ca4400b987.jpeg": {
+    "mtime": 1777466273.7905765,
+    "hash": "67bc62c589990f3a803dc4f43ea330ce"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\605c679f33f67d3dd00b04b4_avatar-3-4f0d2055df.jpeg": {
+    "mtime": 1777466265.2802784,
+    "hash": "3a9145bbe08f789b2611679411b7b6d4"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\605d989c371fba72f26870d2_header-w-95ce565c9d.svg": {
+    "mtime": 1777466266.946771,
+    "hash": "9827766011e4b66adaa1c018f048bf6f"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61001a3509319b6ae39e156b_arrow-long-30c12dec51.svg": {
+    "mtime": 1777466273.6841555,
+    "hash": "4c76bc98298eec88fc20ea0a0c8fc506"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61002f390ad4b605537a07f5_hiring-chain-817fe65bc0.svg": {
+    "mtime": 1777851911.4051235,
+    "hash": "de99172c03f18770b4474fa4c5bcadbf"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61002f407796bf6e701cfa91_hiring-chain-45bcaf89dd.svg": {
+    "mtime": 1777851911.4081302,
+    "hash": "a7a9891acd3e51fbe7e5a11b5ffd3c64"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\610a9b23773de019356b2465_web-clip-980e151776.png": {
+    "mtime": 1777466265.8036706,
+    "hash": "643354609d0ef23c6907bcfa70d76483"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\610a9b617744c726c80e42ec_favicon-0e9df116c3.png": {
+    "mtime": 1777466265.747671,
+    "hash": "5e8f42667290c00ce318cf0fb1dbaa3a"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\614f353f1e11a6a7afdd8b74_6059a3e2b9ae6d2bd508685c_pt-texture-2-910a4fce28.jpg": {
+    "mtime": 1777466265.1770837,
+    "hash": "318fe5de0bba62ffc186b1700af80431"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\6154c08d01eb1d0431cc5e99_thumbnail-big-fc45ed4f90.jpeg": {
+    "mtime": 1777466316.4512532,
+    "hash": "230011e809c23c034bbe3ac5f269d0b1"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\6154c08f2cb3f82f2dce7b6d_thumbnail-small-1c7012fcc8.jpeg": {
+    "mtime": 1777466272.0934794,
+    "hash": "065d0270b96229c9b88312a51a1ce79d"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\6154c08f2cb3f82f2dce7b6d_thumbnail-small-p-500-5fe19def26.jpeg": {
+    "mtime": 1777466275.168079,
+    "hash": "6485e026a6b3bb72fb26d34cd223e584"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\6154c08f2cb3f82f2dce7b6d_thumbnail-small-p-800-259475ce92.jpeg": {
+    "mtime": 1777466275.2973475,
+    "hash": "0f50158a43b8b47efabe6519802da7d3"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\6154c829c9765ee8749d5aca_sal-parasuco-c677010ec0.svg": {
+    "mtime": 1777851911.4111488,
+    "hash": "021d5e3b9daf611ecc8d6f8f73efa4e8"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\6154c8309a78ed406cf77672_sal-parasuco-47de824c88.svg": {
+    "mtime": 1777851911.414211,
+    "hash": "f807672a6ec82e11ea8319b426e67bdf"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\6154cd66aac8e06eae680d70_prada-5564e0c99a.svg": {
+    "mtime": 1777851911.416969,
+    "hash": "6e3df3c6bd93de2b8f8be119a2dccca6"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\6155b959e22ce11a4a39ad04_scratch-1803e60b21.png": {
+    "mtime": 1777466278.2378938,
+    "hash": "e2c525a3f12f6a3abe99f7f52aa501e0"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\6155b959e22ce11a4a39ad04_scratch-p-1080-7ba0277f87.png": {
+    "mtime": 1777466281.895882,
+    "hash": "eb2e97c11ea961bd87370f71d5bb2c7d"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\6155b959e22ce11a4a39ad04_scratch-p-1600-256d6aa3d2.png": {
+    "mtime": 1777466282.0484364,
+    "hash": "555481432b98e5d0b4ca8b03f47bf34c"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\6155b959e22ce11a4a39ad04_scratch-p-2000-f3f0a4d69d.png": {
+    "mtime": 1777466282.2304037,
+    "hash": "d05b12b72846b39d358880cdb77f2b9b"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\6155b959e22ce11a4a39ad04_scratch-p-2600-fa3ac37f3d.png": {
+    "mtime": 1777466282.4751966,
+    "hash": "b4d4b8d53182ea9475aaba98c4600a0a"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\6155b959e22ce11a4a39ad04_scratch-p-3200-0d9e24473c.png": {
+    "mtime": 1777466282.766153,
+    "hash": "b91206fda6270154e22316208a39471f"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\6155b959e22ce11a4a39ad04_scratch-p-500-2c67157337.png": {
+    "mtime": 1777466281.6879933,
+    "hash": "fdf82b58235afb04e556ba959ad8f34d"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\6155b959e22ce11a4a39ad04_scratch-p-800-add135d04f.png": {
+    "mtime": 1777466281.7924142,
+    "hash": "7eb4ebf6b8a05cafc3c8a318e3e416bd"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\6155c5590fd7e8eac5d4c28a_eCommerce-1073c16100.svg": {
+    "mtime": 1777466267.3785548,
+    "hash": "442543aa8dabedb3ec47bcddd9d65226"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\6155c55d0a67d3c06cfe6540_fashion-d1b1ac3bc6.svg": {
+    "mtime": 1777466267.442209,
+    "hash": "f9b3b4ad193d5cbfadd47eb47fb31df0"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\6155c8173b8e8ce07a3a08f6_arrow-down-1c14bc78d4.svg": {
+    "mtime": 1777466278.3884168,
+    "hash": "d51100de727bea97a89f06c1d8d979df"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\615620541599cbe2e3985ff2_gallery-579256325c.svg": {
+    "mtime": 1777466278.9232776,
+    "hash": "6c97d8f144114f0a7e1b477cbd58a8c9"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\6156269f844b45c65e496771_close-5751f8af2a.svg": {
+    "mtime": 1777466277.1918204,
+    "hash": "27feeb1d219563303c9b7d2d69ac984e"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\615b3797811af550938b83e8_cinema-24c9f4c0b9.svg": {
+    "mtime": 1777466272.2658038,
+    "hash": "fbeb357d1f3fb965bcba02c83bea2ba1"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\615b379e9bc97430ef4536e5_portfolio-4883650d90.svg": {
+    "mtime": 1777466267.955603,
+    "hash": "fa812f215d033e699ed9c8644310d0e8"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\615b37b43843e03672eed81f_architecture-85aa1caab7.svg": {
+    "mtime": 1777466268.0372107,
+    "hash": "029df3695c0df1f374b5380ee73bb362"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\615b37cce6b9dafc199c41ad_music-0a9dbb4342.svg": {
+    "mtime": 1777466271.2533424,
+    "hash": "ce7bd38f7fc2e73d3af7c77d258098e4"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\615b37df34840b1f908cc72d_digital-36c9f42b11.svg": {
+    "mtime": 1777466267.6423354,
+    "hash": "b8166bc124a8da7490980ae3821ac96a"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\615d964b41e06766b5de4c50_thumbnail-small-2ee2971764.jpeg": {
+    "mtime": 1777466271.731255,
+    "hash": "b42b0ff6af9afe2dec3e36fee96f1249"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\615d964b41e06766b5de4c50_thumbnail-small-p-500-ca9c215e49.jpeg": {
+    "mtime": 1777466275.0697994,
+    "hash": "1f6d9b54238dc2cdfd8257d8db2a3238"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\615d965c7d1e647b4cb97b73_thumbnail-small-a689a3dab3.jpeg": {
+    "mtime": 1777466271.0814972,
+    "hash": "a704418689caf451e35d8536956103de"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\615d965c7d1e647b4cb97b73_thumbnail-small-b118c7df65.jpeg": {
+    "mtime": 1777466279.576031,
+    "hash": "a704418689caf451e35d8536956103de"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\615d965c7d1e647b4cb97b73_thumbnail-small-p-500-9086cf6a24.jpeg": {
+    "mtime": 1777466274.8451035,
+    "hash": "75acd3fdafc9b105634aa62b2de534f6"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\615d9662fbb2467631e07c72_thumbnail-big-313666b2fe.jpeg": {
+    "mtime": 1777648992.2078774,
+    "hash": "9209464afab8ffc7fdbd47d5539bb4fd"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\615d9670b144655ffd217ac6_thumbnail-big-4951f49aae.jpeg": {
+    "mtime": 1777663599.8882565,
+    "hash": "54a1ab96760890ed26af3faf11cc2656"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\615d9672cc65f12c9ab25f21_thumbnail-small-677a1d404f.jpeg": {
+    "mtime": 1777466269.1303608,
+    "hash": "72b4ca460ac0215a65294a9d1a989a40"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\615d9672cc65f12c9ab25f21_thumbnail-small-p-500-b8a7f68fe6.jpeg": {
+    "mtime": 1777466274.2633388,
+    "hash": "451ae05ddad8a21172a45d06c5381e7b"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\615d96d3bb23c2ae2b1f3dd8_aquerone-740b591e68.svg": {
+    "mtime": 1777851911.418969,
+    "hash": "437d13b29643d44f40a4410654502f31"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\615d9bc3488f1e230fba8cf6_avroko-5d79b9d8c8.svg": {
+    "mtime": 1777851911.4215634,
+    "hash": "b9339a83b91ee989c3dc3d9547158501"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\615d9d9b5edfe105b32e1dc4_cobo-srl-ccfdb44178.svg": {
+    "mtime": 1777851911.4287012,
+    "hash": "18e2dc874ab539a0e1f4007d9ece6b10"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\615dc88cfe2d004ce649b413_author-name-dc79ee1659.svg": {
+    "mtime": 1777466325.260078,
+    "hash": "ce19b120fd610aa1346bdad14c524a59"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\6160264b7d4ffe664c07fbde_thumbnail-big-4f2e4d4db3.jpeg": {
+    "mtime": 1777466314.573248,
+    "hash": "532755ed9a8c8f547edc2b17bea6971b"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61604f29c4dcace095eaf9fd_review-ico-126b9a14c9.png": {
+    "mtime": 1777466313.4567666,
+    "hash": "3a93b100d08eb471455e8f5e1733e7cc"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61604f319a5ac54594f48492_author-name-1-bc7f56522a.svg": {
+    "mtime": 1777466313.5236924,
+    "hash": "b643552196d02e0a4fb1a7bb79a1c3be"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\616050d7afb9002f8cd65ad1_review-ico-2-203a5bf067.png": {
+    "mtime": 1777466318.7682943,
+    "hash": "41f79ec0a5be0176c416a7942e26ec7c"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\616050e80b59157d91348001_author-name-2-5afb9db739.svg": {
+    "mtime": 1777466318.8814824,
+    "hash": "6df6a029a1d0a92ab98c36062f28d02a"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\6160511ba9fb4a4b71841886_author-name-3-b7c035d5cb.svg": {
+    "mtime": 1777466320.8310947,
+    "hash": "c5281646a8ff586ca60cbe38df3e1452"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\616052763a85733f18b7b4cd_review-ico-3-85ffc9c9d1.png": {
+    "mtime": 1777466323.5265217,
+    "hash": "a35b85e5c75172b081c7029959d63146"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\6160527e88025b362df66d0b_author-name-4-6a65f0ae60.svg": {
+    "mtime": 1777466323.5884314,
+    "hash": "e447848aa8d52bb6df90979d56f9a07d"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\616053b34fb8fd6887d48077_review-ico-4-bb72bf140d.png": {
+    "mtime": 1777466313.5921447,
+    "hash": "3766837bbcfbad9668a9d49191389f57"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\616053ee2516f3200a2b7744_author-name-5-ec56b8c5f3.svg": {
+    "mtime": 1777466313.7007499,
+    "hash": "4e8343b103cd9bc08c4bf15c956fac31"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61605b01df161189ad82fc41_gallery-2-01c5e52e3d.jpeg": {
+    "mtime": 1777466324.9005435,
+    "hash": "182e3674e566ab09268fa2f0a8621934"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61605b01df161189ad82fc41_gallery-2-p-1080-11f1f31700.jpeg": {
+    "mtime": 1777466325.4543908,
+    "hash": "6b593576b538ddb2a85b5814344d5fb2"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61605b01fc7f67239e34640a_gallery-4-11047e4a1f.jpeg": {
+    "mtime": 1777466325.195908,
+    "hash": "1587f16810d1be3351753c0ddbf136ac"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61605b01fc7f67239e34640a_gallery-4-p-1080-a3de1cf07a.jpeg": {
+    "mtime": 1777466325.6223907,
+    "hash": "a683410bc2bde82248080cb6af2f03a5"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61605b01fc7f67afb634640b_gallery-3-aa38e74ab0.jpeg": {
+    "mtime": 1777466325.0517366,
+    "hash": "87548f3a6c97564fe6e8bb5fa83793f2"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61605b01fc7f67afb634640b_gallery-3-p-1080-5d4078d1e9.jpeg": {
+    "mtime": 1777466325.5452404,
+    "hash": "672a4c6a2f9ec47b72398c559f81e39d"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61605b02d19aa0ed8f08f886_gallery-1-b471a77f87.jpeg": {
+    "mtime": 1777466324.7909515,
+    "hash": "5d7022ae02cd067e30873978d76aee9d"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61605b02d19aa0ed8f08f886_gallery-1-p-1080-7fb718115a.jpeg": {
+    "mtime": 1777466325.3429992,
+    "hash": "910879594c19f3c7250001ad12ddd52d"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655d8a0f35b3fe7670132e_gallery-4-f8a32edc92.jpeg": {
+    "mtime": 1777648996.7578087,
+    "hash": "3e8aea7637e6cd3d48d4e19e38b55825"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655d8a0f35b3fe7670132e_gallery-4-p-1080-581fa30ad0.jpeg": {
+    "mtime": 1777649909.5633166,
+    "hash": "1f43c8b483ed78487bcdc7f8e5cf6c3c"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655d8ab4a6ecd075be2c18_gallery-3-ed370a22f9.jpeg": {
+    "mtime": 1777648996.3994164,
+    "hash": "6eb8a9e3f44cc42308e51ae0a81df864"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655d8ab4a6ecd075be2c18_gallery-3-p-1080-66203f8bc5.jpeg": {
+    "mtime": 1777649909.5034616,
+    "hash": "b608fe65a8586b995f947cc7e292380d"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655d8b1ae3d8c0307621aa_gallery-1-040c0ebacd.jpeg": {
+    "mtime": 1777648995.6156585,
+    "hash": "e4e2f10915275960c58b9fdd8418bb2c"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655d8b1ae3d8c0307621aa_gallery-1-p-1080-4f3f434cf6.jpeg": {
+    "mtime": 1777649909.365679,
+    "hash": "5624db1a1d7c2fd9c4e7e31db7b9480b"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655d8bd038090d9ff71423_gallery-2-526f8afc85.jpeg": {
+    "mtime": 1777648996.0089302,
+    "hash": "9c6edefba89a8aed4f7efa624ad010b0"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655d8bd038090d9ff71423_gallery-2-p-1080-87c21a9133.jpeg": {
+    "mtime": 1777649909.4369824,
+    "hash": "5b00713fbc8b26d478d335f9aae47fdb"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655d9d2077e51e3344b15f_gallery-2-976a81280b.jpeg": {
+    "mtime": 1777466316.6570985,
+    "hash": "81bfc8547b4a87b66dbfd45c9132ca8c"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655d9d2077e51e3344b15f_gallery-2-p-1080-8f9934e57b.jpeg": {
+    "mtime": 1777466317.216874,
+    "hash": "c21ee8851b37ddbfac0f049a9c5066a5"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655d9d559bab535506f889_gallery-4-1ffad9d3a3.jpeg": {
+    "mtime": 1777466316.8581736,
+    "hash": "5e77591e7bd18981828b7c8323184bcc"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655d9d559bab535506f889_gallery-4-p-1080-b2ec85eea6.jpeg": {
+    "mtime": 1777466317.4034865,
+    "hash": "d5e9d76a0851e92f5a031bdac7ec480c"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655d9dc1b9a0e24955aeee_gallery-1-fba112ec08.jpeg": {
+    "mtime": 1777466316.549472,
+    "hash": "55ece97d3c69fda6161625d67415ac5a"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655d9dc1b9a0e24955aeee_gallery-1-p-1080-98c69946b4.jpeg": {
+    "mtime": 1777466317.1403801,
+    "hash": "422fbfefe03480b37fe1b2f51ec20bd4"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655d9dc6c2a203d367e112_gallery-3-ea54775a50.jpeg": {
+    "mtime": 1777466316.7785947,
+    "hash": "5146ff6440591c62f46d7ab814762694"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655d9dc6c2a203d367e112_gallery-3-p-1080-9ce13cec3e.jpeg": {
+    "mtime": 1777466317.2968872,
+    "hash": "5a2d51bce11806b2db9c81785b60e2af"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655d9dfab41c102bad247e_gallery-5-c3e7c7600d.jpeg": {
+    "mtime": 1777466316.959958,
+    "hash": "8afb4a5ea0b2f734b162015e8fdf4ae6"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655d9dfab41c102bad247e_gallery-5-p-1080-b70c0f5d7b.jpeg": {
+    "mtime": 1777466317.5925374,
+    "hash": "ce968c9e2e1c1e60cccb7792b50fcdc2"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655d9dfab41c102bad247e_gallery-5-p-800-4d125c6350.jpeg": {
+    "mtime": 1777466317.4876103,
+    "hash": "73a2145da6d8f87d119fdb1867353c93"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655daa0f35b321de701379_gallery-4-8e8e813aa9.jpeg": {
+    "mtime": 1777466315.1574218,
+    "hash": "92726c7119b2998da61eee6590264a46"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655daa0f35b321de701379_gallery-4-p-1080-94d70338aa.jpeg": {
+    "mtime": 1777466315.9277763,
+    "hash": "cc512797719267fceb4a7cce5d4ee624"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655daa273d486eeb0f1d5a_gallery-5-512a3f105c.jpeg": {
+    "mtime": 1777466315.3529813,
+    "hash": "0072dc6655793e195cc39b16cc00ae46"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655daa273d486eeb0f1d5a_gallery-5-p-1080-1d758160cd.jpeg": {
+    "mtime": 1777466316.0276554,
+    "hash": "59f091f9fd24db9d8e1d83adc478ee56"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655daa4316f3b0ad502017_gallery-6-0f19aeab9c.jpeg": {
+    "mtime": 1777466315.4740303,
+    "hash": "e6738221c1522e00fb79c8a4a5a4e03a"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655daa4316f3b0ad502017_gallery-6-p-1080-ae4751bfa3.jpeg": {
+    "mtime": 1777466316.109354,
+    "hash": "8669e6145479c9e6e98f1ba74dfccbdc"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655daac1b9a0621055af1f_gallery-3-71347ed473.jpeg": {
+    "mtime": 1777466315.0201197,
+    "hash": "d571b75491f516c9d2ea00b57ec481b5"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655daac1b9a0621055af1f_gallery-3-p-1080-0af2388772.jpeg": {
+    "mtime": 1777466315.8145063,
+    "hash": "e21d7155913a77de9a4cb0c04786eb7a"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655daada8533cae55a5f4b_gallery-1-cf03fc9980.jpeg": {
+    "mtime": 1777466314.7014532,
+    "hash": "eb114eb3aafa1c6e7e97af95c10b51e2"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655daada8533cae55a5f4b_gallery-1-p-1080-99775e4b6e.jpeg": {
+    "mtime": 1777466315.6382377,
+    "hash": "9b07c3881876810e28654d17721e62ef"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655daada8533cae55a5f4b_gallery-1-p-800-99557d4fb9.jpeg": {
+    "mtime": 1777466315.557107,
+    "hash": "e90aeb5121ac163dcb8e78606c8b8017"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655daae9543678de17e6dd_gallery-2-17bf84b1bf.jpeg": {
+    "mtime": 1777466314.8736687,
+    "hash": "c6ebb43c012a60b3fa8e0ecd66d3b576"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655daae9543678de17e6dd_gallery-2-p-1080-dd611fcdee.jpeg": {
+    "mtime": 1777466315.7236297,
+    "hash": "3d5721291d0462e171e839c31309fdb3"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655db701a131a06c37ca83_gallery-5-af134209a7.jpeg": {
+    "mtime": 1777648994.0222533,
+    "hash": "781db35e3dda19631bb5b0630321ea6b"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655db701a131a06c37ca83_gallery-5-p-1080-fbe323700f.jpeg": {
+    "mtime": 1777649909.286529,
+    "hash": "a8d66ec910cd234d9046170654b9ba88"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655db701a131a06c37ca83_gallery-5-p-800-be86e0b6ea.jpeg": {
+    "mtime": 1777649909.2381914,
+    "hash": "5f52c9b8d30b19b23df676fff796ad6a"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655db73259a581d3bc4dec_gallery-1-155fffe5de.jpeg": {
+    "mtime": 1777648992.586397,
+    "hash": "56cfbcd218b1b00d8cd967d2745c195f"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655db73259a581d3bc4dec_gallery-1-p-1080-37611b4a03.jpeg": {
+    "mtime": 1777649908.8694506,
+    "hash": "78f8769296a67bd01f3ff8785e0f6bb2"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655db764ba8edc61444653_gallery-3-3c75896247.jpeg": {
+    "mtime": 1777648993.3849502,
+    "hash": "9180ae52040f420c3e7a95741be5a276"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655db764ba8edc61444653_gallery-3-p-1080-c8d2491dc3.jpeg": {
+    "mtime": 1777649909.0723703,
+    "hash": "48c09f653642b2198607dfddd6920ead"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655db764ba8edc61444653_gallery-3-p-500-fc16473e83.jpeg": {
+    "mtime": 1777649909.0106268,
+    "hash": "5984660e2001372afe3741be119650ce"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655db764ba8edc61444653_gallery-3-p-800-8450de1bd1.jpeg": {
+    "mtime": 1777649909.0355089,
+    "hash": "059c4bbf266db15d62b50f25d060a399"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655db793d872e9e2b04caa_gallery-4-7d81ba2ffe.jpeg": {
+    "mtime": 1777648993.7079253,
+    "hash": "14a72d9165d9a4592245894390804183"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655db793d872e9e2b04caa_gallery-4-p-1080-27fec11d3e.jpeg": {
+    "mtime": 1777649909.172606,
+    "hash": "aa06dd7cc46ec92e73fc6672dd52bbe4"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655db793d872e9e2b04caa_gallery-4-p-500-78320dbf56.jpeg": {
+    "mtime": 1777649909.103872,
+    "hash": "c13f77cbec4ba9231a898a5dcdd72f46"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655db793d872e9e2b04caa_gallery-4-p-800-3c66b6ad9a.jpeg": {
+    "mtime": 1777649909.131876,
+    "hash": "ad32868cb7be3b1c764d480790a4cd45"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655db7fc7180dd48fda3c4_gallery-2-ff37f5e6fe.jpeg": {
+    "mtime": 1777648992.9822156,
+    "hash": "2e7a2244ca8faa911ab6af2487fb7392"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655db7fc7180dd48fda3c4_gallery-2-p-1080-fd7e1bb6fe.jpeg": {
+    "mtime": 1777649908.9807997,
+    "hash": "16c978f2dde8df2d5840f9275e2b2722"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655db7fc7180dd48fda3c4_gallery-2-p-500-50a47a61c1.jpeg": {
+    "mtime": 1777649908.9081454,
+    "hash": "90ad14fb4a1d68be11e70f70034d896b"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655db7fc7180dd48fda3c4_gallery-2-p-800-3cb80c315f.jpeg": {
+    "mtime": 1777649908.9384856,
+    "hash": "1e1e0c5fb3c58590ceeb3a68a512d202"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655dc29aca461777676cff_gallery-3-11f8013e78.jpeg": {
+    "mtime": 1777663600.167029,
+    "hash": "ea2973d1832e0d079b6dcb57aea57449"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655dc29aca461777676cff_gallery-3-p-1080-c3fa8ecd0a.jpeg": {
+    "mtime": 1777663600.2006533,
+    "hash": "0acd90cc2532c5b2554ab281f73e8a2f"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655dc2aebe19703a5b53f5_gallery-4-d5f9a88adb.jpeg": {
+    "mtime": 1777663600.2705996,
+    "hash": "16ccaec930a100c911b700382635a587"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655dc2aebe19703a5b53f5_gallery-4-p-1080-fa9262de2e.jpeg": {
+    "mtime": 1777663600.3048322,
+    "hash": "3289931841c886afe32ddde4e7808caf"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655dc2c9f01845bcc8a640_gallery-5-a79c41a932.jpeg": {
+    "mtime": 1777663600.3751636,
+    "hash": "1458c95899fd5390211b0322db1b1194"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655dc2c9f01845bcc8a640_gallery-5-p-1080-134d40e13a.jpeg": {
+    "mtime": 1777663600.4093409,
+    "hash": "b20bc83238ab0d90c853b2264b123f70"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655dc2fab41c224cad2490_gallery-1-d711a0faf8.jpeg": {
+    "mtime": 1777663599.9573803,
+    "hash": "fc1e25565d419d3053337e43c1678ed3"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655dc2fab41c224cad2490_gallery-1-p-1080-773506ecee.jpeg": {
+    "mtime": 1777663599.990932,
+    "hash": "d786b85197c81c1355a559ec05899753"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655dc2fab41c4a89ad248f_gallery-6-4e11e25368.jpeg": {
+    "mtime": 1777663600.4782312,
+    "hash": "7e55ac1272df7d4958f7d8a5f01ad14a"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655dc2fab41c4a89ad248f_gallery-6-p-1080-1127feda24.jpeg": {
+    "mtime": 1777663600.5116892,
+    "hash": "bda27df1804cdb4d31e04b9abf7bd000"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655dc2fc7180aec1fda436_gallery-2-74608d6d71.jpeg": {
+    "mtime": 1777663600.0605288,
+    "hash": "19f2073f9776170cbbccf3561bc81e29"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655dc2fc7180aec1fda436_gallery-2-p-1080-74f30f9cb9.jpeg": {
+    "mtime": 1777663600.0932474,
+    "hash": "456c721a5db70fbada5acb33022003e0"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655ddf11269d46bd7ac322_gallery-6-702beea5c4.jpeg": {
+    "mtime": 1777466323.2505426,
+    "hash": "f5c279e9b2790b3afeb449e55b961c92"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655ddf11269d46bd7ac322_gallery-6-p-500-44ac87cb2e.jpeg": {
+    "mtime": 1777466324.369738,
+    "hash": "8de4f0433de60a18f940ed4eb231930a"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655ddf2435121136735003_gallery-5-0a8bcebb1e.jpeg": {
+    "mtime": 1777466323.058453,
+    "hash": "3727a537a980c397b7b4da400c0762c7"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655ddf2435121136735003_gallery-5-p-1080-5cfb8a7158.jpeg": {
+    "mtime": 1777466324.2424383,
+    "hash": "d0f779547e96059b11c7d62d3b506063"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655ddf375b80c401e16a06_gallery-4-09c8a49963.jpeg": {
+    "mtime": 1777466322.897954,
+    "hash": "b8f47ec54efb5cc5b81eaff169f5b097"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655ddf375b80c401e16a06_gallery-4-p-1080-d517b35b63.jpeg": {
+    "mtime": 1777466324.1299424,
+    "hash": "5246ad8ec04a5fcd03083ed42ffd49fa"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655ddf4316f3ba1a5022a7_gallery-1-1daaa3a06d.jpeg": {
+    "mtime": 1777466322.4538214,
+    "hash": "e143d56ed0167349985f70fc8d364d43"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655ddf4316f3ba1a5022a7_gallery-1-p-1080-496c9ce822.jpeg": {
+    "mtime": 1777466323.709589,
+    "hash": "dd145d3504cb7e4fea8d837805db1774"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655ddfaebe1906925b55ef_gallery-3-541ac93d28.jpeg": {
+    "mtime": 1777466322.7839396,
+    "hash": "2531e18a3d9f280cce5e4574b09e07bf"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655ddfaebe1906925b55ef_gallery-3-p-500-c77222829d.jpeg": {
+    "mtime": 1777466324.0271504,
+    "hash": "64d65d1eac5a066c9566c05d1699be8a"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655ddfc9f01854a1c8a6bc_gallery-2-5e4d780fe2.jpeg": {
+    "mtime": 1777466322.6327066,
+    "hash": "1e08c90a38ec8975709254be79125854"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655ddfc9f01854a1c8a6bc_gallery-2-p-1080-33cec03a90.jpeg": {
+    "mtime": 1777466323.802963,
+    "hash": "a1fae355547d4ec4d486f01025fe49c8"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655dec0f35b30db4701431_gallery-1-366daac4c0.jpeg": {
+    "mtime": 1777466320.1198397,
+    "hash": "264936dc91a1be5ecfd130e774336ed2"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655dec0f35b30db4701431_gallery-1-p-1080-3f1e4290b9.jpeg": {
+    "mtime": 1777466320.9499607,
+    "hash": "e0d27cc23b7589df7081d75e6cfb3ee6"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655dec2435125dae735071_gallery-2-479ac5e751.jpeg": {
+    "mtime": 1777466320.2054367,
+    "hash": "501540f342e22b117da730d481a09e12"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655dec2435125dae735071_gallery-2-p-1080-c04ec953f0.jpeg": {
+    "mtime": 1777466321.137465,
+    "hash": "5569172720c50d46d22008e4719122d8"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655dec2435125dae735071_gallery-2-p-800-7d74da583c.jpeg": {
+    "mtime": 1777466321.0734832,
+    "hash": "e69b534c21f050f7f2e8bd3cbd5f2fcc"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655dec47fce27cc3495741_gallery-5-733ba783a2.jpeg": {
+    "mtime": 1777466320.558273,
+    "hash": "ee719f16e60835a0adb3bd21d7144899"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655dec47fce27cc3495741_gallery-5-p-1080-a85026ac9f.jpeg": {
+    "mtime": 1777466321.617859,
+    "hash": "34713626d1335fc845513199fc274a4c"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655dec7e24d2db8448d770_gallery-4-b7725eec86.jpeg": {
+    "mtime": 1777466320.4426658,
+    "hash": "730ce32a72cc2922d7ceba87bcdbe463"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655dec7e24d2db8448d770_gallery-4-p-1080-709517259e.jpeg": {
+    "mtime": 1777466321.511536,
+    "hash": "655134500591f1641d81ca9d68e9eb7f"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655deca174da40a57fce30_gallery-6-8935b3ed45.jpeg": {
+    "mtime": 1777466320.6619513,
+    "hash": "20e33b3df4bf26647a03f96909c4a0e0"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655deca174da40a57fce30_gallery-6-p-500-6a08492b02.jpeg": {
+    "mtime": 1777466321.7153752,
+    "hash": "313f99f39d6508676d8832bd9e409510"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655deca174da40a57fce30_gallery-6-p-800-d874396214.jpeg": {
+    "mtime": 1777466321.846002,
+    "hash": "fcd805605940c260de7fa27e1d4fb35c"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655decd03809773df716ae_gallery-3-397daad588.jpeg": {
+    "mtime": 1777466320.322176,
+    "hash": "47837548abf3c02178c1cb5f79f2f608"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655decd03809773df716ae_gallery-3-p-500-0e6f0d8c5e.jpeg": {
+    "mtime": 1777466321.2552018,
+    "hash": "a4ee056c4947fd4111f30f2f84aa7848"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655decd03809773df716ae_gallery-3-p-800-b2e24a59dd.jpeg": {
+    "mtime": 1777466321.4202478,
+    "hash": "c75a539f99673f000b9f3f00fe901764"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655df611269d912b7ac32a_gallery-4-c2042d5a7f.jpeg": {
+    "mtime": 1777466318.4844522,
+    "hash": "4dfcf395ede8196702cdc4b5ca8dd208"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655df611269d912b7ac32a_gallery-4-p-1080-3ed49b8726.jpeg": {
+    "mtime": 1777466319.497178,
+    "hash": "baec985c4c23ed2a0db34f3318fc96d9"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655df61717444cfbfca76c_gallery-5-dae901ed84.jpeg": {
+    "mtime": 1777466318.5959709,
+    "hash": "16188bdb63f361b0ab10c194b6b896f1"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655df61717444cfbfca76c_gallery-5-p-1080-2aa0817db4.jpeg": {
+    "mtime": 1777466319.6066365,
+    "hash": "39458d496c114935a6e196cd6897773b"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655df6273d48d0900f1fbf_gallery-3-48b7d4bed0.jpeg": {
+    "mtime": 1777466318.3545532,
+    "hash": "50b229c97bbc807a1cfa9e8f4af9c919"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655df6273d48d0900f1fbf_gallery-3-p-1080-0b08625135.jpeg": {
+    "mtime": 1777466319.393797,
+    "hash": "9f357215053ae4e8a534fdb327072b32"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655df6375b802600e16b7e_gallery-2-749fcb0fcb.jpeg": {
+    "mtime": 1777466318.2472665,
+    "hash": "7635fd57ab072e8d780c784cc740c3d9"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655df6375b802600e16b7e_gallery-2-p-1080-5510dab032.jpeg": {
+    "mtime": 1777466319.2877731,
+    "hash": "fecf69166a0d328f2bf078b1b6153415"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655df6375b802600e16b7e_gallery-2-p-500-3876b5f4e1.jpeg": {
+    "mtime": 1777466319.1645162,
+    "hash": "b55df575e32e5e4ae83da4722b856d71"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655df63d9f3e9508a1997c_gallery-1-843131367d.jpeg": {
+    "mtime": 1777466318.0955553,
+    "hash": "08bb19765f550888ed373787aec0e177"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655df63d9f3e9508a1997c_gallery-1-p-1080-e7e43ce9be.jpeg": {
+    "mtime": 1777466319.0481498,
+    "hash": "ebf8f8572fda7adadd3b06fb01f35b46"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655df6fc7180cf51fda76f_gallery-6-4f1415411f.jpeg": {
+    "mtime": 1777466318.7083352,
+    "hash": "4ab201276e9520f046ebd862d2679d15"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61655df6fc7180cf51fda76f_gallery-6-p-1080-9a5142ae14.jpeg": {
+    "mtime": 1777466319.7093856,
+    "hash": "7a4a38cbd7acadca28be72397df4ad61"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\616564680f35b300757029e8_credits-634d7f89ea.svg": {
+    "mtime": 1777466279.4736834,
+    "hash": "c3477f474e8d71d5f5bb6d70b2cce77f"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61656468b761f0015558fced_awards-dccce3251e.svg": {
+    "mtime": 1777466279.3070288,
+    "hash": "d34133de46225df9fa424ac10d5a0f90"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\616564691ae3d81ca476459f_publications-d2699a1037.svg": {
+    "mtime": 1777466279.4175973,
+    "hash": "9d55ad166cbdb442d79cdd266236170f"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\616eb5f7b9eb7e24d86fdbdf_back-all-69a99b9cc1.svg": {
+    "mtime": 1777466278.45536,
+    "hash": "de274f771aa28d952ee7a2fd3421e928"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\616ec1362503e464765a37cf_thumbnail-small-030e09e720.jpeg": {
+    "mtime": 1777466284.1529157,
+    "hash": "d516dfeb6e7ff458d4be3a3c796f5cf3"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\616ec15295423487ae300b63_thumbnail-big-796a418ea8.jpeg": {
+    "mtime": 1777466320.0052073,
+    "hash": "90683371f0ed0a9349deaf7e6953ca5d"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\616ec1549198372c8ac9b54b_thumbnail-small-b030783e49.jpeg": {
+    "mtime": 1777466272.6699214,
+    "hash": "af426058faf3e25640e709b2f288df83"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\616ec1549198372c8ac9b54b_thumbnail-small-p-500-790c63d8ad.jpeg": {
+    "mtime": 1777466275.5679257,
+    "hash": "27db2af83318e2f1595e2bf695a314be"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\616ec16425309e6083d897d8_thumbnail-big-a2614162cb.jpeg": {
+    "mtime": 1777466324.669967,
+    "hash": "ee92c47813e73c328b67d935692cc0a7"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\616ec16685b160870d15932b_thumbnail-small-1b3cdcfc82.jpeg": {
+    "mtime": 1777466273.2584949,
+    "hash": "f28fa7e1d0d05fc9c8faae507a320f71"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\616ec16685b160870d15932b_thumbnail-small-a541b1168c.jpeg": {
+    "mtime": 1777466289.4774745,
+    "hash": "f28fa7e1d0d05fc9c8faae507a320f71"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\616ec16685b160870d15932b_thumbnail-small-p-500-804e66f5b1.jpeg": {
+    "mtime": 1777466275.9130125,
+    "hash": "5c48857dddf0fe68423031a1e8029972"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\616ec16e9198371694c9b55d_thumbnail-big-810541a183.jpeg": {
+    "mtime": 1777466317.9679394,
+    "hash": "d7ca64a886401c9d38a16ace847b8fac"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\616ec170954234545c300c8a_thumbnail-small-1139f58fdb.jpeg": {
+    "mtime": 1777466272.4827173,
+    "hash": "c7e472771411994f61a0375f1cd62431"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\616ec170954234545c300c8a_thumbnail-small-p-500-97cdfe452c.jpeg": {
+    "mtime": 1777466275.3741534,
+    "hash": "016ddf48854988e757eefa6f112bec87"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\616ec170954234545c300c8a_thumbnail-small-p-800-2c3bb92628.jpeg": {
+    "mtime": 1777466275.4677942,
+    "hash": "7e85ccfe2775e17a7a4e003d6da84c0e"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\616ec18d17d26b81ac1203c6_thumbnail-big-703bfe95b3.jpeg": {
+    "mtime": 1777466322.2584734,
+    "hash": "c3f0703802d839181ceb29aa5cfdd917"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\616ec19001d741cd58f6c55d_thumbnail-small-5b368eecb7.jpeg": {
+    "mtime": 1777466287.786285,
+    "hash": "cbb2fcceda1809bd332d9d0f0a9d76da"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\616ec19001d741cd58f6c55d_thumbnail-small-a748800bfe.jpeg": {
+    "mtime": 1777466272.9498935,
+    "hash": "cbb2fcceda1809bd332d9d0f0a9d76da"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\616ec19001d741cd58f6c55d_thumbnail-small-p-500-37119e4782.jpeg": {
+    "mtime": 1777466275.6655447,
+    "hash": "af0132eaa6670378b4c30b9561d6b5a7"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\616ec19001d741cd58f6c55d_thumbnail-small-p-800-e6d17aff0e.jpeg": {
+    "mtime": 1777466275.8079133,
+    "hash": "1b5fd3eed88d0ca84684c0eb0db1ff7d"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\616ec1b825309eb624d89bc1_thumbnail-big-f78878601a.jpeg": {
+    "mtime": 1777648995.228285,
+    "hash": "861ea8ac7db84350d7a442e1d31a7ee1"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\616ec1bb079f697e147918a9_thumbnail-small-11847442d5.jpeg": {
+    "mtime": 1777466293.6341724,
+    "hash": "974d24611e7b707473a0c56a8e2c3233"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\616ec1bb079f697e147918a9_thumbnail-small-a451cb27e4.jpeg": {
+    "mtime": 1777466271.494985,
+    "hash": "974d24611e7b707473a0c56a8e2c3233"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\616ec1bb079f697e147918a9_thumbnail-small-p-500-0d209632f4.jpeg": {
+    "mtime": 1777466274.959412,
+    "hash": "430b45994ba46d6cfbf0562ca94cfeb3"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\616eddf7a8747e3f045d61e8_titlemask-027797b5fe.png": {
+    "mtime": 1777466282.954475,
+    "hash": "a1bc837c5f7907bee523441caed1e2a6"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\619e3e1da47586074e279461_fonts-in-use-610f05b498.png": {
+    "mtime": 1777466323.3598895,
+    "hash": "a2c885b9afa115762b43f3bd5162a940"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\619e3e4c504c03753be32f78_author-name-6-bd76933a4e.svg": {
+    "mtime": 1777466323.4668486,
+    "hash": "152717bfddc52cb32aca262b0b07b59b"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61cdc506856e75d4b33cd9bd_thumbnail-small-44066c5d75.jpeg": {
+    "mtime": 1777466270.7541976,
+    "hash": "a365ab4ba0206e26d65f4da4663d7329"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61cdc506856e75d4b33cd9bd_thumbnail-small-7cc12ac7f8.jpeg": {
+    "mtime": 1777466305.2505114,
+    "hash": "a365ab4ba0206e26d65f4da4663d7329"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61cdc506856e75d4b33cd9bd_thumbnail-small-p-500-0e8c16ceb2.jpeg": {
+    "mtime": 1777466274.7395546,
+    "hash": "878b09ed110fb1204f32745e0455cdc6"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61cdc50bf311324e64ce0dcb_thumbnail-big-3e2ebbcfaf.jpeg": {
+    "mtime": 1777466308.1507413,
+    "hash": "a6739cec1886895be468f84a473984b1"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61cdc5850b96230b1b4e459a_books-of-ye-01681c8394.svg": {
+    "mtime": 1777851911.4374387,
+    "hash": "17c06b348915bdbe7f415839a228b930"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61efeed80278053aaf665284_NFT-ce2edae8e8.svg": {
+    "mtime": 1777466270.5668094,
+    "hash": "15fd88c8ebd0ca71d19ee5215e2c917a"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61eff5f3126d1de606a15163_gallery-4-372e758288.jpeg": {
+    "mtime": 1777466308.568167,
+    "hash": "6d19c94123d5d49b96947f39396bea7f"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61eff5f36b5315bfbdc8f08d_gallery-3-8aaae769af.jpeg": {
+    "mtime": 1777466308.432799,
+    "hash": "805671f140780290668117caf4718555"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61eff5f36b5315bfbdc8f08d_gallery-3-p-1080-6f0e88a877.jpeg": {
+    "mtime": 1777466309.5856216,
+    "hash": "5fcac2c9dedf34b8de236b8831bc68bb"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61eff5f381e84632fac2d430_gallery-2-f859c2c946.jpeg": {
+    "mtime": 1777466308.3489773,
+    "hash": "44562bfb274ed7aff3079ccd71b5a955"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61eff5f381e84632fac2d430_gallery-2-p-1080-c2498c98e7.jpeg": {
+    "mtime": 1777466309.438719,
+    "hash": "6b3c5efbd3c06486af24594d14fac6ac"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61eff5f3f75daae2b313b4fd_gallery-1-8b69187c17.jpeg": {
+    "mtime": 1777466308.2570362,
+    "hash": "9ec3eabdd0afb4705d038bac4bdc2889"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61eff5f3f75daae2b313b4fd_gallery-1-p-1080-573bbab11d.jpeg": {
+    "mtime": 1777466309.2313416,
+    "hash": "c9a2db8a99e79f6b18f21167b1c41b45"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61eff5f3fb10fb5ed25b49a4_gallery-5-0cda97a9d0.jpeg": {
+    "mtime": 1777466308.672366,
+    "hash": "6d567dbe3952bc65ea3c77d2c7702a2c"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61eff5f3fb10fb5ed25b49a4_gallery-5-p-1080-52a008fd8e.jpeg": {
+    "mtime": 1777466309.9327984,
+    "hash": "4e5eaab2855e1c34a275b56c2192b91e"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61eff5f3fb10fb5ed25b49a4_gallery-5-p-500-5e9870d0db.jpeg": {
+    "mtime": 1777466309.7552445,
+    "hash": "ef37110a54723261d696083d41aa15bd"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61f1426292ee6b676fd694a9_sawyer-altman-62bda44914.svg": {
+    "mtime": 1777466308.888665,
+    "hash": "bc807c6cf4e4388bdc05d5101af9af27"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61f142c093fe3255f90eb3d8_boy-4fe10aeaed.png": {
+    "mtime": 1777466308.7340407,
+    "hash": "a7a1cafb883219435e111f9af513593c"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\621f2de58c0579490e2c5a94_thumbnail-big-a47c11a456.jpeg": {
+    "mtime": 1777648979.4850378,
+    "hash": "a522080d6f334252ae82d9b9a54729a3"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\621f2de86891ea03211fe874_thumbnail-small-bdf90dfd6f.jpeg": {
+    "mtime": 1777466296.854375,
+    "hash": "3dee3a51177964004e0bf1a46226bd4b"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\621f2de86891ea03211fe874_thumbnail-small-c79542ccc3.jpeg": {
+    "mtime": 1777466270.447501,
+    "hash": "3dee3a51177964004e0bf1a46226bd4b"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\621f2de86891ea03211fe874_thumbnail-small-p-500-3a2728532f.jpeg": {
+    "mtime": 1777466274.6025436,
+    "hash": "5b053009038d97dcfa23d42e9af32c28"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\621f2def0f03718523e2508b_gallery-3-f71168e78d.jpg": {
+    "mtime": 1777648983.2156162,
+    "hash": "6407c8b1c0d3b405b8ffbd65faf6c387"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\621f2def0f03718523e2508b_gallery-3-p-1080-106371e36c.jpeg": {
+    "mtime": 1777649907.647822,
+    "hash": "003b19997fc6972187c23294c15f2c1d"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\621f2def0f03718523e2508b_gallery-3-p-1600-03f00c88d6.jpeg": {
+    "mtime": 1777649907.7624333,
+    "hash": "62bb00b72b9f0f7841a5cd541d677b4f"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\621f2def0f03718523e2508b_gallery-3-p-2000-3a13e4ec82.jpeg": {
+    "mtime": 1777649907.908027,
+    "hash": "b7e2094d9f84d2aab43d0cc09fad404c"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\621f2def18738babecd865ab_gallery-1-02ee42a5b0.jpg": {
+    "mtime": 1777648980.7834232,
+    "hash": "40ad1b89e9f1b5b87d06a33bf9e581df"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\621f2def18738babecd865ab_gallery-1-p-1080-e56f62ca30.jpeg": {
+    "mtime": 1777649906.8694966,
+    "hash": "49c0d78844fbf1352803778ed3456b7e"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\621f2def18738babecd865ab_gallery-1-p-1600-35a6c3890a.jpeg": {
+    "mtime": 1777649906.9570367,
+    "hash": "61353edf51b160f431f86ce66b03d1bb"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\621f2def18738babecd865ab_gallery-1-p-2000-06ac4a3aaa.jpeg": {
+    "mtime": 1777649907.1032524,
+    "hash": "52b3094a2acc921f388ed9a1846eccf4"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\621f2def18738babecd865ab_gallery-1-p-500-944fae405d.jpeg": {
+    "mtime": 1777649906.798215,
+    "hash": "63854d0d638826d0d3afd65f088e5161"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\621f2defa9cce9ea6974bda9_gallery-5-f0875a77f7.jpg": {
+    "mtime": 1777648987.4039903,
+    "hash": "a632fb8e91a3e4da3b17c054f2b3fcdf"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\621f2defa9cce9ea6974bda9_gallery-5-p-1080-53a142e742.jpeg": {
+    "mtime": 1777649908.6046858,
+    "hash": "6193fd10043c39f27b734fa7107d2814"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\621f2defa9cce9ea6974bda9_gallery-5-p-1600-54f559d2d9.jpeg": {
+    "mtime": 1777649908.6903274,
+    "hash": "ff46a362cbf1e75459d15f0034fa41a4"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\621f2defa9cce9ea6974bda9_gallery-5-p-2000-2393156f5e.jpeg": {
+    "mtime": 1777649908.7881396,
+    "hash": "305b8c6039762bf47ae57b7baa035802"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\621f2defbe82f730231c815e_gallery-2-371048cc57.jpg": {
+    "mtime": 1777648981.9773886,
+    "hash": "924ee13ef55dd7d23e8999881c11157e"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\621f2defbe82f730231c815e_gallery-2-p-1080-b4df64c3a5.jpeg": {
+    "mtime": 1777649907.2377017,
+    "hash": "48d9548cd5d5b917c460ef49615de9e3"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\621f2defbe82f730231c815e_gallery-2-p-1600-66fb924f7d.jpeg": {
+    "mtime": 1777649907.3915212,
+    "hash": "885b30666969f860950c5e347f3e88b0"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\621f2defbe82f730231c815e_gallery-2-p-2000-3d39a6b77e.jpeg": {
+    "mtime": 1777649907.5407515,
+    "hash": "9dc4e562374408141e0c8c2cf9dc0019"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\621f2df007b4b4ca51d15457_gallery-5-1-ba7197ff72.jpg": {
+    "mtime": 1777648985.877444,
+    "hash": "6630ca23c94e4f2586296e291721ae8b"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\621f2df007b4b4ca51d15457_gallery-5-1-p-1080-f3807fedc8.jpeg": {
+    "mtime": 1777649908.3233478,
+    "hash": "683e212d19c34a7a426169ba970d8000"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\621f2df007b4b4ca51d15457_gallery-5-1-p-1600-df31b40e89.jpeg": {
+    "mtime": 1777649908.404834,
+    "hash": "9211a325353b66a671dd6c1cb9a6472f"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\621f2df007b4b4ca51d15457_gallery-5-1-p-2000-def692fc6c.jpeg": {
+    "mtime": 1777649908.5141292,
+    "hash": "0b4ba840a14fca42b5364c51e9116930"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\621f2df007b4b4ca51d15457_gallery-5-1-p-500-794d0adfae.jpeg": {
+    "mtime": 1777649908.260774,
+    "hash": "c4c5632bac9895e2977c8c81485ffe1a"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\621f2df017ecd5557368cb5a_gallery-4-8fcee7fca8.jpg": {
+    "mtime": 1777648984.7077177,
+    "hash": "34f46fe6ed4210cf240b0f4e431f6606"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\621f2df017ecd5557368cb5a_gallery-4-p-1080-8a1db95730.jpeg": {
+    "mtime": 1777649908.0308287,
+    "hash": "986fbeecb532b588996edb363fd7d439"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\621f2df017ecd5557368cb5a_gallery-4-p-1600-f3c277af6e.jpeg": {
+    "mtime": 1777649908.108108,
+    "hash": "5cdba831add0c56af217ed5880ac43ce"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\621f2df017ecd5557368cb5a_gallery-4-p-2000-b1ac40a17e.jpeg": {
+    "mtime": 1777649908.203451,
+    "hash": "cd5e95d336161070a3b15c9b1c7a3fea"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\621f2df017ecd5557368cb5a_gallery-4-p-500-2637c96375.jpeg": {
+    "mtime": 1777649907.9670868,
+    "hash": "dd860b0c0cb4cb403506ffd0e39f7be9"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\621f2e53bf183bf7ff43eede_om-swami-946300853e.svg": {
+    "mtime": 1777851911.4408362,
+    "hash": "b53453dc1da2174d027e59bc6fd4856f"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\621f31389342fe66a9cc3b20_thumbnail-big-2388c6998e.jpeg": {
+    "mtime": 1777648973.110911,
+    "hash": "eff973b3778b4f1e33b1731b2f18e8d7"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\621f3139e4e9f98966403c36_thumbnail-small-011ae2d159.jpeg": {
+    "mtime": 1777466270.2274778,
+    "hash": "3df1dc6af888ff526539be69c6f03856"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\621f3139e4e9f98966403c36_thumbnail-small-fe77422659.jpeg": {
+    "mtime": 1777466317.0647194,
+    "hash": "3df1dc6af888ff526539be69c6f03856"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\621f3139e4e9f98966403c36_thumbnail-small-p-500-cf455d6d61.jpeg": {
+    "mtime": 1777466274.48826,
+    "hash": "3984943addc1be813e68128eedff1b59"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\621f316e0f037129b2e2735d_argor-logo-7ecd82a746.svg": {
+    "mtime": 1777851911.4493349,
+    "hash": "899d307727d18b881f53eca3b93c4d29"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\621f3185ba2e9d02d6d2988a_corporate-9dcdc64bc7.svg": {
+    "mtime": 1777466269.72613,
+    "hash": "0909c8ab142375dad5076f525ecc8078"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\62220c9574d2ddf1fd74e6fe_thumbnail-big-a8bd4a4fc5.jpeg": {
+    "mtime": 1777648965.468197,
+    "hash": "23d9af14e28a2cb7c5130dd4a6b012cb"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\62220c97acb46941c381160d_thumbnail-small-033f4839da.jpeg": {
+    "mtime": 1777466269.9339724,
+    "hash": "14120254e96fe49badb82cf3fafb5aac"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\62220c9f251ce5b7743b7f99_gallery-5-5dd5bfcdd6.jpeg": {
+    "mtime": 1777648971.957083,
+    "hash": "72b48852de7ac662004bbb5c9b6c9d09"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\62220c9f251ce5b7743b7f99_gallery-5-p-1080-2c3d9de65c.jpeg": {
+    "mtime": 1777649904.7895048,
+    "hash": "cf950f82fa4abb1559465961a00168fc"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\62220c9f251ce5b7743b7f99_gallery-5-p-500-9c21093a04.jpeg": {
+    "mtime": 1777649904.7043107,
+    "hash": "d76e3b2e1e22a049a32256fff740b98a"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\62220c9f43b22976dcf71487_gallery-2-4382acb2e4.jpeg": {
+    "mtime": 1777648967.893166,
+    "hash": "3b641b685ed9344cb448203e0b34e05d"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\62220c9f43b22976dcf71487_gallery-2-p-1080-0eb362d44e.jpeg": {
+    "mtime": 1777649904.3088927,
+    "hash": "dd1e53b07fe7bf43e5359d2d8f0804c8"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\62220c9f43b22976dcf71487_gallery-2-p-1600-acf616638b.jpeg": {
+    "mtime": 1777649904.4047651,
+    "hash": "d48b0c2d4456032484e41259a2d32469"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\62220c9f43b22976dcf71487_gallery-2-p-2000-2f46bba265.jpeg": {
+    "mtime": 1777649904.5842185,
+    "hash": "227a6affa6133e305e122b62da825924"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\62220c9f43b22976dcf71487_gallery-2-p-800-0d242c2cdf.jpeg": {
+    "mtime": 1777649904.2391596,
+    "hash": "1310a23f8ef42363047aaa6d01805a1c"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\62220c9f8ff3a1b716fce855_gallery-3-c583b6da37.jpeg": {
+    "mtime": 1777648969.0934181,
+    "hash": "53496c9c543cfcb1cb178b4a9bbfcde0"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\62220c9f8ff3a1b716fce855_gallery-3-p-1080-51d3171a3c.jpeg": {
+    "mtime": 1777649904.9696736,
+    "hash": "904d6756421ae233b101307756f1fbcd"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\62220c9f8ff3a1b716fce855_gallery-3-p-1600-d89e5b696d.jpeg": {
+    "mtime": 1777649905.0753236,
+    "hash": "12ddde0fa5fe25dbca35c9d85b828aa5"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\62220c9f8ff3a1b716fce855_gallery-3-p-2000-0121de2835.jpeg": {
+    "mtime": 1777649905.2031083,
+    "hash": "93a16f437a35f7d803f6ff42df941cee"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\62220c9f8ff3a1b716fce855_gallery-3-p-800-df93ea22a8.jpeg": {
+    "mtime": 1777649904.8865201,
+    "hash": "a858fe3e78a7987c096ce4b0a84cbe95"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\62220c9f9dd898831245b222_gallery-4-f57745a803.jpeg": {
+    "mtime": 1777648970.6381655,
+    "hash": "e10071bc250cd954f88754f8db02da93"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\62220c9f9dd898831245b222_gallery-4-p-1080-c27ef056d8.jpeg": {
+    "mtime": 1777649904.165025,
+    "hash": "67a4feb680e5de5afe2d718bc1713576"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\62220c9f9dd898831245b222_gallery-4-p-500-a6a0207ffe.jpeg": {
+    "mtime": 1777649904.0850232,
+    "hash": "b0203101d6719c5176efb2e86a4c5784"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\62220c9fa06c83a2d0587f48_gallery-1-5c206a74ad.jpeg": {
+    "mtime": 1777648966.7156608,
+    "hash": "4d3586f428df23421316ef058253b4c7"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\62220c9fa06c83a2d0587f48_gallery-1-p-1080-330802231e.jpeg": {
+    "mtime": 1777649903.8493135,
+    "hash": "563ce6ee6e9abc3a7fe477bc58c326ad"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\62220c9fa06c83a2d0587f48_gallery-1-p-1600-6f6a699e35.jpeg": {
+    "mtime": 1777649903.925263,
+    "hash": "3b6cb7409089a7dccd124c77b0747943"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\62220c9fa06c83a2d0587f48_gallery-1-p-2000-4cc641a40a.jpeg": {
+    "mtime": 1777649904.0242202,
+    "hash": "a4bc34a2719d0c3e14188584007be301"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\62220cf70bcdcc15142f1b7d_title-98125d292b.svg": {
+    "mtime": 1777466269.663676,
+    "hash": "12bbbe533c7a6e555efadba7df308f10"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\639c50e200f0d75ca02d186d_gallery-1-6786d49db3.jpeg": {
+    "mtime": 1777648974.3721776,
+    "hash": "3b69820fffa555ea3b293d111095e41a"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\639c50e200f0d75ca02d186d_gallery-1-p-1080-6f5a91fc9b.jpeg": {
+    "mtime": 1777649905.4553566,
+    "hash": "daf03bbe5fbcca35e8f1856ae2d4ecc2"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\639c50e200f0d75ca02d186d_gallery-1-p-1600-e624ea4fb9.jpeg": {
+    "mtime": 1777649905.5535796,
+    "hash": "100bea0897691149d90f1d934826ea62"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\639c50e200f0d75ca02d186d_gallery-1-p-500-89ca944293.jpeg": {
+    "mtime": 1777649905.324325,
+    "hash": "736408c7ea065297fb3029ff6124674f"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\639c50e200f0d75ca02d186d_gallery-1-p-800-ca10f76829.jpeg": {
+    "mtime": 1777649905.3781252,
+    "hash": "59d50a9e077b9281b05102163d54eb09"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\639c50e222f9366913103cb3_gallery-3-75fdf5595b.jpeg": {
+    "mtime": 1777648977.049475,
+    "hash": "56009efeaf33827e5a31fd1aed29ea1c"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\639c50e222f9366913103cb3_gallery-3-p-1080-3226489613.jpeg": {
+    "mtime": 1777649906.1624405,
+    "hash": "2ad2f8af03e6bf7fae17a34275c5daa7"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\639c50e222f9366913103cb3_gallery-3-p-1600-26e68708d6.jpeg": {
+    "mtime": 1777649906.2782245,
+    "hash": "092ada1aff7f2012bda2e2f394ce0465"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\639c50e222f9366913103cb3_gallery-3-p-500-4eb9a4b793.jpeg": {
+    "mtime": 1777649905.9982553,
+    "hash": "65cb4870ab6ad6360aa5924ac6faabaa"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\639c50e222f9366913103cb3_gallery-3-p-800-9c8294d0a5.jpeg": {
+    "mtime": 1777649906.07142,
+    "hash": "6d1cd613741660b228609ef692fb514c"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\639c50e2bf582d30910b3004_gallery-4-7b1c0e716f.jpeg": {
+    "mtime": 1777648978.2624133,
+    "hash": "3337ebe0588c966833a104a6ea806a47"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\639c50e2bf582d30910b3004_gallery-4-p-1080-b1eb7aeaff.jpeg": {
+    "mtime": 1777649906.5108259,
+    "hash": "4aff3b7f55800a2b1a175a563d61f091"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\639c50e2bf582d30910b3004_gallery-4-p-1600-e3246bdf54.jpeg": {
+    "mtime": 1777649906.6158724,
+    "hash": "1f69952ef120572454ad2c9a0878be00"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\639c50e2bf582d30910b3004_gallery-4-p-2000-a092ad7894.jpeg": {
+    "mtime": 1777649906.7241857,
+    "hash": "4448839c48ee622b0efdca7729f8b404"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\639c50e2bf582d30910b3004_gallery-4-p-500-f3f6ad7ac8.jpeg": {
+    "mtime": 1777649906.3630202,
+    "hash": "0591c9dc5f2764ae35fbaf86a19007b7"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\639c50e2bf582d30910b3004_gallery-4-p-800-ed5fcb274e.jpeg": {
+    "mtime": 1777649906.4297762,
+    "hash": "3c73ea2bc75be7074e06fca438c654b6"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\639c50e2c9a6a209ff1e22a9_gallery-2-cdc8036c58.jpeg": {
+    "mtime": 1777648975.560762,
+    "hash": "879d94847cc94c843fc1debe0ee63947"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\639c50e2c9a6a209ff1e22a9_gallery-2-p-1080-7151e24c51.jpeg": {
+    "mtime": 1777649905.757738,
+    "hash": "c7387ed45ce935459da3c0391d36a74e"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\639c50e2c9a6a209ff1e22a9_gallery-2-p-1600-da19a059c4.jpeg": {
+    "mtime": 1777649905.9008036,
+    "hash": "58ff1fb2d04cf9d2cfb3fdf0b8ffb6f8"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\639c50e2c9a6a209ff1e22a9_gallery-2-p-500-87a692b94b.jpeg": {
+    "mtime": 1777649905.627379,
+    "hash": "986d474077c930454635b1e13b8768a1"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\639c50e2c9a6a209ff1e22a9_gallery-2-p-800-47ceec520a.jpeg": {
+    "mtime": 1777649905.6816227,
+    "hash": "d8f5ae09e596b165c13f75b1b7944f64"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b53b3205bc7849342ac0d_thumbnail-small-7ba6dac61d.webp": {
+    "mtime": 1777466269.5475352,
+    "hash": "668ed364b2cbf6f23c96fc30917daab3"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b53b3205bc7849342ac0d_thumbnail-small-88e60a680d.webp": {
+    "mtime": 1777466309.087503,
+    "hash": "668ed364b2cbf6f23c96fc30917daab3"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b53b3205bc7849342ac0d_thumbnail-small-p-500-83c0b1ad5b.webp": {
+    "mtime": 1777466274.3225763,
+    "hash": "89e97b985f603b561da2bb402dfe1978"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b53b3205bc7849342ac0d_thumbnail-small-p-800-df91eaf20f.webp": {
+    "mtime": 1777466274.385547,
+    "hash": "605791bb6c919af8f4c74f3b2eb2360c"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b53b5d6e6c44168af2a93_thumbnail-big-9ff96017ba.webp": {
+    "mtime": 1777466288.5918877,
+    "hash": "6bcc43299681487891dd6fab6c467a7b"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b53c551c1574a8e1a3bf8_gallery-1-d29c267d3b.webp": {
+    "mtime": 1777466288.7385497,
+    "hash": "f4547d546970ad073843bf39b608abf7"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b53c551c1574a8e1a3bf8_gallery-1-p-1080-f0fff09be5.webp": {
+    "mtime": 1777466289.7155972,
+    "hash": "52718609c6335369106a608a01a27307"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b53c551c1574a8e1a3bf8_gallery-1-p-1600-bad5f5c55b.webp": {
+    "mtime": 1777466289.7853198,
+    "hash": "54d5743ab9063c93c4bfaa11113fd16a"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b53c551c1574a8e1a3bf8_gallery-1-p-2000-849ab90874.webp": {
+    "mtime": 1777466289.859962,
+    "hash": "753deced498babeced2023cdc74c1005"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b53c551c1574a8e1a3bf8_gallery-1-p-500-ce1e32bd4e.webp": {
+    "mtime": 1777466289.5476372,
+    "hash": "73e24fbacf427a8574b2f317b03b71a7"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b53c551c1574a8e1a3bf8_gallery-1-p-800-633328c2be.webp": {
+    "mtime": 1777466289.652511,
+    "hash": "d93766cd341e6e4acce493d581f0202b"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b53c57130f914b234be8d_gallery-4-53f148ab1b.webp": {
+    "mtime": 1777466289.280213,
+    "hash": "ff81efa527eeca7dfe9e0ff0c00b9e82"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b53c57130f914b234be8d_gallery-4-p-1080-b9bde765c0.webp": {
+    "mtime": 1777466291.095922,
+    "hash": "4bdb350d73d20ba381b7a51cc2bd7f06"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b53c57130f914b234be8d_gallery-4-p-1600-6c958f0390.webp": {
+    "mtime": 1777466291.2157454,
+    "hash": "8cd65ce49e474357f8d79e6db0d844fa"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b53c57130f914b234be8d_gallery-4-p-2000-07f18a49a2.webp": {
+    "mtime": 1777466291.3558216,
+    "hash": "d4e0f98dfa889b5cc26990226c45ee2f"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b53c57130f914b234be8d_gallery-4-p-500-11f6abe398.webp": {
+    "mtime": 1777466290.8952098,
+    "hash": "bf87bccf44869a11e1729c83305795f8"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b53c57130f914b234be8d_gallery-4-p-800-c2c67e155d.webp": {
+    "mtime": 1777466291.0043335,
+    "hash": "6845d61ca4f57ac97f40f08705e982cc"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b53c575d3cd6976bb4e50_gallery-3-18cb56d40f.webp": {
+    "mtime": 1777466289.0582054,
+    "hash": "1f83cf19af1882f518786e36a3878478"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b53c575d3cd6976bb4e50_gallery-3-p-1080-6bd35e1853.webp": {
+    "mtime": 1777466290.601446,
+    "hash": "a03a8a51f15a5b1db351778e35fc6ff4"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b53c575d3cd6976bb4e50_gallery-3-p-1600-bb60fe6e1b.webp": {
+    "mtime": 1777466290.71584,
+    "hash": "e56b6b0308f1e60d681388bff9ab52c0"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b53c575d3cd6976bb4e50_gallery-3-p-2000-39f690b10d.webp": {
+    "mtime": 1777466290.832924,
+    "hash": "9af4d18a4d1e402cc5c2defb194e86b4"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b53c575d3cd6976bb4e50_gallery-3-p-500-76cc58a23d.webp": {
+    "mtime": 1777466290.4082131,
+    "hash": "c8e03e3d36817f3932bea378c5684677"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b53c575d3cd6976bb4e50_gallery-3-p-800-2deef65b2d.webp": {
+    "mtime": 1777466290.515662,
+    "hash": "759feba117e82163d23aa251ec27172c"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b53c5e21090b22068f6ac_gallery-5-4b13db1a1a.webp": {
+    "mtime": 1777466289.388218,
+    "hash": "2b0355f4e7008903228e591376403152"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b53c5e21090b22068f6ac_gallery-5-p-1080-e360317556.webp": {
+    "mtime": 1777466291.631423,
+    "hash": "380ca5da00fd03b7ad8f367ffe6a0222"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b53c5e21090b22068f6ac_gallery-5-p-1600-1e24e4dc28.webp": {
+    "mtime": 1777466291.7238443,
+    "hash": "93fbec01f56956b9a952c5ed86a69da0"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b53c5e21090b22068f6ac_gallery-5-p-2000-ca7b324cf3.webp": {
+    "mtime": 1777466291.8304033,
+    "hash": "40cc0de567bdf51521f9b00e5bf9f825"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b53c5e21090b22068f6ac_gallery-5-p-500-22d3030b96.webp": {
+    "mtime": 1777466291.4803312,
+    "hash": "e9c3111ee4bbed9333f43a5d60a2fb06"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b53c5e21090b22068f6ac_gallery-5-p-800-e90e96506a.webp": {
+    "mtime": 1777466291.5494456,
+    "hash": "9fe9d724a8f33a2291e9480081b879ee"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b53c5e51baa10511269e2_gallery-2-2cffec6346.webp": {
+    "mtime": 1777466288.8534684,
+    "hash": "cece0934af3d853c644f4f91e813f5d8"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b53c5e51baa10511269e2_gallery-2-p-1080-b457bb28c4.webp": {
+    "mtime": 1777466290.0734172,
+    "hash": "debd7bb7fde0c2872f4e169952644f5f"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b53c5e51baa10511269e2_gallery-2-p-1600-38176ed15a.webp": {
+    "mtime": 1777466290.183992,
+    "hash": "e35efe9b04fbea8a375c6af5b1f0ecb2"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b53c5e51baa10511269e2_gallery-2-p-2000-47771010fe.webp": {
+    "mtime": 1777466290.3004684,
+    "hash": "be5e7844b6abf66301a188a8160c1b96"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b53c5e51baa10511269e2_gallery-2-p-500-cf8fdd02d3.webp": {
+    "mtime": 1777466289.9229615,
+    "hash": "fa184b6970b7892847a974b8c61c7f1a"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b53c5e51baa10511269e2_gallery-2-p-800-a34072f11e.webp": {
+    "mtime": 1777466289.9973955,
+    "hash": "b68618432c72a88ba17ddf413565adae"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b54372e6d6f19ddf847a7_thumbnail-big-1e8c72e34f.webp": {
+    "mtime": 1777648952.105702,
+    "hash": "f1d8f624b16cd5ed05eda92bf0d8d6ea"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b5439577bd35377de8c43_thumbnail-small-2ad95688c6.webp": {
+    "mtime": 1777466267.742307,
+    "hash": "9e66e63beb5dba7057d5e872879c731b"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b5439577bd35377de8c43_thumbnail-small-2fa51f0791.webp": {
+    "mtime": 1777466279.751325,
+    "hash": "9e66e63beb5dba7057d5e872879c731b"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b5439577bd35377de8c43_thumbnail-small-p-500-4a66c71d83.webp": {
+    "mtime": 1777466274.0566828,
+    "hash": "e20249e2937a33ba883c518b910206ab"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b5439577bd35377de8c43_thumbnail-small-p-800-f1bb2e0e91.webp": {
+    "mtime": 1777466274.165842,
+    "hash": "f67cfbab18f9eb9f86e8d5035f8ade9a"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b54403713b7856b0ed5d0_gallery-3-5806167a87.webp": {
+    "mtime": 1777648959.28815,
+    "hash": "de94a422c2eeb68611f01b3749873475"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b54403713b7856b0ed5d0_gallery-3-p-1080-d20d9e8278.webp": {
+    "mtime": 1777649901.8010204,
+    "hash": "b83bc2302e35631d0d5819f8cbef9fd6"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b54403713b7856b0ed5d0_gallery-3-p-1600-73805a931b.webp": {
+    "mtime": 1777649902.2055004,
+    "hash": "2f2e87e94e989802c67dbc1d4fd93050"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b54403713b7856b0ed5d0_gallery-3-p-500-b9332c1e5c.webp": {
+    "mtime": 1777649901.4286368,
+    "hash": "72f99d97f66fc7576f481e36f9eea5a9"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b54403713b7856b0ed5d0_gallery-3-p-800-3bb18399cc.webp": {
+    "mtime": 1777649901.5651398,
+    "hash": "2b8bb200c383e651a097aa2d3e81d0a5"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b54408c124f60c1133569_gallery-4-54325d60de.webp": {
+    "mtime": 1777648961.2049603,
+    "hash": "2ca7b5163e3e006d4a8e02114a493a38"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b54408c124f60c1133569_gallery-4-p-1080-9fbcdbc1fc.webp": {
+    "mtime": 1777649902.7723274,
+    "hash": "88b16137d2cb25286194b3c3bcc6b577"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b54408c124f60c1133569_gallery-4-p-1600-123acfe203.webp": {
+    "mtime": 1777649903.1879663,
+    "hash": "506794930c09392977958b62a7714d37"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b54408c124f60c1133569_gallery-4-p-2000-26c9b7f996.webp": {
+    "mtime": 1777649903.7417114,
+    "hash": "33b1c450241f6cffb617af46d0c596b8"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b54408c124f60c1133569_gallery-4-p-500-e2822af949.webp": {
+    "mtime": 1777649902.3757553,
+    "hash": "dca065e06d049cf456bb251321a2c51a"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b54408c124f60c1133569_gallery-4-p-800-54949cd4aa.webp": {
+    "mtime": 1777649902.5300577,
+    "hash": "a1acfc74b99f0c00aaa802f92ca428ff"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b5440e5ec79c1222f03c7_gallery-1-0e6c0e5c29.webp": {
+    "mtime": 1777648953.9411757,
+    "hash": "088ecf5ad058816096e6d3aa72953e51"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b5440e5ec79c1222f03c7_gallery-1-p-1080-02c40f01b5.webp": {
+    "mtime": 1777649899.1783516,
+    "hash": "e79c64463506153c0f1af7f0cc226195"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b5440e5ec79c1222f03c7_gallery-1-p-1600-eb27f0015b.webp": {
+    "mtime": 1777649899.5132022,
+    "hash": "fce9a373f50adeaaad41dde34b59e340"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b5440e5ec79c1222f03c7_gallery-1-p-2000-6ef32b6422.webp": {
+    "mtime": 1777649899.9845948,
+    "hash": "5c66a8b6bec37c33e7384384a31b0651"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b5440e5ec79c1222f03c7_gallery-1-p-500-fa7227b6e3.webp": {
+    "mtime": 1777649898.8588374,
+    "hash": "9faa16187099592258444590a69b0a5c"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b5440e5ec79c1222f03c7_gallery-1-p-800-267738a4bf.webp": {
+    "mtime": 1777649898.9803529,
+    "hash": "a4cf47bf4e7fa0c1291a6c7941cd3246"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b5440fd053e2968ee1370_gallery-2-bb022fc6da.webp": {
+    "mtime": 1777648955.8403993,
+    "hash": "202bf964191cb37d93cc2b098d4b874e"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b5440fd053e2968ee1370_gallery-2-p-1080-541e644528.webp": {
+    "mtime": 1777649900.4538608,
+    "hash": "dce555270bbfec90077f3d225897e804"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b5440fd053e2968ee1370_gallery-2-p-1600-37aa1cd896.webp": {
+    "mtime": 1777649900.7984903,
+    "hash": "995f4b91d463fdbbd3d62fb3ac261d38"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b5440fd053e2968ee1370_gallery-2-p-2000-d3f23ec9f8.webp": {
+    "mtime": 1777649901.2826765,
+    "hash": "996b932e1f427703c287c44ef4318783"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b5440fd053e2968ee1370_gallery-2-p-500-ac0313fa2f.webp": {
+    "mtime": 1777649900.1305249,
+    "hash": "dd2461341e4a6d3c0b71074d703c0337"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b5440fd053e2968ee1370_gallery-2-p-800-beda644f31.webp": {
+    "mtime": 1777649900.256575,
+    "hash": "a5f4086a51f5ae6d1731cd61f4ee02bc"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b591a574150afe2d9af38_roger-hub-a54cf6a5eb.svg": {
+    "mtime": 1777851911.4533932,
+    "hash": "5ed2baf0b5bfcb69b75285edba8b1f1f"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b5c7620c38b339e01b795_thumbnail-big-82d394b778.webp": {
+    "mtime": 1777466273.5253663,
+    "hash": "230317f52bd01b1649cc54a8abf8bad4"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b5c7620c38b339e01b795_thumbnail-big-p-1080-2aaad1b4cd.webp": {
+    "mtime": 1777466276.2366438,
+    "hash": "68dba96bf1aa2bfca1748a9921c3d2d7"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b5c7620c38b339e01b795_thumbnail-big-p-1600-84d3e94da4.webp": {
+    "mtime": 1777466276.3784025,
+    "hash": "12f14e60c06e872215d0d8b84924c81b"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b5c7620c38b339e01b795_thumbnail-big-p-500-0d1f4756f3.webp": {
+    "mtime": 1777466276.025136,
+    "hash": "aeaac4c1cb4ffce516cd547cefee887e"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b5c7620c38b339e01b795_thumbnail-big-p-800-3bd28b70f3.webp": {
+    "mtime": 1777466276.1171637,
+    "hash": "961bdbe4bba9442e528a3a9daf4f078c"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b5d0c227d4a35562c5b85_unexpected-time-5bebf4b73f.svg": {
+    "mtime": 1777466273.3185248,
+    "hash": "b47f31fb3dd72a413331f6d96af70da4"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\647dc0753912d7cfbd50fe17_thumbnail-big-4ea1b44312.webp": {
+    "mtime": 1777466276.8366911,
+    "hash": "1fee24a7c45c366759e45f721e1aa0b7"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\647dc0777b1a5df29f8e5a58_thumbnail-small-0033e75e73.webp": {
+    "mtime": 1777466267.5134785,
+    "hash": "98dcb38917f44d7cc5bd17605bfb61cc"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\647dc0777b1a5df29f8e5a58_thumbnail-small-91918ada49.webp": {
+    "mtime": 1777466284.2669835,
+    "hash": "98dcb38917f44d7cc5bd17605bfb61cc"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\647dc0777b1a5df29f8e5a58_thumbnail-small-p-500-3a06179989.webp": {
+    "mtime": 1777466273.8530195,
+    "hash": "03c86813ddb5e7cf0a45af8aa9c87fee"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\647dc0777b1a5df29f8e5a58_thumbnail-small-p-800-452f711eeb.webp": {
+    "mtime": 1777466273.9865375,
+    "hash": "ade3838f082a1e004c44cb38cdbe7f57"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\647dc07f273acc29bf623a60_gallery-6-313e8f443b.jpg": {
+    "mtime": 1777466277.9197252,
+    "hash": "0e2d4f822f3d04c93f528c13053a2510"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\647dc07f273acc29bf623a60_gallery-6-p-1080-73140c2511.jpg": {
+    "mtime": 1777466281.5765214,
+    "hash": "1855923c6b79b8409c06dc7a89019e86"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\647dc07f273acc29bf623a60_gallery-6-p-500-950987f382.jpg": {
+    "mtime": 1777466281.3619173,
+    "hash": "066fa65a2c7ba49033149848edc829d2"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\647dc07f273acc29bf623a60_gallery-6-p-800-6939d67245.jpg": {
+    "mtime": 1777466281.463147,
+    "hash": "125604c97531be8b61ebdfd0e7877fa6"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\647dc07f54b50a794fe727a4_gallery-1-0eab07562d.jpg": {
+    "mtime": 1777466277.2937717,
+    "hash": "a0c71362276194f537b267eac166c9e0"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\647dc07f54b50a794fe727a4_gallery-1-p-500-47c3bbcaf7.jpg": {
+    "mtime": 1777466279.8600104,
+    "hash": "25a1470ddff2fb916045e07ba3ac7338"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\647dc07f54b50a794fe727a4_gallery-1-p-800-73972665d1.jpg": {
+    "mtime": 1777466279.9701853,
+    "hash": "fc2283b6539e2d5200a3555cf1077a7d"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\647dc07f6c6c83d632d622c4_gallery-3-97fb2441b4.jpg": {
+    "mtime": 1777466277.573733,
+    "hash": "540ed41569103db32f1aeb90590f1153"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\647dc07f6c6c83d632d622c4_gallery-3-p-1080-2d1723c6b2.jpg": {
+    "mtime": 1777466280.6888313,
+    "hash": "bcdf85f831bd12e5cf0fefd4709e047b"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\647dc07f6c6c83d632d622c4_gallery-3-p-500-3d19a4740a.jpg": {
+    "mtime": 1777466280.4261327,
+    "hash": "3fac31fb021463a3403b36dd99fbafaf"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\647dc07f6c6c83d632d622c4_gallery-3-p-800-1cfbb1a033.jpg": {
+    "mtime": 1777466280.5377278,
+    "hash": "3531bab47ed97c01a7db43d3bd188ee4"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\647dc07f856a67fee72adc27_gallery-5-e8034eda5c.jpg": {
+    "mtime": 1777466277.7887044,
+    "hash": "ad876fec9c93924f74243ed4af53c661"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\647dc07f856a67fee72adc27_gallery-5-p-1080-0f5829247d.jpg": {
+    "mtime": 1777466281.2812746,
+    "hash": "327e7c38bb72856d2a3f7fc2dbaf9070"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\647dc07f856a67fee72adc27_gallery-5-p-500-328bbc0c0b.jpg": {
+    "mtime": 1777466281.0739236,
+    "hash": "950d356b01fee7db59a5245c5b8f886a"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\647dc07f856a67fee72adc27_gallery-5-p-800-5d2ee881c0.jpg": {
+    "mtime": 1777466281.1677628,
+    "hash": "920d63509f432d20113f10355f4f288a"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\647dc07f89842cddfd5331e9_gallery-2-fcaf75831a.jpg": {
+    "mtime": 1777466277.4133005,
+    "hash": "5c4c49dbe6750ddb6c15e105c11aa5b9"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\647dc07f89842cddfd5331e9_gallery-2-p-1080-428ea02e63.jpg": {
+    "mtime": 1777466280.322177,
+    "hash": "8b0de8033ff3ff8aa07236dea82701d6"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\647dc07f89842cddfd5331e9_gallery-2-p-500-a80cb0c997.jpg": {
+    "mtime": 1777466280.0734804,
+    "hash": "e78164ae87f638461fb67029ff7216d7"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\647dc07f89842cddfd5331e9_gallery-2-p-800-d2870eca26.jpg": {
+    "mtime": 1777466280.1867278,
+    "hash": "aeccde095a21ce94dc7e61dd885c8359"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\647dc0ed22589620411e19d3_wow-concept-20243bca4d.svg": {
+    "mtime": 1777851911.458533,
+    "hash": "db0d59f8b371e3ea7faf3d74e7cedbc0"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\647dc4760764a3c41019efa5_gallery-4-420f2a4cf2.webp": {
+    "mtime": 1777466277.6617036,
+    "hash": "051328f0caf36235b147dbc8eb60faca"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\647dc4760764a3c41019efa5_gallery-4-p-1080-db3305a858.webp": {
+    "mtime": 1777466280.9955475,
+    "hash": "c4a406db9cdbe24a253dedbac7121984"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\647dc4760764a3c41019efa5_gallery-4-p-500-7d5e50651b.webp": {
+    "mtime": 1777466280.803635,
+    "hash": "6595a8940c4b71f62a17260fbcc6c94b"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\647dc4760764a3c41019efa5_gallery-4-p-800-c45786fbcb.webp": {
+    "mtime": 1777466280.8934293,
+    "hash": "5f25fac1af7920cc345484e0e8d4fec6"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\byc2w-milky-deep-scan.png": {
+    "mtime": 1777648990.4380355,
+    "hash": "76f069728543f7dbd9f7e93f631cf364"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\byc2w-milky-oblique-close.png": {
+    "mtime": 1777648991.0760612,
+    "hash": "b46ecc0186c48f5d98de371fe6fa03c9"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\byc2w-milky-overview.png": {
+    "mtime": 1777648988.3815463,
+    "hash": "496945bffe292d0cba3af158d5cd19db"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\byc2w-milky-target-lock.png": {
+    "mtime": 1777648989.7504838,
+    "hash": "1e5d9195e9de0af7ae59bcbd9441b72b"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\byc2w-milky-test.png": {
+    "mtime": 1777606684.0410056,
+    "hash": "ada936e315820a729816a87f95686d34"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\byc2w-milky-wide-scan.png": {
+    "mtime": 1777648989.0657299,
+    "hash": "2caecb53c78be76252ca73b7a5022b01"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\cortex-header-hero.png": {
+    "mtime": 1777648961.47328,
+    "hash": "fcca3bb5d6233ce1374d71cdb299d509"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\cortex-playground-detail.png": {
+    "mtime": 1777648963.3900156,
+    "hash": "f09ca4a4cef2bd464aada4e2109f2231"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\cortex-playground-overview.png": {
+    "mtime": 1777648962.1391923,
+    "hash": "0144fc97a576dce798e58854d0b88eb9"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\cortex-playground-panel.png": {
+    "mtime": 1777648964.0582156,
+    "hash": "8f2c5a9f9ea6dbf03274182c7f74ee41"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\cortex-playground-routing.png": {
+    "mtime": 1777648962.778257,
+    "hash": "6271ec7eb9a12021fdaa85ccae8dddf2"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\cortex-playground-wide.png": {
+    "mtime": 1777609456.7168772,
+    "hash": "881a02314a2f1136309bc0c7f409bf16"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\cortex-vertical.png": {
+    "mtime": 1777648964.264273,
+    "hash": "e16aa0afa4614034f0bb57c6cd8be17f"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\svg\\6155c07f1c37174850256cab_patch-fcb3f6cf52.svg": {
+    "mtime": 1777466265.0937474,
+    "hash": "2ca3d78821486ba412d3b659991f58c0"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\svg\\background-image-46ae28cb1f.svg": {
+    "mtime": 1777466264.4364076,
+    "hash": "96edb61c19a0b7d81492ffc8c2a76816"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\images\\books\\about_me_cover.png": {
+    "mtime": 1777747114.835607,
+    "hash": "db450823c2cf6e1a21fee498d49ba597"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\images\\books\\ai_library_cover.png": {
+    "mtime": 1777831182.1789086,
+    "hash": "6fd5f6f15309d9eafc4b930e7152808b"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\images\\books\\ai_library_cover_v2.png": {
+    "mtime": 1777832220.447502,
+    "hash": "f62be016ebf51fb0779296cf306332ee"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\images\\books\\bonnie_1777746458866.png": {
+    "mtime": 1777746458.8672657,
+    "hash": "a24c590391626973d092accfdddf686d"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\images\\books\\boonk_1777746488106.png": {
+    "mtime": 1777746488.1075318,
+    "hash": "d85f056caab29be38351deb5ccdf2bf6"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\images\\books\\brokie_v1_1777746500531.png": {
+    "mtime": 1777746500.5332165,
+    "hash": "0394b2ddd1c48140a43cbfcac5e4ad8a"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\images\\books\\brokie_v1_custom.jpg": {
+    "mtime": 1777841661.9914253,
+    "hash": "5fdb011e1b4b26c52ddc1173d9962899"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\images\\books\\brokie_v2_1777746399761.png": {
+    "mtime": 1777746399.7626505,
+    "hash": "54011f8dab7deb9dda70cd68293054a0"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\images\\books\\byc2w_1777746475201.png": {
+    "mtime": 1777746475.2023575,
+    "hash": "baa108448062e2b05a5ebf1a654c53a6"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\images\\books\\cellcore_cover.jpg": {
+    "mtime": 1777748633.157032,
+    "hash": "a745d9c116a1eee2c518d9ad9ac03829"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\images\\books\\cortex_1777746414041.png": {
+    "mtime": 1777746414.0429533,
+    "hash": "b428a00c3ffdcd264214784bf846eb34"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\images\\books\\fintech_cover.jpg": {
+    "mtime": 1777766015.225515,
+    "hash": "2484b4d765dc86966bc1f246878f36d7"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\images\\books\\flow_cover.jpg": {
+    "mtime": 1777760333.2740097,
+    "hash": "97b62359f344d2ba8432cec66f06c98d"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\images\\books\\global_market_1777746384925.png": {
+    "mtime": 1777746384.927993,
+    "hash": "a27f3400e04d25391218be27b7ee4cd5"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\images\\books\\ifp_cover.jpg": {
+    "mtime": 1777766887.9766388,
+    "hash": "5e83e75cfde4078ad21b846aec748fda"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\images\\books\\jm_family_cover.jpg": {
+    "mtime": 1777752659.003471,
+    "hash": "a1bbaa81a7683f9799971b2129ecd437"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\images\\books\\life_tap_1777746431592.png": {
+    "mtime": 1777746431.5931575,
+    "hash": "6b1cf2986b8ac31cb7f10aeb2d3542eb"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\images\\books\\light_wonder_cover.jpg": {
+    "mtime": 1777750430.4935083,
+    "hash": "52bf5f60c9db0677d69374e708c90c55"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\images\\books\\milestone_motors_cover.jpg": {
+    "mtime": 1777768077.5196178,
+    "hash": "1e91f06267a6fd35a4bb6ce153abef05"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\images\\books\\mortgage_cover.jpg": {
+    "mtime": 1777749202.590836,
+    "hash": "6d9ac6a232b3285a210f1017e49ad166"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\images\\books\\nextera_cover.jpg": {
+    "mtime": 1777749734.8190596,
+    "hash": "c21675ab20f74e2e84199dae71322d11"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\images\\books\\nvidia_cover.png": {
+    "mtime": 1777754205.4659274,
+    "hash": "b2b29f427af2bef60cd54b8208807648"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\images\\books\\panopticon_1777746444071.png": {
+    "mtime": 1777746444.0722387,
+    "hash": "36c61e4d9686abf112c580edbe0efa12"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\images\\books\\stuttgart_library.jpg": {
+    "mtime": 1777831147.4979856,
+    "hash": "dccc41c5d1f5e47d5e3d9edbb43158a9"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\images\\books\\summit_health_cover.jpg": {
+    "mtime": 1777767892.3264806,
+    "hash": "256c533fbd0b50d7077acb62637c0afc"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\images\\books\\vsp_cover.jpg": {
+    "mtime": 1777764355.9485228,
+    "hash": "dc91995488cdcdd369be202d6cd02360"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\images\\books\\winter_haven_1777746369741.png": {
+    "mtime": 1777746369.7427535,
+    "hash": "b39d9c6acd58482bf875756ef3b4225b"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\images\\gim\\gim_market_summary_1777851011115.png": {
+    "mtime": 1777851011.1212127,
+    "hash": "46a27f1321244cc6a17d3eabc0afad2d"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\images\\gim\\gim_order_book_1777850976836.png": {
+    "mtime": 1777850976.8376882,
+    "hash": "db1c8d0c4429ac3291ad15fe24bc0810"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\images\\gim\\gim_routing_matrix_1777850994313.png": {
+    "mtime": 1777850994.3158789,
+    "hash": "cee4fe8c24850ecc15042b5e6192f42f"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\argor-heraeus\\panopticon-playground\\uploads\\ferrofluid_goal.png": {
+    "mtime": 1777851911.5114768,
+    "hash": "25f9244fb59d486aeb542698e2b78f50"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\argor-heraeus\\panopticon-playground\\uploads\\panopticon_worldmodel_brandnew.png": {
+    "mtime": 1777851911.5228138,
+    "hash": "2b09919125131edc6e1b19e158d4f491"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\argor-heraeus\\panopticon-playground\\uploads\\panopticon_worldmodel_overview-c9fdc50c.png": {
+    "mtime": 1777851911.5388288,
+    "hash": "32d32b50d9f6aac627c6c2fea5c8411c"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\argor-heraeus\\panopticon-playground\\uploads\\panopticon_worldmodel_overview.png": {
+    "mtime": 1777851911.5504322,
+    "hash": "32d32b50d9f6aac627c6c2fea5c8411c"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\argor-heraeus\\panopticon-playground\\uploads\\panopticon_worldmodel_regional-b573fbcb.png": {
+    "mtime": 1777851911.5702546,
+    "hash": "6553e78c26e125fe709b769efccfc240"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\argor-heraeus\\panopticon-playground\\uploads\\panopticon_worldmodel_regional.png": {
+    "mtime": 1777851911.5812595,
+    "hash": "6553e78c26e125fe709b769efccfc240"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\argor-heraeus\\panopticon-playground\\uploads\\pasted-1777056846655-0.png": {
+    "mtime": 1777851911.604419,
+    "hash": "265d3fb8b51228def5c306f697b962e4"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\argor-heraeus\\panopticon-playground\\uploads\\pasted-1777057393382-0.png": {
+    "mtime": 1777851911.615491,
+    "hash": "7c8532e215ad364b67bea966b9fd1956"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\argor-heraeus\\panopticon-playground\\uploads\\pasted-1777057534385-0.png": {
+    "mtime": 1777851911.6358552,
+    "hash": "8bb8bdaa07a552b1d00ea7d9770b0d4c"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\argor-heraeus\\panopticon-playground\\uploads\\pasted-1777057546514-0.png": {
+    "mtime": 1777851911.6591535,
+    "hash": "5730f1b812ebfc391df2ccd9abb740c0"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\argor-heraeus\\panopticon-playground\\uploads\\pasted-1777058889066-0.png": {
+    "mtime": 1777851911.6869245,
+    "hash": "dc86b82a5d3ac70e431ba9155d65fb7f"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\argor-heraeus\\panopticon-playground\\uploads\\pasted-1777059005468-0.png": {
+    "mtime": 1777851911.7221417,
+    "hash": "ec3f07f69b777093c47a3097a201f680"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\boonk\\boonk-v2-app\\previews\\test\\assets\\images\\img.png": {
+    "mtime": 1777653682.0,
+    "hash": "67b6e8fb910b61db5bcf245330dedbae"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\panopticon\\panopticon-playground\\uploads\\ferrofluid_goal.png": {
+    "mtime": 1777652064.0,
+    "hash": "25f9244fb59d486aeb542698e2b78f50"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\panopticon\\panopticon-playground\\uploads\\panopticon_worldmodel_brandnew.png": {
+    "mtime": 1777652064.0,
+    "hash": "2b09919125131edc6e1b19e158d4f491"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\panopticon\\panopticon-playground\\uploads\\panopticon_worldmodel_overview-c9fdc50c.png": {
+    "mtime": 1777652064.0,
+    "hash": "32d32b50d9f6aac627c6c2fea5c8411c"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\panopticon\\panopticon-playground\\uploads\\panopticon_worldmodel_overview.png": {
+    "mtime": 1777652064.0,
+    "hash": "32d32b50d9f6aac627c6c2fea5c8411c"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\panopticon\\panopticon-playground\\uploads\\panopticon_worldmodel_regional-b573fbcb.png": {
+    "mtime": 1777652064.0,
+    "hash": "6553e78c26e125fe709b769efccfc240"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\panopticon\\panopticon-playground\\uploads\\panopticon_worldmodel_regional.png": {
+    "mtime": 1777652064.0,
+    "hash": "6553e78c26e125fe709b769efccfc240"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\panopticon\\panopticon-playground\\uploads\\pasted-1777056846655-0.png": {
+    "mtime": 1777652064.0,
+    "hash": "265d3fb8b51228def5c306f697b962e4"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\panopticon\\panopticon-playground\\uploads\\pasted-1777057393382-0.png": {
+    "mtime": 1777652064.0,
+    "hash": "7c8532e215ad364b67bea966b9fd1956"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\panopticon\\panopticon-playground\\uploads\\pasted-1777057534385-0.png": {
+    "mtime": 1777652064.0,
+    "hash": "8bb8bdaa07a552b1d00ea7d9770b0d4c"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\panopticon\\panopticon-playground\\uploads\\pasted-1777057546514-0.png": {
+    "mtime": 1777652064.0,
+    "hash": "5730f1b812ebfc391df2ccd9abb740c0"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\panopticon\\panopticon-playground\\uploads\\pasted-1777058889066-0.png": {
+    "mtime": 1777652064.0,
+    "hash": "dc86b82a5d3ac70e431ba9155d65fb7f"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\panopticon\\panopticon-playground\\uploads\\pasted-1777059005468-0.png": {
+    "mtime": 1777652064.0,
+    "hash": "ec3f07f69b777093c47a3097a201f680"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\prada\\boonk-v2-app\\previews\\test\\assets\\images\\img.png": {
+    "mtime": 1777851911.8454168,
+    "hash": "67b6e8fb910b61db5bcf245330dedbae"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\videos\\about-bg.mp4": {
+    "mtime": 1777849682.9363747,
+    "hash": "9727b8e015484f5561480fb6bb9aa13e"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\videos\\bonnie-bg.mp4": {
+    "mtime": 1777849694.7092798,
+    "hash": "e9bfb661ba07be23e8924960d1c85973"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\videos\\boonk-bg.mp4": {
+    "mtime": 1777849700.3859775,
+    "hash": "3085134c5c9213ba2c5701d437e846a2"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\videos\\boonk_cover.mp4": {
+    "mtime": 1777849705.5961032,
+    "hash": "a8c70169a0ffe64021720ef6e0fe0149"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\videos\\brokie-v1-bg.mp4": {
+    "mtime": 1777849714.427289,
+    "hash": "cd48f4ae8bbb170cbf0603fb8f17f8af"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\videos\\brokie-v2-bg.mp4": {
+    "mtime": 1777849723.6348042,
+    "hash": "17cfc527645e598cd1b37076d4e80e8b"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\videos\\brokie_v1_cover.mp4": {
+    "mtime": 1777849732.3645937,
+    "hash": "cd48f4ae8bbb170cbf0603fb8f17f8af"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\videos\\brokie_v2_cover.mp4": {
+    "mtime": 1777849740.6132855,
+    "hash": "17cfc527645e598cd1b37076d4e80e8b"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\videos\\byc2w-bg.mp4": {
+    "mtime": 1777849742.654855,
+    "hash": "af7b35628f973ba580bf28467f18f498"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\videos\\cellcore-bg.mp4": {
+    "mtime": 1777849747.186812,
+    "hash": "315c5464fe0ffd0b8fc6bf996b8fe062"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\videos\\cortex-bg.mp4": {
+    "mtime": 1777849764.703294,
+    "hash": "95393881634af8ea6d7ed63b631e71d9"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\videos\\fintech-bg.mp4": {
+    "mtime": 1777849770.3920903,
+    "hash": "a3429ea26b1b25d4f0470e3a10c62a54"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\videos\\gim-bg.mp4": {
+    "mtime": 1777850614.79818,
+    "hash": "8d0f46a1fb1dbd67bee41a5272c143ba"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\videos\\hero-bg.mp4": {
+    "mtime": 1777849776.8433197,
+    "hash": "23eda19a399cfc7378d3dc78cd759036"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\videos\\library-bg.mp4": {
+    "mtime": 1777849781.0815213,
+    "hash": "003be72801b6fd87109c4319548016b1"
+  }
+}

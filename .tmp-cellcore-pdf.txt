@@ -1,0 +1,1086 @@
+AI-Assisted Markov Chain Product Prediction Case Study
+Page 1
+AI-Assisted Markov Chain Product 
+Prediction
+Case Study for Protocol-Based Wellness Commerce
+Public portfolio version | CellCore Biosciences / Microbe Formulas context | Markov chain, 
+reorder propensity, product affinity, segmentation, and recommendation ranking
+Role Product analytics, data engineering, data science, 
+ML prototyping, and AI-assisted implementation
+Core system Markov Chain Product Prediction and 
+Recommendation System
+AI usage GPT-4-class assistant used for code scaffolding, SQL 
+design, algorithm explanation, debugging, and 
+documentation. No PII, raw customer records, 
+credentials, or database access were provided.
+Deployment status Offline model/prototype and analytics handoff. 
+Final production deployment status is not claimed 
+because contract work ended before deployment 
+confirmation.
+Prepared as a website-ready case study for B2B buyers, B2C audiences, hiring managers, technical leaders, 
+and enterprise teams evaluating AI-enabled analytics and ML implementation capability.
+Public accuracy and confidentiality note
+This document describes a real project context and a realistic technical implementation pattern. 
+Exact client data, schema internals, and audited production metrics are not included. Any numeric 
+results marked as reconstructed or illustrative should be treated as representative portfolio 
+figures, not as official CellCore metrics. Product and protocol descriptions are based only on public 
+CellCore pages and should not be interpreted as medical claims.
+
+AI-Assisted Markov Chain Product Prediction Case Study
+Page 2
+Table of Contents
+1. Executive Summary
+2. Business Context
+3. Problem Scenario
+4. Why the Problem Was Hard
+5. AI-Assisted Delivery Model
+6. Data Architecture and Pipeline
+7. Model Stack and Methods
+8. Formulas, Tradeoffs, and Failure Modes
+9. Evaluation and Validation Plan
+10. Reconstructed Insights and Business Interpretation
+11. Productionization Blueprint
+12. Governance, Privacy, and Risk Controls
+13. What This Demonstrates to Employers and Enterprise Buyers
+14. Website-Ready Version
+15. Technical Appendix
+16. References
+
+AI-Assisted Markov Chain Product Prediction Case Study
+Page 3
+1. Executive Summary
+This case study explains how I designed an AI-assisted machine learning and analytics system to 
+model product purchase sequences, reorder likelihood, protocol adherence, and next-best-product 
+recommendations for a protocol-based wellness commerce business. The project context was CellCore 
+Biosciences / Microbe Formulas, a professional supplement and protocol brand with both practitioner 
+and consumer-facing commerce dynamics.
+The core insight was that ordinary reorder analytics understated true customer momentum. Reorder 
+likelihood was generally low when customers purchased isolated products, but it increased materially 
+when the customer was attached to a practitioner, protocol, pathway, bundle, or known phase 
+sequence. Standard ecommerce reporting could count repeat orders, but it could not explain 
+sequence behavior: what customers did next, where they exited, which products pulled them deeper 
+into a protocol, and which cohorts behaved like one-time buyers versus structured pathway 
+followers.
+I designed the system as one broader ML project with multiple modeling layers rather than a 
+collection of unrelated projects. The centerpiece was a Markov chain product prediction model. 
+Supporting layers included higher-order sequence modeling, reorder propensity scoring, market 
+basket association rules, behavioral customer segmentation, and a weighted ranking layer that 
+converted model outputs into practical next-product recommendations.
+Layer Method Business question answered
+Next-product sequence First-order Markov chain Given the most recent purchase, what 
+product or protocol step is most likely 
+next?
+Protocol/pathway continuation Higher-order Markov chain / n-gram 
+sequence model
+Given the last two or three purchases, is 
+the customer following a recognizable 
+pathway?
+Same-product reorder Logistic regression-style propensity 
+scoring
+Is this buyer likely to buy the same SKU 
+again within a target window?
+Product affinity Association rule mining / market basket 
+analysis
+Which products naturally appear 
+together in orders or journeys?
+Customer segmentation Behavioral cohorting plus optional K-
+means on RFM/pathway features
+Which buyer types exist, and how do 
+their next steps differ?
+Recommendation ranking Weighted scoring ensemble How should signals be combined into 
+usable next-best-product outputs?
+The work was performed with GPT-4-class assistance in mid-2025, but not with autonomous AI agents 
+and not by connecting AI to the production database. The safe operating model was deliberately 
+constrained: I provided table names, column names, synthetic examples, sanitized row fragments, 
+and business rules. GPT-4 helped produce SQL, Python, feature engineering logic, formulas, pseudo-
+code, tests, and documentation that could be wired cleanly into the real datasets without exposing PII 
+or giving the model access to the database.
+
+AI-Assisted Markov Chain Product Prediction Case Study
+Page 4
+Case study position
+This should be presented as an offline validated analytics and ML system design with production-
+ready model logic and data contracts. It should not claim confirmed production deployment unless 
+the company later verifies that the models were deployed after the contract ended.
+2. Business Context
+CellCore Biosciences operates in a specialized commerce environment where products are not only 
+individual SKUs. They are often part of guided protocols, phase-based pathways, practitioner 
+recommendations, bundles, and wellness routines. Public CellCore materials describe advanced 
+professional formulas, practitioner involvement, foundational protocols, comprehensive protocols, 
+and a Microbe transition context tied to thousands of practitioners. Their terms also identify Microbe 
+Formulas LLC as a producer and wholesale supplier of nutraceutical and natural health products 
+marketed under brands including Microbe Formulas, CellCore Biosciences, and Biocidin, with 
+products primarily intended for distribution through licensed healthcare professionals [1-5].
+That context matters because the buyer journey is not a normal one-click ecommerce replenishment 
+journey. A customer may begin with a foundational product, move to a drainage or binder category, 
+proceed through steps or phases, pause during a protocol, receive a practitioner recommendation, 
+switch into a kit, or buy multiple related products in a single order. The commercial question is not 
+simply, 'Who bought again?' It is, 'Which pathway does this purchase imply, and what should happen 
+next?'
+2.1 Commercial stakeholders
+Stakeholder What they needed Why sequence modeling helped
+Practitioner / partner teams Understand which products or steps 
+patients were likely to need next
+Transitions exposed pathway adherence 
+and drop-off points
+Marketing Segment one-time buyers from 
+continuation buyers
+Cohorts separated generic reorder 
+campaigns from protocol progression 
+campaigns
+Ecommerce / product Improve recommendations, bundles, and 
+merchandising
+Affinity and sequence signals identified 
+products that belonged together 
+operationally
+Leadership Explain product movement and customer 
+behavior
+Transition matrices made hidden product 
+journeys visible
+Data and analytics Turn raw order history into repeatable 
+decision logic
+The model transformed historical orders 
+into reusable scoring tables
+2.2 Why generic ecommerce analytics was not enough
+ Order dashboards counted transactions, but did not model state transitions. They could show 
+repeat purchase rates but not the conditional probability of moving from Product A to Product B.
+
+AI-Assisted Markov Chain Product Prediction Case Study
+Page 5
+ Reorder metrics missed protocol continuation. A customer buying a different product in the 
+next protocol step may be healthy continuation, not churn.
+ Product bundles distorted SKU-level behavior. Kits and bundles had to be decomposed or 
+mapped to protocol states to avoid false transition counts.
+ Practitioner-led buyers behaved differently from direct consumers. The same SKU could 
+mean different intent depending on channel, account type, or referral context.
+ Pathways mattered more than isolated products. The model needed to detect progression, 
+deviation, and drop-off across multi-step journeys.
+3. Problem Scenario
+The practical scenario was a product and customer journey problem hiding inside ordinary order 
+history. Leadership and commercial teams needed to know whether customers were likely to reorder 
+the same product, continue into another product, enter a protocol sequence, or disappear after an 
+initial purchase. The dataset existed in business systems, but the insight was not available from 
+normal dashboards because the problem required sequence reconstruction.
+A realistic product journey might look like this:
+Order event Observed purchase Naive dashboard 
+interpretation
+Sequence-model 
+interpretation
+T0 Customer buys a Step 1 / 
+drainage product
+New order Possible entry into a protocol 
+path
+T1 Customer buys binder or gut 
+support
+Different SKU, not a reorder Continuation into a related 
+pathway
+T2 Customer buys kit or Step 2 
+items
+Upsell or bundle purchase Protocol adherence signal
+T3 Customer does not reorder 
+original SKU
+Possible churn May still be active if moving 
+through sequence
+The modeling problem was therefore not 'predict revenue' in the abstract. It was to convert discrete 
+customer purchase events into a state machine that could answer what comes next, how confident the 
+recommendation is, and which business process should act on the result.
+3.1 The central business question
+Given a customer's purchase history, customer type, and protocol context, what is the most likely next 
+product, reorder, or pathway step, and how should that prediction be used for marketing, practitioner 
+support, merchandising, and customer retention?
+3.2 Target outputs
+ A product-to-product transition matrix showing probabilities of next purchases.
+ A protocol-step transition view showing movement through foundational and comprehensive 
+pathways.
+ A reorder propensity score for same-SKU repurchase within a defined time window.
+
+AI-Assisted Markov Chain Product Prediction Case Study
+Page 6
+ A market basket affinity table showing products commonly bought together.
+ Behavioral customer segments based on recency, frequency, monetary value, pathway behavior, 
+and practitioner influence.
+ A ranked next-best-product recommendation table consumable by BI tools, CRM workflows, 
+ecommerce modules, or email audience builders.
+4. Why the Problem Was Hard
+The hard part was not choosing a trendy model. The hard part was turning messy commerce data into 
+a sequence-safe, privacy-safe, business-readable model. A simple neural recommender would have 
+been harder to explain, harder to govern, more fragile with sparse protocol behavior, and less useful 
+to non-technical stakeholders. The appropriate solution was a transparent probabilistic sequence 
+model supported by carefully engineered features and validation loops.
+4.1 Data complications
+Issue Failure mode Implementation treatment
+Same-order multiple products Artificial sequence if line items are 
+ordered arbitrarily
+Treat same-order products as a basket; use 
+association rules for co-purchase and 
+order-level state for sequence
+Bundles and kits Bundle SKU hides component behavior Map kits to protocol states; optionally 
+decompose bundle components when 
+reliable metadata exists
+Practitioner bulk orders Bulk buying can look like consumer 
+protocol behavior
+Partition B2B/practitioner accounts from 
+direct consumers or use account type 
+features
+Subscriptions and replenishment Automatic repeats inflate reorder 
+behavior
+Flag subscriptions separately and compare 
+manual versus automatic reorder
+Returns, refunds, cancellations False purchase transitions Filter to paid/fulfilled order states and 
+optionally net out returns
+SKU renames / product changes Historical fragmentation Normalize SKU aliases to durable product 
+keys
+Long gaps Model may treat delayed progression as 
+churn
+Use time-windowed transitions and days-
+since features
+Low support product pairs Noisy transition probabilities Apply smoothing, support thresholds, and 
+backoff to category/protocol-level states
+4.2 Product analytics complication
+The key behavioral distinction was between 'same product reorder' and 'protocol continuation.' A 
+customer who does not buy the same product again may still be following the intended journey if the 
+next purchase is a related protocol step. A generic reorder dashboard would mark that as lower 
+retention. A sequence model can identify it as expected movement through the product system.
+
+AI-Assisted Markov Chain Product Prediction Case Study
+Page 7
+4.3 PM and stakeholder complication
+The model had to be explainable to teams that would use the output. A transition matrix, lift table, 
+and ranked recommendation list were more operationally useful than a black-box embedding model 
+because teams could ask, 'Why did the model suggest this?' and receive a concrete answer: transition 
+probability, pathway history, basket affinity, reorder timing, and customer segment.
+5. AI-Assisted Delivery Model
+The project used GPT-4-class assistance as an implementation accelerator, not as an unsupervised 
+decision-maker. In mid-2025, the LLM was used like a senior coding, modeling, and documentation 
+partner. It helped translate business questions into algorithms, generate SQL and Python scaffolding, 
+compare modeling approaches, debug edge cases, and write stakeholder-facing explanations. It did 
+not receive PII, credentials, direct database access, or raw production data.
+5.1 Safe AI operating pattern
+Input to AI Allowed? Reason
+Table names and column names Yes Enough context to design compatible 
+SQL and feature logic
+Synthetic or manually sanitized rows Yes Used for debugging schema 
+assumptions without exposing real 
+customers
+Business rules and product categories Yes Necessary for protocol mapping and 
+feature design
+Raw customer records No Unnecessary and privacy-sensitive
+PII such as names, emails, addresses, 
+phone numbers
+No Not needed for sequence modeling and 
+inappropriate for external AI assistance
+Database credentials or live access No AI generated code and logic, but did not 
+query the system
+5.2 Human and AI boundary
+Workstream Human-owned AI-assisted
+Problem framing Business objective, stakeholder needs, 
+constraints, success criteria
+Draft options, clarify assumptions, 
+produce comparison tables
+Data engineering Schema validation, secure access, source-
+of-truth decisions
+SQL scaffolds, transformation logic, data 
+quality checks
+Modeling Method selection, leakage control, metric 
+interpretation
+Formula review, pseudo-code, 
+implementation templates
+Analytics Cohort definitions, business readouts, 
+dashboard logic
+Query optimization, narrative drafts, chart 
+suggestions
+Governance Privacy policy, access boundaries, 
+deployment decisions
+Documentation, test plans, risk checklists
+
+AI-Assisted Markov Chain Product Prediction Case Study
+Page 8
+5.3 Example safe prompt pattern
+The AI workflow used prompts like this, with schema-level detail but without PII:
+You are helping design a product sequence model.
+Use only the schema below. Do not assume access to live data.
+Tables: orders(order_id, customer_id_hash, order_ts, channel, status), order_lines(order_id, sku, qty, price), products(sku, 
+product_family, protocol_step, bundle_flag).
+Goal: build SQL that creates ordered customer purchase transitions, filters cancelled orders, handles same-order baskets, 
+and produces transition counts by cohort.
+Return: SQL, edge cases, and validation queries.
+5.4 Why AI mattered
+The AI value was speed, breadth, and translation across domains. The work required PM judgment, 
+data engineering rigor, analytics interpretation, ML design, privacy discipline, and executive 
+storytelling. GPT-4 compressed iteration cycles by helping generate implementation candidates 
+quickly, but every material decision had to be reconciled with the actual schema, the real business 
+process, and the constraints of a protocol-based product model.
+6. Data Architecture and Pipeline
+The system was designed as a local-first, batch-friendly analytics and ML pipeline. The data product 
+did not require AI access to production systems. It required deterministic transformations, 
+reproducible model runs, saved artifacts, evaluation reports, and scoring tables that could be 
+consumed by business tools.
+6.1 Current state, target state, and frontier
+State Description Recommended posture
+Current state Offline prototype and analytics handoff 
+built from order history, product 
+metadata, customer type fields, and 
+protocol mapping.
+Describe as model design/prototype unless 
+deployment is verified.
+Target state Scheduled batch scoring pipeline that 
+refreshes transition matrices and 
+recommendation scores daily or weekly.
+Deploy with replay logs, validation gates, 
+rollback, and owner signoff.
+Speculative frontier Contextual Markov models, personalized 
+Markov chains, graph-based 
+recommenders, or sequence transformers 
+for mature datasets.
+Use only after simpler transparent 
+baselines are production-stable.
+6.2 Pipeline overview
+Stage Purpose Output artifact
+Source extraction Pull paid/fulfilled orders, order lines, Raw staging tables
+
+AI-Assisted Markov Chain Product Prediction Case Study
+Page 9
+product metadata, customer/account type, 
+channel, subscription flags, and protocol 
+mappings.
+Normalization Clean SKU aliases, product families, kits, 
+protocol steps, returns, cancelled orders, 
+duplicate orders, and timestamps.
+Normalized order events
+Basket builder Represent same-order product sets as 
+baskets and avoid arbitrary line-item 
+sequencing.
+Customer basket timeline
+Sequence builder Create first-order and higher-order 
+transitions by customer, cohort, product, 
+category, and protocol step.
+Transition event table
+Feature builder Calculate RFM, days since last purchase, 
+prior count, pathway depth, practitioner 
+flag, bundle exposure, and category 
+history.
+Feature table
+Model training Estimate transition probabilities, reorder 
+propensity, affinity rules, segments, and 
+ranking weights.
+Model artifacts and parameter tables
+Validation Compare to temporal holdout and simple 
+baselines; review cohort leakage and 
+business reasonableness.
+Evaluation report
+Scoring Generate next-best-product 
+recommendations and confidence scores.
+Recommendation table
+Activation Expose outputs to BI, CRM, ecommerce 
+recommendations, email lists, or 
+practitioner dashboards.
+Operational audiences and dashboards
+6.3 Core data contracts
+The production-ready version would use explicit contracts so engineers and analysts know exactly 
+what each table owns.
+Contract Grain Required fields Owner
+order_event_clean One row per customer-order-
+basket
+customer_id_hash, 
+order_id_hash, order_ts, channel, 
+account_type, basket_id, status
+Data engineering
+order_line_clean One row per order-line product order_id_hash, sku_key, qty, 
+net_price, product_family, 
+bundle_component_flag
+Data engineering
+product_protocol_map One row per durable SKU or 
+product family
+sku_key, family, protocol_name, 
+protocol_step, pathway_group, 
+active_flag
+Product analytics
+customer_features One row per customer per 
+scoring date
+RFM, prior_orders, 
+pathway_depth, last_sku, 
+last_protocol_step, 
+days_since_last
+Analytics / ML
+transition_counts One row per cohort- state_i, state_j, count_ij, count_i, ML
+
+AI-Assisted Markov Chain Product Prediction Case Study
+Page 10
+current_state-next_state support_window, cohort
+recommendation_scores One row per customer-product 
+candidate per run
+customer_id_hash, sku_key, 
+score, rank, reasons, run_id
+ML / activation
+6.4 Sequence construction logic
+The sequence builder avoided a common modeling mistake: treating same-order line items as ordered 
+events. Within one order, product line order is often arbitrary. The safer design was to model same-
+order items as a basket for affinity and order-to-order changes as sequence transitions.
+1. 1. Filter to valid paid or fulfilled orders.
+2. 2. Normalize each SKU to a durable product key and map it to category/protocol metadata.
+3. 3. Group all line items in the same order into a basket state.
+4. 4. Sort each customer's baskets by timestamp.
+5. 5. Emit first-order transitions: basket_t -> basket_t+1 or state_t -> state_t+1.
+6. 6. Emit higher-order contexts when at least two prior states exist.
+7. 7. Partition counts by cohort: practitioner-led, direct consumer, protocol, bundle exposure, first-time buyer, 
+subscription, and channel.
+7. Model Stack and Methods
+The model stack was deliberately composable. Each layer answered a different question, produced a 
+reusable output, and fed the final ranking layer. This made the system easier to debug, explain, and 
+improve without rewriting the entire architecture.
+7.1 Layer 1: First-order Markov chain
+Purpose: predict the next likely product, product family, basket, or protocol state from the customer's 
+most recent state.
+Formula: P(next_state = j | current_state = i) = (C_ij + alpha) / (sum_k C_ik + alpha * K)
+Where C_ij is the number of observed transitions from state i to state j, alpha is the smoothing 
+parameter, and K is the number of possible next states. Smoothing prevents zero-probability 
+recommendations for sparse but plausible paths.
+Input Output Best use Tradeoff
+Ordered customer purchase 
+states
+Transition matrix Transparent next-product 
+recommendation
+Captures only recent state 
+unless extended
+Product or protocol state 
+definitions
+Top-k next candidates Explainable business review Sensitive to sparse counts and 
+state design
+7.2 Layer 2: Higher-order Markov chain / n-gram model
+Purpose: detect multi-step protocol behavior by conditioning the next purchase on a short history, not 
+just the last product.
+
+AI-Assisted Markov Chain Product Prediction Case Study
+Page 11
+Formula: P(s_t = j | s_{t-1}, s_{t-2}) for second-order behavior, or more generally P(s_t | s_{t-n:t-1}).
+Because higher-order states become sparse quickly, the model should use interpolation or backoff. 
+For example: P_final = lambda_2 * P_2(j | s_{t-2}, s_{t-1}) + lambda_1 * P_1(j | s_{t-1}) + lambda_0 * 
+P_popular(j), where the lambda weights sum to 1.
+Why it mattered Tradeoff Mitigation
+Protocol behavior often depends on the 
+last two or three steps
+State explosion and sparse observations Back off to first-order, category-level, or 
+protocol-level states
+Distinguishes pathway continuation from 
+generic reorder
+Harder for stakeholders than first-order 
+matrix
+Expose reason codes and keep first-order 
+output visible
+7.3 Layer 3: Reorder propensity scoring
+Purpose: estimate whether the customer will buy the same SKU again within a defined time window 
+such as 30, 60, 90, or 120 days. This layer was not the whole recommendation system. It specifically 
+modeled same-product replenishment behavior.
+Formula: P(reorder = 1 | x) = 1 / (1 + exp(-(beta_0 + beta_1*x_1 + ... + beta_m*x_m)))
+Feature family Examples Rationale
+Timing days_since_last_purchase, 
+average_interpurchase_days
+Replenishment is time-dependent
+History prior_orders, prior_same_sku_orders, 
+prior_category_orders
+Repeat behavior is self-reinforcing
+Protocol protocol_name, protocol_step, 
+pathway_depth
+Pathway buyers are more likely to 
+continue
+Customer type practitioner-led, partner, direct consumer Channel changes intent and cadence
+Basket context bundle_flag, kit_exposure, co-
+purchased_products
+Bundled entry may indicate planned 
+continuation
+7.4 Layer 4: Product affinity / market basket analysis
+Purpose: identify products frequently bought together in the same order or journey, regardless of 
+sequence. This was complementary to the Markov chain. The Markov chain modeled order-to-order 
+movement. Association rules modeled co-occurrence.
+Formulas: support(X) = count(X) / N; confidence(X -> Y) = support(X union Y) / support(X); lift(X -> Y) = 
+confidence(X -> Y) / support(Y).
+Metric Question Use
+Support How common is this itemset? Remove rare or noisy product pairs
+Confidence When X appears, how often does Y 
+appear?
+Candidate bundle and recommendation 
+logic
+
+AI-Assisted Markov Chain Product Prediction Case Study
+Page 12
+Lift Is X -> Y stronger than random chance? Separate meaningful affinity from 
+popular-product bias
+7.5 Layer 5: Customer segmentation
+Purpose: separate buyer types so the model could avoid treating all customers as equivalent. The 
+safest implementation was behavioral cohorting, optionally supported by K-means clustering on 
+normalized RFM and pathway features.
+K-means objective: minimize sum over clusters of squared distance between each customer feature 
+vector and its assigned cluster centroid.
+Segment Definition example Likely action
+Practitioner-led pathway buyer Practitioner/referral signal plus multiple 
+protocol-aligned purchases
+Protocol continuation recommendations
+Direct one-time detox buyer First order only, low pathway depth, no 
+return within window
+Education, onboarding, pathway 
+explanation
+Replenishment buyer Repeated same SKU or category at regular 
+intervals
+Reorder reminder and replenishment 
+cadence
+Bundle-driven entrant Initial kit or bundle purchase Step-based follow-up sequence
+High-value multi-path buyer High frequency and broad category 
+coverage
+Personalized recommendations and 
+practitioner support
+7.6 Layer 6: Weighted recommendation ranking
+Purpose: combine all signals into an actionable ranked list. The ranking layer was intentionally 
+lightweight because the core value was not an opaque ranking algorithm. The value was the 
+integration of transparent model signals into an operational recommendation table.
+Formula: score(user, product) = w1*P_markov + w2*P_pathway + w3*P_reorder + w4*affinity_lift + 
+w5*segment_modifier + w6*business_rule_adjustment.
+Signal Typical role Example weight
+First-order Markov probability Core next-product movement 35-45%
+Higher-order pathway continuation Protocol adherence 20-30%
+Reorder propensity Same-SKU replenishment 10-20%
+Affinity lift Co-purchase relationship 5-15%
+Segment modifier Cohort-specific adjustment 5-15%
+Business rules Stock, discontinued SKUs, protocol safety 
+constraints
+Hard filter or adjustment
+
+AI-Assisted Markov Chain Product Prediction Case Study
+Page 13
+8. Formulas, Tradeoffs, and Failure Modes
+A strong case study should explain not just what was used, but why each method was appropriate and 
+what could go wrong. The system was designed to extend simple, interpretable models before 
+jumping to heavier algorithms.
+Method Why selected Tradeoff Failure mode Control
+First-order Markov chain Transparent and strong 
+baseline for sequential 
+purchase prediction
+Limited memory Overweights last purchase 
+when journey context 
+matters
+Add higher-order layer and 
+cohort partitions
+Higher-order Markov / n-
+gram
+Captures protocol 
+sequences
+Sparse states Low support for rare paths Backoff, smoothing, 
+category-level states
+Logistic reorder propensity Interpretable binary 
+classification
+May miss nonlinear effects Weak performance on rare 
+reorders
+Compare with tree model 
+later, calibrate probabilities
+Association rules Clear product affinity 
+metrics
+Not personalized by default Popular items create 
+misleading confidence
+Use lift and support 
+thresholds
+Behavioral cohorts / K-
+means
+Turns customer behavior 
+into operational segments
+Cluster choice can be 
+arbitrary
+Unstable clusters across 
+refreshes
+Scale features, monitor 
+drift, keep human-readable 
+cohorts
+Weighted ranker Easy to govern and tune Manual weights may be 
+imperfect
+Overfitting to stakeholder 
+preference
+Temporal validation and 
+A/B testing
+8.1 Why not start with deep learning?
+A deep sequence model such as an RNN, transformer, or neural recommender could be appropriate at 
+a larger maturity stage, but it was not the right first production candidate for this problem. The goal 
+was not to win an academic benchmark. The goal was to produce a system that stakeholders could 
+trust, engineers could wire into the data warehouse, and commercial teams could act on.
+ The dataset likely had sparse transitions for many products and protocol states.
+ Business users needed explainability, not just a black-box score.
+ Protocol constraints and practitioner context needed explicit modeling.
+ A simple transparent baseline was easier to validate, replay, and roll back.
+ The higher-order Markov and ranking layers could later be extended into personalized Markov 
+chains or factorized sequential recommenders if volume justified it.
+8.2 Why not treat all repeat purchases as reorders?
+Because in protocol commerce, switching SKUs may be a sign of success. A direct reorder model alone 
+would penalize customers who progress through intended steps. The correct design separated same-
+SKU reorder from pathway continuation, then combined both in the ranking layer.
+8.3 Cold start strategy
+Cold-start case Fallback
+New customer with no history Popularity by channel, entry protocol, practitioner 
+recommendation, or first basket affinity
+New SKU Product family, protocol step, bundle mapping, manually 
+
+AI-Assisted Markov Chain Product Prediction Case Study
+Page 14
+assigned adjacency
+Low-support transition Smoothed first-order probability, category-level transition, or 
+protocol-level backoff
+Unknown customer type Use global transition matrix with confidence penalty
+9. Evaluation and Validation Plan
+The right evaluation for this model was temporal, not random. Random splits leak future customer 
+behavior into training. The model should be trained on earlier orders and tested on later orders so the 
+evaluation simulates actual recommendation timing.
+9.1 Temporal validation design
+8. Choose a historical cutoff date.
+9. Train transition matrices, affinity rules, segments, and reorder models using orders before the 
+cutoff.
+10. Score customers at the cutoff using only their known history at that point.
+11. Compare the top-k recommendations to actual purchases after the cutoff.
+12. Evaluate separately by customer type, protocol cohort, product family, and first-time versus 
+repeat customers.
+9.2 Metrics
+Metric Layer Meaning
+Top-k hit rate Recommendation ranking Was the actual next product in the top k 
+suggestions?
+Mean reciprocal rank Ranking How high did the actual next product 
+appear?
+Coverage Ranking How many products and customers 
+receive valid recommendations?
+Precision / recall Reorder propensity How well did the classifier detect true 
+reorders?
+ROC AUC / PR AUC Reorder propensity Binary model separability, especially 
+useful with class imbalance
+Brier score Calibration Whether predicted probabilities match 
+observed outcomes
+Lift over baseline Business Improvement versus popularity, category, 
+or same-SKU baseline
+Cohort stability Segmentation Whether segments remain interpretable 
+across refreshes
+
+AI-Assisted Markov Chain Product Prediction Case Study
+Page 15
+9.3 Baselines
+A credible ML project compares the model against simple baselines. For this use case, the required 
+baselines were:
+ Global popularity: recommend the most purchased products overall.
+ Category popularity: recommend the most purchased products inside the prior product family.
+ Same-SKU reorder: recommend the same product the customer last purchased.
+ Practitioner/channel baseline: recommend top products by account type or channel.
+ Protocol rule baseline: recommend the next manually defined protocol step.
+9.4 Leakage and data quality checks
+Check Reason
+No future orders in training features Prevents inflated next-product accuracy
+No target window leakage in days-since fields Prevents reorder model from seeing future behavior
+Cancelled/refunded orders excluded or flagged Prevents false transitions
+Subscription orders separated Avoids confusing automatic replenishment with active intent
+Product aliases normalized before split Prevents train/test fragmentation
+Bundle decomposition rules frozen before validation Prevents post-hoc tuning to outcomes
+10. Reconstructed Insights and Business Interpretation
+Important
+The figures in this section are realistic reconstructed public-case-study examples. They should not 
+be represented as audited client metrics. They are included to show the kind of insight the system 
+was designed to produce.
+The most important qualitative insight was that reorder probability was low for many isolated 
+purchases, but materially higher when the buyer was attached to a specific protocol, pathway, 
+practitioner recommendation, or bundle. That means the commercial opportunity was less about 
+generic reorder marketing and more about identifying where each customer sat in the product 
+journey.
+10.1 Representative dataset framing
+Dimension Representative public-case-study value Use
+Observation window 18-24 months Enough history for sequences and 
+replenishment windows
+Orders 55,000-75,000 Transaction base for transition counts
+Order lines 130,000-180,000 Product-level and basket-level modeling
+
+AI-Assisted Markov Chain Product Prediction Case Study
+Page 16
+Durable SKUs/product states 80-130 State space for Markov chain
+Customer/account records 25,000-40,000 Cohort and segmentation base
+Protocol/pathway states 10-25 Higher-level state space to reduce sparsity
+10.2 Representative findings
+Finding Representative value Business interpretation
+Same-SKU reorder rate across all 
+customers
+9-14% within target window Generic reorder alone was not the 
+dominant behavior
+Same-SKU reorder for protocol-attached 
+customers
+22-32% Protocol context increased 
+continuation/replenishment behavior
+Any-pathway continuation for protocol-
+attached customers
+30-45% Customers often moved forward rather 
+than reordering the same SKU
+Top-3 next-product hit rate for known 
+pathway customers
+42-52% Sequence context made recommendations 
+more useful than popularity
+Lift for strong protocol-adjacent product 
+pairs
+3x-7x Some products had affinity far beyond 
+random co-occurrence
+First-time direct one-off segment 35-50% of first-time buyers Required onboarding, education, or 
+practitioner connection rather than 
+simple reorder nudges
+10.3 Example transition matrix
+A simplified example of a transition matrix is shown below. In production, this table would be 
+generated by cohort, channel, customer type, and protocol mapping.
+Current state Next candidate 1 Prob. Next candidate 2 Prob. Next candidate 3 Prob.
+Step 1 / Energy and 
+Drainage
+Step 2 / Gut and 
+Immune
+0.31 Binder category 0.18 Same Step 1 item 0.11
+Binder category Drainage support 0.27 Same binder 0.19 Gut support 0.13
+Para-oriented kit Drainage support 0.24 Binder category 0.17 Same kit family 0.10
+First direct single-
+SKU order
+No purchase in 
+window
+0.62 Same SKU 0.08 Entry bundle 0.06
+10.4 What the insight changed
+ From product-level reorder to pathway-level continuation. The model reframed retention 
+around expected next state, not just same-SKU repurchase.
+ From generic campaigns to cohort-specific activation. Practitioner-led buyers, direct one-time 
+buyers, bundle entrants, and protocol followers required different actions.
+ From anecdotal product adjacency to quantified affinity. Support, confidence, and lift made 
+product relationships measurable.
+
+AI-Assisted Markov Chain Product Prediction Case Study
+Page 17
+ From dashboard reporting to decision automation. The recommendation table could become a 
+feed for CRM, BI, ecommerce, or practitioner tools.
+11. Productionization Blueprint
+Because final deployment status is unknown, the most accurate public framing is that the project 
+produced a production-ready blueprint and offline model logic. The system below describes how it 
+should be deployed safely.
+11.1 Batch scoring architecture
+Component Responsibility Rollback / control
+Data extraction job Refresh normalized orders and product 
+metadata
+Versioned source snapshots
+Model build job Recompute transition counts, 
+probabilities, rules, and segment labels
+Run ID and artifact versioning
+Validation gate Block deployment if metrics drift, 
+coverage drops, or data quality fails
+Fail closed to prior model
+Scoring job Generate customer-product 
+recommendations
+Can replay from source snapshots
+Activation tables Expose rank, score, reason codes, and 
+exclusions
+Feature flag by channel or audience
+Monitoring Track hit rate, conversion, drift, 
+recommendation coverage, and 
+complaints
+Rollback to baseline recommender
+11.2 Recommendation output contract
+Field Example Why it exists
+run_id 2025_06_15_v03 Replay and audit
+customer_id_hash hash_abc123 Join key without exposing PII
+candidate_sku_key sku_001 Recommended product
+rank 1 Top-k ordering
+score 0.783 Combined ranking score
+score_components markov=0.41;path=0.22;reorder=0.08;lift=0
+.07
+Explainability
+reason_code PATHWAY_CONTINUATION Human-readable action logic
+exclusion_flags out_of_stock=false;discontinued=false Business rule safety
+
+AI-Assisted Markov Chain Product Prediction Case Study
+Page 18
+11.3 Activation channels
+ BI dashboard: show transition matrices, cohort summaries, pathway drop-offs, and product 
+affinity maps.
+ CRM/email: build audiences such as 'high likelihood Step 2 continuation' or 'same-product reorder 
+due soon.'
+ Ecommerce: power next-best-product carousels with guardrails and product availability filters.
+ Practitioner dashboard: show likely next protocol step or follow-up candidates for practitioner-led 
+accounts.
+ Merchandising: identify natural bundles and products with high co-purchase lift.
+11.4 A/B testing design
+Production use should begin with a controlled test. A safe test compares business-as-usual 
+recommendations to model-informed recommendations across matched cohorts.
+Test cell Recommendation source Measured outcomes
+Control Current merchandising, manual protocol 
+rule, or popularity baseline
+CTR, add-to-cart, conversion, 
+reorder/continuation, revenue, opt-out
+Treatment Weighted Markov recommendation table 
+with reason codes
+Same metrics plus top-k hit, pathway 
+continuation, cohort performance
+11.5 Monitoring and rollback
+ Keep the prior model artifact and prior activation table available for immediate rollback.
+ Run data quality checks before publishing any new recommendation table.
+ Track recommendation coverage by cohort so the system does not silently stop serving smaller 
+segments.
+ Monitor product availability and discontinued SKUs before activation.
+ Log reason codes so business teams can audit why a recommendation was generated.
+12. Governance, Privacy, and Risk Controls
+The AI-assisted workflow was intentionally privacy-preserving. GPT-4 was used to design and debug 
+code against schema-level inputs, not to process live customer records. That matters because the 
+project sat at the intersection of commerce, practitioner relationships, customer behavior, and 
+potentially sensitive wellness contexts.
+12.1 Privacy controls
+Control Implementation
+No PII to AI Only table names, column names, business rules, synthetic rows, 
+and sanitized fragments were used
+Hashed identifiers Customer and order IDs should be hashed or surrogate keys in 
+modeling tables
+Least privilege Modeling pipeline should read only necessary order, product, 
+
+AI-Assisted Markov Chain Product Prediction Case Study
+Page 19
+and metadata fields
+Data minimization No names, emails, addresses, phone numbers, or health notes 
+are needed for this model
+Artifact versioning Model outputs should be tied to run IDs and data snapshots
+Human review Recommendations should be reviewed before any sensitive 
+practitioner or customer-facing activation
+12.2 AI governance controls
+For enterprise buyers, the important lesson is that AI assistance can be valuable without making AI 
+the data processor of record. A responsible implementation maintains human ownership of access, 
+validation, and deployment while using the LLM to accelerate code, analysis, and documentation. This 
+aligns with risk-management thinking such as NIST AI RMF principles around mapping context, 
+measuring performance, managing risk, and governing AI systems [14].
+12.3 Model risk register
+Risk Impact Mitigation
+Wrong recommendation Customer confusion or reduced 
+conversion
+Top-k confidence threshold, reason codes, 
+business review
+Over-personalization Feels intrusive or inappropriate Use product journey language, avoid 
+sensitive inference
+Sparse data Noisy recommendations for low-volume 
+SKUs
+Support thresholds, smoothing, backoff
+Protocol misinterpretation Incorrect pathway suggestion Protocol metadata owner and business 
+rule review
+Data drift Model degrades as products or protocols 
+change
+Scheduled monitoring, retraining, and 
+product map updates
+Unverified deployment claim Credibility issue in public case study State that production deployment status is 
+unknown
+13. What This Demonstrates to Employers and Enterprise Buyers
+This case study is valuable because it shows how AI can be used to build real analytics and ML 
+systems without abandoning engineering discipline. The project required cross-functional ownership 
+across PM, data engineering, analytics, ML, and stakeholder communication.
+13.1 PM capability
+ Translated a vague business question into specific model outputs and activation paths.
+ Separated same-product reorder from protocol continuation so stakeholders could reason 
+correctly about customer behavior.
+ Designed outputs that business teams could actually use: transition matrices, recommendation 
+ranks, reason codes, and segment definitions.
+
+AI-Assisted Markov Chain Product Prediction Case Study
+Page 20
+13.2 Data engineering capability
+ Designed normalization, basketization, sequence construction, and feature tables.
+ Handled messy commerce edge cases such as bundles, same-order items, cancellations, 
+subscriptions, and product aliasing.
+ Specified contracts that allow the model to run as a repeatable pipeline rather than a one-off 
+notebook.
+13.3 Analytics capability
+ Created cohort logic for practitioner-led, direct consumer, protocol-attached, replenishment, and 
+one-time buyer behavior.
+ Converted raw order history into business findings about product movement, pathway adherence, 
+and customer drop-off.
+ Defined validation views that leadership could understand without needing to read model code.
+13.4 ML / data science capability
+ Selected transparent models suited to sparse sequential commerce behavior.
+ Combined multiple statistical methods into a coherent recommendation architecture.
+ Specified temporal validation, baselines, calibration, and model monitoring.
+13.5 AI implementation capability
+ Used GPT-4 to accelerate implementation without giving it PII, credentials, or database access.
+ Converted AI output into auditable SQL, Python, model formulas, tests, and stakeholder-ready 
+documentation.
+ Showed how AI can augment technical delivery while preserving human ownership, privacy, and 
+system boundaries.
+14. Website-Ready Version
+The following section can be adapted directly into a website case study. It is more polished and 
+concise than the technical sections above while remaining accurate.
+14.1 Suggested title
+Using AI to Build a Markov Chain Product Prediction Model for Protocol-Based Commerce
+14.2 Short case study copy
+I designed an AI-assisted product prediction and recommendation system for a protocol-based 
+wellness commerce environment. The company sold products through a mix of practitioner, partner, 
+and direct consumer journeys, where customers often moved through multi-step product protocols 
+rather than simply reordering the same SKU.
+The business problem was that traditional ecommerce analytics could show repeat purchase rates, 
+but could not explain sequence behavior. A customer who did not reorder the same product might 
+still be progressing through a protocol. That distinction mattered for retention, product 
+recommendations, practitioner support, bundling, and customer education.
+
+AI-Assisted Markov Chain Product Prediction Case Study
+Page 21
+I used GPT-4 as a technical acceleration tool to design the data pipeline, SQL transformations, Python 
+modeling logic, validation plan, formulas, and documentation. The AI never received PII, raw 
+customer records, credentials, or direct database access. I only supplied sanitized schemas, column 
+names, table names, business rules, and synthetic examples so the generated logic could later be 
+wired to the real datasets.
+The final model architecture used a Markov chain as the core sequence engine, supported by higher-
+order pathway modeling, reorder propensity scoring, product affinity analysis, behavioral 
+segmentation, and a weighted recommendation ranking layer. The output was a system capable of 
+estimating likely next products, same-SKU reorders, protocol continuation, and product relationships 
+across different customer cohorts.
+The key insight was that generic reorder probability was low for isolated purchases, but materially 
+stronger when buyers were attached to a practitioner, bundle, protocol, or pathway. That shifted the 
+commercial interpretation from 'customers are not reordering' to 'customers behave differently 
+depending on where they are in the product journey.'
+My contract ended before I could verify whether the models were deployed into production, so I 
+describe the work as an offline validated model design and analytics handoff rather than a confirmed 
+production deployment. The project demonstrates how AI can be used responsibly to accelerate 
+enterprise analytics and ML delivery without exposing sensitive customer data.
+14.3 Resume-ready bullets
+ Designed an AI-assisted Markov chain product prediction system to model next-product 
+likelihood, reorder propensity, protocol continuation, and product affinity across practitioner, 
+partner, and consumer purchase journeys.
+ Built a privacy-preserving AI workflow using GPT-4 for SQL, Python, feature engineering, model 
+documentation, and validation logic without exposing PII, raw customer data, credentials, or live 
+database access.
+ Developed a layered recommendation architecture combining first-order Markov chains, higher-
+order sequence modeling, logistic reorder scoring, association rule mining, behavioral 
+segmentation, and weighted ranking.
+ Converted historical order behavior into transition matrices, pathway adherence insights, cohort 
+definitions, and next-best-product recommendation outputs for potential BI, CRM, ecommerce, 
+and practitioner activation.
+14.4 Interview explanation
+A clear way to explain the project in an interview:
+I did not treat the problem as a black-box recommendation engine. I first reframed the 
+business problem around product journeys. In that environment, a customer not reordering 
+the same SKU was not necessarily churn because they might be moving into the next 
+protocol step. So I built a Markov chain sequence model to estimate product-to-product 
+movement, added higher-order logic for protocol paths, added a reorder propensity model 
+for same-SKU replenishment, used association rules for co-purchase relationships, 
+segmented customers by behavior, and combined the outputs into a ranked recommendation 
+
+AI-Assisted Markov Chain Product Prediction Case Study
+Page 22
+layer. GPT-4 helped me move faster, but I never gave it PII or database access. I used it to 
+generate code scaffolds and documentation from sanitized schemas, then reconciled that 
+logic with the real dataset structure.
+15. Technical Appendix
+15.1 Example SQL-style transformation plan
+13. Create product_sku_map to normalize old SKUs, aliases, kits, families, and protocol steps.
+14. Create valid_orders as paid/fulfilled orders excluding cancelled, test, refunded, and internal 
+orders as needed.
+15. Create basket_events by grouping valid order lines by order_id and customer_id_hash.
+16. Create customer_order_sequence using row_number over customer_id_hash ordered by order_ts.
+17. Create first_order_transitions by joining sequence row n to row n+1.
+18. Create second_order_contexts by joining rows n, n+1, and n+2 for higher-order modeling.
+19. Create transition_counts grouped by cohort, state_i, state_j, and support window.
+20. Create transition_probabilities using smoothed counts.
+21. Create candidate_recommendations by crossing each active customer state with eligible next 
+states.
+22. Create recommendation_scores by joining Markov, pathway, reorder, affinity, and segment 
+signals.
+15.2 Pseudo-code
+for customer in customers:
+    events = sort(valid_baskets[customer], by='order_ts')
+    for t in range(len(events) - 1):
+        current_state = state_mapper(events[t])
+        next_state = state_mapper(events[t+1])
+        emit_transition(customer, current_state, next_state, cohort, delta_days)
+    if len(events) >= 3:
+        emit_higher_order_context(events[t-2], events[t-1], events[t])
+for state_i in states:
+    for state_j in states:
+        p[state_i, state_j] = (count[state_i, state_j] + alpha) / (count[state_i] + alpha * K)
+for customer in active_customers:
+    candidates = markov_candidates(customer) union reorder_candidates(customer) union affinity_candidates(customer)
+    score each candidate using weighted signal formula
+    apply business filters
+    output top_k candidates with reason codes
+
+AI-Assisted Markov Chain Product Prediction Case Study
+Page 23
+15.3 Implementation modules
+Module Responsibility
+config/product_map.yml Protocol names, product families, SKU aliases, kit flags, 
+active/discontinued products
+etl/orders.sql Valid order filtering and normalized order/basket creation
+features/customer_features.sql RFM, prior purchase counts, days since last purchase, pathway 
+depth
+models/markov.py Transition counts, smoothing, top-k next-state probabilities
+models/reorder.py Binary reorder training and scoring
+models/affinity.py Support, confidence, lift, and pair filtering
+models/segments.py Behavioral cohort assignment and optional K-means
+ranking/score.py Weighted ranking, reason codes, and exclusion filters
+eval/temporal_holdout.py Cutoff-based validation and baseline comparison
+monitoring/drift_checks.py Data quality, metric drift, coverage, and artifact comparison
+15.4 Model cards
+Model Intended use Not intended for Review owner
+Markov transition model Predict next product or protocol 
+state from recent purchase 
+behavior
+Medical advice, diagnosis, or 
+clinical protocol selection
+Analytics / product
+Reorder propensity Estimate commercial likelihood 
+of same-SKU repurchase
+Inferring health status or 
+sensitive traits
+ML / marketing analytics
+Affinity rules Identify co-purchase and bundle 
+relationships
+Claiming clinical efficacy or 
+causation
+Product / merchandising
+Segmentation Group commercial behavior 
+patterns
+Sensitive profiling or health 
+inference
+Analytics / governance
+Ranking layer Prioritize eligible commercial 
+recommendations
+Autonomous practitioner or 
+medical decisioning
+Product / activation
+15.5 Extension roadmap
+Maturity level Extension When to consider
+Level 1 First-order Markov and simple rules Initial production baseline
+Level 2 Higher-order Markov with backoff Enough sequence depth and protocol 
+mapping
+Level 3 Personalized Markov chains or matrix 
+factorization
+Large user/item volume with stable repeat 
+behavior
+Level 4 Graph-based recommendations Rich product, protocol, customer, and 
+practitioner network data
+
+AI-Assisted Markov Chain Product Prediction Case Study
+Page 24
+Level 5 Sequence transformers Large-scale mature event stream, strong 
+eval discipline, and need for 
+personalization
+15.6 Recommended claims language
+Avoid saying Say instead
+I deployed the model into production I designed and handed off an offline validated model/prototype; 
+final production deployment status is unknown
+The model proved clinical outcomes The model analyzed commercial purchase sequences and 
+product journey behavior
+AI built the whole system I used GPT-4 to accelerate implementation while I owned 
+privacy, architecture, validation, and business logic
+The data showed exact reorder numbers Reconstructed public metrics illustrate the type of insight 
+produced; exact audited figures are not included
+16. References
+[1] CellCore Biosciences homepage and product context. https://cellcore.com/
+[2] CellCore Foundational Protocol public page. https://cellcore.com/collections/foundational-protocol
+[3] CellCore Comprehensive Protocol public page. https://cellcore.com/collections/comprehensive-protocol
+[4] CellCore Terms and Conditions, Microbe Formulas LLC, brands, and professional distribution context. 
+https://cellcore.com/pages/terms
+[5] CellCore Microbe Transition page, practitioner transition context. https://cellcore.com/pages/microbe-transition
+[6] Agrawal, R., Imielinski, T., and Swami, A. Mining association rules between sets of items in large databases. 
+SIGMOD 1993. https://doi.org/10.1145/170035.170072
+[7] Agrawal, R., and Srikant, R. Fast Algorithms for Mining Association Rules. VLDB 1994. 
+https://www.vldb.org/conf/1994/P487.PDF
+[8] Rendle, S., Freudenthaler, C., and Schmidt-Thieme, L. Factorizing Personalized Markov Chains for Next-Basket 
+Recommendation. WWW 2010. https://doi.org/10.1145/1772690.1772773
+[9] He, R., and McAuley, J. Fusing Similarity Models with Markov Chains for Sparse Sequential Recommendation. ICDM 
+2016. https://doi.org/10.1109/ICDM.2016.0030
+[10] Cox, D. R. The Regression Analysis of Binary Sequences. Journal of the Royal Statistical Society: Series B, 1958. 
+https://www.jstor.org/stable/2983890
+[11] MacQueen, J. Some Methods for Classification and Analysis of Multivariate Observations. Proceedings of the Fifth 
+Berkeley Symposium, 1967. https://digicoll.lib.berkeley.edu/record/113015
+[12] OpenAI. GPT-4 Technical Report. arXiv:2303.08774, 2023. https://arxiv.org/abs/2303.08774
+[13] OpenAI API data controls documentation. https://developers.openai.com/api/docs/guides/your-data
+[14] NIST. Artificial Intelligence Risk Management Framework AI RMF 1.0, 2023. https://www.nist.gov/itl/ai-risk-
+management-framework

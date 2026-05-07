@@ -29,7 +29,7 @@ export default function App() {
       {/* Header */}
       <header className="p-6 border-b border-[#2a2a2a] flex justify-between items-center backdrop-blur-md sticky top-0 z-10 bg-[#0f0f0f]/80">
         <div className="flex items-center gap-4">
-          <a href="/work/the-books-of-ye/index.html" className="p-2 hover:bg-[#2a2a2a] rounded-full transition-colors group">
+          <a href="/?tab=project&project=byc2w" className="p-2 hover:bg-[#2a2a2a] rounded-full transition-colors group">
             <ArrowLeft className="w-5 h-5 text-[#96B59F] group-hover:-translate-x-1 transition-transform" />
           </a>
           <div>

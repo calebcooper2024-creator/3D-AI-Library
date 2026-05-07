@@ -1,6 +1,7 @@
 import React from 'react';
 import { SectionContent, STANDARD_SOURCE_NOTE_LABEL, STANDARD_SOURCE_NOTE_TEXT } from './caseStudyMeta';
 import { BubbleDiagram, ProcessFlow, BeforeAfter, HandwrittenNote } from '../components/Visuals';
+import _cellcoreSections from './cellcoreCase';
 
 export const ImagePlaceholder = ({ title, desc, height = "aspect-video" }: { title: string, desc: string, height?: string }) => (
   <div className={`w-full bg-black/5 ${height} flex flex-col items-center justify-center border border-black/10 rounded-lg p-8 text-center my-8 relative overflow-hidden group`}>
@@ -193,25 +194,7 @@ const createMassiveSections = (
   }
 ];
 
-export const cellcoreSections = createMassiveSections(
-  { 
-    bgLeft: 'bg-black', 
-    textLeft: 'text-white', 
-    bgRight: 'bg-transparent', 
-    textRight: 'text-black', 
-    heroBg: 'bg-[#166534]', 
-    heroText: 'text-white',
-    heroVideo: '/videos/cellcore-bg.mp4',
-    heroOverlay: 'linear-gradient(to top, rgba(20, 83, 45, 0.95) 0%, rgba(20, 83, 45, 0.4) 50%, rgba(20, 83, 45, 0.2) 100%)'
-  },
-  "CellCore", "Agentic Data Structuring for Biological Scale.",
-  "CellCore possessed petabytes of highly valuable clinical trial data scattered across legacy ERPs. The data was unstructured, locked in PDFs, handwritten notes, and disparate DB schemas.",
-  "We built specialized data-extraction agents that crawl legacy systems, read unstructured PDFs via OCR and Vision models, and map the outputs into a unified biological schema.",
-  "By utilizing an LLM router, we directed complex biological data to specialized fine-tuned models, achieving a 99.4% accuracy rate in data structurization with zero human intervention.",
-  "98% Reduction in Manual Entry",
-  "The beauty of this AI integration was its invisibility. We didn't force scientists to learn a new tool. The agents operated entirely in the background, pushing structured results directly into existing dashboards.",
-  "The deployment allowed CellCore to uncover 3 new drug interaction pathways simply because the data was finally structured and queryable."
-);
+export const cellcoreSections = _cellcoreSections;
 
 import _maybeMortgageSections from './maybeMortgageCase';
 export const maybeMortgageSections = _maybeMortgageSections;

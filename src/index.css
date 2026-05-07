@@ -3,10 +3,10 @@
 
 @font-face {
   font-family: 'Canopee';
-  src: url('/assets/fonts/616fd1dd00cf6c70f978fc69_Canopee-ef3a776d1e.woff2') format('woff2');
+  src: url('/assets/fonts/canopee.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
-  font-display: swap;
+  font-display: block;
 }
 
 @theme {
@@ -49,6 +49,8 @@ body::before {
 .book-card {
   --spine-width: 72px;
   --cover-width: 380px;
+  /* Slight overlap to prevent subpixel seams between spine and cover across browsers/DPIs */
+  --hinge-overlap: 2px;
   width: var(--spine-width);
   height: 540px;
   position: relative;
@@ -106,7 +108,7 @@ body::before {
 
 .book-back-group {
   position: absolute;
-  left: var(--spine-width);
+  left: calc(var(--spine-width) - var(--hinge-overlap));
   top: 0;
   width: var(--cover-width);
   height: 100%;
@@ -119,7 +121,7 @@ body::before {
 
 .book-cover-group {
   position: absolute;
-  left: var(--spine-width);
+  left: calc(var(--spine-width) - var(--hinge-overlap));
   top: 0;
   width: var(--cover-width);
   height: 100%;
@@ -132,7 +134,7 @@ body::before {
 
 .book-page-flap {
   position: absolute;
-  left: var(--spine-width);
+  left: calc(var(--spine-width) - var(--hinge-overlap));
   top: 0;
   width: var(--cover-width);
   height: 100%;

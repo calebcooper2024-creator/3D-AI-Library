@@ -1,0 +1,922 @@
+{
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\fix_portfolio.py": {
+    "mtime": 1777489800.8634064,
+    "hash": "dd797977a210ade1db3ced9c6bcfffec"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\process_stamp.py": {
+    "mtime": 1777582381.268516,
+    "hash": "89954e64f05afabe4c5a39287d67e749"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\vite.config.ts": {
+    "mtime": 1777470632.347397,
+    "hash": "60785666fc59d0906be7385d87a7e2c1"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\js\\caleb-cooper-works.js": {
+    "mtime": 1777851911.465429,
+    "hash": "ed35729d26f0080ad5994a86907fdece"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\js\\Draggable.min-2c75b760fb.js": {
+    "mtime": 1777466277.123549,
+    "hash": "071b0dc357fd18be03d858d3183c016c"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\js\\gsap.min-85b2c7594d.js": {
+    "mtime": 1777466266.5168195,
+    "hash": "7f2b3bdb990fbf8053a7343d4581b52b"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\js\\jquery-3.5.1.min.dc5e7f18c8-e07f811afa.js": {
+    "mtime": 1777466266.6384673,
+    "hash": "dc5e7f18c8d36ac1d3d4753a87c98d0a"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\js\\locomotive-scroll.min-cc8f42dcb9.js": {
+    "mtime": 1777466266.200624,
+    "hash": "fbfa9c0b7c13e970bf4ab6f62043e7f0"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\js\\nav-fix.js": {
+    "mtime": 1777851911.4679632,
+    "hash": "41bdf936cfc9f5a293b4c2c0713a5c0f"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\js\\paper-curtain-bootstrap.js": {
+    "mtime": 1777777049.6893556,
+    "hash": "afb4bbe93eb84940416d8bd2c411e5c6"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\js\\paper-curtain.mjs": {
+    "mtime": 1777740184.4220648,
+    "hash": "4b807bb4900272bd1fbaafdb1e336950"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\js\\paper-slide-in.js": {
+    "mtime": 1777760361.4857557,
+    "hash": "d2c3b17a026671e37e58d569539e40bd"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\js\\webflow.07467efa9-52e4f0421f.js": {
+    "mtime": 1777466266.7758217,
+    "hash": "07467efa9f6935fefdaf4db985b2853d"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\cortex-playground\\vite.config.ts": {
+    "mtime": 1777475216.0,
+    "hash": "60785666fc59d0906be7385d87a7e2c1"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\cortex-playground\\src\\App.tsx": {
+    "mtime": 1777475216.0,
+    "hash": "7e57092609dd58670cced8daaea3f02d"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\cortex-playground\\src\\main.tsx": {
+    "mtime": 1777475216.0,
+    "hash": "2b36426d5ad7e08ef79746aa524f4fb7"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\cortex-playground\\src\\store.ts": {
+    "mtime": 1777475216.0,
+    "hash": "e185802de573b75b07aff4f48d5298a2"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\cortex-playground\\src\\components\\ChatInterface.tsx": {
+    "mtime": 1777475216.0,
+    "hash": "300e27ecf288127197df42ffb0bd99b8"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\cortex-playground\\src\\components\\FactoryScene.tsx": {
+    "mtime": 1777475216.0,
+    "hash": "cdfef5a752fb0991f641ea23423ee4fb"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\cortex-playground\\src\\components\\L2LanesNode.tsx": {
+    "mtime": 1777475216.0,
+    "hash": "c30b40948b14cf6cbb98a2eb233ea066"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\cortex-playground\\src\\components\\L3EvidenceNode.tsx": {
+    "mtime": 1777475216.0,
+    "hash": "a230ad5d36d53ef2b8833fc54311d740"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\cortex-playground\\src\\components\\ProcessGraph.tsx": {
+    "mtime": 1777475216.0,
+    "hash": "6d35edc1c33f6b4cefc03144965ae127"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\cortex-playground\\src\\components\\ProcessNode.tsx": {
+    "mtime": 1777475216.0,
+    "hash": "319eaf23d3f1e664f5262d31812cff31"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\cortex-playground\\src\\components\\TubePath.tsx": {
+    "mtime": 1777475216.0,
+    "hash": "dc2c50d856084de1c44dc98262b933c1"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\cortex-playground\\src\\components\\UIManager.tsx": {
+    "mtime": 1777475216.0,
+    "hash": "4492ddfacfc3cf9ed022243bdf038ee6"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\cortex-playground\\src\\lib\\utils.ts": {
+    "mtime": 1777475216.0,
+    "hash": "ea1c194ee828369e6fcdde84b4d8b8ba"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\bonnie\\bonnie-playground\\vite.config.ts": {
+    "mtime": 1777851911.7312512,
+    "hash": "b14c10a2a3daa1bb38ca7d5e4c6ecbe9"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\bonnie\\bonnie-playground\\src\\App.tsx": {
+    "mtime": 1777609344.0,
+    "hash": "5280eed7a454d50b18cb845c774933f1"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\bonnie\\bonnie-playground\\src\\main.tsx": {
+    "mtime": 1777609344.0,
+    "hash": "2b36426d5ad7e08ef79746aa524f4fb7"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\bonnie\\bonnie-playground\\src\\components\\ControllerDisplay.tsx": {
+    "mtime": 1777609344.0,
+    "hash": "dc88bcd6b1547b1ecd008cfa9e380c23"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\bonnie\\bonnie-playground\\src\\components\\TacticalRadar.tsx": {
+    "mtime": 1777609344.0,
+    "hash": "b7ebb1a3d9695c9d1b6bc90abce6f2f4"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\bonnie\\bonnie-playground\\src\\components\\TelemetryPanel.tsx": {
+    "mtime": 1777609344.0,
+    "hash": "06cb84d42b059a4fa4f280b41a52124f"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\bonnie\\bonnie-playground\\src\\components\\VisionPanel.tsx": {
+    "mtime": 1777609344.0,
+    "hash": "b8da8e9c405debbaa8556bb9a87d724a"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\bonnie\\bonnie-playground\\src\\components\\VoiceChat.tsx": {
+    "mtime": 1777609344.0,
+    "hash": "511226560bfbc89e4774921ae2b7d1a3"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\bonnie\\bonnie-playground\\src\\services\\geminiService.ts": {
+    "mtime": 1777634426.2679443,
+    "hash": "dea376ce214170896e45fa0fa5c4a242"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\boonk\\boonk-v2-app\\vite.config.ts": {
+    "mtime": 1777851911.7411318,
+    "hash": "54c424af6dcdfc1dcfa9302f249ce56c"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\boonk\\boonk-v2-app\\src\\App.tsx": {
+    "mtime": 1777851911.7396233,
+    "hash": "b93d26dd772918b5ae9dc7ee0220aecf"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\boonk\\boonk-v2-app\\src\\main.tsx": {
+    "mtime": 1777653682.0,
+    "hash": "e9cb2fa9a0dc8accf9e881ce67b4ec16"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\boonk\\boonk-v2-app\\src\\components\\ErrorBoundary.tsx": {
+    "mtime": 1777653682.0,
+    "hash": "a246153caffda510b80f5c58623b8c5a"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\boonk\\boonk-v2-app\\src\\components\\VisualEditor.tsx": {
+    "mtime": 1777653682.0,
+    "hash": "4a0fe54578ff806f88380da065bcce2e"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\brokie-v1-app\\eslint.config.mjs": {
+    "mtime": 1777650820.0,
+    "hash": "514279e2189c54adb2442e384cc25404"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\brokie-v1-app\\postcss.config.mjs": {
+    "mtime": 1777650820.0,
+    "hash": "b2f5d23a090943dc40e19a92862cc2c1"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\byc2w\\playground\\vite.config.ts": {
+    "mtime": 1777597131.2751048,
+    "hash": "60785666fc59d0906be7385d87a7e2c1"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\byc2w\\playground\\src\\App.tsx": {
+    "mtime": 1777851911.7635343,
+    "hash": "97f520ce4053c4f4fa4481168ad7bc72"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\byc2w\\playground\\src\\main.tsx": {
+    "mtime": 1777611112.0,
+    "hash": "2b36426d5ad7e08ef79746aa524f4fb7"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\life-tap-labs\\ltl-playground\\vite.config.ts": {
+    "mtime": 1777851911.7857728,
+    "hash": "219382d47c5afc64c6bffa57b688445a"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\life-tap-labs\\ltl-playground\\src\\App.tsx": {
+    "mtime": 1777650458.0,
+    "hash": "b12bb9b01e2ee473535c1bdc84ec494a"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\life-tap-labs\\ltl-playground\\src\\main.tsx": {
+    "mtime": 1777650458.0,
+    "hash": "2b36426d5ad7e08ef79746aa524f4fb7"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\life-tap-labs\\ltl-playground\\src\\components\\AgentDirectory.tsx": {
+    "mtime": 1777650458.0,
+    "hash": "bac6294f2b862a367d6ca7841b356528"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\life-tap-labs\\ltl-playground\\src\\components\\AnalyticsDashboard.tsx": {
+    "mtime": 1777650458.0,
+    "hash": "4b86eb33a6ccaea7d7227b7a96c87ccf"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\life-tap-labs\\ltl-playground\\src\\components\\EconomyDashboard.tsx": {
+    "mtime": 1777650458.0,
+    "hash": "142d88b603538f5c488e6cc0596039f9"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\life-tap-labs\\ltl-playground\\src\\components\\EmbeddingsVisualizer.tsx": {
+    "mtime": 1777650458.0,
+    "hash": "146b8d342cd1605a93b481317f335104"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\life-tap-labs\\ltl-playground\\src\\components\\GlobalCommand.tsx": {
+    "mtime": 1777650458.0,
+    "hash": "95bf8e9f64d96bcbbbdb05f8a1a4ec27"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\life-tap-labs\\ltl-playground\\src\\components\\GovernanceDashboard.tsx": {
+    "mtime": 1777650458.0,
+    "hash": "62b2d236d183da9b24ab4b1e69db0d59"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\life-tap-labs\\ltl-playground\\src\\components\\KnowledgeBase.tsx": {
+    "mtime": 1777650458.0,
+    "hash": "8ef66389850e77c6915589e60a717f52"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\life-tap-labs\\ltl-playground\\src\\components\\NetworkMesh.tsx": {
+    "mtime": 1777650458.0,
+    "hash": "2c79256c0f86f3c37ecd311f28e63210"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\life-tap-labs\\ltl-playground\\src\\components\\PerformanceDashboard.tsx": {
+    "mtime": 1777650458.0,
+    "hash": "c03f16909fe4702f52a7846f7063b9c0"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\life-tap-labs\\ltl-playground\\src\\components\\PromptRegistry.tsx": {
+    "mtime": 1777650458.0,
+    "hash": "873b8db1308ea8792178b579c3580e45"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\life-tap-labs\\ltl-playground\\src\\components\\WorkflowMap.tsx": {
+    "mtime": 1777650458.0,
+    "hash": "98e71e2b23cc2142510e748aa6ba8e3c"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\life-tap-labs\\ltl-playground\\src\\components\\AgentDiagnostics\\BrainTerminal.tsx": {
+    "mtime": 1777650458.0,
+    "hash": "dc47dbc6f6d444260801a9285297e726"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\life-tap-labs\\ltl-playground\\src\\components\\AgentDiagnostics\\NetworkGraph.tsx": {
+    "mtime": 1777650458.0,
+    "hash": "baa5ad3b5c5335a4a8a9fc9dfa497bfa"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\om-swami\\bonnie-playground\\vite.config.ts": {
+    "mtime": 1777851911.8143198,
+    "hash": "b14c10a2a3daa1bb38ca7d5e4c6ecbe9"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\om-swami\\bonnie-playground\\src\\App.tsx": {
+    "mtime": 1777851911.801232,
+    "hash": "79e3dfbc76e43c31b7565534501ec46c"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\om-swami\\bonnie-playground\\src\\main.tsx": {
+    "mtime": 1777851911.8112645,
+    "hash": "a0bcc3ffa5e95e1965f94969ab488283"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\om-swami\\bonnie-playground\\src\\components\\ControllerDisplay.tsx": {
+    "mtime": 1777851911.803322,
+    "hash": "f58a6d975e9e20683fddd38bdebf5f02"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\om-swami\\bonnie-playground\\src\\components\\TacticalRadar.tsx": {
+    "mtime": 1777851911.8048694,
+    "hash": "73bbc496be3c32be9f62d2b65f4c8ef7"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\om-swami\\bonnie-playground\\src\\components\\TelemetryPanel.tsx": {
+    "mtime": 1777851911.8058715,
+    "hash": "b47a4c6b25f266b74e704c196697330b"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\om-swami\\bonnie-playground\\src\\components\\VisionPanel.tsx": {
+    "mtime": 1777851911.8068569,
+    "hash": "2c5780876ac53aed6cdcc3fd529ac372"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\om-swami\\bonnie-playground\\src\\components\\VoiceChat.tsx": {
+    "mtime": 1777851911.8096397,
+    "hash": "5000db23b7afaa84af2cbd943809807a"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\om-swami\\bonnie-playground\\src\\services\\geminiService.ts": {
+    "mtime": 1777851911.8122756,
+    "hash": "a517b4a77c364241b11351322ab7ec77"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\prada\\boonk-v2-app\\vite.config.ts": {
+    "mtime": 1777851911.8807795,
+    "hash": "54c424af6dcdfc1dcfa9302f249ce56c"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\prada\\boonk-v2-app\\src\\App.tsx": {
+    "mtime": 1777851911.8518524,
+    "hash": "b93d26dd772918b5ae9dc7ee0220aecf"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\prada\\boonk-v2-app\\src\\main.tsx": {
+    "mtime": 1777851911.8600109,
+    "hash": "6f5de1585604b26ed3b4286aadcc29a0"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\prada\\boonk-v2-app\\src\\components\\ErrorBoundary.tsx": {
+    "mtime": 1777851911.8539622,
+    "hash": "c24aaf1843c5c8ee8852f1afee92a726"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\prada\\boonk-v2-app\\src\\components\\VisualEditor.tsx": {
+    "mtime": 1777851911.8558004,
+    "hash": "45998e58394dfc8ddea46cb815d2d9e6"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\the-books-of-ye\\playground\\vite.config.ts": {
+    "mtime": 1777851911.9127207,
+    "hash": "17a4a8b0e9b65f611212b80725ac5fd9"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\the-books-of-ye\\playground\\src\\App.tsx": {
+    "mtime": 1777851911.9078267,
+    "hash": "97f520ce4053c4f4fa4481168ad7bc72"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\the-books-of-ye\\playground\\src\\main.tsx": {
+    "mtime": 1777851911.9100955,
+    "hash": "a0bcc3ffa5e95e1965f94969ab488283"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\thinkers\\ltl-playground\\vite.config.ts": {
+    "mtime": 1777851911.9571137,
+    "hash": "219382d47c5afc64c6bffa57b688445a"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\thinkers\\ltl-playground\\src\\App.tsx": {
+    "mtime": 1777851911.932171,
+    "hash": "2632211c45cd4219456acfde13e60617"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\thinkers\\ltl-playground\\src\\main.tsx": {
+    "mtime": 1777851911.955417,
+    "hash": "a0bcc3ffa5e95e1965f94969ab488283"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\thinkers\\ltl-playground\\src\\components\\AgentDirectory.tsx": {
+    "mtime": 1777851911.935822,
+    "hash": "7948e76ce458444a2682a098c19a48e0"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\thinkers\\ltl-playground\\src\\components\\AnalyticsDashboard.tsx": {
+    "mtime": 1777851911.9390402,
+    "hash": "b9edd163f097c6f6d8a20ddc302aa4c7"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\thinkers\\ltl-playground\\src\\components\\EconomyDashboard.tsx": {
+    "mtime": 1777851911.9406445,
+    "hash": "f64246d3a6b7d39bfae3bc7fb03ff278"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\thinkers\\ltl-playground\\src\\components\\EmbeddingsVisualizer.tsx": {
+    "mtime": 1777851911.9419208,
+    "hash": "e810d661e3b371a61a75f0f3b73b0b20"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\thinkers\\ltl-playground\\src\\components\\GlobalCommand.tsx": {
+    "mtime": 1777851911.9453638,
+    "hash": "bee6b50012f8faf4809a33c7f409c396"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\thinkers\\ltl-playground\\src\\components\\GovernanceDashboard.tsx": {
+    "mtime": 1777851911.946988,
+    "hash": "4aa8bded51c0c550afaf0cfa20f0e00d"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\thinkers\\ltl-playground\\src\\components\\KnowledgeBase.tsx": {
+    "mtime": 1777851911.9480536,
+    "hash": "1e1aaa6262388fc66ca00f26a4c42dde"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\thinkers\\ltl-playground\\src\\components\\NetworkMesh.tsx": {
+    "mtime": 1777851911.9501643,
+    "hash": "76624911c132f4b65b2eed2fc582ab03"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\thinkers\\ltl-playground\\src\\components\\PerformanceDashboard.tsx": {
+    "mtime": 1777851911.951215,
+    "hash": "0c8840e73147ff596390f890d52efe3e"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\thinkers\\ltl-playground\\src\\components\\PromptRegistry.tsx": {
+    "mtime": 1777851911.9522617,
+    "hash": "ea4f4b9c3b3e896fb9422a790b19a2cd"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\thinkers\\ltl-playground\\src\\components\\WorkflowMap.tsx": {
+    "mtime": 1777851911.9532993,
+    "hash": "82d7bdabc78165f632f0019f337fe66e"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\thinkers\\ltl-playground\\src\\components\\AgentDiagnostics\\BrainTerminal.tsx": {
+    "mtime": 1777851911.932171,
+    "hash": "fbc8d5b96a4822ae75031b287d6a52b1"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\thinkers\\ltl-playground\\src\\components\\AgentDiagnostics\\NetworkGraph.tsx": {
+    "mtime": 1777851911.935822,
+    "hash": "274e68ae06147825987f377e7ffe1db5"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\App.tsx": {
+    "mtime": 1777984985.433064,
+    "hash": "6089d6c4a7f74b8150440fb5f75cd488"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\main.tsx": {
+    "mtime": 1777470632.2885656,
+    "hash": "2b36426d5ad7e08ef79746aa524f4fb7"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\components\\Book.tsx": {
+    "mtime": 1777980999.0261753,
+    "hash": "2faecdb631f8201f992fb2ed14b1e7bb"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\components\\Bookshelf.tsx": {
+    "mtime": 1777851911.969949,
+    "hash": "c4377af6d8f2dbf02da0868f58304e71"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\components\\CaseStudyDetail.tsx": {
+    "mtime": 1777887214.339222,
+    "hash": "8c70ee5eb646f4457df3ee61ef1e6280"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\components\\HomeView.tsx": {
+    "mtime": 1777982703.5990274,
+    "hash": "29a71891e7654ef16fc197f6c074cb23"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\components\\LibraryShelfPick.tsx": {
+    "mtime": 1777779698.308004,
+    "hash": "acf64e6e36048c163d77fdb8588fda30"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\components\\Navigation.tsx": {
+    "mtime": 1777981044.645397,
+    "hash": "94516b8ad16532a0a98fd565c8051bf4"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\components\\Visuals.tsx": {
+    "mtime": 1777491733.8119636,
+    "hash": "413ea133d91bc2c897ac9f8a714f5b1d"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\components\\project\\ProjectDetailPage.tsx": {
+    "mtime": 1777984994.9590213,
+    "hash": "ca1fe09905721e57fcf4eae1247d5f2c"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\components\\project\\ProjectEmailMarquee.tsx": {
+    "mtime": 1777836437.725018,
+    "hash": "138daf53d86b3e8e62a84b06b42a41c8"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\components\\project\\ProjectFooterStamp.tsx": {
+    "mtime": 1777775390.885696,
+    "hash": "83891fb49ad560867b664d17c70b00a7"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\components\\project\\ProjectGallery.tsx": {
+    "mtime": 1777823987.6038184,
+    "hash": "7b4c92eadac7e49c3671300b9e3ac14a"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\components\\project\\ProjectNextPrevious.tsx": {
+    "mtime": 1777779698.313424,
+    "hash": "4ac2d585862f51c95c64ebd162f524e9"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\components\\project\\ProjectPlaygroundCTA.tsx": {
+    "mtime": 1777763471.6255395,
+    "hash": "0436312f6c27559622c731e769000dbc"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\data\\aboutMe.tsx": {
+    "mtime": 1777982703.5990274,
+    "hash": "db8fe3b49490c2749f01dd7a82d6c5c5"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\data\\aiLibraryBook.tsx": {
+    "mtime": 1777890764.464793,
+    "hash": "b79bfab1b4af7096fd4ddf929172d811"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\data\\caseStudies.tsx": {
+    "mtime": 1777888845.468502,
+    "hash": "6d04823a4712b2d05c201a46ba0b2488"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\data\\caseStudyMeta.ts": {
+    "mtime": 1777984833.217642,
+    "hash": "1f9c5ccc7f017b98482f5224d5fa5258"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\data\\helloPatientCase.tsx": {
+    "mtime": 1777851797.5458615,
+    "hash": "efe04e661cfa142421f9afcd2521d786"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\data\\jmFamilyCase.tsx": {
+    "mtime": 1777504489.4483168,
+    "hash": "4451b925aa820ece9ca92309c2246d14"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\data\\lightWonderCase.tsx": {
+    "mtime": 1777504489.4483168,
+    "hash": "84f5ce1a82d93a8bdf4f6211afc68059"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\data\\maybeMortgageCase.tsx": {
+    "mtime": 1777504489.445956,
+    "hash": "590c6ebd805a50b0679c59db9bcabcb2"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\data\\nextEraCase.tsx": {
+    "mtime": 1777504489.446964,
+    "hash": "8358c00d3ec64c465987eacc926e50a0"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\data\\nvidiaCase.tsx": {
+    "mtime": 1777514927.4469917,
+    "hash": "f2bb4a35d05775ca5bb291a267340378"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\data\\portfolio.tsx": {
+    "mtime": 1777982703.601041,
+    "hash": "2a08b095720639b8c81e4b0487f5da40"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\data\\workDetails.tsx": {
+    "mtime": 1777984841.11881,
+    "hash": "77b833cfe6c3a9b49fa198c3e58463a5"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\data\\works.tsx": {
+    "mtime": 1777982703.6020484,
+    "hash": "588d4444863a42d9c2301dcad272c772"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\lib\\bookOpening.ts": {
+    "mtime": 1777697568.757269,
+    "hash": "75f969f1de68ace10c71b3db0efe8245"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\lib\\paperCurtainTransition.ts": {
+    "mtime": 1777761746.2278044,
+    "hash": "69cb8a6588e2649b37f761e42973df98"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\src\\lib\\utils.ts": {
+    "mtime": 1777470632.3333738,
+    "hash": "8595c2f874aa1ff8c7cc28df2999f354"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\AGENTS.md": {
+    "mtime": 1777978193.2916236,
+    "hash": "814a8f50dd6310f74ab40936dfa19170"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\CLAUDE.md": {
+    "mtime": 1777978193.2921922,
+    "hash": "199a0912c762acdd9ed900bafb95fb6d"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\GEMINI.md": {
+    "mtime": 1777978193.2932155,
+    "hash": "199a0912c762acdd9ed900bafb95fb6d"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\index.html": {
+    "mtime": 1777851911.3494883,
+    "hash": "a2fbc124a9ba6fa45d1f042e76464b22"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\PROJECT_PAGES_REACT_REBUILD_HANDOFF.md": {
+    "mtime": 1777761508.6525867,
+    "hash": "2767db99c60d2fca696c47a9aa643895"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\README.md": {
+    "mtime": 1777470632.3489196,
+    "hash": "3801d35aa755ca245bda597f49e1b336"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\docs\\agent-handoff.md": {
+    "mtime": 1777985059.8390195,
+    "hash": "c76967ebde875dd01ffe784b8ae917a9"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\robots.txt": {
+    "mtime": 1777851911.471693,
+    "hash": "9e5e0f3c00e036d1694de2e6f678be2b"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\cortex-playground\\index.html": {
+    "mtime": 1777475216.0,
+    "hash": "c6cdc88c3abec682e37d1f35b7b4ad0b"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\index.html": {
+    "mtime": 1777851911.7812505,
+    "hash": "0b635eb4e5f8b9c26f6b9786500bfcd0"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\aquerone\\index.html": {
+    "mtime": 1777851911.479303,
+    "hash": "1ad30379f9874f5ba5dcef5cb96ccc16"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\argor-heraeus\\index.html": {
+    "mtime": 1777851911.4803994,
+    "hash": "264a7d0556472f77ab97281c4f271c7e"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\avroko\\index.html": {
+    "mtime": 1777851911.7292027,
+    "hash": "882ff33348a1d2d0f142eca4d43e0a72"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\avroko\\brokie-playground\\index.html": {
+    "mtime": 1777851911.7260814,
+    "hash": "192563a8d45aa1965422c97d50926ba7"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\bonnie\\index.html": {
+    "mtime": 1777851911.7358425,
+    "hash": "005aa630971359c5baa96a3a434dd8df"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\bonnie\\bonnie-playground\\index.html": {
+    "mtime": 1777609344.0,
+    "hash": "c6cdc88c3abec682e37d1f35b7b4ad0b"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\boonk\\index.html": {
+    "mtime": 1777851911.7430642,
+    "hash": "f95bcd7ed2b6c6e24c623a26876e016b"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\boonk\\boonk-v2-app\\index.html": {
+    "mtime": 1777653682.0,
+    "hash": "2eb31a41658c49f9c262f95a6f3b9825"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\boonk\\boonk-v2-app\\previews\\test\\index.html": {
+    "mtime": 1777653682.0,
+    "hash": "107c30d8ae3ae863480fccb24e9a2d21"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\brokie-v1\\index.html": {
+    "mtime": 1777851911.7524178,
+    "hash": "dcb41b0e2bd6d7d1e8cc6e7c48789efb"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\brokie-v1-app\\index.html": {
+    "mtime": 1777851911.7466154,
+    "hash": "97e4337103745cb639c90342cf016035"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\brokie-v2\\index.html": {
+    "mtime": 1777851911.759365,
+    "hash": "db84801822e04a3cee03696e074f9342"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\brokie-v2\\brokie-playground\\index.html": {
+    "mtime": 1777851911.7551775,
+    "hash": "192563a8d45aa1965422c97d50926ba7"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\byc2w\\index.html": {
+    "mtime": 1777851911.7604403,
+    "hash": "518175490fe1ea3551c25ddf607ae7c9"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\byc2w\\playground\\index.html": {
+    "mtime": 1777611112.0,
+    "hash": "c23a4af1f6fe3cf46c2812bbaba2c418"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\chiara-luzzana\\index.html": {
+    "mtime": 1777851911.7635343,
+    "hash": "5a91be1e1f8b1cc97824a8761a56f82d"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\cobo\\index.html": {
+    "mtime": 1777851911.7661219,
+    "hash": "c453aaeeb4a220e0be96909ba4aa936c"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\cortex\\index.html": {
+    "mtime": 1777851911.7689896,
+    "hash": "67bd5c4a539ed0631aebba9f7bb0b4dc"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\deplace-maison\\index.html": {
+    "mtime": 1777851911.77123,
+    "hash": "295c721f6b8c65306abddbc165a65976"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\edoardo-smerilli\\index.html": {
+    "mtime": 1777851911.774576,
+    "hash": "c13daf3d301be57ce96f5ea00fd19885"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\global-intelligence-market\\index.html": {
+    "mtime": 1777851911.7770286,
+    "hash": "998ea365f06c771a0ac8f4e93e71425b"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\global-intelligence-market\\playground\\index.html": {
+    "mtime": 1777851911.7791162,
+    "hash": "435a27a755dc9601ccacd2e7460ef6eb"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\life-tap-labs\\index.html": {
+    "mtime": 1777851911.783257,
+    "hash": "f650e8b8191783bd8c4d25e3eeed00be"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\life-tap-labs\\ltl-playground\\index.html": {
+    "mtime": 1777650458.0,
+    "hash": "c6cdc88c3abec682e37d1f35b7b4ad0b"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\loftgarten\\index.html": {
+    "mtime": 1777851911.7892995,
+    "hash": "4d829c8b31b573e9574fda4bdb89d1fa"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\om-swami\\index.html": {
+    "mtime": 1777851911.8143198,
+    "hash": "288226370753ef1d3e5f5d25855e9c99"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\om-swami\\bonnie-playground\\index.html": {
+    "mtime": 1777851911.7954392,
+    "hash": "f10d287108a715d7981a85d55a4c7dfe"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\panopticon\\index.html": {
+    "mtime": 1777851911.8168373,
+    "hash": "e6443f4afe22bc09207f85220b52e619"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\prada\\index.html": {
+    "mtime": 1777851911.8818603,
+    "hash": "646f71ed7b59b5c71c96aaf0d5765328"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\prada\\boonk-v2-app\\index.html": {
+    "mtime": 1777851911.8328176,
+    "hash": "a81bf97a5ce4ded20b7d8300dda30238"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\prada\\boonk-v2-app\\previews\\test\\index.html": {
+    "mtime": 1777851911.846466,
+    "hash": "107c30d8ae3ae863480fccb24e9a2d21"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\project-winter-haven\\index.html": {
+    "mtime": 1777851911.8843982,
+    "hash": "a9e5364a933d03be994f842ec34a9549"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\sal-parasuco\\index.html": {
+    "mtime": 1777851911.8867784,
+    "hash": "20857eb2a593435cee0cb98f3b39d0f9"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\the-books-of-ye\\index.html": {
+    "mtime": 1777851911.8884206,
+    "hash": "af75a3ede030e7732653bde5e7c2973f"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\the-books-of-ye\\playground\\index.html": {
+    "mtime": 1777851911.9007897,
+    "hash": "dd81a79d62f6d4bdd270621d371c2e0d"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\the-hiring-chain\\index.html": {
+    "mtime": 1777851911.9148636,
+    "hash": "85dcd0a3f35c6aa03aa721cb3f51ccef"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\the-roger-hub\\index.html": {
+    "mtime": 1777851911.9166205,
+    "hash": "7bd9f8d7cadbb6c63d850268ba491468"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\the-roger-hub\\playground\\index.html": {
+    "mtime": 1777851911.9188068,
+    "hash": "435a27a755dc9601ccacd2e7460ef6eb"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\thinkers\\index.html": {
+    "mtime": 1777851911.9204123,
+    "hash": "3a465f674f1f2575bee13b884e819642"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\thinkers\\ltl-playground\\index.html": {
+    "mtime": 1777851911.9225326,
+    "hash": "f10d287108a715d7981a85d55a4c7dfe"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\work\\wow-concept\\index.html": {
+    "mtime": 1777851911.9597456,
+    "hash": "a2027fae161e63a753a33ace2a38c76a"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\5f7f87c8b81a6e7a214312f0_header-f150e1dd70.svg": {
+    "mtime": 1777466266.838625,
+    "hash": "1fef5952d1f1ad5fb3334ead94cc0e95"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\5f908a8383d77666d092e9ac_edoardo-smerilli-e9fb926f4c.svg": {
+    "mtime": 1777851911.3637102,
+    "hash": "b6f381cce9563751f9404f1d4f88c5de"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\5f908aaaad7295f73a764e52_chiara-luzzana-41790aceff.svg": {
+    "mtime": 1777851911.3745983,
+    "hash": "278e572e2ac18da2a501099455df19eb"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\5f908aaf34dc6285e960f5e9_loftgarten-e5d4200ef9.svg": {
+    "mtime": 1777851911.379155,
+    "hash": "e120bef3119f56df018c169299a00d66"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\5f908ab3ae373ef56d31eefb_deplace-maison-97feefa870.svg": {
+    "mtime": 1777851911.383976,
+    "hash": "cce6dbff366fa0aaeb8acaecf86e3c47"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\5fa1c652d273b319eaf21a8a_avro-ko-d42afbb420.svg": {
+    "mtime": 1777466267.851779,
+    "hash": "cde7ccd3fa59e7b6f5028e3b68aaeac9"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\6000aa69371be067d0031c26_Group-20108-1bc9fdbb47.svg": {
+    "mtime": 1777466278.5645945,
+    "hash": "fca371f5d3fbd58a8b18697e637f637d"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\6037bca8a235aa99d7071f0e_deplace-maison-bdda96e5e5.svg": {
+    "mtime": 1777851911.3890085,
+    "hash": "6d7e3a706f833b9eb124de0e740af00d"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\6037bcaf8dfb7033537d1844_loftgarten-3024221499.svg": {
+    "mtime": 1777851911.3920524,
+    "hash": "ea248e68e261208a7eedf8ed8dbe668e"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\6037bcb5ce2b0c74b30b5b1f_chiara-luzzana-fefdb019e3.svg": {
+    "mtime": 1777851911.3967605,
+    "hash": "5b440596e79d87640ae261c6b07c3bfd"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\6037bcbbd8289d51c376f76d_edoardo-smerilli-ffe44b0eb3.svg": {
+    "mtime": 1777851911.40145,
+    "hash": "8bb3694bb02c6f6dd425e9214b929ca9"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\605d989c371fba72f26870d2_header-w-95ce565c9d.svg": {
+    "mtime": 1777466266.946771,
+    "hash": "9827766011e4b66adaa1c018f048bf6f"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61001a3509319b6ae39e156b_arrow-long-30c12dec51.svg": {
+    "mtime": 1777466273.6841555,
+    "hash": "4c76bc98298eec88fc20ea0a0c8fc506"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61002f390ad4b605537a07f5_hiring-chain-817fe65bc0.svg": {
+    "mtime": 1777851911.4051235,
+    "hash": "de99172c03f18770b4474fa4c5bcadbf"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61002f407796bf6e701cfa91_hiring-chain-45bcaf89dd.svg": {
+    "mtime": 1777851911.4081302,
+    "hash": "a7a9891acd3e51fbe7e5a11b5ffd3c64"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\6154c829c9765ee8749d5aca_sal-parasuco-c677010ec0.svg": {
+    "mtime": 1777851911.4111488,
+    "hash": "021d5e3b9daf611ecc8d6f8f73efa4e8"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\6154c8309a78ed406cf77672_sal-parasuco-47de824c88.svg": {
+    "mtime": 1777851911.414211,
+    "hash": "f807672a6ec82e11ea8319b426e67bdf"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\6154cd66aac8e06eae680d70_prada-5564e0c99a.svg": {
+    "mtime": 1777851911.416969,
+    "hash": "6e3df3c6bd93de2b8f8be119a2dccca6"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\6155c5590fd7e8eac5d4c28a_eCommerce-1073c16100.svg": {
+    "mtime": 1777466267.3785548,
+    "hash": "442543aa8dabedb3ec47bcddd9d65226"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\6155c55d0a67d3c06cfe6540_fashion-d1b1ac3bc6.svg": {
+    "mtime": 1777466267.442209,
+    "hash": "f9b3b4ad193d5cbfadd47eb47fb31df0"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\6155c8173b8e8ce07a3a08f6_arrow-down-1c14bc78d4.svg": {
+    "mtime": 1777466278.3884168,
+    "hash": "d51100de727bea97a89f06c1d8d979df"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\615620541599cbe2e3985ff2_gallery-579256325c.svg": {
+    "mtime": 1777466278.9232776,
+    "hash": "6c97d8f144114f0a7e1b477cbd58a8c9"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\6156269f844b45c65e496771_close-5751f8af2a.svg": {
+    "mtime": 1777466277.1918204,
+    "hash": "27feeb1d219563303c9b7d2d69ac984e"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\615b3797811af550938b83e8_cinema-24c9f4c0b9.svg": {
+    "mtime": 1777466272.2658038,
+    "hash": "fbeb357d1f3fb965bcba02c83bea2ba1"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\615b379e9bc97430ef4536e5_portfolio-4883650d90.svg": {
+    "mtime": 1777466267.955603,
+    "hash": "fa812f215d033e699ed9c8644310d0e8"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\615b37b43843e03672eed81f_architecture-85aa1caab7.svg": {
+    "mtime": 1777466268.0372107,
+    "hash": "029df3695c0df1f374b5380ee73bb362"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\615b37cce6b9dafc199c41ad_music-0a9dbb4342.svg": {
+    "mtime": 1777466271.2533424,
+    "hash": "ce7bd38f7fc2e73d3af7c77d258098e4"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\615b37df34840b1f908cc72d_digital-36c9f42b11.svg": {
+    "mtime": 1777466267.6423354,
+    "hash": "b8166bc124a8da7490980ae3821ac96a"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\615d96d3bb23c2ae2b1f3dd8_aquerone-740b591e68.svg": {
+    "mtime": 1777851911.418969,
+    "hash": "437d13b29643d44f40a4410654502f31"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\615d9bc3488f1e230fba8cf6_avroko-5d79b9d8c8.svg": {
+    "mtime": 1777851911.4215634,
+    "hash": "b9339a83b91ee989c3dc3d9547158501"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\615d9d9b5edfe105b32e1dc4_cobo-srl-ccfdb44178.svg": {
+    "mtime": 1777851911.4287012,
+    "hash": "18e2dc874ab539a0e1f4007d9ece6b10"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\615dc88cfe2d004ce649b413_author-name-dc79ee1659.svg": {
+    "mtime": 1777466325.260078,
+    "hash": "ce19b120fd610aa1346bdad14c524a59"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61604f319a5ac54594f48492_author-name-1-bc7f56522a.svg": {
+    "mtime": 1777466313.5236924,
+    "hash": "b643552196d02e0a4fb1a7bb79a1c3be"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\616050e80b59157d91348001_author-name-2-5afb9db739.svg": {
+    "mtime": 1777466318.8814824,
+    "hash": "6df6a029a1d0a92ab98c36062f28d02a"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\6160511ba9fb4a4b71841886_author-name-3-b7c035d5cb.svg": {
+    "mtime": 1777466320.8310947,
+    "hash": "c5281646a8ff586ca60cbe38df3e1452"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\6160527e88025b362df66d0b_author-name-4-6a65f0ae60.svg": {
+    "mtime": 1777466323.5884314,
+    "hash": "e447848aa8d52bb6df90979d56f9a07d"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\616053ee2516f3200a2b7744_author-name-5-ec56b8c5f3.svg": {
+    "mtime": 1777466313.7007499,
+    "hash": "4e8343b103cd9bc08c4bf15c956fac31"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\616564680f35b300757029e8_credits-634d7f89ea.svg": {
+    "mtime": 1777466279.4736834,
+    "hash": "c3477f474e8d71d5f5bb6d70b2cce77f"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61656468b761f0015558fced_awards-dccce3251e.svg": {
+    "mtime": 1777466279.3070288,
+    "hash": "d34133de46225df9fa424ac10d5a0f90"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\616564691ae3d81ca476459f_publications-d2699a1037.svg": {
+    "mtime": 1777466279.4175973,
+    "hash": "9d55ad166cbdb442d79cdd266236170f"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\616eb5f7b9eb7e24d86fdbdf_back-all-69a99b9cc1.svg": {
+    "mtime": 1777466278.45536,
+    "hash": "de274f771aa28d952ee7a2fd3421e928"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\619e3e4c504c03753be32f78_author-name-6-bd76933a4e.svg": {
+    "mtime": 1777466323.4668486,
+    "hash": "152717bfddc52cb32aca262b0b07b59b"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61cdc5850b96230b1b4e459a_books-of-ye-01681c8394.svg": {
+    "mtime": 1777851911.4374387,
+    "hash": "17c06b348915bdbe7f415839a228b930"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61efeed80278053aaf665284_NFT-ce2edae8e8.svg": {
+    "mtime": 1777466270.5668094,
+    "hash": "15fd88c8ebd0ca71d19ee5215e2c917a"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\61f1426292ee6b676fd694a9_sawyer-altman-62bda44914.svg": {
+    "mtime": 1777466308.888665,
+    "hash": "bc807c6cf4e4388bdc05d5101af9af27"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\621f2e53bf183bf7ff43eede_om-swami-946300853e.svg": {
+    "mtime": 1777851911.4408362,
+    "hash": "b53453dc1da2174d027e59bc6fd4856f"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\621f316e0f037129b2e2735d_argor-logo-7ecd82a746.svg": {
+    "mtime": 1777851911.4493349,
+    "hash": "899d307727d18b881f53eca3b93c4d29"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\621f3185ba2e9d02d6d2988a_corporate-9dcdc64bc7.svg": {
+    "mtime": 1777466269.72613,
+    "hash": "0909c8ab142375dad5076f525ecc8078"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\62220cf70bcdcc15142f1b7d_title-98125d292b.svg": {
+    "mtime": 1777466269.663676,
+    "hash": "12bbbe533c7a6e555efadba7df308f10"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b591a574150afe2d9af38_roger-hub-a54cf6a5eb.svg": {
+    "mtime": 1777851911.4533932,
+    "hash": "5ed2baf0b5bfcb69b75285edba8b1f1f"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\645b5d0c227d4a35562c5b85_unexpected-time-5bebf4b73f.svg": {
+    "mtime": 1777466273.3185248,
+    "hash": "b47f31fb3dd72a413331f6d96af70da4"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\img\\647dc0ed22589620411e19d3_wow-concept-20243bca4d.svg": {
+    "mtime": 1777851911.458533,
+    "hash": "db0d59f8b371e3ea7faf3d74e7cedbc0"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\svg\\6155c07f1c37174850256cab_patch-fcb3f6cf52.svg": {
+    "mtime": 1777466265.0937474,
+    "hash": "2ca3d78821486ba412d3b659991f58c0"
+  },
+  "C:\\Users\\Caleb\\Downloads\\calebs-3d-case-study\\public\\assets\\svg\\background-image-46ae28cb1f.svg": {
+    "mtime": 1777466264.4364076,
+    "hash": "96edb61c19a0b7d81492ffc8c2a76816"
+  }
+}
