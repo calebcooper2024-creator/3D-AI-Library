@@ -127,10 +127,10 @@ export function ManagedHeroVideo({
         muted
         loop
         playsInline
-        preload={nearViewport ? 'metadata' : 'none'}
+        preload="auto"
         className={videoClassName}
       >
-        {nearViewport && <source src={src} type="video/mp4" />}
+        <source src={src} type="video/mp4" />
       </video>
     </div>
   );
