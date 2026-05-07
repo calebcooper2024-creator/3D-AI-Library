@@ -31,8 +31,9 @@ export function ManagedHeroVideo({
 }: ManagedHeroVideoProps) {
   const hostRef = useRef<HTMLDivElement | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const [nearViewport, setNearViewport] = useState(false);
-  const [visibleEnough, setVisibleEnough] = useState(false);
+  // Default to true to prevent the hero video from pausing for 1 frame while waiting for observer
+  const [nearViewport, setNearViewport] = useState(true);
+  const [visibleEnough, setVisibleEnough] = useState(true);
   const [heavyMotionActive, setHeavyMotionActive] = useState(false);
   const [documentVisible, setDocumentVisible] = useState(
     typeof document === 'undefined' ? true : document.visibilityState === 'visible'
