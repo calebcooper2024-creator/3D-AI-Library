@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { Book } from './Book';
 import { motion } from 'motion/react';
+import { createHeavyMotionSettler } from '../lib/heavyMotion';
 
 export interface ShelfBook {
   id: string;
@@ -272,10 +273,10 @@ export const Bookshelf = ({
     <div 
       ref={shelfRef}
       className={`min-h-screen flex flex-col justify-center pt-20 overflow-hidden bg-transparent hide-scrollbar ${isTransitioning ? 'pointer-events-none' : ''}`}
-      style={{ touchAction: 'pan-x' }}
+      style={{ touchAction: 'pan-y pinch-zoom' }}
     >
       <div className={`bookshelf-container px-4 md:px-16 flex items-center${openingInstanceKey ? ' has-opening-book' : ''}`}>
-          <div ref={stageRef} className="book-stage relative flex transform-gpu will-change-transform" style={{ 
+          <div ref={stageRef} className="book-stage relative flex transform-gpu" style={{ 
               width: `${displayedBooks.length * step}px`, 
               height: '540px'
           }}>

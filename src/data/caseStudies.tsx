@@ -15,6 +15,7 @@ export const ImagePlaceholder = ({ title, desc, height = "aspect-video" }: { tit
 );
 
 // Helper function to create massive sections for a project
+import { ManagedHeroVideo } from '../components/ManagedHeroVideo';
 const createMassiveSections = (
   theme: { 
     bgLeft: string, 
@@ -39,17 +40,13 @@ const createMassiveSections = (
     id: `${title}-hero`,
     fullWidthContent: (
       <div className={`w-full min-h-screen ${theme.heroBg} ${theme.heroText} flex flex-col justify-end p-8 md:p-24 relative overflow-hidden`}>
-        {theme.heroVideo && (
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="none"
-            className="absolute inset-0 h-full w-full object-cover opacity-85 z-0"
-          >
-            <source src={theme.heroVideo} type="video/mp4" />
-          </video>
+                {theme.heroVideo && (
+          <ManagedHeroVideo
+            src={theme.heroVideo}
+            idSeed={`case-study-${title}`}
+            className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
+            videoClassName="absolute inset-0 h-full w-full object-cover opacity-85 pointer-events-none"
+          />
         )}
         <div 
           className="absolute inset-0 z-0 opacity-30" 

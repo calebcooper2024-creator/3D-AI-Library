@@ -12,6 +12,8 @@ import ProjectFooterStamp from './ProjectFooterStamp';
 import ProjectGallery from './ProjectGallery';
 import ProjectNextPrevious from './ProjectNextPrevious';
 import { runPaperCurtainSwap } from '../../lib/paperCurtainTransition';
+import { ManagedHeroVideo } from '../ManagedHeroVideo';
+import { createHeavyMotionSettler } from '../../lib/heavyMotion';
 import './projectStyles.css';
 
 interface ProjectDetailPageProps {
@@ -306,6 +308,9 @@ export const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({
   const railVelocityRef = useRef(0);
   const railRafRef = useRef<number | null>(null);
   const railSnappingRef = useRef(false);
+  const railMaxOffsetRef = useRef(0);
+  const railSnapPointsRef = useRef<number[]>([0]);
+  const railLastTimestampRef = useRef(0);
 
   useEffect(() => {
     window.scrollTo(0, 0);

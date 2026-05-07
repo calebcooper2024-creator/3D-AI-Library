@@ -312,3 +312,11 @@ body::before {
   z-index: 40;
   pointer-events: none;
 }
+
+.book-stage {
+  will-change: auto;
+}
+
+.book-stage.is-moving {
+  will-change: transform;
+}
