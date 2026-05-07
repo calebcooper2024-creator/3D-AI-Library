@@ -105,9 +105,16 @@ export async function prepareProjectEntry({
   const hasVideo = Boolean(videoSrc);
   let contentReadyAt: number | null = null;
 
+  // Smoothed display value. Advances at ≤ 18 % per second so the bar
+  // visually ticks up ~1 % every ~55 ms instead of jumping between milestones.
+  // When the gate is done the value snaps instantly so exit is clean.
+  let displayProgress = 0;
+  let lastReportTimeMs = startedAt;
+
   const reportProgress = (finalOverride?: Partial<ProjectEntryProgress>) => {
     if (!onProgress) return;
-    const elapsed = Date.now() - startedAt;
+    const now = Date.now();
+    const elapsed = now - startedAt;
     const minFraction = Math.min(1, elapsed / minDurationMs);
     const contentFraction = projectReady ? 1 : 0;
 
@@ -116,29 +123,42 @@ export async function prepareProjectEntry({
       ? lastVideoSnap.progress / 100
       : hasVideo ? 0 : 1;
 
-    // Once content is ready and we're waiting for the managed video to play,
-    // slowly creep the bar from its current position toward 99% so the user
-    // sees steady per-second movement instead of a frozen number.
+    // Creep the bar forward once content is ready and buffering is underway
+    // so the user sees continuous movement instead of long pauses.
     let videoFraction = rawVideoFraction;
     if (
       contentReadyAt !== null &&
       lastVideoSnap !== null &&
       (lastVideoSnap.phase === 'canplay' || lastVideoSnap.phase === 'buffering') &&
-      rawVideoFraction >= 0.35 // only creep once buffering is underway
+      rawVideoFraction >= 0.15
     ) {
-      const waitedMs = Date.now() - contentReadyAt;
+      const waitedMs = now - contentReadyAt;
       const creepDuration = Math.max(3000, effectiveMaxMs * 0.5);
       const creepFraction = Math.min(1, waitedMs / creepDuration);
-      // Ease-in: starts slow, accelerates gently
       const eased = creepFraction * creepFraction;
       videoFraction = rawVideoFraction + (0.99 - rawVideoFraction) * eased;
     }
 
-    const overall = contentFraction * 0.25 + videoFraction * 0.65 + minFraction * 0.10;
+    const realPct = Math.min(
+      done ? 100 : 99,
+      (contentFraction * 0.25 + videoFraction * 0.65 + minFraction * 0.10) * 100,
+    );
+
+    // Rate-limit the display so it never jumps — max 18 % per second.
+    // When done, let it snap immediately so the exit animation sees 100 %.
+    if (done) {
+      displayProgress = realPct;
+    } else {
+      const frameMs = Math.max(0, now - lastReportTimeMs);
+      const maxAdvance = (frameMs / 1000) * 18;
+      displayProgress = Math.min(realPct, displayProgress + maxAdvance);
+    }
+    lastReportTimeMs = now;
+
     const phase = derivePhase(projectReady, lastVideoSnap, hasVideo);
 
     onProgress({
-      overallProgress: Math.round(Math.min(done ? 100 : 99, overall * 100)),
+      overallProgress: Math.round(displayProgress),
       contentProgress: Math.round(contentFraction * 100),
       videoProgress: Math.round(videoFraction * 100),
       phase,

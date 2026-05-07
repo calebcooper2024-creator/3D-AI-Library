@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { Book } from './Book';
 import { motion } from 'motion/react';
-import { createHeavyMotionSettler } from '../lib/heavyMotion';
+import { ChevronLeft, ChevronRight, ChevronsLeft } from 'lucide-react';
 
 export interface ShelfBook {
   id: string;
@@ -21,20 +21,22 @@ export interface ShelfBook {
   showAuthorBadge?: boolean;
 }
 
-export const Bookshelf = ({ 
-  books, 
+export const Bookshelf = ({
+  books,
   onSelectBook,
   canOpenBook,
   onBlockedSelectBook,
   shelfMessage,
-  isTransitioning = false
-}: { 
+  isTransitioning = false,
+  onReady
+}: {
   books: ShelfBook[];
   onSelectBook: (id: string) => void;
   canOpenBook?: (id: string) => boolean;
   onBlockedSelectBook?: (id: string) => void;
   shelfMessage?: string | null;
   isTransitioning?: boolean;
+  onReady?: () => void;
 }) => {
   const audioContextRef = useRef<AudioContext | null>(null);
 
@@ -152,36 +154,143 @@ export const Bookshelf = ({
   const gap = 2;
   const step = spine + projectedFace + gap;
   const cycleWidth = books.length * step;
+  // Single copy of the book list. We used to render 3 copies for an infinite-
+  // scroll wrap effect; on a finite portfolio that ~3x'd DOM nodes and motion-
+  // mount springs for no real UX gain. The shelf now has hard edges with a
+  // small rubber-band on overscroll.
   const displayedBooks = React.useMemo(
-    () => Array.from({ length: 3 }, (_, copyIndex) =>
-      books.map((book, bookIndex) => ({ book, bookIndex, copyIndex }))
-    ).flat(),
+    () => books.map((book, bookIndex) => ({ book, bookIndex })),
     [books]
   );
-  
+
   const shelfRef = React.useRef<HTMLDivElement>(null);
   const stageRef = React.useRef<HTMLDivElement>(null);
   const offset = React.useRef(0);
   const velocity = React.useRef(0);
   const rafId = React.useRef<number | null>(null);
+  // Cached visible viewport width — updated on mount and resize so the animate
+  // loop never has to read layout (which would force a reflow each frame).
+  const containerWidthRef = React.useRef(0);
+  // Imperatively-callable tween. Assigned inside the animation effect so it
+  // closes over the same applyTransform/getMaxOffset helpers used by inertia.
+  const tweenToRef = React.useRef<((target: number) => void) | null>(null);
+
+  // Control-button states. We keep "last shown" refs so the per-frame state
+  // sync only triggers a React render when the value actually crosses a
+  // threshold — most frames are no-ops.
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+  const lastCanScrollLeftRef = React.useRef(false);
+  const lastCanScrollRightRef = React.useRef(true);
+
+  // Preload all cover images and notify the parent when they're ready (or after
+  // a 3.5s safety timeout). This lets the parent gate the reveal behind a
+  // loading overlay so covers paint together instead of staggering in.
+  React.useEffect(() => {
+    if (!onReady) return;
+
+    const urls = books
+      .map((b) => b.coverImage)
+      .filter((u): u is string => Boolean(u));
+
+    if (urls.length === 0) {
+      onReady();
+      return;
+    }
+
+    let cancelled = false;
+    let remaining = urls.length;
+    const tick = () => {
+      if (cancelled) return;
+      remaining -= 1;
+      if (remaining <= 0) {
+        cancelled = true;
+        onReady();
+      }
+    };
+
+    const safetyTimer = window.setTimeout(() => {
+      if (cancelled) return;
+      cancelled = true;
+      onReady();
+    }, 3500);
+
+    for (const url of urls) {
+      const img = new Image();
+      img.onload = tick;
+      img.onerror = tick;
+      img.src = url;
+    }
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(safetyTimer);
+    };
+  }, [books, onReady]);
 
   React.useEffect(() => {
     const el = shelfRef.current;
     const stage = stageRef.current;
     if (!el || cycleWidth === 0) return;
 
+    // The 3D-perspective book card renders visually wider than its `step`
+    // allocation (the projected front cover juts out to the right of the spine
+    // and the hover state scales the whole card). Without a generous trailing
+    // buffer the last book clips its cover at maxOffset and gets cropped on
+    // hover. ~1.6 steps gives plenty of breathing room for hover scale.
+    const trailingBuffer = Math.round(step * 1.6);
+
+    // Refresh the cached viewport width. Called on mount and resize so the
+    // hot animate path never reads layout.
+    const measureContainer = () => {
+      const container = stage?.parentElement;
+      containerWidthRef.current = container?.clientWidth ?? 0;
+    };
+    measureContainer();
+
+    const getMaxOffset = () =>
+      Math.max(0, cycleWidth + trailingBuffer - containerWidthRef.current);
+
     const applyTransform = () => {
       if (!stage) return;
-      const normalizedOffset = ((offset.current % cycleWidth) + cycleWidth) % cycleWidth;
-      stage.style.transform = `translate3d(${-cycleWidth - normalizedOffset}px, 0, 0)`;
+      stage.style.transform = `translate3d(${-offset.current}px, 0, 0)`;
+    };
+
+    const syncButtonStates = () => {
+      const max = getMaxOffset();
+      const left = offset.current > 1;
+      const right = offset.current < max - 1;
+      if (left !== lastCanScrollLeftRef.current) {
+        lastCanScrollLeftRef.current = left;
+        setCanScrollLeft(left);
+      }
+      if (right !== lastCanScrollRightRef.current) {
+        lastCanScrollRightRef.current = right;
+        setCanScrollRight(right);
+      }
     };
 
     const animate = () => {
-      offset.current += velocity.current;
-      velocity.current *= 0.88;
-      applyTransform();
+      const max = getMaxOffset();
 
-      if (Math.abs(velocity.current) > 0.1) {
+      // Spring-back force when out of bounds — pulls offset toward the nearest
+      // edge proportional to overshoot. Heavier damping while out of bounds so
+      // the rubber-band settles quickly without oscillating.
+      if (offset.current < 0) {
+        velocity.current += -offset.current * 0.2;
+      } else if (offset.current > max) {
+        velocity.current += (max - offset.current) * 0.2;
+      }
+
+      offset.current += velocity.current;
+
+      const outOfBounds = offset.current < 0 || offset.current > max;
+      velocity.current *= outOfBounds ? 0.7 : 0.91;
+
+      applyTransform();
+      syncButtonStates();
+
+      if (Math.abs(velocity.current) > 0.1 || outOfBounds) {
         rafId.current = requestAnimationFrame(animate);
       } else {
         velocity.current = 0;
@@ -189,14 +298,67 @@ export const Bookshelf = ({
       }
     };
 
+    // Smooth tween toward an absolute target offset. Used by the control-pill
+    // buttons. Cancels any in-flight inertia first so the two animation modes
+    // never fight over rafId.
+    const tweenTo = (rawTarget: number) => {
+      const max = getMaxOffset();
+      const target = Math.max(0, Math.min(max, rawTarget));
+      velocity.current = 0;
+      if (rafId.current !== null) {
+        cancelAnimationFrame(rafId.current);
+        rafId.current = null;
+      }
+
+      const startOffset = offset.current;
+      const distance = target - startOffset;
+      if (Math.abs(distance) < 0.5) {
+        offset.current = target;
+        applyTransform();
+        syncButtonStates();
+        return;
+      }
+      // Duration scales with distance so short hops feel snappy and long
+      // jumps (Start → end of shelf) still complete in well under a second.
+      const duration = Math.min(900, Math.max(380, Math.abs(distance) * 0.55));
+      const startTime = performance.now();
+
+      const tweenStep = (now: number) => {
+        const t = Math.min(1, (now - startTime) / duration);
+        // ease-out cubic: fast departure, soft landing.
+        const eased = 1 - Math.pow(1 - t, 3);
+        offset.current = startOffset + distance * eased;
+        applyTransform();
+        syncButtonStates();
+        if (t < 1) {
+          rafId.current = requestAnimationFrame(tweenStep);
+        } else {
+          offset.current = target;
+          applyTransform();
+          syncButtonStates();
+          rafId.current = null;
+        }
+      };
+
+      rafId.current = requestAnimationFrame(tweenStep);
+    };
+
+    tweenToRef.current = tweenTo;
+
     const handleWheelEvent = (e: WheelEvent) => {
       if (isTransitioning) return;
       const dominantDelta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
       if (Math.abs(dominantDelta) < 0.01) return;
 
       e.preventDefault();
-      velocity.current += dominantDelta * 0.16;
-      velocity.current = Math.max(-32, Math.min(32, velocity.current));
+      const max = getMaxOffset();
+      let scaled = dominantDelta * 0.09;
+      // Dampen wheel input pushing further past an edge (rubber-band feel).
+      if (offset.current <= 0 && scaled < 0) scaled *= 0.3;
+      if (offset.current >= max && scaled > 0) scaled *= 0.3;
+
+      velocity.current += scaled;
+      velocity.current = Math.max(-18, Math.min(18, velocity.current));
 
       if (rafId.current === null) {
         rafId.current = requestAnimationFrame(animate);
@@ -233,10 +395,15 @@ export const Bookshelf = ({
 
       if (touchActive) {
         e.preventDefault();
-        const moveDelta = touchLastX - touch.clientX;
+        let moveDelta = touchLastX - touch.clientX;
         touchLastX = touch.clientX;
+        const max = getMaxOffset();
+        // Dampen drag past edges (rubber-band feel during active drag).
+        if (offset.current < 0 && moveDelta < 0) moveDelta *= 0.3;
+        if (offset.current > max && moveDelta > 0) moveDelta *= 0.3;
         offset.current += moveDelta;
         applyTransform();
+        syncButtonStates();
       }
     };
 
@@ -245,29 +412,51 @@ export const Bookshelf = ({
       const touch = e.changedTouches[0];
       const flickDelta = touchLastX - touch.clientX;
       velocity.current = flickDelta * 0.8;
-      velocity.current = Math.max(-32, Math.min(32, velocity.current));
-      if (rafId.current === null) {
+      velocity.current = Math.max(-18, Math.min(18, velocity.current));
+      const max = getMaxOffset();
+      const outOfBounds = offset.current < 0 || offset.current > max;
+      // Always run animate when out of bounds so the spring-back fires even
+      // after a slow drag that ended past an edge.
+      if (rafId.current === null && (Math.abs(velocity.current) > 0.1 || outOfBounds)) {
         rafId.current = requestAnimationFrame(animate);
       }
       touchActive = false;
     };
 
     applyTransform();
+    syncButtonStates();
     el.addEventListener('wheel', handleWheelEvent, { passive: false });
     el.addEventListener('touchstart', handleTouchStart, { passive: true });
     el.addEventListener('touchmove', handleTouchMove, { passive: false });
     el.addEventListener('touchend', handleTouchEnd, { passive: true });
+    window.addEventListener('resize', measureContainer);
 
     return () => {
       el.removeEventListener('wheel', handleWheelEvent);
       el.removeEventListener('touchstart', handleTouchStart);
       el.removeEventListener('touchmove', handleTouchMove);
       el.removeEventListener('touchend', handleTouchEnd);
+      window.removeEventListener('resize', measureContainer);
+      tweenToRef.current = null;
       if (rafId.current !== null) {
         cancelAnimationFrame(rafId.current);
       }
     };
   }, [cycleWidth, isTransitioning]);
+
+  // Click handlers wired to the imperative tween. Each button steps by ~70%
+  // of the visible width so users see partial overlap with the prior view —
+  // far more orienting than a full-page jump.
+  const stepByPage = (direction: 1 | -1) => {
+    const tween = tweenToRef.current;
+    if (!tween) return;
+    const pageDistance = Math.max(step * 2, containerWidthRef.current * 0.7);
+    tween(offset.current + direction * pageDistance);
+  };
+
+  const goToStart = () => {
+    tweenToRef.current?.(0);
+  };
 
   return (
     <div 
@@ -276,13 +465,20 @@ export const Bookshelf = ({
       style={{ touchAction: 'pan-y pinch-zoom' }}
     >
       <div className={`bookshelf-container px-4 md:px-16 flex items-center${openingInstanceKey ? ' has-opening-book' : ''}`}>
-          <div ref={stageRef} className="book-stage relative flex transform-gpu" style={{ 
-              width: `${displayedBooks.length * step}px`, 
-              height: '540px'
-          }}>
-            {displayedBooks.map(({ book, bookIndex, copyIndex }, index) => {
+          <div
+            ref={stageRef}
+            className="book-stage relative flex transform-gpu"
+            style={{
+              width: `${displayedBooks.length * step}px`,
+              height: '540px',
+              // Hint the compositor so transform updates promote into a layer
+              // and the browser doesn't re-rasterize on every frame.
+              willChange: 'transform',
+            }}
+          >
+            {displayedBooks.map(({ book, bookIndex }, index) => {
               const bookLeft = index * step;
-              const instanceKey = `${book.id}-${copyIndex}`;
+              const instanceKey = book.id;
               const isOpening = openingInstanceKey === instanceKey;
 
               return (
@@ -317,6 +513,41 @@ export const Bookshelf = ({
         >
           {shelfMessage ?? ''}
         </motion.div>
+      </div>
+
+      {/* Floating scroll-control pill. Buttons fade to inactive when they
+          can't scroll further in their direction so the user always knows
+          where the boundaries are. */}
+      <div className="pointer-events-none fixed bottom-8 right-8 z-50 select-none">
+        <div className="pointer-events-auto flex items-center gap-1 border border-[#1f1a17]/15 bg-[rgba(249,243,235,0.92)] px-1.5 py-1.5 shadow-[0_12px_36px_rgba(0,0,0,0.18)] backdrop-blur-md">
+          <button
+            type="button"
+            onClick={goToStart}
+            disabled={!canScrollLeft}
+            aria-label="Back to start"
+            className="flex h-9 w-9 items-center justify-center text-[#1f1a17] transition-opacity duration-200 hover:bg-[#1f1a17]/10 disabled:pointer-events-none disabled:opacity-25"
+          >
+            <ChevronsLeft size={18} strokeWidth={1.6} />
+          </button>
+          <button
+            type="button"
+            onClick={() => stepByPage(-1)}
+            disabled={!canScrollLeft}
+            aria-label="Scroll left"
+            className="flex h-9 w-9 items-center justify-center text-[#1f1a17] transition-opacity duration-200 hover:bg-[#1f1a17]/10 disabled:pointer-events-none disabled:opacity-25"
+          >
+            <ChevronLeft size={18} strokeWidth={1.6} />
+          </button>
+          <button
+            type="button"
+            onClick={() => stepByPage(1)}
+            disabled={!canScrollRight}
+            aria-label="Scroll right"
+            className="flex h-9 w-9 items-center justify-center text-[#1f1a17] transition-opacity duration-200 hover:bg-[#1f1a17]/10 disabled:pointer-events-none disabled:opacity-25"
+          >
+            <ChevronRight size={18} strokeWidth={1.6} />
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -49,8 +49,12 @@ export function ManagedHeroVideo({
   const [visibleEnough, setVisibleEnough] = useState(true);
   const [heavyMotionActive, setHeavyMotionActive] = useState(() => isHeavyMotionActive());
   const [videoReady, setVideoReady] = useState(() => {
+    // Use isPlaying (not canPlay) so the poster stays visible until the
+    // visible element has actually played a frame. canPlay comes from the
+    // warmup element and does not guarantee the visible element has decoded
+    // its first frame, causing a poster-then-black flash on first open.
     const snap = getVideoReadinessSnapshot(src);
-    return snap ? (snap.canPlay || snap.isPlaying) : false;
+    return snap ? snap.isPlaying : false;
   });
   const [documentVisible, setDocumentVisible] = useState(
     typeof document === 'undefined' ? true : document.visibilityState === 'visible'
@@ -62,7 +66,7 @@ export function ManagedHeroVideo({
 
   useEffect(() => {
     const snap = getVideoReadinessSnapshot(src);
-    setVideoReady(snap ? (snap.canPlay || snap.isPlaying) : false);
+    setVideoReady(snap ? snap.isPlaying : false);
   }, [src]);
 
   useEffect(() => {

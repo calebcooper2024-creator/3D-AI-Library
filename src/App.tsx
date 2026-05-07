@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, Suspense } from 'react';
+import React, { useCallback, useEffect, useRef, useState, Suspense } from 'react';
 import { Bookshelf } from './components/Bookshelf';
 import { HomeView } from './components/HomeView';
 import { ProjectEntryOverlay } from './components/ProjectEntryOverlay';
@@ -261,8 +261,15 @@ export default function App() {
   // Lazily-resolved book data for the detail view
   const [resolvedBookData, setResolvedBookData] = useState<PortfolioBook | null>(null);
   const [isLoadingBookData, setIsLoadingBookData] = useState(false);
+  // True once Bookshelf has finished preloading its cover images. Drives the
+  // library loading overlay so covers paint together instead of staggering.
+  const [libraryReady, setLibraryReady] = useState(false);
   const transitionTimerRef = useRef<number | null>(null);
   const entryRequestRef = useRef(0);
+
+  const handleShelfReady = useCallback(() => {
+    setLibraryReady(true);
+  }, []);
 
   const syncHistoryForView = (tab: ActiveView, mode: 'push' | 'replace' = 'replace') => {
     const nextUrl = getActiveViewUrl(tab);
@@ -537,6 +544,39 @@ export default function App() {
     };
   }, [allBooks]);
 
+  // Drive the library loading overlay. Show it whenever the library shelf is
+  // mounted but its cover images haven't finished preloading yet, so covers
+  // paint together when revealed instead of staggering in. We piggyback on
+  // the same entryOverlay state used by the case-study entry gate — the two
+  // never overlap (selecting a book unmounts the shelf).
+  const libraryShelfMounted =
+    activeView === 'project' &&
+    !selectedBookId &&
+    standalonePageId !== PLACEHOLDER_404_ID;
+
+  useEffect(() => {
+    if (!libraryShelfMounted) {
+      // Reset the ready flag so the next visit shows the overlay again.
+      setLibraryReady(false);
+      return;
+    }
+    if (!libraryReady) {
+      setEntryOverlay({
+        visible: true,
+        title: 'Library',
+        progress: 0,
+        phase: 'loading-library',
+      });
+      return;
+    }
+    // Shelf is ready — drop the overlay only if it's still the library one.
+    setEntryOverlay((prev) =>
+      prev.phase === 'loading-library'
+        ? { visible: false, title: null, progress: 100, phase: 'ready' }
+        : prev
+    );
+  }, [libraryShelfMounted, libraryReady]);
+
   const handleBookSelect = (id: string) => {
     if (isHomeTransitioning) return;
 
@@ -705,6 +745,7 @@ export default function App() {
                 <div style={{ position: 'relative' }}>
                   <Bookshelf
                     books={allBooks}
+                    onReady={handleShelfReady}
                     onSelectBook={handleBookSelect}
                     canOpenBook={(id) => {
                       const targetBook = allBooks.find((book) => book.id === id);

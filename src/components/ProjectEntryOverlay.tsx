@@ -6,6 +6,7 @@ const PHASE_MESSAGES: Record<string, string> = {
   'loading-content':      'Your book is loading, please be patient',
   'loading-video':        'Your book is loading, please be patient',
   'waiting-for-playback': 'Almost ready, hang tight',
+  'loading-library':      'Loading your library, please be patient',
   ready:                  'Opening now',
   timeout:                'Opening now',
   error:                  'Opening now',

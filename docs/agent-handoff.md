@@ -1465,3 +1465,95 @@ Next recommended step:
 - Broadcasted `portfolio:heavy-motion` from Bookshelf dragging, horizontal rails, and Paper Curtain transitions to instantly pause all 4K video rendering and give 100% of GPU/CPU resources to the scroll and UI transitions.
 - Prevented GPU leak by scoping `will-change-transform` dynamically on the Bookshelf stage.
 
+### 2026-05-07 | Codex | Bounded Project Entry Gate
+
+Goal:
+- Replace the fixed multi-second book-open delay with a bounded entry gate that preloads the detail module/data, warms the hero video offscreen, and never holds the user longer than 2500ms.
+
+Files changed:
+- src/App.tsx
+- src/components/Bookshelf.tsx
+- src/components/HomeView.tsx
+- src/components/ManagedHeroVideo.tsx
+- src/components/ProjectEntryOverlay.tsx
+- src/lib/heavyMotion.ts
+- src/lib/projectEntryGate.ts
+- src/lib/videoWarmup.ts
+
+Architecture or design decisions:
+- Kept the existing route shape and controlled `ManagedHeroVideo` path intact.
+- Replaced the child-level fixed `setTimeout(..., 2000)` book-open delays with immediate handoff to an app-level entry gate.
+- Added a cached offscreen video warmup utility and a bounded `prepareProjectEntry()` helper with 600ms minimum display and 2500ms hard cap.
+- Added a premium route-level overlay instead of exposing a half-loaded detail page.
+- Added poster-first hero rendering so work-detail pages can show content immediately if the video is still catching up.
+
+Verification run:
+- npm run build
+- npm run preview -- --port 3000
+- HTTP 200 confirmed for `/CalebCooper` and `/CalebCooper/Library`
+- graphify update .
+
+Known risks:
+- The 2500ms cap is enforced by the gate, but a very slow first-time dynamic import on an unusually constrained machine could still delay the actual rendered detail if the module misses the cap; that was not reproduced in this session.
+- Interactive click-through and console inspection were not browser-automated in this session.
+
+Next recommended step:
+- Open the local preview in a browser and verify one warmed work-detail book and one custom case-study book end-to-end for overlay timing and perceived smoothness.
+
+### 2026-05-07 | Claude Sonnet 4.6 | Dynamic Video-Readiness Entry Gate
+
+Goal:
+- Replace the fixed-timer overlay with a truth-based loading gate that stays visible until the selected hero video has actually started playing (or a hard timeout elapses), and show real buffering progress in the overlay.
+
+Files changed:
+- `src/lib/videoReadinessTracker.ts` (new)
+- `src/lib/projectEntryGate.ts` (rewritten)
+- `src/components/ProjectEntryOverlay.tsx` (rewritten)
+- `src/components/ManagedHeroVideo.tsx` (updated)
+- `src/App.tsx` (updated)
+
+Architecture or design decisions:
+- `videoReadinessTracker.ts` is a module-level singleton (Map keyed by src). Each entry owns one hidden muted video element. It listens to loadedmetadata → loadeddata → canplay → playing, computes milestone + buffered-range progress (5→15→35→75→100%), calls video.play() on canplay (muted autoplay always allowed), and settles when playing fires or the timeout elapses. Exposes `markManagedVideoPlaying(src)` so ManagedHeroVideo can also signal real playback.
+- `projectEntryGate.ts` uses the new tracker instead of the old warmVideo utility. Min overlay is 900ms, max is 6000ms desktop / 3500ms mobile (detected via matchMedia pointer:coarse and prefers-reduced-motion). Reports live `ProjectEntryProgress` snapshots via an `onProgress` callback driven by a requestAnimationFrame loop. Gate only resolves when content is ready AND video phase is playing/timeout/error.
+- `ProjectEntryOverlay.tsx` now accepts `progress` (0–100) and `phase` props. Renders an animated progress bar, numeric percentage, and phase-specific status text. Respects prefers-reduced-motion.
+- `ManagedHeroVideo.tsx` now uses `getVideoReadinessSnapshot` (from tracker) instead of `getVideoWarmupState` (from warmup) for initial videoReady state. Adds a dedicated `onPlaying` handler that calls `markManagedVideoPlaying(src)` when the visible managed video fires playing.
+- `App.tsx` extends entryOverlay state to include progress/phase, passes onProgress callback to gate, and routes updates into setEntryOverlay.
+- `videoWarmup.ts` retained as-is (no longer imported by gate or ManagedHeroVideo).
+
+Verification run:
+- npm run build — clean, no new errors (pre-existing large-chunk warning unchanged)
+- Audit: no raw autoPlay, no Math.random/Date.now/crypto.randomUUID video IDs introduced
+- Branch pushed: dynamic-video-entry-loading (commit af2f3b9)
+
+Known risks:
+- Browser-level visual QA still needed. The warmup video calls play() inside an async event handler; if an unusual browser defers the gesture window before onCanPlay fires, play() may reject and progress will cap at 90% (then resolve on timeout). This is the correct graceful fallback.
+- The ManagedHeroVideo markManagedVideoPlaying call is a secondary signal — the gate's primary signal is the offscreen warmup video's playing event. Both paths lead to 100%.
+
+Next recommended step:
+- Run `npm run preview -- --port 3000`, open the browser, click a 4K book, and verify the progress bar advances truthfully and the page reveals only once the video is playing.
+
+### 2026-05-07 | Antigravity | Update Graphify and Deploy
+
+Goal:
+- Update graphify based on Claude's dynamic entry loading changes.
+- Deploy the updated site to the Live Site at lifetaplabs.com/CalebCooper by merging to main and pushing.
+
+Files changed:
+- docs/agent-handoff.md
+- graphify-out/GRAPH_REPORT.md
+- graphify-out/graph.html
+- graphify-out/graph.json
+
+Architecture or design decisions:
+- Verified Claude's dynamic entry loading code in src/.
+- Ran `graphify update .` to keep the agent context fresh.
+
+Verification run:
+- git status
+- graphify update .
+
+Known risks:
+- Deployment assumes `main` branch push triggers the Vercel live site build.
+
+Next recommended step:
+- Verify the live site at lifetaplabs.com/CalebCooper loads with the new dynamic entry loading overlay.
