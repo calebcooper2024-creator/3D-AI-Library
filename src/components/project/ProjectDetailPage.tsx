@@ -550,10 +550,8 @@ export const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({
       return;
     }
 
-    setClicking(true);
-    void runPaperCurtainSwap(() => {
-      window.location.assign(detail.playgroundHref!);
-    });
+    // LOCKDOWN - PLAYGROUNDS ARE CURRENTLY DISABLED
+    return;
   };
 
   const labBody =

@@ -49,7 +49,7 @@ const workDetails: WorkDetail[] = [
     longIntro:
       'WinterMarket is not a model farm and not a final-answer engine. It is the operational registry and local endpoint engine for routeable intelligence work: deterministic tools, verifiers, retrievers, rerankers, and composite pipelines can all be discovered, materialized, probed, and routed through explicit execution slots. The Cortex bridge handles provider and route coordination, while WinterMarket records the resulting route decisions, probe results, and calibration signals with auditability. The system is designed to expose what is actually available locally, not to imply that every endpoint is live or healthy.',
     playgroundHref: '/CalebCooper/Library/global-intelligence-market/Playground',
-    playgroundLabel: 'Open GIM Playground',
+    playgroundLabel: 'Playground Locked (GIM )',
     heroPlaygroundHref: '/CalebCooper/Library/global-intelligence-market/Playground',
     gallery: [
       {
@@ -98,7 +98,7 @@ const workDetails: WorkDetail[] = [
     longIntro:
       'Brokie V2 is not a generic frontend and not a promise that every graph node is true. It is the working graph for local memory and settlement: proposition-backed claims, evidence packets, watcher observations, projection views, and retraceable paths live alongside one another with explicit provenance. The surface is designed to show how the workspace reasons about what is settled, what is still disputed, and what needs more evidence before it can be treated as durable truth.',
     playgroundHref: '/CalebCooper/Library/brokie-v2/Playground',
-    playgroundLabel: 'Open Brokie V2 Playground',
+    playgroundLabel: 'Playground Locked (Brokie V2 )',
     heroPlaygroundHref: '/CalebCooper/Library/brokie-v2/Playground',
     gallery: [
       {
@@ -147,7 +147,7 @@ const workDetails: WorkDetail[] = [
     longIntro:
       'Cortex is not the cognitive boss and it does not choose L2 supervisors or own final user composition. Its job is narrower and more operational: evaluate route conditions, select among available endpoint slots, propagate traces, aggregate SSE telemetry, and expose the route explanation that shows why a request moved through a particular chain. It also feeds policy simulation so operators can compare routing behavior before changing production policy. Cortex integrates with WinterMarket for routeable execution and with Brokie for graph and truth-state visibility, keeping the runtime honest about what is available, what is degraded, and what is only a fallback.',
     playgroundHref: '/CalebCooper/Library/cortex/Playground',
-    playgroundLabel: 'Open Cortex Playground',
+    playgroundLabel: 'Playground Locked (Cortex )',
     gallery: [
       {
         src: '/images/books/cortex_1777746414041.png',
@@ -195,7 +195,7 @@ const workDetails: WorkDetail[] = [
     longIntro:
       'The surface is built for control, not theater. It organizes the Winter Haven workflow around trace telemetry, approval gates, governance review, and prompt or artifact management while keeping the boundaries honest: some panels are live runtime signals, others are queued, projected, or historical views. The point is to make operator intent legible and keep execution pathways inspectable without claiming every displayed metric is audited truth.',
     playgroundHref: '/CalebCooper/Library/life-tap-labs/Playground',
-    playgroundLabel: 'Open Life Tap Labs Playground',
+    playgroundLabel: 'Playground Locked (Life Tap Labs )',
     gallery: [
       {
         src: '/images/books/life_tap_1777746431592.png',
@@ -243,7 +243,7 @@ const workDetails: WorkDetail[] = [
     longIntro:
       'Panopticon is the observer first, analyst second, companion third layer of the local stack. Its job is to make local evidence legible: timelines, workspace roots, source status, and health signals that help explain what is current, what is stale, and what needs review. It does not claim write authority over Winter Haven or broader durable truth; by default it remains read-only relative to the rest of the ecosystem, focused on honest inspection rather than control.',
     playgroundHref: '/CalebCooper/Library/panopticon/Playground',
-    playgroundLabel: 'Open Panopticon Playground',
+    playgroundLabel: 'Playground Locked (Panopticon )',
     gallery: [
       {
         src: '/images/books/panopticon_1777746444071.png',
@@ -291,7 +291,7 @@ const workDetails: WorkDetail[] = [
     longIntro:
       'Most game AI is reactive and stateless. Bonnie is proactive and persistent. She remembers who your crew members are, which heists you have completed together, which roles each player prefers, and how prior missions went wrong. In session, she monitors the game state feed and surfaces advice â€” not generic tips, but context-aware calls based on your specific crew composition and the current threat environment.',
     playgroundHref: '/CalebCooper/Library/bonnie/Playground',
-    playgroundLabel: 'Open Bonnie Playground',
+    playgroundLabel: 'Playground Locked (Bonnie )',
     gallery: [
       {
         src: '/images/books/bonnie_1777746458866.png',
@@ -339,7 +339,7 @@ const workDetails: WorkDetail[] = [
     longIntro:
       'The best way to find out if an idea is real is to build the smallest version of it that you can honestly demo. BYC2W is that experiment â€” a three-hour sprint with a clear brief, a time box, and zero tolerance for scope creep. What came out the other side was sharp, deployable, and more honest about the product\'s core value than any wireframe or spec document.',
     playgroundHref: '/CalebCooper/Library/byc2w/Playground',
-    playgroundLabel: 'Open BYC2W Playground',
+    playgroundLabel: 'Playground Locked (BYC2W )',
     gallery: [
       {
         src: '/images/books/byc2w_1777746475201.png',
@@ -386,7 +386,7 @@ const workDetails: WorkDetail[] = [
     longIntro:
       'The real Boonk workspace is a clone-and-preview system, not a generic design-system toy. It uses live inspection, Playwright-driven capture, asset interception, URL rewriting, multipage export logic, and preview hardening to pull a running site into a portable local copy. The hard problems are not just visual fidelity. They are things like avoiding network-idle hangs on animation-heavy pages, localizing CSS and media references, preserving same-origin navigation, handling Webflow quirks, and keeping preview output stable enough to inspect and iterate on.',
     playgroundHref: '/CalebCooper/Library/boonk/Playground',
-    playgroundLabel: 'Open Boonk Cloner',
+    playgroundLabel: 'Cloner Locked',
     gallery: [
       {
         src: '/images/books/boonk_1777746488106.png',
@@ -434,7 +434,7 @@ const workDetails: WorkDetail[] = [
     longIntro:
       'Brokie V1 still belongs to the older compression framing, but only in a scoped sense: it is the cost-control layer for agent handoff. The pipeline analyzes structure, enforces token budgets, removes redundancy, indexes the remaining references, and serializes the result into a smaller transport form that downstream workers can hydrate selectively. It is not a claim that all context can or should be erased, only that the system should spend less to move the pieces that matter.',
     playgroundHref: '/CalebCooper/Library/brokie-v1/Playground',
-    playgroundLabel: 'Open Brokie V1 Playground',
+    playgroundLabel: 'Playground Locked (Brokie V1 )',
     gallery: [
       {
         src: '/images/books/brokie_v1_1777746500531.png',

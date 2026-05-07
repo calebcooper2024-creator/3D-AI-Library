@@ -270,9 +270,10 @@ export const boonkBook: BookProject = {
             href="/work/boonk/boonk-v2-app/dist/index.html"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-3 border border-[#e5c28f]/24 bg-[#e5c28f]/8 px-6 py-4 font-mono text-[11px] uppercase tracking-[0.28em] text-white transition-colors hover:bg-[#e5c28f]/14"
+            className="inline-flex items-center gap-3 border border-[#e5c28f]/24 bg-[#e5c28f]/8 px-6 py-4 font-mono text-[11px] uppercase tracking-[0.28em] text-white transition-colors hover:bg-[#e5c28f]/14 opacity-50 cursor-not-allowed"
+            onClick={(e) => e.preventDefault()}
           >
-            Open Boonk Cloner
+            Playground Locked
             <span aria-hidden="true">↗</span>
           </a>
 

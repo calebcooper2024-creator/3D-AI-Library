@@ -291,9 +291,10 @@ export const brokieV1Book: BookProject = {
             href="/work/brokie-v1-app/out/index.html"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-3 border border-[#8eeeff]/22 bg-[#8eeeff]/8 px-6 py-4 font-mono text-[11px] uppercase tracking-[0.28em] text-white transition-colors hover:bg-[#8eeeff]/14"
+            className="inline-flex items-center gap-3 border border-[#8eeeff]/22 bg-[#8eeeff]/8 px-6 py-4 font-mono text-[11px] uppercase tracking-[0.28em] text-white transition-colors hover:bg-[#8eeeff]/14 opacity-50 cursor-not-allowed"
+            onClick={(e) => e.preventDefault()}
           >
-            Open Brokie V1 Playground
+            Playground Locked
             <span aria-hidden="true">→</span>
           </a>
 

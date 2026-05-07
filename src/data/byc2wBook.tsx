@@ -242,9 +242,10 @@ export const byc2wBook: BookProject = {
             href="/work/byc2w/playground/dist/index.html"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-3 border border-white/18 bg-white/6 px-6 py-4 font-mono text-[11px] uppercase tracking-[0.28em] text-white transition-colors hover:bg-white/10"
+            className="inline-flex items-center gap-3 border border-white/18 bg-white/6 px-6 py-4 font-mono text-[11px] uppercase tracking-[0.28em] text-white transition-colors hover:bg-white/10 opacity-50 cursor-not-allowed"
+            onClick={(e) => e.preventDefault()}
           >
-            Open BYC2W Playground
+            Playground Locked
             <span aria-hidden="true">{'->'}</span>
           </a>
 

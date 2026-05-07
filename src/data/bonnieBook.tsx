@@ -249,9 +249,10 @@ export const bonnieBook: BookProject = {
             href="/work/bonnie/bonnie-playground/dist/index.html"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-3 border border-[#f2a3c7]/35 bg-[#f2a3c7]/10 px-6 py-4 font-mono text-[11px] uppercase tracking-[0.28em] text-[#f8d0e0] transition-colors hover:bg-[#f2a3c7]/16"
+            className="inline-flex items-center gap-3 border border-[#f2a3c7]/35 bg-[#f2a3c7]/10 px-6 py-4 font-mono text-[11px] uppercase tracking-[0.28em] text-[#f8d0e0] transition-colors hover:bg-[#f2a3c7]/16 opacity-50 cursor-not-allowed"
+            onClick={(e) => e.preventDefault()}
           >
-            Open Bonnie Playground
+            Playground Locked
             <span aria-hidden="true">↗</span>
           </a>
 

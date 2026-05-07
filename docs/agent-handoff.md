@@ -1557,3 +1557,31 @@ Known risks:
 
 Next recommended step:
 - Verify the live site at lifetaplabs.com/CalebCooper loads with the new dynamic entry loading overlay.
+
+### 2026-05-07 | Antigravity | Lock Down Playgrounds
+
+Goal:
+- Lock down all playground surfaces so they do not open on click.
+- Temporarily disable playground interaction across all horizontal and vertical views.
+
+Files changed:
+- src/data/workDetails.tsx
+- src/data/*Book.tsx
+- src/components/project/ProjectDetailPage.tsx
+- docs/agent-handoff.md
+
+Architecture or design decisions:
+- Prevented default navigation on `<a href="...">` playground links and appended disabled styling (`opacity-50`, `cursor-not-allowed`).
+- Replaced literal text to read "Playground Locked".
+- Added an early return to `handleLabClick` in `ProjectDetailPage.tsx`.
+- Did not delete the playground routes, just severed the UI entry points.
+
+Verification run:
+- npm run dev
+- graphify update .
+
+Known risks:
+- Playground URLs can still be manually typed or reached via history unless `App.tsx` routing is strictly blocking them (it currently redirects to the target playground URL). The lockdown is UI-only.
+
+Next recommended step:
+- Once the playgrounds are repaired, revert the `href` closures and remove the disabled visual state.

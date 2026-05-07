@@ -203,9 +203,10 @@ export const agenticDashboardsBook: BookProject = {
             href="/work/life-tap-labs/ltl-playground/dist/index.html"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-3 border border-black/12 bg-black px-6 py-4 font-mono text-[11px] uppercase tracking-[0.28em] text-white transition-colors hover:bg-black/85"
+            className="inline-flex items-center gap-3 border border-black/12 bg-black px-6 py-4 font-mono text-[11px] uppercase tracking-[0.28em] text-white transition-colors hover:bg-black/85 opacity-50 cursor-not-allowed"
+            onClick={(e) => e.preventDefault()}
           >
-            Open Agentic Dashboards Playground
+            Playground Locked
             <span aria-hidden="true">{'->'}</span>
           </a>
 
