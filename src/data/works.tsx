@@ -15,6 +15,7 @@ export interface WorkProject {
   textureClass: string;
   detailHref: string;
   hidden?: boolean;
+  visualAssetUrls?: string[];
   coverContent?: React.ReactNode;
   spineContent?: React.ReactNode;
 }
@@ -26,6 +27,7 @@ export const works: WorkProject[] = [
     author: 'Caleb Cooper', fontTitle: 'font-serif',
     spineColor: '#0a0a0f', coverColor: '#0d0d1a', textColor: '#c8b8ff', textureClass: 'texture-leather',
     detailHref: '/CalebCooper/Library/project-winter-haven',
+    visualAssetUrls: ['/images/books/winter_haven_1777746369741.png'],
     coverContent: (
       <div className="absolute inset-0 bg-cover bg-center shadow-[inset_0_0_100px_rgba(0,0,0,0.8)]" style={{ backgroundImage: "url('/images/books/winter_haven_1777746369741.png')" }}>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_24%_18%,rgba(125,211,252,0.08),transparent_20%),radial-gradient(circle_at_76%_20%,rgba(56,189,248,0.06),transparent_18%),linear-gradient(180deg,rgba(3,7,18,0.06)_0%,rgba(3,7,18,0.42)_46%,rgba(0,0,0,0.94)_100%)]" />
@@ -91,6 +93,7 @@ export const works: WorkProject[] = [
     author: 'Caleb Cooper', fontTitle: 'font-sans',
     spineColor: '#171717', coverColor: '#262626', textColor: '#facc15', textureClass: 'texture-paper',
     detailHref: '/CalebCooper/Library/global-intelligence-market',
+    visualAssetUrls: ['/images/books/gim_cover_new.jpg'],
     coverContent: (
       <div className="absolute inset-0 bg-cover bg-center shadow-[inset_0_0_80px_rgba(0,0,0,0.4)]" style={{ backgroundImage: "url('/images/books/gim_cover_new.jpg')" }}>
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.1)_0%,rgba(0,0,0,0.6)_60%,rgba(0,0,0,0.95)_100%)]" />
@@ -146,6 +149,7 @@ export const works: WorkProject[] = [
     author: 'Caleb Cooper', fontTitle: 'font-mono',
     spineColor: '#0c1a0e', coverColor: '#0f2412', textColor: '#4ade80', textureClass: 'texture-rough',
     detailHref: '/CalebCooper/Library/brokie-v2',
+    visualAssetUrls: ['/images/books/brokie_v2_cover_new.jpg'],
     coverContent: (
       <div className="absolute inset-0 bg-cover bg-center shadow-[inset_0_0_100px_rgba(0,0,0,0.8)]" style={{ backgroundImage: "url('/images/books/brokie_v2_cover_new.jpg')" }}>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_18%,rgba(74,222,128,0.12),transparent_22%),radial-gradient(circle_at_78%_24%,rgba(187,247,208,0.08),transparent_18%),linear-gradient(180deg,rgba(6,18,8,0.08)_0%,rgba(6,18,8,0.46)_44%,rgba(0,0,0,0.94)_100%)]" />
@@ -211,6 +215,7 @@ export const works: WorkProject[] = [
     author: 'Caleb Cooper', fontTitle: 'font-mono',
     spineColor: '#0a0010', coverColor: '#0d0018', textColor: '#e879f9', textureClass: 'texture-leather',
     detailHref: '/CalebCooper/Library/cortex',
+    visualAssetUrls: ['/images/books/cortex_1777746414041.png'],
     coverContent: (
       <div className="absolute inset-0 bg-cover bg-center shadow-[inset_0_0_100px_rgba(0,0,0,0.8)]" style={{ backgroundImage: "url('/images/books/cortex_1777746414041.png')" }}>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_24%_20%,rgba(232,121,249,0.14),transparent_20%),radial-gradient(circle_at_76%_22%,rgba(216,180,254,0.08),transparent_18%),linear-gradient(180deg,rgba(8,0,16,0.08)_0%,rgba(8,0,16,0.45)_46%,rgba(0,0,0,0.96)_100%)]" />
@@ -274,6 +279,7 @@ export const works: WorkProject[] = [
     author: 'Caleb Cooper', fontTitle: 'font-serif',
     spineColor: '#ffffff', coverColor: '#f8fafc', textColor: '#0f172a', textureClass: 'texture-paper',
     detailHref: '/CalebCooper/Library/life-tap-labs',
+    visualAssetUrls: ['/images/books/agentic_dashboards_cover.jpg'],
     coverContent: (
       <div className="absolute inset-0 bg-cover bg-center shadow-[inset_0_0_80px_rgba(0,0,0,0.2)] border-8 border-white" style={{ backgroundImage: "url('/images/books/agentic_dashboards_cover.jpg')" }}>
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.1)_0%,rgba(255,255,255,0.7)_40%,rgba(255,255,255,0.95)_100%)]" />
@@ -327,6 +333,7 @@ export const works: WorkProject[] = [
     author: 'Caleb Cooper', fontTitle: 'font-sans',
     spineColor: '#120000', coverColor: '#0d0000', textColor: '#ff4444', textureClass: 'texture-rough',
     detailHref: '/CalebCooper/Library/panopticon',
+    visualAssetUrls: ['/images/books/panopticon_1777746444071.png'],
     coverContent: (
       <div className="absolute inset-0 bg-cover bg-center shadow-[inset_0_0_100px_rgba(0,0,0,0.8)]" style={{ backgroundImage: "url('/images/books/panopticon_1777746444071.png')" }}>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_24%,rgba(255,255,255,0.08),transparent_22%),linear-gradient(180deg,rgba(3,2,4,0.04)_0%,rgba(3,2,4,0.42)_48%,rgba(0,0,0,0.92)_100%)]" />
@@ -399,6 +406,7 @@ export const works: WorkProject[] = [
     author: 'Caleb Cooper', fontTitle: 'font-serif',
     spineColor: '#1a0010', coverColor: '#200015', textColor: '#f9a8d4', textureClass: 'texture-paper',
     detailHref: '/CalebCooper/Library/bonnie',
+    visualAssetUrls: ['/images/books/bonnie_cover_new.jpg'],
     coverContent: (
       <div className="absolute inset-0 bg-cover bg-center shadow-[inset_0_0_120px_rgba(0,0,0,0.9)]" style={{ backgroundImage: "url('/images/books/bonnie_cover_new.jpg')" }}>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(249,168,212,0.18),transparent_42%),linear-gradient(180deg,rgba(3,2,7,0.08)_0%,rgba(3,2,7,0.55)_48%,rgba(0,0,0,0.96)_100%)]" />
@@ -456,6 +464,7 @@ export const works: WorkProject[] = [
     author: 'Caleb Cooper', fontTitle: 'font-serif',
     spineColor: '#1a0f00', coverColor: '#1e1200', textColor: '#fcd34d', textureClass: 'texture-canvas',
     detailHref: '/CalebCooper/Library/byc2w',
+    visualAssetUrls: ['/images/books/byc2w_1777746475201.png'],
     coverContent: (
       <div
         className="absolute inset-0 bg-cover bg-center shadow-[inset_0_0_100px_rgba(0,0,0,0.82)]"
@@ -529,6 +538,7 @@ export const works: WorkProject[] = [
     author: 'Caleb Cooper', fontTitle: 'font-sans',
     spineColor: '#0a0a0a', coverColor: '#111111', textColor: '#ffffff', textureClass: 'texture-leather',
     detailHref: '/CalebCooper/Library/boonk',
+    visualAssetUrls: ['/images/books/boonk_1777746488106.png'],
     coverContent: (
       <div className="absolute inset-0 bg-cover bg-center shadow-[inset_0_0_100px_rgba(0,0,0,0.8)]" style={{ backgroundImage: "url('/images/books/boonk_1777746488106.png')" }}>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(255,255,255,0.06),transparent_18%),linear-gradient(180deg,rgba(0,0,0,0.04)_0%,rgba(0,0,0,0.38)_44%,rgba(0,0,0,0.92)_100%)]" />
@@ -571,6 +581,7 @@ export const works: WorkProject[] = [
     author: 'Caleb Cooper', fontTitle: 'font-mono',
     spineColor: '#0a0f1a', coverColor: '#0d1420', textColor: '#38bdf8', textureClass: 'texture-leather',
     detailHref: '/CalebCooper/Library/brokie-v1',
+    visualAssetUrls: ['/images/books/brokie_v1_custom.jpg'],
     coverContent: (
       <div className="absolute inset-0 bg-cover bg-center shadow-[inset_0_0_100px_rgba(0,0,0,0.8)]" style={{ backgroundImage: "url('/images/books/brokie_v1_custom.jpg')" }}>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_24%_18%,rgba(56,189,248,0.12),transparent_22%),radial-gradient(circle_at_76%_26%,rgba(147,197,253,0.08),transparent_18%),linear-gradient(180deg,rgba(5,10,18,0.06)_0%,rgba(5,10,18,0.44)_46%,rgba(0,0,0,0.95)_100%)]" />
@@ -642,6 +653,7 @@ export const works: WorkProject[] = [
     author: 'Caleb Cooper', fontTitle: 'font-serif',
     spineColor: '#0d0d0d', coverColor: '#111111', textColor: '#e8d5b0', textureClass: 'texture-leather',
     detailHref: '/CalebCooper/Library/resume',
+    visualAssetUrls: ['/images/books/resume_cover.jpg'],
     coverContent: (
       <div className="absolute inset-0 bg-cover bg-center shadow-[inset_0_0_110px_rgba(0,0,0,0.82)]"
         style={{ backgroundImage: "url('/images/books/resume_cover.jpg')" }}>
