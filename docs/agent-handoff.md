@@ -1633,3 +1633,11 @@ Known risks:
 
 Next recommended step:
 - Continue with planned performance audits or infrastructure tasks.
+
+### 2026-05-08 23:45:00 - desktop performance patch 03, content-visibility for offscreen project panels
+- task: desktop performance patch 03, content-visibility for offscreen project panels
+- files changed: `src/components/project/projectStyles.css`, `docs/agent-handoff.md`
+- summary: added guarded content-visibility optimization for non-intro project horizontal panels to improve rendering performance.
+- verification: npm run build, source checks, manual route checks
+- known risks: possible browser-specific rendering/layout issues, mitigated by @supports guard and excluding intro/hero panel
+- Next recommended step: Patch 04: CSS contain for high-complexity component regions (e.g. project galleries).

@@ -469,6 +469,15 @@
   z-index: 1;
 }
 
+/* Performance: skip rendering work for offscreen project panels.
+   Keep the intro/hero panel fully renderable so entry videos and first paint remain stable. */
+@supports (content-visibility: auto) {
+  .project-horizontal-panel:not(.project-horizontal-panel--intro) {
+    content-visibility: auto;
+    contain-intrinsic-size: 1000px 720px;
+  }
+}
+
 
 /* When hero video is active, suppress the panel gradient so the
    old heroImage PNG can never bleed through */
