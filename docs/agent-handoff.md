@@ -1684,3 +1684,69 @@ Next recommended step:
   - source checks
 - known risks:
   - low, type-only/minimal data-shape patch; confirm no visual or routing changes expected.
+
+### 2026-05-09 | Claude Code | Patch 06 — accurate Library shelf readiness gate
+
+Goal:
+- Fix the Library shelf loading problem where books appear in an incomplete visual state (bare geometry without cover imagery) before their background images fully render. The preload gate was dormant because (1) `onReady` was never passed from App.tsx and (2) even if it were, the gate only checked `book.coverImage` — all 11 works use `coverContent` with `backgroundImage` CSS instead, so `urls.length === 0` caused an immediate no-op resolve.
+
+Files changed:
+- `src/components/Bookshelf.tsx` — added `visualAssetUrls?: string[]` to `ShelfBook` interface; added module-level `SHELF_PRELOAD_BUDGET`, `_preloadedUrls` Set, and `preloadImageAsset` helper (uses `img.decode()` for verified decode, resolves on both success/failure); added internal `isReady` state; replaced the old preload effect with one that includes `visualAssetUrls` in the preload set, uses a module-level cache for instant return-visit reveals, and applies a 3.5s safety timeout; added `opacity`/`transition` to outer div controlled by `isReady`.
+- `src/data/works.tsx` — added `visualAssetUrls?: string[]` to `WorkProject` interface; added `visualAssetUrls` array to all 11 work entries pointing to the `backgroundImage` URL embedded in their `coverContent` JSX.
+- `src/vite-env.d.ts` — created standard Vite triple-slash reference file so `import.meta.env.DEV` is correctly typed (this file was absent, causing TS2339 errors on the dev-mode console warnings).
+
+Architecture or design decisions:
+- Bookshelf is now self-gating via internal `isReady` — App.tsx required no changes. The `onReady` prop still works if a parent wants to layer additional orchestration.
+- Module-level `_preloadedUrls` Set (not component state) survives component unmount/remount, ensuring return visits to the shelf are instant without re-preloading already-decoded images.
+- `preloadImageAsset` attempts `img.decode()` when available, which verifies the image is fully decoded into GPU memory — not just downloaded — before the shelf becomes visible.
+- Budget capped at first 10 books to avoid blocking on off-screen entries.
+- Safety timeout at 3500ms with dev-only console warning logs failed/timed-out URLs without ever hanging the UI.
+
+Verification run:
+- `npm run lint` — clean (0 errors)
+- `npm run build` — ✓ built in ~24s (chunk size warning is pre-existing, unrelated to this patch)
+- Source checks via Grep confirmed: all 7 key patterns present in Bookshelf.tsx, `visualAssetUrls` field present on interface and all 11 work entries in works.tsx
+- `npm run dev` started at http://localhost:5180/ — manual browser test recommended (see next step)
+
+Known risks:
+- Low. The gate is additive: if all images fail to load, the 3500ms safety timeout guarantees the shelf still appears. `onReady` is called via optional chaining so no existing callers can break.
+- `src/vite-env.d.ts` is a new file — if the tsconfig is later updated to explicitly include `vite/client` types, this file becomes redundant but harmless.
+
+Next recommended step:
+- Manual browser test: hard-refresh the Library route, observe shelf is invisible for ~200–800ms while images decode, then fades in at full opacity with all covers rendered. On a fast return visit (back-navigate to Library), the shelf should appear instantly (cache hit). Check DevTools console in dev mode — should be silent on a clean load, but show `[Bookshelf] Some cover assets failed to preload` if any image 404s.
+
+### 2026-05-09 | Claude Sonnet 4.6 | Summit Phase 1 — SummitVoiceDemo Integration
+
+Goal:
+- Integrate the summit-phase1-code-bundle into the project by copying the frontend-only mock demo components and wiring them into the existing `hp-demo` section of the Summit Health case study.
+
+Files changed:
+- `src/components/summit/SummitVoiceDemo.tsx` (new)
+- `src/components/summit/SummitCallControls.tsx` (new)
+- `src/components/summit/SummitFailureControls.tsx` (new)
+- `src/components/summit/SummitTranscriptPanel.tsx` (new)
+- `src/components/summit/SummitToolPanel.tsx` (new)
+- `src/components/summit/SummitPolicyPanel.tsx` (new)
+- `src/components/summit/SummitLatencyPanel.tsx` (new)
+- `src/components/summit/SummitReviewQueue.tsx` (new)
+- `src/components/summit/SummitReplayPanel.tsx` (new)
+- `src/lib/summit/summitEvents.ts` (new)
+- `src/lib/summit/summitMockData.ts` (new)
+- `src/lib/summit/summitReplay.ts` (new)
+- `src/lib/summit/summitDemoScenarios.ts` (new)
+- `src/data/helloPatientCase.tsx` — added `SummitVoiceDemo` import; replaced static placeholder frame in `hp-demo` with `<SummitVoiceDemo mode="mock" />`
+
+Architecture or design decisions:
+- All new code is scoped to `src/components/summit/` and `src/lib/summit/` per the bundle spec; no existing files outside `helloPatientCase.tsx` were touched.
+- The surrounding `hp-demo` section structure (outer container, kicker, title/paragraph, status badge, bottom 3-col grid) is fully preserved — only the static placeholder frame was removed.
+- No new npm dependencies were added; no routing, global nav, Bookshelf, portfolio data, videos, or other case studies were modified.
+
+Verification run:
+- `npm run lint` — clean (0 errors)
+- `npm run build` — clean build in ~21s (pre-existing large-chunk warning unchanged)
+
+Known risks:
+- Browser-level interactive QA is the next real check: Start Demo, End Demo, Replay Trace, scenario selector, and all panels should respond correctly.
+
+Next recommended step:
+- Open `/CalebCooper/Library/summit-health` in the browser and verify the `The Agent On The Line.` section renders the interactive mock demo with working controls.

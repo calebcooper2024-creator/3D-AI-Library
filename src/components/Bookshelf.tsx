@@ -16,9 +16,39 @@ export interface ShelfBook {
   textureClass?: string;
   detailHref?: string;
   coverImage?: string;
+  /** Extra image URLs embedded in coverContent/spineContent that Bookshelf cannot
+   *  discover automatically. Added to the readiness preload set alongside coverImage. */
+  visualAssetUrls?: string[];
   coverContent?: React.ReactNode;
   spineContent?: React.ReactNode;
   showAuthorBadge?: boolean;
+}
+
+const SHELF_PRELOAD_BUDGET = 10;
+
+const _preloadedUrls = new Set<string>();
+
+type ImagePreloadResult = { url: string; ok: boolean; error?: string };
+
+function preloadImageAsset(url: string): Promise<ImagePreloadResult> {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.decoding = 'async';
+    const finish = (ok: boolean, error?: string): void => {
+      if (ok && typeof img.decode === 'function') {
+        img.decode()
+          .then(() => resolve({ url, ok: true }))
+          .catch((e: unknown) =>
+            resolve({ url, ok: false, error: e instanceof Error ? e.message : 'decode failed' })
+          );
+      } else {
+        resolve({ url, ok, error });
+      }
+    };
+    img.onload = () => finish(true);
+    img.onerror = () => finish(false, 'image load failed');
+    img.src = url;
+  });
 }
 
 export const Bookshelf = ({
@@ -126,6 +156,8 @@ export const Bookshelf = ({
     }
   };
 
+  const [isReady, setIsReady] = useState(false);
+
   // Tracks which specific rendered instance (id-copyIndex) is animating open
   const [openingInstanceKey, setOpeningInstanceKey] = useState<string | null>(null);
 
@@ -183,49 +215,47 @@ export const Bookshelf = ({
   const lastCanScrollLeftRef = React.useRef(false);
   const lastCanScrollRightRef = React.useRef(true);
 
-  // Preload all cover images and notify the parent when they're ready (or after
-  // a 3.5s safety timeout). This lets the parent gate the reveal behind a
-  // loading overlay so covers paint together instead of staggering in.
+  // Preload cover images (coverImage + visualAssetUrls) for the first
+  // SHELF_PRELOAD_BUDGET books, then reveal. Module-level cache means return
+  // visits are instant. Safety timeout prevents the gate from blocking forever.
   React.useEffect(() => {
-    if (!onReady) return;
+    const visibleBooks = books.slice(0, SHELF_PRELOAD_BUDGET);
+    const urls = Array.from(new Set([
+      ...visibleBooks.map((b) => b.coverImage).filter((u): u is string => Boolean(u)),
+      ...visibleBooks.flatMap((b) => b.visualAssetUrls ?? []).filter(Boolean),
+    ]));
 
-    const urls = books
-      .map((b) => b.coverImage)
-      .filter((u): u is string => Boolean(u));
+    const markReady = () => { setIsReady(true); onReady?.(); };
 
-    if (urls.length === 0) {
-      onReady();
-      return;
-    }
+    if (urls.length === 0) { markReady(); return; }
+
+    if (urls.every((u) => _preloadedUrls.has(u))) { markReady(); return; }
 
     let cancelled = false;
-    let remaining = urls.length;
-    const tick = () => {
-      if (cancelled) return;
-      remaining -= 1;
-      if (remaining <= 0) {
-        cancelled = true;
-        onReady();
-      }
-    };
-
     const safetyTimer = window.setTimeout(() => {
       if (cancelled) return;
+      if (import.meta.env.DEV) {
+        console.warn('[Bookshelf] Cover preload safety timeout. Still pending:', urls.filter((u) => !_preloadedUrls.has(u)));
+      }
       cancelled = true;
-      onReady();
+      markReady();
     }, 3500);
 
-    for (const url of urls) {
-      const img = new Image();
-      img.onload = tick;
-      img.onerror = tick;
-      img.src = url;
-    }
-
-    return () => {
+    Promise.all(urls.map(preloadImageAsset)).then((results) => {
+      if (cancelled) return;
       cancelled = true;
       window.clearTimeout(safetyTimer);
-    };
+      results.forEach((r) => { if (r.ok) _preloadedUrls.add(r.url); });
+      if (import.meta.env.DEV) {
+        const failed = results.filter((r) => !r.ok);
+        if (failed.length > 0) {
+          console.warn('[Bookshelf] Some cover assets failed to preload:', failed.map((r) => r.url));
+        }
+      }
+      markReady();
+    });
+
+    return () => { cancelled = true; window.clearTimeout(safetyTimer); };
   }, [books, onReady]);
 
   React.useEffect(() => {
@@ -459,10 +489,22 @@ export const Bookshelf = ({
   };
 
   return (
-    <div 
+    <div className="relative min-h-screen">
+      {/* Loading overlay — visible and interactive until cover images are decoded */}
+      <div
+        className="absolute inset-0 z-10 flex items-center justify-center bg-[#f9f3eb]"
+        style={{ opacity: isReady ? 0 : 1, transition: 'opacity 0.35s ease', pointerEvents: isReady ? 'none' : 'auto' }}
+        aria-hidden={isReady}
+      >
+        <p className="font-mono text-xs uppercase tracking-[0.28em] text-[#1f1a17]/55">
+          Opening Library
+        </p>
+      </div>
+    <div
       ref={shelfRef}
       className={`min-h-screen flex flex-col justify-center pt-20 overflow-hidden bg-transparent hide-scrollbar ${isTransitioning ? 'pointer-events-none' : ''}`}
-      style={{ touchAction: 'pan-y pinch-zoom' }}
+      style={{ touchAction: 'pan-y pinch-zoom', opacity: isReady ? 1 : 0, transition: 'opacity 0.35s ease', pointerEvents: isReady ? 'auto' : 'none' }}
+      aria-hidden={!isReady}
     >
       <div className={`bookshelf-container px-4 md:px-16 flex items-center${openingInstanceKey ? ' has-opening-book' : ''}`}>
           <div
@@ -549,6 +591,7 @@ export const Bookshelf = ({
           </button>
         </div>
       </div>
+    </div>
     </div>
   );
 };
