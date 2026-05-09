@@ -1585,3 +1585,28 @@ Known risks:
 
 Next recommended step:
 - Once the playgrounds are repaired, revert the `href` closures and remove the disabled visual state.
+
+### 2026-05-08 | Antigravity | Desktop performance patch 01: font loading cleanup
+
+Goal:
+- Improve desktop first render performance by moving Google Fonts loading out of CSS @import and into index.html, while preserving exact visual design.
+
+Files changed:
+- `index.html`
+- `src/index.css`
+- `docs/agent-handoff.md`
+
+Architecture or design decisions:
+- Moved Google Fonts discovery (Space Grotesk, Playfair Display, Inter) from CSS @import in `src/index.css` to a standard `<link>` in `index.html` <head>.
+- Changed Canopee `@font-face` `font-display` from `block` to `swap` in `src/index.css` to prevent invisible text during loading.
+- Preserved all other styling, preconnect links, and the existing Caveat font link.
+
+Verification run:
+- npm run lint
+- npm run build
+
+Known risks:
+- Changing font-display to `swap` for Canopee may cause a slight flash of unstyled text (FOUT) if the font is slow to load, but improves perceived performance.
+
+Next recommended step:
+- Run a Lighthouse or PageSpeed Insights audit to verify the improvement in "Eliminate render-blocking resources".
