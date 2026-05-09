@@ -1610,3 +1610,26 @@ Known risks:
 
 Next recommended step:
 - Run a Lighthouse or PageSpeed Insights audit to verify the improvement in "Eliminate render-blocking resources".
+
+### 2026-05-08 | Antigravity | Desktop performance/SEO patch 02: canonical URL cleanup
+
+Goal:
+- Normalize canonical and social metadata URLs to https://www.lifetaplabs.com/CalebCooper/ to match the deployed origin and improve SEO consistency.
+
+Files changed:
+- `index.html`
+- `docs/agent-handoff.md`
+
+Architecture or design decisions:
+- Updated `canonical`, `og:url`, `og:image`, and `twitter:image` metadata in `index.html` to use the `www` origin.
+- Preserved all other metadata, scripts, and layout elements.
+
+Verification run:
+- npm run build
+- metadata source checks (grep for non-www origin)
+
+Known risks:
+- None expected; metadata-only patch.
+
+Next recommended step:
+- Continue with planned performance audits or infrastructure tasks.
