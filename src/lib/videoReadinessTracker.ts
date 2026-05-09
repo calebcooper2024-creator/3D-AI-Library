@@ -28,6 +28,7 @@ type ReadinessRecord = {
   snapshot: VideoReadinessSnapshot;
   listeners: Set<(s: VideoReadinessSnapshot) => void>;
   resolve: (s: VideoReadinessSnapshot) => void;
+  promise: Promise<VideoReadinessSnapshot>;
   settled: boolean;
   timer: number | null;
   cleanupListeners: (() => void) | null;
@@ -140,6 +141,7 @@ export function prepareVideoForEntry(
     snapshot: initialSnapshot,
     listeners: new Set(),
     resolve: resolveRecord,
+    promise,
     settled: false,
     timer: null,
     cleanupListeners: null,

@@ -1640,4 +1640,16 @@ Next recommended step:
 - summary: added guarded content-visibility optimization for non-intro project horizontal panels to improve rendering performance.
 - verification: npm run build, source checks, manual route checks
 - known risks: possible browser-specific rendering/layout issues, mitigated by @supports guard and excluding intro/hero panel
-- Next recommended step: Patch 04: CSS contain for high-complexity component regions (e.g. project galleries).
+
+### 2026-05-08 23:55:00 - baseline verification patch 04, TypeScript lint fixes
+- task: baseline verification patch 04, TypeScript lint fixes
+- files changed: `src/data/workDetails.tsx`, `src/lib/videoReadinessTracker.ts`, `docs/agent-handoff.md`
+- summary:
+  - added missing promise field to VideoReadinessRecord type and object
+  - added missing required WorkDetail fields (heroImage, gallery) for the about-caleb placeholder entry
+- verification:
+  - npm run lint
+  - npm run build
+  - source checks
+- known risks:
+  - low, type-only/minimal data-shape patch; confirm no visual or routing changes expected.

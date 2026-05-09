@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import type { NarrativeSection } from './caseStudyMeta';
 
 export interface WorkGalleryItem {
@@ -511,9 +511,11 @@ const workDetails: WorkDetail[] = [
     year: '2026',
     client: 'Caleb Cooper',
     tags: [],
+    heroImage: '/images/books/about_me_cover.png',
     heroVideo: '/videos/about-bg.mp4',
     intro: '',
     longIntro: '',
+    gallery: [],
     sections: [],
   },
 
