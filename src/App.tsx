@@ -262,6 +262,7 @@ export default function App() {
   // Lazily-resolved book data for the detail view
   const [resolvedBookData, setResolvedBookData] = useState<PortfolioBook | null>(null);
   const [isLoadingBookData, setIsLoadingBookData] = useState(false);
+  const [bookLoadError, setBookLoadError] = useState<string | null>(null);
   const transitionTimerRef = useRef<number | null>(null);
   const entryRequestRef = useRef(0);
 
@@ -369,31 +370,58 @@ export default function App() {
   useEffect(() => {
     if (!selectedBookId) {
       setResolvedBookData(null);
+      setIsLoadingBookData(false);
+      setBookLoadError(null);
       return;
     }
+
+    let cancelled = false;
+    setBookLoadError(null);
 
     // 1. Check statically-imported books first (about-caleb, ai-library)
     const staticBook = STATIC_BOOK_OVERRIDES[selectedBookId];
     if (staticBook) {
       setResolvedBookData(staticBook);
-      return;
+      setIsLoadingBookData(false);
+      return () => { cancelled = true; };
     }
 
     // 2. Check if we already have cached data from a previous lazy load
     const cached = getCachedBookData(selectedBookId);
     if (cached) {
       setResolvedBookData(cached);
-      return;
+      setIsLoadingBookData(false);
+      return () => { cancelled = true; };
     }
 
     // 3. If it's a custom detail book, load it lazily
     if (hasCustomBookData(selectedBookId)) {
       setIsLoadingBookData(true);
-      loadBookData(selectedBookId).then((data) => {
-        setResolvedBookData(data);
-        setIsLoadingBookData(false);
-      });
-      return;
+      setResolvedBookData(null);
+
+      loadBookData(selectedBookId)
+        .then((data) => {
+          if (cancelled) return;
+          if (data) {
+            setResolvedBookData(data);
+            setBookLoadError(null);
+          } else {
+            setResolvedBookData(null);
+            setBookLoadError(selectedBookId);
+          }
+        })
+        .catch((error) => {
+          if (cancelled) return;
+          console.error('[bookDataLoader] Failed to load book data', selectedBookId, error);
+          setResolvedBookData(null);
+          setBookLoadError(selectedBookId);
+        })
+        .finally(() => {
+          if (cancelled) return;
+          setIsLoadingBookData(false);
+        });
+
+      return () => { cancelled = true; };
     }
 
     // 4. For case studies (from portfolio.tsx), use the inline project data
@@ -408,6 +436,7 @@ export default function App() {
       } else {
         setResolvedBookData(null);
       }
+      setIsLoadingBookData(false);
     }
   }, [selectedBookId, selectedBookType]);
 
@@ -617,6 +646,7 @@ export default function App() {
     entryRequestRef.current += 1;
     setEntryOverlay({ visible: false, title: null, progress: 0, phase: 'starting' });
     setHeavyMotion('project-entry', false, 'detail-close');
+    setBookLoadError(null);
     // Clear the readiness record so re-opening the same book waits for the
     // video to actually play again rather than resolving instantly from cache.
     if (selectedBookId) {
@@ -683,6 +713,18 @@ export default function App() {
     selectedBook &&
     selectedBookType === 'work' &&
     !CUSTOM_WORK_DETAIL_IDS.has(selectedBookId);
+
+  // Invariant guards: selectedBookId must never render only blank paper.
+  // isCustomOrCaseStudy covers all books that go through async/dynamic data loading.
+  // showBookLoadFallback: data not yet available (including the 1-frame window before effect fires).
+  // showBookErrorFallback: loadBookData rejected or returned null.
+  const isCustomOrCaseStudy =
+    selectedBookId !== null &&
+    (CUSTOM_WORK_DETAIL_IDS.has(selectedBookId) || selectedBookType === 'case-study');
+  const showBookLoadFallback =
+    isCustomOrCaseStudy && !showCaseStudyDetail && bookLoadError === null;
+  const showBookErrorFallback =
+    selectedBookId !== null && bookLoadError !== null;
 
   return (
     <div className="min-h-screen bg-transparent">
@@ -803,6 +845,67 @@ export default function App() {
               onNavigateToLibraryItem={(id) => handleBookSelect(id)}
               onMenuNavigate={handleTabChange}
             />
+          )}
+
+          {showBookLoadFallback && (
+            <div
+              key="book-loading-fallback"
+              style={{
+                position: 'fixed', inset: 0,
+                display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+                background: '#e2dedb',
+                zIndex: 40,
+              }}
+            >
+              <p style={{ fontFamily: 'monospace', fontSize: '11px', letterSpacing: '0.38em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.45)', marginBottom: '1.25rem' }}>
+                Opening Book
+              </p>
+              <p style={{ fontFamily: 'Georgia, serif', fontSize: '2rem', color: '#161312', marginBottom: '2.5rem', textAlign: 'center', padding: '0 2rem', lineHeight: 1.15 }}>
+                {selectedBook?.title ?? selectedBookId}
+              </p>
+              <button
+                onClick={handleCloseDetail}
+                style={{
+                  fontFamily: 'monospace', fontSize: '11px', letterSpacing: '0.3em', textTransform: 'uppercase',
+                  color: 'rgba(0,0,0,0.55)', background: 'transparent', border: '1px solid rgba(0,0,0,0.2)',
+                  padding: '0.6rem 1.4rem', cursor: 'pointer',
+                }}
+              >
+                Back to Library
+              </button>
+            </div>
+          )}
+
+          {showBookErrorFallback && (
+            <div
+              key="book-error-fallback"
+              style={{
+                position: 'fixed', inset: 0,
+                display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+                background: '#e2dedb',
+                zIndex: 40,
+              }}
+            >
+              <p style={{ fontFamily: 'monospace', fontSize: '11px', letterSpacing: '0.38em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.45)', marginBottom: '1.25rem' }}>
+                Book could not be loaded
+              </p>
+              <p style={{ fontFamily: 'Georgia, serif', fontSize: '2rem', color: '#161312', marginBottom: '0.5rem', textAlign: 'center', padding: '0 2rem', lineHeight: 1.15 }}>
+                {selectedBook?.title ?? selectedBookId}
+              </p>
+              <p style={{ fontFamily: 'monospace', fontSize: '11px', letterSpacing: '0.25em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.38)', marginBottom: '2.5rem', textAlign: 'center' }}>
+                There was a problem loading this book
+              </p>
+              <button
+                onClick={handleCloseDetail}
+                style={{
+                  fontFamily: 'monospace', fontSize: '11px', letterSpacing: '0.3em', textTransform: 'uppercase',
+                  color: 'rgba(0,0,0,0.55)', background: 'transparent', border: '1px solid rgba(0,0,0,0.2)',
+                  padding: '0.6rem 1.4rem', cursor: 'pointer',
+                }}
+              >
+                Back to Library
+              </button>
+            </div>
           )}
         </AnimatePresence>
       </Suspense>

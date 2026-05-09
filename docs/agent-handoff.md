@@ -1641,6 +1641,37 @@ Next recommended step:
 - verification: npm run build, source checks, manual route checks
 - known risks: possible browser-specific rendering/layout issues, mitigated by @supports guard and excluding intro/hero panel
 
+### 2026-05-09 | Claude Sonnet 4.6 | Emergency Bugfix: Custom Book Route Blank-Paper Recovery
+
+Goal:
+- Eliminate the blank-paper state that could occur when navigating directly to any custom book detail route (e.g. /CalebCooper/Library/resume, /panopticon, /project-winter-haven, /global-intelligence-market) and the async loadBookData had not yet resolved or had failed.
+
+Files changed:
+- `src/App.tsx`
+- `docs/agent-handoff.md`
+
+Architecture or design decisions:
+- Added `bookLoadError: string | null` state alongside the existing `isLoadingBookData` state. The error stores the selectedBookId that failed to load so the fallback can display the correct book title.
+- Rewrote the custom book data loading useEffect with three resilience improvements: (1) stale-promise cancellation guard (`let cancelled = false`), (2) `.catch()` handler that sets `bookLoadError` so failures are surfaced rather than silently leaving blank paper, (3) `.finally()` so `isLoadingBookData` is always cleared on both success and failure paths.
+- Added two new derived booleans (`showBookLoadFallback`, `showBookErrorFallback`) that activate whenever `selectedBookId` is set but `showCaseStudyDetail` has not rendered yet (i.e. data is still loading or failed).
+- Loading fallback covers the 1-frame window before the effect fires as well as genuine in-progress loads. The entry overlay still covers normal shelf-click opens so the fallback is never visually exposed in that path.
+- Error fallback shows the book title (from `selectedBook?.title`) and a "Back to Library" button that reuses the existing `handleCloseDetail` reset path.
+- `handleCloseDetail` now also calls `setBookLoadError(null)` on close so the error state never leaks across books.
+- `bookDataLoader.ts` was not touched — the bug is entirely in App.tsx's missing error/loading guard, not in the loader itself.
+
+Verification run:
+- npm run lint — clean, zero errors
+- npm run build — clean, same pre-existing large-chunk warning, no new warnings
+- Source checks: all fallback strings and async guard patterns confirmed present in App.tsx
+
+Known risks:
+- Low. The loading fallback also activates briefly during direct-route refresh of any custom book while the dynamic import is in-flight. This is the correct visible fallback replacing blank paper. It disappears as soon as the data resolves.
+- The entry overlay continues to cover normal book opens from the shelf, so the loading fallback is never exposed in that path.
+- Visual detail pages are unchanged when data loads successfully; only the blank-paper failure path is patched.
+
+Next recommended step:
+- Manual browser test: hard-refresh /CalebCooper/Library/resume, /panopticon, /project-winter-haven, /global-intelligence-market and confirm each shows a visible "Opening Book" state, then resolves to the detail page (or shows "Book could not be loaded" with a Back to Library button if the module fails).
+
 ### 2026-05-08 23:55:00 - baseline verification patch 04, TypeScript lint fixes
 - task: baseline verification patch 04, TypeScript lint fixes
 - files changed: `src/data/workDetails.tsx`, `src/lib/videoReadinessTracker.ts`, `docs/agent-handoff.md`
