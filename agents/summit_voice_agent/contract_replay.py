@@ -6,6 +6,13 @@ Prints sample summit.event envelope trace to prove event shape.
 from __future__ import annotations
 
 import json
+import os
+import sys
+from pathlib import Path
+
+if __name__ in ("__main__", "__mp_main__"):
+    sys.path.insert(0, str(Path(__file__).parent.parent))
+    __package__ = "summit_voice_agent"
 from .events import (
     make_call_id, envelope,
     session_event, transcript_event, intent_event,

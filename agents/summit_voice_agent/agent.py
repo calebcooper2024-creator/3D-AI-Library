@@ -13,7 +13,7 @@ from __future__ import annotations
 
 import sys
 from pathlib import Path
-if __name__ == "__main__":
+if __name__ in ("__main__", "__mp_main__"):
     sys.path.insert(0, str(Path(__file__).parent.parent))
     __package__ = "summit_voice_agent"
 
@@ -208,25 +208,23 @@ class SummitHealthAgent:
         )
 
 
-def _build_worker():
-    """Build LiveKit Agents 1.x WorkerOptions. Raises ImportError if not installed."""
-    from livekit.agents import WorkerOptions, cli, JobContext, JobProcess  # noqa
+_has = {}
+for name, mod in [
+    ("openai", "livekit.plugins.openai"),
+    ("deepgram", "livekit.plugins.deepgram"),
+    ("cartesia", "livekit.plugins.cartesia"),
+    ("silero", "livekit.plugins.silero"),
+]:
+    try:
+        import importlib
+        _has[name] = importlib.import_module(mod)
+    except ImportError:
+        _has[name] = None
+
+try:
+    from livekit.agents import WorkerOptions, cli, JobContext, JobProcess
     from livekit.agents.voice import AgentSession, Agent
     from livekit.agents import function_tool, RunContext
-
-    _has = {}
-    for name, mod in [
-        ("openai", "livekit.plugins.openai"),
-        ("deepgram", "livekit.plugins.deepgram"),
-        ("cartesia", "livekit.plugins.cartesia"),
-        ("silero", "livekit.plugins.silero"),
-        ("turn", "livekit.plugins.turn_detector.multilingual"),
-    ]:
-        try:
-            import importlib
-            _has[name] = importlib.import_module(mod)
-        except ImportError:
-            _has[name] = None
 
     class _LKAgent(Agent):
         def __init__(self):
@@ -292,7 +290,6 @@ def _build_worker():
         await bus.publish(latency_event(call_id, "room_connect",
                                         int((time.monotonic() - t0) * 1000), target_ms=500))
         label, expected = SCENARIO_LABELS.get(scenario_id, (scenario_id, ""))
-        from .events import failure_event
         await bus.publish(failure_event(call_id, scenario_id, label, expected))
         await bus.publish(session_event(call_id, "running", f"Ready — scenario: {label}"))
 
@@ -348,14 +345,18 @@ def _build_worker():
         )
 
     def _prewarm(proc: JobProcess) -> None:
-        if _has["silero"]:
+        if _has.get("silero"):
             try:
                 proc.userdata["vad"] = _has["silero"].VAD.load()
             except Exception as exc:
                 logger.warning("VAD prewarm failed: %s", exc)
 
-    return WorkerOptions(entrypoint_fnc=_entrypoint, prewarm_fnc=_prewarm, agent_name=CONFIG.agent_name)
+    def _build_worker():
+        return WorkerOptions(entrypoint_fnc=_entrypoint, prewarm_fnc=_prewarm, agent_name=CONFIG.agent_name)
 
+except ImportError:
+    def _build_worker():
+        return None
 
 def main():
     logging.basicConfig(level=logging.INFO,
@@ -364,13 +365,13 @@ def main():
         print("\n[Summit Agent] LiveKit env not configured.\n"
               "  Set LIVEKIT_URL, LIVEKIT_API_KEY, LIVEKIT_API_SECRET in .env.local\n")
         sys.exit(1)
-    try:
-        from livekit.agents import cli
-        cli.run_app(_build_worker())
-    except ImportError as exc:
-        print(f"\n[Summit Agent] ImportError: {exc}\n  Run: pip install -r requirements.txt\n")
+    
+    worker_opts = _build_worker()
+    if not worker_opts:
+        print("\n[Summit Agent] ImportError: LiveKit packages not installed.\n  Run: pip install -r requirements.txt\n")
         sys.exit(1)
-
+        
+    cli.run_app(worker_opts)
 
 if __name__ == "__main__":
     main()
