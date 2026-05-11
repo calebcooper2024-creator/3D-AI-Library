@@ -321,23 +321,22 @@ try:
             kw["tts"] = _has["cartesia"].TTS(model="sonic-2024-10-19", voice=CONFIG.tts_voice, speed=0.92)
         if _has["silero"]:
             kw["vad"] = _has["silero"].VAD.load()
-        if _has["turn"]:
-            kw["turn_detection"] = _has["turn"].MultilingualModel()
+        # turn_detection bypassed
 
         session = AgentSession(**kw)
 
         @session.on("user_input_transcribed")
-        async def _on_user_tx(ev):
+        def _on_user_tx(ev):
             text = getattr(ev, "transcript", "") or getattr(ev, "text", "")
             is_final = getattr(ev, "is_final", True)
             if text:
-                await bus.publish(transcript_event(call_id, "caller", text, is_final=is_final))
+                asyncio.ensure_future(bus.publish(transcript_event(call_id, "caller", text, is_final=is_final)))
 
         @session.on("agent_state_changed")
-        async def _on_agent_state(ev):
+        def _on_agent_state(ev):
             state_str = str(getattr(ev, "state", ev)).lower()
             if "speaking" in state_str or "listening" in state_str:
-                await bus.publish(session_event(call_id, "running", f"Agent: {state_str}"))
+                asyncio.ensure_future(bus.publish(session_event(call_id, "running", f"Agent: {state_str}")))
 
         await session.start(room=ctx.room, agent=lk_agent)
         await session.generate_reply(

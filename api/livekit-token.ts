@@ -1,4 +1,4 @@
-import { AccessToken } from "livekit-server-sdk";
+import { AccessToken, AgentDispatchClient } from "livekit-server-sdk";
 
 type VercelRequest = {
   method?: string;
@@ -108,6 +108,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   });
 
   const jwt = await token.toJwt();
+
+  const dispatchClient = new AgentDispatchClient(livekitUrl, apiKey, apiSecret);
+  try {
+    await dispatchClient.createDispatch(roomName, agentName, { metadata: JSON.stringify({ scenarioId }) });
+  } catch (err) {
+    console.error("[Summit API] Failed to explicitly dispatch agent:", err);
+  }
 
   res.status(200).json({
     ok: true,
