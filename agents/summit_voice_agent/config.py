@@ -36,6 +36,10 @@ class SummitAgentConfig:
     openai_api_key: str
     deepgram_api_key: str
     cartesia_api_key: str
+    llm_provider: str
+    ollama_base_url: str
+    ollama_api_key: str
+    local_llm_model: str
 
     @property
     def is_configured(self) -> bool:
@@ -44,6 +48,8 @@ class SummitAgentConfig:
 
     @property
     def has_llm(self) -> bool:
+        if self.llm_provider == "ollama":
+            return bool(self.ollama_base_url and self.local_llm_model)
         return bool(self.openai_api_key)
 
     @property
@@ -74,6 +80,10 @@ def load_config() -> SummitAgentConfig:
         openai_api_key=os.getenv("OPENAI_API_KEY", ""),
         deepgram_api_key=os.getenv("DEEPGRAM_API_KEY", ""),
         cartesia_api_key=os.getenv("CARTESIA_API_KEY", ""),
+        llm_provider=os.getenv("SUMMIT_LLM_PROVIDER", "openai").lower(),
+        ollama_base_url=os.getenv("OLLAMA_BASE_URL", "http://localhost:11434/v1"),
+        ollama_api_key=os.getenv("OLLAMA_API_KEY", "ollama"),
+        local_llm_model=os.getenv("SUMMIT_LOCAL_LLM_MODEL", ""),
     )
 
 

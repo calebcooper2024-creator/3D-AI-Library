@@ -11,6 +11,12 @@ Voice pipeline requires OPENAI_API_KEY, DEEPGRAM_API_KEY, CARTESIA_API_KEY.
 """
 from __future__ import annotations
 
+import sys
+from pathlib import Path
+if __name__ == "__main__":
+    sys.path.insert(0, str(Path(__file__).parent.parent))
+    __package__ = "summit_voice_agent"
+
 import asyncio
 import json
 import logging
@@ -304,7 +310,14 @@ def _build_worker():
         # Build plugins
         kw = {}
         if _has["openai"] and CONFIG.has_llm:
-            kw["llm"] = _has["openai"].LLM(model="gpt-4o")
+            if CONFIG.llm_provider == "ollama":
+                kw["llm"] = _has["openai"].LLM(
+                    model=CONFIG.local_llm_model,
+                    base_url=CONFIG.ollama_base_url,
+                    api_key=CONFIG.ollama_api_key,
+                )
+            else:
+                kw["llm"] = _has["openai"].LLM(model=CONFIG.llm_model)
         if _has["deepgram"] and CONFIG.has_stt:
             kw["stt"] = _has["deepgram"].STT(model="nova-3-medical")
         if _has["cartesia"] and CONFIG.has_tts:
