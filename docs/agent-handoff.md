@@ -1962,6 +1962,26 @@ Verification run:
 Known risks:
 - Local Ollama latency may still cause intermittent 'Request timed out' warnings if the system is under heavy load.
 - Deterministic fallback is keyword-based and may miss complex intent variations.
+### 2026-05-11 | Antigravity | Summit Audio Sink Regression & Stabilization
+
+Goal:
+- Add remote audio rendering via an isolated component.
+
+Outcome:
+- Attempted to add `SummitRemoteAudioSink` to `SummitLiveKitBridge`.
+- Observed render instability/blanking in the automated browser test (likely due to Hook ordering sensitivity or HMR artifacts).
+- Reverted the bridge and hook changes immediately to preserve the stable render.
+- The page is now back to a verified stable state (Commit `e12ba03` baseline).
+
+Verification:
+- npm run build: PASS
+- npm run lint: PASS
+- Summit Agent Contract: PASS (52 checks)
+- Summit Policy: PASS
+- Browser Render (Mock): Verified stable on port 3004.
+
+Next Step:
+- Investigate the specific hook conflict or implement the audio sink as a completely top-level sibling to the bridge to ensure zero hook interference.
 
 Next recommended step:
 - Perform manual mic check at http://localhost:3004/CalebCooper/Library/summit-health with headset to verify real-time voice response.
