@@ -1856,3 +1856,55 @@ Known risks:
 
 Next recommended step:
 - Phase 4: Build the Python LiveKit agent that joins the same `summit-demo-*` room, subscribes to `summit.control`, runs the STT → policy gate → workflow/tool → TTS loop, and publishes structured `SummitDemoEvent` packets to `summit.event`. The full event contract is defined in `src/lib/summit/summitLiveKit.ts` and `src/lib/summit/summitEvents.ts`. The Phase 4 handoff spec is in `docs/summit-livekit-frontend.md`.
+
+### 2026-05-10 | Antigravity | Summit Phase 4 — Python LiveKit Agent
+
+Goal:
+Build the Python LiveKit agent worker. Subscribe to `summit.control`. Publish structured `SummitDemoEvent` envelopes to `summit.event`. Enforce deterministic policy gate before all tool actions.
+
+Files added:
+- `agents/summit_voice_agent/__init__.py`
+- `agents/summit_voice_agent/agent.py` — LiveKit Agents 1.x worker + SummitHealthAgent class
+- `agents/summit_voice_agent/config.py` — SummitAgentConfig from env vars
+- `agents/summit_voice_agent/events.py` — Python event builders mirroring summitEvents.ts
+- `agents/summit_voice_agent/event_bus.py` — publish to LiveKit room + decode control packets
+- `agents/summit_voice_agent/workflow_state.py` — deterministic state machine + intent classifier
+- `agents/summit_voice_agent/policy_gate.py` — Python port of summitPolicyGate.ts
+- `agents/summit_voice_agent/mock_ecw.py` — fake eClinicalWorks adapter (no real data)
+- `agents/summit_voice_agent/tools.py` — policy-gated tool runner
+- `agents/summit_voice_agent/contract_replay.py` — offline event trace prover
+- `agents/summit_voice_agent/requirements.txt`
+- `agents/summit_voice_agent/.env.example`
+- `agents/summit_voice_agent/.gitignore`
+- `agents/summit_voice_agent/README.md`
+- `scripts/verify-summit-agent-contract.py`
+- `docs/summit-livekit-agent-phase4.md`
+
+Architecture decisions:
+- LiveKit Agents 1.x API shape used: `WorkerOptions`, `AgentSession`, `Agent`, `function_tool`, `RunContext`.
+- LiveKit packages not yet installed globally — agent requires pip install in venv.
+- All tools route through `policy_gate.evaluate_policy()`. LLM cannot bypass policy.
+- `contract_replay.py` and `verify-summit-agent-contract.py` both run without LiveKit installed.
+- `__pycache__` excluded via `.gitignore` in the agent dir.
+
+Verification outputs:
+- `python scripts/verify-summit-agent-contract.py` — PASS (52/52 checks)
+- `node scripts/verify-summit-policy.mjs` — PASS (10/10)
+- `node scripts/verify-summit-livekit-env.mjs` — NOT CONFIGURED (expected)
+- `npm run lint` — clean (0 errors)
+- `npm run build` — clean build (pre-existing chunk warning only, exit 0)
+- `python contract_replay.py` — not run standalone (uses package import); covered by verifier
+- `python agent.py dev` — BLOCKED: LiveKit env vars not configured locally
+
+Known risks / blockers:
+- `agent.py dev` requires LIVEKIT_URL, LIVEKIT_API_KEY, LIVEKIT_API_SECRET in `.env.local`. Until set, runtime startup cannot be tested.
+- LiveKit packages (`livekit-agents`, `livekit-plugins-*`) must be pip-installed in the venv before `agent.py` can start.
+- Agent TTS transcript mirroring (publishing agent speech as `speaker: "agent"` transcript events) depends on whether `conversation_item_added` is available in the installed LiveKit version. If not, it is a Phase 4.1 follow-up item.
+- The `agent.py` `@session.on("user_input_transcribed")` handler name may differ in older LiveKit Agents builds — verify against installed version.
+
+Frontend compatibility:
+- Phase 1–3 frontend code unchanged. Mock trace mode still works without LiveKit env vars.
+- The Summit Health page remains stable with or without the Python agent running.
+
+Next recommended step:
+- Phase 5: End-to-end live browser conversation hardening. Requires: set LiveKit env vars in Vercel + `.env.local`, start `python agent.py dev`, open Summit Health page, click Connect LiveKit room, test full call scenario with voice. Then run latency eval suite and SIP/Twilio ingress wiring.
