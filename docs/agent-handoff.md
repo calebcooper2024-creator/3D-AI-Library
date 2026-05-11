@@ -1934,3 +1934,35 @@ Next exact step: Provide valid LiveKit API credentials and model API keys in `ag
 - Implemented Phase 5: Credential wiring, runtime fix (pickling/mp issues), and verified frontend API token generation.
 - The Python agent successfully registers with LiveKit cloud and the frontend can fetch tokens and join the room (browser mic access blocked automated full E2E, but credential routing is verified).
 - Next Step: Manual E2E test by the user with a real microphone.
+
+### 2026-05-11 | Antigravity | Debugging Summit Agent Response Loop
+
+Goal:
+- Resolve silent failure where agent fails to respond to caller transcripts.
+
+Files changed:
+- agents/summit_voice_agent/.env.local
+- agents/summit_voice_agent/agent.py
+- agents/summit_voice_agent/event_bus.py
+- scripts/verify-summit-ollama-provider.py (new)
+
+Architecture or design decisions:
+- Switched to qwen2.5:0.5b for local inference to prevent LLM timeouts seen with larger models.
+- Increased LLM timeout to 30s via custom AsyncOpenAI client in AgentSession.
+- Implemented deterministic keyword fallback (run_fallback) to ensure tool-calling events trigger even if LLM reasoning is weak.
+- Added [SummitAgent] prefixed logging to track job lifecycle, transcript ingestion, and reply scheduling.
+- Wrapped reply generation in a boolean lock to prevent overlapping generation tasks.
+
+Verification run:
+- Python contract_replay.py: PASS
+- verify-summit-ollama-provider.py: PASS
+- npm run lint & build: PASS
+- E2E Browser test: Verified interaction loop with greeting and transcript handling.
+
+Known risks:
+- Local Ollama latency may still cause intermittent 'Request timed out' warnings if the system is under heavy load.
+- Deterministic fallback is keyword-based and may miss complex intent variations.
+
+Next recommended step:
+- Perform manual mic check at http://localhost:3004/CalebCooper/Library/summit-health with headset to verify real-time voice response.
+

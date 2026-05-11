@@ -35,6 +35,7 @@ class SummitEventBus:
                 reliable=True,
                 topic=self.event_topic,
             )
+            logger.info("[SummitAgent] event published: %s", event.get("type", "unknown"))
         except Exception as exc:
             logger.warning("SummitEventBus.publish failed: %s", exc)
 

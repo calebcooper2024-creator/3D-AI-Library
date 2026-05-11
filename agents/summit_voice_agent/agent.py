@@ -207,6 +207,28 @@ class SummitHealthAgent:
             action=lambda: self.ecw.log_patient_statement(patient_words, flags),
         )
 
+    async def run_fallback(self, text: str) -> bool:
+        """Deterministic keyword-based fallback for weak tool calling."""
+        c = classify_intent_from_text(text)
+        if c.intent == "unclear" or c.confidence < 0.6:
+            return False
+
+        logger.info("[SummitAgent] fallback triggered for intent: %s", c.intent)
+        await self.tool_classify_intent(text)
+
+        # Basic routing fallback
+        if c.intent == "body_part_routing":
+            await self.tool_get_provider_availability(text, "New patient scheduling")
+        elif c.intent == "workers_comp":
+            await self.tool_transfer_call("workers_comp", "Workers comp detected in fallback.")
+        elif c.intent == "medical_question":
+            await self.tool_log_patient_statement(text)
+            await self.tool_create_staff_task("clinical_callback", "Medical question captured in fallback.")
+        elif c.intent == "emergency":
+            await self.tool_create_staff_task("emergency_escalation", "Emergency language detected in fallback.")
+        
+        return True
+
 
 _has = {}
 for name, mod in [
@@ -277,8 +299,9 @@ try:
             return json.dumps(await self._summit.tool_log_patient_statement(patient_words, flags) if self._summit else {})
 
     async def _entrypoint(ctx: JobContext) -> None:
-        logger.info("Summit agent session — room: %s", ctx.room.name)
+        logger.info("[SummitAgent] job received — room: %s", ctx.room.name)
         await ctx.connect()
+        logger.info("[SummitAgent] room joined")
         call_id = make_call_id(ctx.room.name)
         scenario_id = CONFIG.default_scenario
         ecw = MockEcwAdapter(scenario_id)
@@ -308,10 +331,15 @@ try:
         kw = {}
         if _has["openai"] and CONFIG.has_llm:
             if CONFIG.llm_provider == "ollama":
-                kw["llm"] = _has["openai"].LLM(
-                    model=CONFIG.local_llm_model,
+                from openai import AsyncOpenAI
+                client = AsyncOpenAI(
                     base_url=CONFIG.ollama_base_url,
                     api_key=CONFIG.ollama_api_key,
+                    timeout=30.0,
+                )
+                kw["llm"] = _has["openai"].LLM(
+                    model=CONFIG.local_llm_model,
+                    client=client,
                 )
             else:
                 kw["llm"] = _has["openai"].LLM(model=CONFIG.llm_model)
@@ -324,13 +352,55 @@ try:
         # turn_detection bypassed
 
         session = AgentSession(**kw)
+        logger.info("[SummitAgent] AgentSession started")
+        reply_lock = False
 
         @session.on("user_input_transcribed")
         def _on_user_tx(ev):
-            text = getattr(ev, "transcript", "") or getattr(ev, "text", "")
+            nonlocal reply_lock
+            # Handle both string and Transcription object
+            text = ""
+            if isinstance(ev, str):
+                text = ev
+            else:
+                text = getattr(ev, "transcript", "") or getattr(ev, "text", "")
+            
             is_final = getattr(ev, "is_final", True)
             if text:
+                logger.info("[SummitAgent] caller transcript received (final=%s): %s", is_final, text)
                 asyncio.ensure_future(bus.publish(transcript_event(call_id, "caller", text, is_final=is_final)))
+                
+                if is_final and not reply_lock:
+                    logger.info("[SummitAgent] reply generation scheduled for: %s", text)
+                    reply_lock = True
+                    async def do_reply():
+                        nonlocal reply_lock
+                        try:
+                            # Try fallback first if the model is local/weak
+                            if CONFIG.llm_provider == "ollama":
+                                handled = await summit.run_fallback(text)
+                                if handled:
+                                    logger.info("[SummitAgent] fallback handled response")
+                                    # Still call generate_reply to let LLM speak if it wants
+                                    await session.generate_reply()
+                                    return
+
+                            await session.generate_reply()
+                        except Exception as e:
+                            logger.error("[SummitAgent] reply error: %s", e)
+                        finally:
+                            reply_lock = False
+                    asyncio.create_task(do_reply())
+            else:
+                logger.debug("[SummitAgent] empty transcript received")
+
+        @session.on("llm_completion_failed")
+        def _on_llm_fail(ev):
+            logger.error("[SummitAgent] provider error: %s", ev)
+
+        @session.on("tts_stream_failed")
+        def _on_tts_fail(ev):
+            logger.error("[SummitAgent] TTS error: %s", ev)
 
         @session.on("agent_state_changed")
         def _on_agent_state(ev):
@@ -339,6 +409,7 @@ try:
                 asyncio.ensure_future(bus.publish(session_event(call_id, "running", f"Agent: {state_str}")))
 
         await session.start(room=ctx.room, agent=lk_agent)
+        logger.info("[SummitAgent] starting initial greeting")
         await session.generate_reply(
             instructions="Greet the caller. Say: 'Thank you for calling Summit Orthopedics scheduling. How can I help you today?'"
         )
