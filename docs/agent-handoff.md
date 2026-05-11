@@ -1908,3 +1908,21 @@ Frontend compatibility:
 
 Next recommended step:
 - Phase 5: End-to-end live browser conversation hardening. Requires: set LiveKit env vars in Vercel + `.env.local`, start `python agent.py dev`, open Summit Health page, click Connect LiveKit room, test full call scenario with voice. Then run latency eval suite and SIP/Twilio ingress wiring.
+
+### 2026-05-10 | Antigravity | Summit Phase 5 — Live E2E Integration
+
+Goal: Live end-to-end integration proof and hardening for the Phase 4 Python agent with the Phase 1-3 frontend.
+
+Phase 5 live test status: BLOCKED BY MISSING ENV VARS
+
+Whether env vars were present: No. `verify-summit-livekit-env.mjs` returned NOT CONFIGURED. Python config also returned `False`.
+Whether agent.py dev started: No (blocked).
+Whether browser connected to LiveKit: No (blocked).
+Whether Python agent joined room: No (blocked).
+Whether summit.control was received: No (blocked).
+Whether summit.event reached frontend: No (blocked).
+Which scenarios were tested: Offline replay contracts tested all scenarios. Live scenarios (normal_scheduling_knee, workers_comp, medical_question, ambiguous_provider, ecw_timeout) skipped due to missing API keys.
+Which issues were fixed: None needed; existing offline contracts pass beautifully.
+Known blockers: Missing LiveKit API credentials, OpenAI key, Deepgram key, and Cartesia key. Live E2E cannot proceed.
+
+Next exact step: Provide valid LiveKit API credentials and model API keys in `agents/summit_voice_agent/.env.local` and frontend environment, then run `python agent.py dev` and connect the browser to verify real-time Voice AI and STT/TTS pipeline flow.
