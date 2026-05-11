@@ -1,5 +1,6 @@
 import { ManagedHeroVideo } from '../components/ManagedHeroVideo';
 import React from 'react';
+import { SummitVoiceDemo } from '../components/summit/SummitVoiceDemo';
 import { SectionContent } from './portfolio';
 import { STANDARD_SOURCE_NOTE_LABEL, STANDARD_SOURCE_NOTE_TEXT } from './caseStudyMeta';
 
@@ -944,110 +945,7 @@ const helloPatientSections: SectionContent[] = [
             </div>
           </div>
 
-          {/* DEMO STAGE — placeholder frame for the eventual UI */}
-          <div className="relative border-2 border-red-400/35 bg-red-950/60 backdrop-blur-sm shadow-[0_2rem_4rem_rgba(0,0,0,0.4)]">
-            {/* Top bar */}
-            <div className="border-b border-red-400/30 px-6 py-3 flex items-center justify-between bg-red-900/40">
-              <div className="flex items-center gap-3">
-                <div className="flex gap-2">
-                  <div className="w-2.5 h-2.5 rounded-full bg-red-400/80 animate-pulse" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-amber-300/30" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-emerald-300/30" />
-                </div>
-                <span className="font-mono text-xs text-white/65">summit-voice-agent · livekit-room</span>
-              </div>
-              <span className="font-mono text-[10px] uppercase tracking-widest text-red-300/70">Interactive Demo</span>
-            </div>
-
-            {/* 3-column stage layout */}
-            <div className="grid grid-cols-1 md:grid-cols-[260px_1fr_260px] min-h-[460px]">
-              {/* Left: Call Control */}
-              <div className="border-b md:border-b-0 md:border-r border-red-400/20 p-6 flex flex-col justify-between">
-                <div className="space-y-4">
-                  <p className="font-mono text-[9px] uppercase tracking-widest text-red-300/80">Call Control</p>
-                  <div className="border border-white/12 bg-white/[0.04] px-4 py-3">
-                    <p className="font-mono text-[9px] uppercase tracking-widest text-red-300/70 mb-1">SIP From</p>
-                    <p className="font-mono text-sm text-white/40">+1 ••• ••• ••••</p>
-                  </div>
-                  <div className="border border-white/12 bg-white/[0.04] px-4 py-3">
-                    <p className="font-mono text-[9px] uppercase tracking-widest text-red-300/70 mb-1">Room ID</p>
-                    <p className="font-mono text-sm text-white/40 italic">awaiting connect</p>
-                  </div>
-                  <div className="border border-white/12 bg-white/[0.04] px-4 py-3">
-                    <p className="font-mono text-[9px] uppercase tracking-widest text-red-300/70 mb-1">Agent</p>
-                    <p className="font-mono text-sm text-white/40">summit-v0.1</p>
-                  </div>
-                </div>
-                <div className="mt-6 border border-red-400/60 bg-red-500/15 px-4 py-3 text-center">
-                  <span className="font-mono text-sm uppercase tracking-widest text-red-200/90">Start Call →</span>
-                </div>
-              </div>
-
-              {/* Center: Live Transcript */}
-              <div className="border-b md:border-b-0 md:border-r border-red-400/20 p-6 flex flex-col">
-                <p className="font-mono text-[9px] uppercase tracking-widest text-red-300/80 mb-6">Live Transcript</p>
-                <div className="flex-1 flex items-center justify-center">
-                  <div className="text-center max-w-xs">
-                    <div className="w-14 h-14 rounded-full border border-red-400/40 flex items-center justify-center mx-auto mb-5">
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-red-200/70">
-                        <path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z" strokeLinecap="round" strokeLinejoin="round" />
-                        <path d="M19 10v1a7 7 0 0 1-14 0v-1M12 18v4M8 22h8" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </div>
-                    <p className="font-serif text-base italic text-white/45 mb-2">Transcript will stream here.</p>
-                    <p className="font-mono text-[10px] text-white/30 leading-relaxed">Interim and final utterances. Confidence scores per segment. Speaker-labeled.</p>
-                  </div>
-                </div>
-                <div className="border-t border-white/8 pt-3 mt-4 flex items-center justify-between">
-                  <span className="font-mono text-[9px] text-white/30">EoT detector: idle</span>
-                  <span className="font-mono text-[9px] text-white/30">VAD: silero · 200ms</span>
-                </div>
-              </div>
-
-              {/* Right: Tools + Latency */}
-              <div className="p-6 space-y-6">
-                <div>
-                  <p className="font-mono text-[9px] uppercase tracking-widest text-red-300/80 mb-4">Tool Calls</p>
-                  <div className="space-y-2">
-                    {[
-                      'lookup_patient',
-                      'get_provider_availability',
-                      'create_appointment',
-                      'transfer_call',
-                      'flag_for_review',
-                    ].map(t => (
-                      <div key={t} className="border border-white/10 bg-white/[0.03] px-3 py-2 font-mono text-[10px] text-white/45 flex items-center justify-between">
-                        <span>{t}()</span>
-                        <span className="text-white/20">idle</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                <div>
-                  <p className="font-mono text-[9px] uppercase tracking-widest text-red-300/80 mb-4">Latency</p>
-                  <div className="space-y-2">
-                    {[
-                      { stage: 'STT partial', val: '—' },
-                      { stage: 'LLM TTFT', val: '—' },
-                      { stage: 'TTS first byte', val: '—' },
-                      { stage: 'EoT → Audio', val: '—' },
-                    ].map(({ stage, val }) => (
-                      <div key={stage} className="grid grid-cols-[1fr_auto] gap-2 border-b border-white/8 pb-2">
-                        <span className="font-mono text-[10px] text-white/45">{stage}</span>
-                        <span className="font-mono text-[10px] text-white/30">{val} ms</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Bottom status bar */}
-            <div className="border-t border-red-400/30 px-6 py-3 bg-red-900/40 flex items-center justify-between">
-              <span className="font-mono text-[10px] uppercase tracking-widest text-white/50">Stage status: awaiting build</span>
-              <span className="font-mono text-[10px] text-red-300/70">v0.1 — interactive demo coming</span>
-            </div>
-          </div>
+          <SummitVoiceDemo mode="mock" />
 
           {/* What this demo will do */}
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3 mt-12">

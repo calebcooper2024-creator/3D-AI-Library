@@ -1750,3 +1750,79 @@ Known risks:
 
 Next recommended step:
 - Open `/CalebCooper/Library/summit-health` in the browser and verify the `The Agent On The Line.` section renders the interactive mock demo with working controls.
+
+### 2026-05-09 | Claude Sonnet 4.6 | Summit Phase 2 — Policy Gate, Workflow Engine, Mock eCW, Verification Script
+
+Goal:
+- Add the deterministic policy gate, workflow state machine, mock eClinicalWorks adapter, and policy self-verification suite for the Summit Health voice agent. This phase makes the demo safe and deterministic without adding LiveKit, backend routes, Python, or new npm dependencies.
+
+Files changed:
+- `src/lib/summit/summitPolicyGate.ts` (new) — deterministic policy gate with 13 named gates; blocks workers-comp, medical advice, billing, surgery, insurance, and low-confidence routing; requires identity confirmation and explicit caller confirmation before appointment review; enforces demo-write guard
+- `src/lib/summit/summitMockEcw.ts` (new) — mock eClinicalWorks adapter with demo patients, orthopedic providers, body-part routing, provider name resolution, availability lookup, appointment review draft creation, staff task creation, warm transfer simulation, and patient-statement logging
+- `src/lib/summit/summitWorkflow.ts` (new, with fix) — deterministic workflow state machine; integrates policy gate and mock eCW; `runSummitToolWithPolicy()` is the primary call path
+- `src/lib/summit/summitPolicyVerification.ts` (new) — 10-case policy self-check suite covering all acceptance gates
+- `scripts/verify-summit-policy.mjs` (new) — Node.js runner that transpiles TypeScript on-the-fly and runs the self-check; exits 0 on PASS
+
+Files adapted from bundle for TypeScript compatibility (logic unchanged):
+- `src/lib/summit/summitWorkflow.ts` — two narrowing fixes in the generic `applyToolFailureToState<T>` function: changed `!result.ok && result.error` compound conditions to `result.ok === false` outer guard + nested `if (result.error …)` inner guards; TypeScript 5.8's discriminated union narrowing does not propagate through compound `&&` conditions when `T` is a generic parameter
+
+Architecture or design decisions:
+- All four modules are pure TypeScript with no browser or React dependencies; they can be used by the demo UI, the verification script, and eventually the LiveKit agent without modification.
+- The existing Phase 1 mock UI (`SummitVoiceDemo` and its subcomponents) was not touched; Phase 2 sits beneath it as an available engine layer that the UI can optionally import in a later pass.
+- `scripts/` directory was created (did not previously exist).
+- No Bookshelf, routing, nav, assets, videos, or unrelated case studies were touched.
+
+Verification run:
+- `node scripts/verify-summit-policy.mjs` — PASS (10/10 checks)
+- `npm run lint` — clean (0 errors)
+- `npm run build` — clean build in ~22s (pre-existing large-chunk warning unchanged)
+- `graphify update .` — rebuilt to 1093 nodes / 1949 edges / 125 communities
+
+Known risks:
+- Low. The four modules are pure logic with no side effects at import time. They are not imported by the Phase 1 UI components yet, so there is no risk of breaking the existing demo.
+- The narrowing fixes in `summitWorkflow.ts` change the conditional structure only; all runtime logic paths are identical to the bundle.
+
+Next recommended step:
+- Optionally wire `runSummitToolWithPolicy()` into `SummitVoiceDemo` to replace the raw event-sequence playback with policy-checked tool execution, or proceed directly to Phase 3 (LiveKit wiring).
+
+### 2026-05-09 | Claude Sonnet 4.6 | Summit Phase 3 — LiveKit Frontend Wiring
+
+Goal:
+- Add browser-side LiveKit room wiring to the Summit Health demo while preserving the Phase 1 mock trace and Phase 2 policy/workflow layer. This phase installs LiveKit npm dependencies, adds the server-side token endpoint, adds the browser room hook and shared type library, and wires a `SummitLiveKitBridge` control card into the existing `SummitVoiceDemo` surface. No Python agent, no SIP/Twilio, no real PHI.
+
+Files changed:
+- `api/livekit-token.ts` (new) — Vercel serverless function; validates env vars, sanitizes inputs, signs a scoped LiveKit `AccessToken` with `livekit-server-sdk`; returns `{ ok, livekitUrl, token, roomName, participantName, callId, expiresAt, scenarioId, agentName, demoMaxSeconds }`; LIVEKIT_API_SECRET never reaches the browser
+- `src/hooks/useSummitLiveKitRoom.ts` (new) — React hook wrapping `Room` from `livekit-client`; `startSession()` → fetch token → connect room → enable mic → publish `start_scenario` control message; `endSession()` → send `end_call` control → disconnect; `resetSession()` → clear state
+- `src/lib/summit/summitLiveKit.ts` (new) — shared constants (`SUMMIT_LIVEKIT_EVENT_TOPIC`, `_CONTROL_TOPIC`, `_HEARTBEAT_TOPIC`), types (`SummitLiveKitConnectionStatus`, `SummitLiveKitTokenResponse`, `SummitLiveKitControlMessage`, `SummitLiveKitSessionSnapshot`), and helpers (`isSummitLiveKitTokenResponse`, `isSummitDemoEvent`, `decodeSummitLiveKitPayload`, `dedupeSummitEvents`, `createSummitLiveKitSessionEvent`, `createSummitLiveKitControlMessage`)
+- `src/components/summit/SummitLiveKitBridge.tsx` (new) — room-control card; shows connection status badge, room name, participant name, connection error; "Connect LiveKit room" button (disabled when mock active or already connected); "Disconnect room" button; feeds received events to parent via `onEvent` prop
+- `src/components/summit/SummitVoiceDemo.tsx` (updated) — added `SummitLiveKitBridge` import and render in left column below `SummitFailureControls`; added `appendLiveKitEvent` callback; expanded `mode` type from `"mock" | "livekit"` to `"mock" | "livekit" | "hybrid"`; updated footer disclaimer text
+- `scripts/verify-summit-livekit-env.mjs` (new) — checks for LIVEKIT_URL, LIVEKIT_API_KEY, LIVEKIT_API_SECRET; exits 0 with "NOT CONFIGURED" message when absent (acceptable for mock-mode builds); validates ws/wss URL format when present
+- `docs/summit-livekit-frontend.md` (new) — Phase 3 integration guide and Phase 4 agent handoff contract
+- `.env.summit-livekit.example` (new) — env var template for Vercel deployment
+- `vercel.summit-livekit.example.json` (new) — reference vercel.json with /api rule
+- `vercel.json` (updated) — prepended `{ "source": "/api/(.*)", "destination": "/api/$1" }` before the SPA catch-all so `/api/livekit-token` is not swallowed by the SPA fallback
+
+npm dependencies installed:
+- `livekit-client` (browser WebRTC client)
+- `@livekit/components-react` (React bindings)
+- `livekit-server-sdk` (server-side token generation, used only in `api/`)
+
+Architecture or design decisions:
+- `api/livekit-token.ts` lives in `api/` (outside `src/`), is not included in `tsconfig.json`, and is not bundled by Vite. It is deployed as a Vercel serverless function. The `livekit-server-sdk` import is safe there.
+- Mock trace mode is fully preserved. `SummitLiveKitBridge` is disabled while a mock trace is running (`mockTraceActive` prop).
+- LiveKit events received from the room are fed into the same shared `events` state as mock trace events, so all existing panels (transcript, tool, policy, latency, review, replay) work with both sources.
+- The `/api/(.*)` rewrite rule must appear before the SPA catch-all in vercel.json or token requests return 200 HTML instead of JSON.
+- `livekit-client` is imported inside lazy-loaded book data, so it lands in a lazy chunk rather than the main bundle.
+
+Verification run:
+- `node scripts/verify-summit-livekit-env.mjs` — NOT CONFIGURED (expected; env vars not set locally)
+- `node scripts/verify-summit-policy.mjs` — PASS (10/10 checks)
+- `npm run lint` — clean (0 errors)
+- `npm run build` — clean build in ~24s (pre-existing large-chunk warning unchanged)
+
+Known risks:
+- Browser-level interactive QA is the next real check. The "Connect LiveKit room" button will show an error (503 from the token endpoint) until LIVEKIT_URL, LIVEKIT_API_KEY, and LIVEKIT_API_SECRET are configured in Vercel. Mock trace mode remains fully usable without env vars.
+- `api/livekit-token.ts` is not type-checked by `tsc --noEmit` because `api/` is outside the tsconfig include paths. This is the correct pattern for Vercel serverless functions.
+
+Next recommended step:
+- Configure LIVEKIT_URL, LIVEKIT_API_KEY, LIVEKIT_API_SECRET in Vercel environment variables, then deploy and verify the "Connect LiveKit room" button returns a valid token. The Python LiveKit agent that publishes to `summit.event` is Phase 4.
