@@ -1826,3 +1826,33 @@ Known risks:
 
 Next recommended step:
 - Configure LIVEKIT_URL, LIVEKIT_API_KEY, LIVEKIT_API_SECRET in Vercel environment variables, then deploy and verify the "Connect LiveKit room" button returns a valid token. The Python LiveKit agent that publishes to `summit.event` is Phase 4.
+
+### 2026-05-10 | Antigravity | Summit Phase 1–3 Recovery and Commit
+
+Goal:
+- Recover and stabilize all Summit Health LiveKit Voice Agent work from the previous Claude Code session that ended due to usage limits.
+- Verify every Phase 1–3 file exists on disk and is functionally correct.
+- Commit the complete implementation cleanly.
+
+Files changed:
+- `docs/agent-handoff.md` (this entry)
+
+Architecture or design decisions:
+- No code was modified. All Phase 1–3 files were found in healthy, verified state on branch `feature/summit-health-voice-agent`.
+- The working tree had 33 staged-but-uncommitted files from the previous session. These were committed as a single clean unit.
+- `src/data/helloPatientCase.tsx` correctly imports `SummitVoiceDemo` and renders `<SummitVoiceDemo mode="mock" />` at line 948 inside the `hp-demo` section, preserving the "The Agent On The Line." title and surrounding layout.
+- `vercel.json` correctly places `/api/(.*)` rewrite before the SPA catch-all.
+- All three LiveKit npm dependencies (`livekit-client`, `@livekit/components-react`, `livekit-server-sdk`) were present in `package.json`.
+
+Verification run:
+- `node scripts/verify-summit-policy.mjs` — PASS (10/10 checks)
+- `node scripts/verify-summit-livekit-env.mjs` — NOT CONFIGURED (expected; no env vars set locally)
+- `npm run lint` — clean (0 errors)
+- `npm run build` — clean build in ~29s (pre-existing large-chunk warning unchanged, exit code 0)
+
+Known risks:
+- None introduced. The "Connect LiveKit room" button will return 503 until `LIVEKIT_URL`, `LIVEKIT_API_KEY`, and `LIVEKIT_API_SECRET` are set in Vercel. Mock trace mode works fully without env vars.
+- `.env.summit-livekit.example` was not tracked by git (likely in `.gitignore`); this is correct — example env files with placeholder values are safe, but the file was already present on disk and its contents were verified.
+
+Next recommended step:
+- Phase 4: Build the Python LiveKit agent that joins the same `summit-demo-*` room, subscribes to `summit.control`, runs the STT → policy gate → workflow/tool → TTS loop, and publishes structured `SummitDemoEvent` packets to `summit.event`. The full event contract is defined in `src/lib/summit/summitLiveKit.ts` and `src/lib/summit/summitEvents.ts`. The Phase 4 handoff spec is in `docs/summit-livekit-frontend.md`.
