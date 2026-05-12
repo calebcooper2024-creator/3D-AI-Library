@@ -172,8 +172,9 @@ export const resumeBook: BookProject = {
           <img
             src="/images/footer-stills/resume-footer.webp"
             alt=""
-            loading="lazy"
+            loading="eager"
             decoding="async"
+            fetchPriority="low"
             aria-hidden="true"
             className="absolute inset-0 h-full w-full object-cover"
           />

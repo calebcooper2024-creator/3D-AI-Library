@@ -2007,3 +2007,28 @@ Verification run:
 
 Known risks:
 - Visual QA on production should confirm each still frame is the preferred moment from its video; performance behavior is structurally improved because no footer video elements remain.
+
+### 2026-05-12 | Codex | Shelf Cover Hydration Performance Pass
+
+Goal:
+- Stop the library shelf from loading full-size cover art before it appears, while keeping spine browsing and preserving detail-page hero video/poster behavior.
+
+Files changed:
+- `src/components/Bookshelf.tsx`: replaced idle shelf books with lightweight CSS/text spines, removed first-10-cover readiness preloading, and added one-active-book cover hydration for hover/focus/opening.
+- `src/components/Book.tsx`: added cover/spine hydration switches so shelf mode can suppress heavy cover content while detail/other uses keep the default behavior.
+- `src/index.css`: added stable lightweight spine styling.
+- `src/data/*Book.tsx` and footer case-study files: made footer stills eager but low-priority so they can arrive before the user scrolls to the bottom without becoming high-priority hero work.
+- `public/images/footer-stills/`: downscaled footer stills from 1920px to 1280px wide to reduce decode cost and transfer size.
+
+Architecture or design decisions:
+- Shelf readiness now marks ready after the shell mounts instead of waiting on cover image decode.
+- Cover art is requested for exactly one active shelf item at a time, using the existing primary cover image/visual asset.
+- Detail page hero video/poster code paths were not changed.
+
+Verification run:
+- `npm run lint`: PASS.
+- `npm run build`: PASS, existing large main chunk warning remains.
+- `graphify update .`: completed AST graph update.
+
+Known risks:
+- The active cover hydration is hover/focus/click driven; a very fast click on a cold image may show the lightweight fallback for a moment before the route overlay takes over.

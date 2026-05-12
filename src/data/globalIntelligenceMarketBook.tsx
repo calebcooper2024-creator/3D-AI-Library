@@ -248,8 +248,9 @@ export const globalIntelligenceMarketBook: BookProject = {
           <img
             src="/images/footer-stills/gim-footer.webp"
             alt=""
-            loading="lazy"
+            loading="eager"
             decoding="async"
+            fetchPriority="low"
             aria-hidden="true"
             className="absolute inset-0 h-full w-full object-cover opacity-85 pointer-events-none"
           />

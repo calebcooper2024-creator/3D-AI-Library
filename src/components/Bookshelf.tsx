@@ -24,9 +24,7 @@ export interface ShelfBook {
   showAuthorBadge?: boolean;
 }
 
-const SHELF_PRELOAD_BUDGET = 10;
-
-const _preloadedUrls = new Set<string>();
+const _decodedCoverUrls = new Set<string>();
 
 type ImagePreloadResult = { url: string; ok: boolean; error?: string };
 
@@ -49,6 +47,33 @@ function preloadImageAsset(url: string): Promise<ImagePreloadResult> {
     img.onerror = () => finish(false, 'image load failed');
     img.src = url;
   });
+}
+
+const getPrimaryCoverUrl = (book: ShelfBook): string | null =>
+  book.coverImage ?? book.visualAssetUrls?.[0] ?? null;
+
+function LightweightBookSpine({ book, index }: { book: ShelfBook; index: number }) {
+  const spineTextColor = book.spineTextColor || book.textColor;
+
+  return (
+    <div
+      className="lightweight-book-spine"
+      style={{
+        backgroundColor: book.spineColor,
+        color: spineTextColor,
+      }}
+    >
+      <span className="lightweight-book-spine-number">
+        No. {String(index + 1).padStart(2, '0')}
+      </span>
+      <h3 className={`lightweight-book-spine-title ${book.fontTitle}`}>
+        {book.title}
+      </h3>
+      <span className="lightweight-book-spine-author">
+        {book.author}
+      </span>
+    </div>
+  );
 }
 
 export const Bookshelf = ({
@@ -160,6 +185,9 @@ export const Bookshelf = ({
 
   // Tracks which specific rendered instance (id-copyIndex) is animating open
   const [openingInstanceKey, setOpeningInstanceKey] = useState<string | null>(null);
+  const [activeInstanceKey, setActiveInstanceKey] = useState<string | null>(null);
+  const [hydratedCoverInstanceKey, setHydratedCoverInstanceKey] = useState<string | null>(null);
+  const hasMarkedReadyRef = React.useRef(false);
 
   const handleSelectInstance = (id: string, instanceKey: string) => {
     if (isTransitioning || openingInstanceKey) return;
@@ -169,6 +197,7 @@ export const Bookshelf = ({
     }
 
     // Mark this instance as opening (triggers is-opening CSS)
+    setActiveInstanceKey(instanceKey);
     setOpeningInstanceKey(instanceKey);
 
     // Play page-turn sound immediately on click
@@ -179,6 +208,16 @@ export const Bookshelf = ({
     window.requestAnimationFrame(() => {
       onSelectBook(id);
     });
+  };
+
+  const handleItemKeyDown = (
+    event: React.KeyboardEvent<HTMLDivElement>,
+    id: string,
+    instanceKey: string
+  ) => {
+    if (event.key !== 'Enter' && event.key !== ' ') return;
+    event.preventDefault();
+    handleSelectInstance(id, instanceKey);
   };
 
   const spine = 72;
@@ -215,48 +254,62 @@ export const Bookshelf = ({
   const lastCanScrollLeftRef = React.useRef(false);
   const lastCanScrollRightRef = React.useRef(true);
 
-  // Preload cover images (coverImage + visualAssetUrls) for the first
-  // SHELF_PRELOAD_BUDGET books, then reveal. Module-level cache means return
-  // visits are instant. Safety timeout prevents the gate from blocking forever.
+  // Shelf readiness is no longer blocked by cover art. The idle shelf renders
+  // CSS/text spines only; cover images hydrate one active book at a time.
   React.useEffect(() => {
-    const visibleBooks = books.slice(0, SHELF_PRELOAD_BUDGET);
-    const urls = Array.from(new Set([
-      ...visibleBooks.map((b) => b.coverImage).filter((u): u is string => Boolean(u)),
-      ...visibleBooks.flatMap((b) => b.visualAssetUrls ?? []).filter(Boolean),
-    ]));
+    const markReady = () => {
+      if (hasMarkedReadyRef.current) return;
+      hasMarkedReadyRef.current = true;
+      setIsReady(true);
+      onReady?.();
+    };
 
-    const markReady = () => { setIsReady(true); onReady?.(); };
+    const rafId = window.requestAnimationFrame(markReady);
 
-    if (urls.length === 0) { markReady(); return; }
+    return () => window.cancelAnimationFrame(rafId);
+  }, [onReady]);
 
-    if (urls.every((u) => _preloadedUrls.has(u))) { markReady(); return; }
+  const activeBook = React.useMemo(() => {
+    if (!activeInstanceKey) return null;
+    const activeItem = displayedBooks.find(({ book }) => book.id === activeInstanceKey);
+    return activeItem?.book ?? null;
+  }, [activeInstanceKey, displayedBooks]);
 
+  React.useEffect(() => {
+    if (!activeInstanceKey || !activeBook) {
+      setHydratedCoverInstanceKey(null);
+      return;
+    }
+
+    const primaryCoverUrl = getPrimaryCoverUrl(activeBook);
+    if (!primaryCoverUrl) {
+      setHydratedCoverInstanceKey(activeInstanceKey);
+      return;
+    }
+
+    if (_decodedCoverUrls.has(primaryCoverUrl)) {
+      setHydratedCoverInstanceKey(activeInstanceKey);
+      return;
+    }
+
+    setHydratedCoverInstanceKey(null);
     let cancelled = false;
-    const safetyTimer = window.setTimeout(() => {
-      if (cancelled) return;
-      if (import.meta.env.DEV) {
-        console.warn('[Bookshelf] Cover preload safety timeout. Still pending:', urls.filter((u) => !_preloadedUrls.has(u)));
-      }
-      cancelled = true;
-      markReady();
-    }, 3500);
 
-    Promise.all(urls.map(preloadImageAsset)).then((results) => {
+    preloadImageAsset(primaryCoverUrl).then((result) => {
       if (cancelled) return;
-      cancelled = true;
-      window.clearTimeout(safetyTimer);
-      results.forEach((r) => { if (r.ok) _preloadedUrls.add(r.url); });
+      if (result.ok) {
+        _decodedCoverUrls.add(result.url);
+        setHydratedCoverInstanceKey(activeInstanceKey);
+      }
       if (import.meta.env.DEV) {
-        const failed = results.filter((r) => !r.ok);
-        if (failed.length > 0) {
-          console.warn('[Bookshelf] Some cover assets failed to preload:', failed.map((r) => r.url));
+        if (!result.ok) {
+          console.warn('[Bookshelf] Active cover failed to hydrate:', result.url, result.error);
         }
       }
-      markReady();
     });
 
-    return () => { cancelled = true; window.clearTimeout(safetyTimer); };
-  }, [books, onReady]);
+    return () => { cancelled = true; };
+  }, [activeBook, activeInstanceKey]);
 
   React.useEffect(() => {
     const el = shelfRef.current;
@@ -522,6 +575,12 @@ export const Bookshelf = ({
               const bookLeft = index * step;
               const instanceKey = book.id;
               const isOpening = openingInstanceKey === instanceKey;
+              const isActive = activeInstanceKey === instanceKey || isOpening;
+              const isCoverHydrated = isActive && hydratedCoverInstanceKey === instanceKey;
+              const clearActiveInstance = () => {
+                if (openingInstanceKey === instanceKey) return;
+                setActiveInstanceKey((current) => (current === instanceKey ? null : current));
+              };
 
               return (
                 <motion.div
@@ -529,15 +588,30 @@ export const Bookshelf = ({
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: bookIndex * 0.06 + 0.2, type: "spring", bounce: 0.35 }}
-                  className="book-item-wrapper absolute top-0 transition-transform duration-500 ease-out transform-gpu z-10 hover:z-[60]"
+                  className="book-item-wrapper absolute top-0 transition-transform duration-500 ease-out transform-gpu z-10 hover:z-[60] focus-visible:z-[60] focus-visible:outline-none"
                   style={{ left: `${bookLeft}px`, height: '100%', zIndex: isOpening ? 200 : books.length - bookIndex }}
+                  role="button"
+                  tabIndex={isTransitioning || openingInstanceKey ? -1 : 0}
+                  aria-label={`Open ${book.title}`}
+                  onPointerEnter={() => setActiveInstanceKey(instanceKey)}
+                  onPointerLeave={clearActiveInstance}
+                  onFocus={() => setActiveInstanceKey(instanceKey)}
+                  onBlur={clearActiveInstance}
+                  onClick={() => handleSelectInstance(book.id, instanceKey)}
+                  onKeyDown={(event) => handleItemKeyDown(event, book.id, instanceKey)}
                 >
-                  <Book 
-                    book={book} 
-                    onClick={() => handleSelectInstance(book.id, instanceKey)}
-                    index={bookIndex}
-                    isOpening={isOpening}
-                  />
+                  {isActive ? (
+                    <Book
+                      book={book}
+                      index={bookIndex}
+                      isOpening={isOpening}
+                      isHovered={activeInstanceKey === instanceKey}
+                      hydrateCover={isCoverHydrated}
+                      renderSpineContent={isCoverHydrated}
+                    />
+                  ) : (
+                    <LightweightBookSpine book={book} index={bookIndex} />
+                  )}
                 </motion.div>
               );
             })}

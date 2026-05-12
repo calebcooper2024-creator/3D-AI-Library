@@ -8,12 +8,16 @@ export const Book = ({
   index = 0,
   isOpening = false,
   isHovered = false,
+  hydrateCover = true,
+  renderSpineContent = true,
 }: { 
   book: ShelfBook; 
   onClick?: () => void;
   index?: number;
   isOpening?: boolean;
   isHovered?: boolean;
+  hydrateCover?: boolean;
+  renderSpineContent?: boolean;
 }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const [openingOffset, setOpeningOffset] = useState({ x: 0, y: 0, scale: 1.85 });
@@ -81,7 +85,7 @@ export const Book = ({
           style={{ backgroundColor: book.spineColor, color: book.spineTextColor || book.textColor }}
         >
            <div className="absolute w-[200%] h-[200%] shadow-[inset_0_0_20px_rgba(0,0,0,0.1)] pointer-events-none" />
-           {book.spineContent ? (
+           {renderSpineContent && book.spineContent ? (
               book.spineContent
            ) : (
              <>
@@ -125,13 +129,13 @@ export const Book = ({
             className={cn("book-face book-front-cover-face flex flex-col justify-end overflow-hidden", book.textureClass || 'texture-paper')} 
             style={{ backgroundColor: book.coverColor, color: book.textColor, transform: 'translateZ(1px)' }}
           >
-             {book.coverImage && (
+             {hydrateCover && book.coverImage && (
                <div 
                  className="absolute inset-0 opacity-20 mix-blend-multiply bg-cover bg-center"
                  style={{ backgroundImage: `url(${book.coverImage})` }}
                />
              )}
-              {book.coverContent ? (
+              {hydrateCover && book.coverContent ? (
                 book.coverContent
               ) : (
                 <div className="relative z-10 p-8">

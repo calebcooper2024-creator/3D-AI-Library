@@ -469,8 +469,9 @@ const cellcoreSections: SectionContent[] = [
         <img
           src="/images/footer-stills/cellcore-footer.webp"
           alt=""
-          loading="lazy"
+          loading="eager"
           decoding="async"
+          fetchPriority="low"
           aria-hidden="true"
           className="absolute inset-0 h-full w-full object-cover opacity-85 pointer-events-none"
         />

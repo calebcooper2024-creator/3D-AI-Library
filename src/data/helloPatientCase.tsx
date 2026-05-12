@@ -1017,8 +1017,9 @@ const helloPatientSections: SectionContent[] = [
           <img
             src="/images/footer-stills/hello-patient-footer.webp"
             alt=""
-            loading="lazy"
+            loading="eager"
             decoding="async"
+            fetchPriority="low"
             aria-hidden="true"
             className="absolute inset-0 h-full w-full object-cover opacity-85 pointer-events-none"
           />
