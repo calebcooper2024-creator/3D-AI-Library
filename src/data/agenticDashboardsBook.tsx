@@ -247,11 +247,13 @@ export const agenticDashboardsBook: BookProject = {
       id: 'agentic-dashboards-footer',
       fullWidthContent: (
         <div className="relative min-h-[72vh] overflow-hidden bg-[#120b05] px-8 py-20 text-white md:px-24">
-          <ManagedHeroVideo
-            src="/videos/agentic-dashboards-4k.mp4"
-            idSeed="agentic-dashboards-secondary-video"
-            className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
-            videoClassName="absolute inset-0 h-full w-full object-cover opacity-85 pointer-events-none"
+          <img
+            src="/images/footer-stills/agentic-dashboards-footer.webp"
+            alt=""
+            loading="lazy"
+            decoding="async"
+            aria-hidden="true"
+            className="absolute inset-0 h-full w-full object-cover opacity-85 pointer-events-none"
           />
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(18,10,2,0.16),rgba(18,10,2,0.58))]" />
           <div className="relative z-10 mx-auto flex min-h-[60vh] max-w-5xl flex-col justify-end">

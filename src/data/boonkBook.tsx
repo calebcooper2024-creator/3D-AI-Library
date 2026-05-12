@@ -287,11 +287,13 @@ export const boonkBook: BookProject = {
       id: 'boonk-footer',
       fullWidthContent: (
         <div className="relative flex min-h-[88vh] w-full items-end overflow-hidden bg-[#14110b] px-8 py-16 text-white md:px-24">
-          <ManagedHeroVideo
-            src="/videos/boonk-4k.mp4"
-            idSeed="boonk-secondary-video"
-            className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
-            videoClassName="absolute inset-0 h-full w-full object-cover opacity-85 pointer-events-none"
+          <img
+            src="/images/footer-stills/boonk-footer.webp"
+            alt=""
+            loading="lazy"
+            decoding="async"
+            aria-hidden="true"
+            className="absolute inset-0 h-full w-full object-cover opacity-85 pointer-events-none"
           />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_20%,rgba(224,171,112,0.12),transparent_24%),radial-gradient(circle_at_76%_24%,rgba(91,199,187,0.1),transparent_20%),linear-gradient(180deg,rgba(11,11,12,0.12),rgba(11,11,12,0.72)_78%)]" />
           <div className="relative z-10 max-w-5xl">

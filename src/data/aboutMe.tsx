@@ -375,12 +375,14 @@ export const aboutMeBook: BookProject = {
       fullWidthContent: (
         <div className="relative overflow-hidden bg-[#0d0a08] text-white">
           <div className="absolute inset-y-0 right-0 w-full lg:w-[58%]">
-            <ManagedHeroVideo
-            src="/videos/about-bg.mp4"
-            idSeed="about-me-secondary-video"
-            className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
-            videoClassName="absolute inset-0 h-full w-full object-cover opacity-85 pointer-events-none"
-          />
+            <img
+              src="/images/footer-stills/about-footer.webp"
+              alt=""
+              loading="lazy"
+              decoding="async"
+              aria-hidden="true"
+              className="absolute inset-0 h-full w-full object-cover opacity-85 pointer-events-none"
+            />
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(13,10,8,0.22),rgba(13,10,8,0.4))] lg:bg-[linear-gradient(90deg,rgba(13,10,8,0.97)_0%,rgba(13,10,8,0.86)_18%,rgba(13,10,8,0.42)_44%,rgba(13,10,8,0.16)_100%)]" />
           </div>
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_left_center,rgba(201,160,78,0.1),transparent_40%)]" />

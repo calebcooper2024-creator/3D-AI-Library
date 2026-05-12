@@ -293,11 +293,13 @@ export const bonnieBook: BookProject = {
       id: 'bonnie-footer',
       fullWidthContent: (
         <div className="relative flex min-h-[88vh] w-full items-end overflow-hidden bg-[#12040d] px-8 py-16 text-white md:px-24">
-          <ManagedHeroVideo
-            src="/videos/bonnie-bg.mp4"
-            idSeed="bonnie-secondary-video"
-            className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
-            videoClassName="absolute inset-0 h-full w-full object-cover opacity-85 pointer-events-none"
+          <img
+            src="/images/footer-stills/bonnie-footer.webp"
+            alt=""
+            loading="lazy"
+            decoding="async"
+            aria-hidden="true"
+            className="absolute inset-0 h-full w-full object-cover opacity-85 pointer-events-none"
           />
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(18,4,13,0.08),rgba(18,4,13,0.68)_78%)]" />
           <div className="relative z-10 max-w-5xl">

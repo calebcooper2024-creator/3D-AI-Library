@@ -169,10 +169,13 @@ export const resumeBook: BookProject = {
       id: 'resume-footer',
       fullWidthContent: (
         <div className="relative min-h-[50vh] overflow-hidden bg-[#0d0d0d]">
-          <ManagedHeroVideo
-            src={HERO_VIDEO}
-            idSeed="resume-footer"
-            className="absolute inset-0 w-full h-full"
+          <img
+            src="/images/footer-stills/resume-footer.webp"
+            alt=""
+            loading="lazy"
+            decoding="async"
+            aria-hidden="true"
+            className="absolute inset-0 h-full w-full object-cover"
           />
           <div className="absolute inset-0 bg-[rgba(13,13,13,0.72)]" />
           <div className="relative z-10 flex min-h-[50vh] items-center justify-center px-8 text-center">

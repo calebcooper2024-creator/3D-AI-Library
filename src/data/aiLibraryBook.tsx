@@ -380,12 +380,14 @@ export const aiLibraryBook: BookProject = {
       fullWidthContent: (
         <div className="relative overflow-hidden bg-[#0c1120] text-white">
           <div className="absolute inset-y-0 right-0 w-full lg:w-[60%]">
-            <ManagedHeroVideo
-            src="/videos/library-4k.mp4"
-            idSeed="ai-library-secondary-video"
-            className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
-            videoClassName="absolute inset-0 h-full w-full object-cover opacity-85 pointer-events-none"
-          />
+            <img
+              src="/images/footer-stills/ai-library-footer.webp"
+              alt=""
+              loading="lazy"
+              decoding="async"
+              aria-hidden="true"
+              className="absolute inset-0 h-full w-full object-cover opacity-85 pointer-events-none"
+            />
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(12,17,32,0.26),rgba(12,17,32,0.44))] lg:bg-[linear-gradient(90deg,rgba(12,17,32,0.97)_0%,rgba(12,17,32,0.84)_18%,rgba(12,17,32,0.4)_48%,rgba(12,17,32,0.12)_100%)]" />
           </div>
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_left_center,rgba(243,202,98,0.12),transparent_36%),radial-gradient(circle_at_left_top,rgba(47,98,255,0.14),transparent_26%)]" />

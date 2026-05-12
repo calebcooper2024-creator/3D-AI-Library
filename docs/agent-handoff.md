@@ -1986,3 +1986,24 @@ Next Step:
 Next recommended step:
 - Perform manual mic check at http://localhost:3004/CalebCooper/Library/summit-health with headset to verify real-time voice response.
 
+### 2026-05-12 | Codex | Footer Video Still Replacement
+
+Goal:
+- Improve project-page stability and load behavior by replacing footer-only secondary video surfaces with static image frames while leaving hero videos untouched.
+
+Files changed:
+- `src/data/*Book.tsx` and case-study data files with footer/secondary sections: replaced footer `ManagedHeroVideo` instances with lazy WebP `<img>` frames.
+- `public/images/footer-stills/`: added extracted WebP still frames from the existing footer videos.
+
+Architecture or design decisions:
+- Kept existing footer containers, overlays, text, and hero video behavior intact.
+- Removed footer video/source mounting entirely instead of only pausing or hiding video elements, so the browser no longer schedules footer MP4 fetch/decode/playback work.
+
+Verification run:
+- `npm run build`: PASS, large main chunk warning remains.
+- `npm run lint`: BLOCKED by existing unrelated errors in `src/lib/summit/summitRemoteAudioRuntime.ts` and `src/lib/videoReadinessTracker.ts`.
+- `rg 'secondary-video' -S src/data dist`: no matches after build.
+- `graphify update .`: completed AST graph update.
+
+Known risks:
+- Visual QA on production should confirm each still frame is the preferred moment from its video; performance behavior is structurally improved because no footer video elements remain.

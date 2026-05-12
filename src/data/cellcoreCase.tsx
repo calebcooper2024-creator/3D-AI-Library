@@ -466,12 +466,14 @@ const cellcoreSections: SectionContent[] = [
     id: 'cellcore-grounding',
     fullWidthContent: (
       <div className="relative w-full overflow-hidden bg-[#eef5ea] px-8 py-24 text-black md:px-20 md:py-28">
-        <ManagedHeroVideo
-            src="/videos/cellcore-bg.mp4"
-            idSeed="cellcore-secondary-video"
-            className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
-            videoClassName="absolute inset-0 h-full w-full object-cover opacity-85 pointer-events-none"
-          />
+        <img
+          src="/images/footer-stills/cellcore-footer.webp"
+          alt=""
+          loading="lazy"
+          decoding="async"
+          aria-hidden="true"
+          className="absolute inset-0 h-full w-full object-cover opacity-85 pointer-events-none"
+        />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(238,245,234,0.9),rgba(238,245,234,0.94))]" />
         <div className="relative z-10 mx-auto max-w-7xl">
           <Kicker n="11" label="Method Grounding And Claim Boundary" tone="text-emerald-700" />

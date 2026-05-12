@@ -245,11 +245,13 @@ export const cortexBook: BookProject = {
       id: 'cortex-footer',
       fullWidthContent: (
         <div className="relative min-h-[72vh] overflow-hidden bg-[#080314] px-8 py-20 text-white md:px-24">
-          <ManagedHeroVideo
-            src="/videos/cortex-4k.mp4"
-            idSeed="cortex-secondary-video"
-            className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
-            videoClassName="absolute inset-0 h-full w-full object-cover opacity-85 pointer-events-none"
+          <img
+            src="/images/footer-stills/cortex-footer.webp"
+            alt=""
+            loading="lazy"
+            decoding="async"
+            aria-hidden="true"
+            className="absolute inset-0 h-full w-full object-cover opacity-85 pointer-events-none"
           />
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,4,24,0.18),rgba(10,4,24,0.6))]" />
           <div className="relative z-10 mx-auto flex min-h-[60vh] max-w-5xl flex-col justify-end">

@@ -259,11 +259,13 @@ export const byc2wBook: BookProject = {
       id: 'byc2w-footer',
       fullWidthContent: (
         <div className="relative min-h-[72vh] overflow-hidden bg-[#100a28] px-8 py-20 text-white md:px-24">
-          <ManagedHeroVideo
-            src="/videos/byc2w-4k.mp4"
-            idSeed="byc2w-secondary-video"
-            className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
-            videoClassName="absolute inset-0 h-full w-full object-cover opacity-85 pointer-events-none"
+          <img
+            src="/images/footer-stills/byc2w-footer.webp"
+            alt=""
+            loading="lazy"
+            decoding="async"
+            aria-hidden="true"
+            className="absolute inset-0 h-full w-full object-cover opacity-85 pointer-events-none"
           />
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(9,6,22,0.26),rgba(9,6,22,0.62))]" />
           <div className="relative z-10 mx-auto flex min-h-[60vh] max-w-5xl flex-col justify-end">

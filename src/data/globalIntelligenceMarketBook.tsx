@@ -245,11 +245,13 @@ export const globalIntelligenceMarketBook: BookProject = {
       id: 'gim-footer',
       fullWidthContent: (
         <div className="relative min-h-[72vh] overflow-hidden bg-[#06111d] px-8 py-20 text-white md:px-24">
-          <ManagedHeroVideo
-            src="/videos/gim-4k.mp4"
-            idSeed="global-intelligence-market-secondary-video"
-            className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
-            videoClassName="absolute inset-0 h-full w-full object-cover opacity-85 pointer-events-none"
+          <img
+            src="/images/footer-stills/gim-footer.webp"
+            alt=""
+            loading="lazy"
+            decoding="async"
+            aria-hidden="true"
+            className="absolute inset-0 h-full w-full object-cover opacity-85 pointer-events-none"
           />
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,16,28,0.14),rgba(7,16,28,0.58))]" />
           <div className="relative z-10 mx-auto flex min-h-[60vh] max-w-5xl flex-col justify-end">

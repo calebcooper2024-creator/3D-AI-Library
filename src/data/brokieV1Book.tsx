@@ -335,11 +335,13 @@ export const brokieV1Book: BookProject = {
       id: 'brokie-v1-footer',
       fullWidthContent: (
         <div className="relative flex min-h-[88vh] w-full items-end overflow-hidden bg-[#07111d] px-8 py-16 text-white md:px-24">
-          <ManagedHeroVideo
-            src="/videos/brokie-v1-4k.mp4"
-            idSeed="brokie-v1-secondary-video"
-            className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
-            videoClassName="absolute inset-0 h-full w-full object-cover opacity-85 pointer-events-none"
+          <img
+            src="/images/footer-stills/brokie-v1-footer.webp"
+            alt=""
+            loading="lazy"
+            decoding="async"
+            aria-hidden="true"
+            className="absolute inset-0 h-full w-full object-cover opacity-85 pointer-events-none"
           />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(94,242,255,0.1),transparent_24%),linear-gradient(180deg,rgba(5,10,18,0.06),rgba(5,10,18,0.52)_78%)]" />
           <div className="relative z-10 max-w-5xl">
