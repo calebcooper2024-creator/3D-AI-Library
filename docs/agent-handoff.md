@@ -2125,3 +2125,25 @@ Verification run:
 
 Known risks:
 - The Library shelf now renders full cover content at rest again, matching About but increasing initial shelf image/content work compared with the temporary lightweight-cover path.
+
+### 2026-05-13 | Codex | Plain Rest Covers Without Geometry Change
+
+Goal:
+- Allow Library shelf books to render lightweight/plain cover content at rest without changing their 3D orientation, spine position, cover face geometry, or shelf layout.
+
+Files changed:
+- `src/components/Book.tsx`: removed the separate `book-plain-cover` overlay so lightweight cover content renders inside the existing `book-front-cover-face`.
+- `src/components/Bookshelf.tsx`: restored one-active-book cover hydration through `hydrateCover` only; spine content and physical book geometry remain unchanged.
+
+Architecture or design decisions:
+- Plain rest state now means "do not render heavy cover image/custom cover content yet", not "render a different cover element".
+- Hover/focus/click hydrate the active book's real cover content in place on the same 3D cover face.
+
+Verification run:
+- `npm run lint`: PASS.
+- `npm run build`: PASS, existing large main chunk warning remains.
+- Local Vite preview + Playwright/Edge geometry check on `/CalebCooper/Library`: PASS; 25 front cover faces, 0 `book-plain-cover` overlays, one cover hydrated on hover.
+- `graphify update .`: completed AST graph update.
+
+Known risks:
+- Resting covers are visually plainer until hover/focus/click hydrates the actual custom cover content.

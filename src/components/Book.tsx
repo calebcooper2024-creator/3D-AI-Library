@@ -113,37 +113,6 @@ export const Book = ({
            )}
         </div>
 
-        {!hydrateCover && (
-          <div
-            className={cn("book-plain-cover", book.textureClass || 'texture-paper')}
-            style={{ backgroundColor: book.coverColor, color: book.textColor }}
-            aria-hidden="true"
-          >
-            <div className="book-plain-cover-top">
-              No. {String(index + 1).padStart(2, '0')}
-            </div>
-            <div className="book-plain-cover-main">
-              <h2
-                className={cn(
-                  "book-plain-cover-title",
-                  book.title.length > 22 ? "is-long-title" : undefined,
-                  book.fontTitle
-                )}
-              >
-                {book.title}
-              </h2>
-              <p className="book-plain-cover-subtitle">
-                {book.subtitle}
-              </p>
-            </div>
-            {book.showAuthorBadge !== false && (
-              <div className="book-plain-cover-author">
-                {book.author}
-              </div>
-            )}
-          </div>
-        )}
-
         {/* Flapping pages */}
         <div className="book-page-flap page-flap-1 bg-[#f4f4f4] border-l border-[#eee]" />
         <div className="book-page-flap page-flap-2 bg-[#f9f9f9] border-l border-[#eee]" />

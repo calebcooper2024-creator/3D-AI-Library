@@ -551,6 +551,8 @@ export const Bookshelf = ({
               const bookLeft = index * step;
               const instanceKey = book.id;
               const isOpening = openingInstanceKey === instanceKey;
+              const isActive = activeInstanceKey === instanceKey || isOpening;
+              const isCoverHydrated = isActive && hydratedCoverInstanceKey === instanceKey;
               const clearActiveInstance = () => {
                 if (openingInstanceKey === instanceKey) return;
                 setActiveInstanceKey((current) => (current === instanceKey ? null : current));
@@ -579,6 +581,7 @@ export const Bookshelf = ({
                     index={bookIndex}
                     isOpening={isOpening}
                     isHovered={activeInstanceKey === instanceKey}
+                    hydrateCover={isCoverHydrated}
                   />
                 </motion.div>
               );

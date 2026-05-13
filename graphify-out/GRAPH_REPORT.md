@@ -1,16 +1,16 @@
 # Graph Report - calebs-3d-case-study  (2026-05-13)
 
 ## Corpus Check
-- 202 files · ~329,277 words
+- 202 files · ~329,381 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1259 nodes · 2218 edges · 140 communities (109 shown, 31 thin omitted)
+- 1259 nodes · 2218 edges · 140 communities (110 shown, 30 thin omitted)
 - Extraction: 95% EXTRACTED · 5% INFERRED · 0% AMBIGUOUS · INFERRED: 115 edges (avg confidence: 0.78)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `2b813778`
+- Built from commit: `2c3ba1f1`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -68,8 +68,8 @@
 - [[_COMMUNITY_Community 51|Community 51]]
 - [[_COMMUNITY_Community 52|Community 52]]
 - [[_COMMUNITY_Community 53|Community 53]]
-- [[_COMMUNITY_Community 55|Community 55]]
-- [[_COMMUNITY_Community 57|Community 57]]
+- [[_COMMUNITY_Community 54|Community 54]]
+- [[_COMMUNITY_Community 56|Community 56]]
 - [[_COMMUNITY_Community 58|Community 58]]
 - [[_COMMUNITY_Community 59|Community 59]]
 - [[_COMMUNITY_Community 60|Community 60]]
@@ -117,7 +117,7 @@
 - `SummitHealthAgent` --uses--> `SummitWorkflowState`  [INFERRED]
   agents/summit_voice_agent/agent.py → agents/summit_voice_agent/workflow_state.py
 
-## Communities (140 total, 31 thin omitted)
+## Communities (140 total, 30 thin omitted)
 
 ### Community 0 - "Community 0"
 Cohesion: 0.02
@@ -144,48 +144,48 @@ Cohesion: 0.06
 Nodes (30): AcceptanceMetric(), FooterCard(), GateRow(), Kicker(), Phase(), ReviewField(), StackRow(), StatBlock() (+22 more)
 
 ### Community 6 - "Community 6"
+Cohesion: 0.07
+Nodes (46): aq(), b(), bD(), $C(), d(), d1(), dq(), E() (+38 more)
+
+### Community 7 - "Community 7"
 Cohesion: 0.1
 Nodes (27): BeforeAfter(), BubbleDiagram(), HandwrittenNote(), ProcessFlow(), ImagePlaceholder(), Choice(), Metric(), Risk() (+19 more)
 
-### Community 7 - "Community 7"
+### Community 8 - "Community 8"
 Cohesion: 0.12
 Nodes (29): getWorkDetail(), clearAllHeavyMotion(), createHeavyMotionSettler(), dispatchHeavyMotion(), isHeavyMotionActive(), setHeavyMotion(), curtainIn(), curtainOut() (+21 more)
 
-### Community 8 - "Community 8"
-Cohesion: 0.11
-Nodes (25): createSummitStaffTask(), deterministicLatency(), findSummitProvidersForBodyPart(), getSummitProviderAvailability(), hashText(), logSummitPatientStatement(), lookupSummitPatient(), normalize() (+17 more)
-
 ### Community 9 - "Community 9"
 Cohesion: 0.11
-Nodes (34): a(), aq(), bD(), $C(), cD(), dq(), E(), eD() (+26 more)
+Nodes (25): createSummitStaffTask(), deterministicLatency(), findSummitProvidersForBodyPart(), getSummitProviderAvailability(), hashText(), logSummitPatientStatement(), lookupSummitPatient(), normalize() (+17 more)
 
 ### Community 10 - "Community 10"
 Cohesion: 0.12
 Nodes (22): captureAndAnalyze(), drawDetections(), startCapture(), stopCapture(), cancelRecordingInternal(), handleVoiceInput(), monitorAudio(), playRawAudio() (+14 more)
 
 ### Community 11 - "Community 11"
-Cohesion: 0.09
-Nodes (31): Af(), df(), Ef(), ff(), fN(), gf(), hf(), hs() (+23 more)
+Cohesion: 0.12
+Nodes (18): _build_worker(), classify_call_intent(), create_staff_task(), _entrypoint(), flag_for_review(), get_provider_availability(), log_patient_statement(), lookup_patient() (+10 more)
 
 ### Community 12 - "Community 12"
+Cohesion: 0.1
+Nodes (29): Af(), df(), Ef(), ff(), fN(), gf(), hf(), If() (+21 more)
+
+### Community 13 - "Community 13"
 Cohesion: 0.11
 Nodes (18): animate(), applyTransform(), getMaxOffset(), handleItemKeyDown(), handleSelectInstance(), handleTouchEnd(), handleTouchMove(), handleWheelEvent() (+10 more)
 
-### Community 13 - "Community 13"
-Cohesion: 0.16
-Nodes (25): _entrypoint(), _medical_question_replay(), Summit Health Voice Agent — contract_replay.py Offline smoke test. No LiveKit r, Verify workers comp blocks scheduling and allows transfer., Verify medical question blocks scheduling and allows log_patient_statement., _run_replay(), _workers_comp_replay(), envelope() (+17 more)
-
 ### Community 14 - "Community 14"
-Cohesion: 0.13
-Nodes (16): _build_worker(), classify_call_intent(), create_staff_task(), flag_for_review(), get_provider_availability(), log_patient_statement(), lookup_patient(), main() (+8 more)
-
-### Community 15 - "Community 15"
 Cohesion: 0.16
 Nodes (23): applyDetailPage(), applyLinkList(), applySharedChrome(), applySidebarCard(), applyWorkIndexPage(), fitAllTitles(), fitTitleNode(), getProject() (+15 more)
 
+### Community 15 - "Community 15"
+Cohesion: 0.09
+Nodes (23): bL(), bS(), dS(), eL(), eM(), hL(), I1(), iP() (+15 more)
+
 ### Community 16 - "Community 16"
-Cohesion: 0.1
-Nodes (22): bL(), bS(), dS(), eL(), hL(), I1(), iP(), je() (+14 more)
+Cohesion: 0.19
+Nodes (20): _medical_question_replay(), Summit Health Voice Agent — contract_replay.py Offline smoke test. No LiveKit r, Verify workers comp blocks scheduling and allows transfer., Verify medical question blocks scheduling and allows log_patient_statement., _run_replay(), _workers_comp_replay(), envelope(), intent_event() (+12 more)
 
 ### Community 17 - "Community 17"
 Cohesion: 0.15
@@ -196,76 +196,76 @@ Cohesion: 0.16
 Nodes (18): delay(), getPhaseMessage(), isMobile(), prepareProjectEntry(), computeBufferedRatio(), computeProgress(), getVideoReadinessSnapshot(), markManagedVideoPlaying() (+10 more)
 
 ### Community 19 - "Community 19"
-Cohesion: 0.11
-Nodes (20): b(), bF(), d1(), E1(), Hx(), jF(), jG(), Jx() (+12 more)
-
-### Community 20 - "Community 20"
 Cohesion: 0.14
 Nodes (18): cP(), DE(), FE(), Fy(), GE(), IU(), ME(), mU() (+10 more)
 
-### Community 21 - "Community 21"
+### Community 20 - "Community 20"
 Cohesion: 0.13
 Nodes (18): AS(), AU(), Dy(), EU(), fS(), gU(), Is(), Ly() (+10 more)
 
-### Community 22 - "Community 22"
+### Community 21 - "Community 21"
 Cohesion: 0.15
 Nodes (5): _make_slots(), MockEcwAdapter, Summit Health Voice Agent — mock_ecw.py Fake eClinicalWorks adapter. No real n, Returns one or two providers depending on scenario., Always returns staff_review_only — never a real EHR write.
+
+### Community 22 - "Community 22"
+Cohesion: 0.12
+Nodes (17): ke(), di(), dx(), fx(), gx(), hs(), lx(), nI() (+9 more)
 
 ### Community 23 - "Community 23"
 Cohesion: 0.12
 Nodes (12): Agent, _LKAgent, decode_control_packet(), Summit Health Voice Agent — event_bus.py Publishes SummitDemoEvent envelopes to, Wraps a LiveKit room to publish SummitDemoEvent envelopes and     receive summi, Serialize an event into the envelope format and publish to the room., Parse a raw data packet from the frontend.     Accepts three shapes:       1. {, Parse a raw data packet from the frontend.     Accepts three shapes:       1. (+4 more)
 
 ### Community 25 - "Community 25"
-Cohesion: 0.13
-Nodes (15): ke(), di(), dx(), fx(), gx(), lx(), nI(), Oa() (+7 more)
+Cohesion: 0.22
+Nodes (15): a(), cD(), eD(), hD(), Lh(), mD(), nD(), o() (+7 more)
 
 ### Community 26 - "Community 26"
-Cohesion: 0.21
-Nodes (13): d(), f(), h(), Ih(), l(), LS(), LU(), p() (+5 more)
-
-### Community 28 - "Community 28"
 Cohesion: 0.31
 Nodes (8): handleHeavyMotion(), handleVisibilityChange(), safeId(), getActiveManagedVideoId(), pauseAllManagedVideos(), pauseManagedVideo(), registerManagedVideo(), requestManagedVideoPlayback()
 
-### Community 29 - "Community 29"
+### Community 28 - "Community 28"
 Cohesion: 0.23
 Nodes (5): NetworkMesh(), handleDeploy(), handleViewAgent(), StatusDot(), toggleTheme()
 
-### Community 30 - "Community 30"
+### Community 29 - "Community 29"
 Cohesion: 0.42
 Nodes (9): _clarify(), evaluate_policy(), _pass(), PolicyResult, Summit Health Voice Agent — policy_gate.py Deterministic Python port of src/lib, Evaluate whether a tool call is allowed given the current workflow state.     T, _reject(), _review() (+1 more)
 
-### Community 31 - "Community 31"
+### Community 30 - "Community 30"
 Cohesion: 0.25
 Nodes (4): load_config(), Summit Health Voice Agent — config.py Loads environment variables from .env.loc, Build a SummitAgentConfig from the current environment., SummitAgentConfig
 
-### Community 33 - "Community 33"
-Cohesion: 0.22
-Nodes (7): publish_review_from_output(), Summit Health Voice Agent — tools.py Policy-gated tool runner. Every LLM tool c, Emit a review event from a prepare_appointment_for_review tool output., IntentClassification, Summit Health Voice Agent — workflow_state.py Deterministic call-state machine, SummitAppointmentDraft, SummitIdentityCapture
-
-### Community 34 - "Community 34"
+### Community 32 - "Community 32"
 Cohesion: 0.39
 Nodes (8): boot(), ensureCanvas(), initEffect(), loadGsapIfNeeded(), loadScript(), rewriteLegacyProjectLinks(), setCanvasSize(), shouldShowArrivalCover()
 
-### Community 35 - "Community 35"
+### Community 33 - "Community 33"
+Cohesion: 0.31
+Nodes (5): ManagedHeroVideo(), Kicker(), MetricTile(), SignalCard(), SystemCard()
+
+### Community 34 - "Community 34"
 Cohesion: 0.43
 Nodes (6): addWidget(), handleKeyDown(), openAddModal(), removeWidget(), renderPlaceholder(), resetWidgets()
+
+### Community 35 - "Community 35"
+Cohesion: 0.33
+Nodes (6): classify_intent_from_text(), IntentClassification, Summit Health Voice Agent — workflow_state.py Deterministic call-state machine, Deterministic keyword-based classifier mirroring classifySummitIntentFromText., SummitAppointmentDraft, SummitIdentityCapture
 
 ### Community 36 - "Community 36"
 Cohesion: 0.48
 Nodes (5): Byc2wMosaic(), Kicker(), MetricTile(), SignalCard(), SystemCard()
 
-### Community 38 - "Community 38"
-Cohesion: 0.53
-Nodes (4): Kicker(), MetricTile(), ProjectCard(), RoleCard()
+### Community 37 - "Community 37"
+Cohesion: 0.33
+Nodes (4): prepare_appointment_for_review(), publish_review_from_output(), Summit Health Voice Agent — tools.py Policy-gated tool runner. Every LLM tool c, Emit a review event from a prepare_appointment_for_review tool output.
 
 ### Community 39 - "Community 39"
 Cohesion: 0.53
-Nodes (4): Kicker(), MetricTile(), SignalCard(), SystemCard()
+Nodes (4): Kicker(), MetricTile(), ProjectCard(), RoleCard()
 
 ### Community 40 - "Community 40"
 Cohesion: 0.53
-Nodes (4): FeatureCard(), Kicker(), MetricTile(), SignalCard()
+Nodes (4): Kicker(), MetricTile(), SignalCard(), SystemCard()
 
 ### Community 41 - "Community 41"
 Cohesion: 0.53
@@ -293,7 +293,7 @@ Nodes (4): Kicker(), MetricTile(), SignalCard(), SystemCard()
 
 ### Community 47 - "Community 47"
 Cohesion: 0.53
-Nodes (4): Kicker(), MetricTile(), SignalCard(), SystemCard()
+Nodes (4): FeatureCard(), Kicker(), MetricTile(), SignalCard()
 
 ### Community 48 - "Community 48"
 Cohesion: 0.53
@@ -303,19 +303,23 @@ Nodes (4): Kicker(), MetricTile(), SignalCard(), SystemCard()
 Cohesion: 0.6
 Nodes (3): boot(), clearRevealFlag(), releaseCover()
 
+### Community 50 - "Community 50"
+Cohesion: 0.4
+Nodes (5): bF(), E1(), jF(), R1(), u1()
+
 ## Knowledge Gaps
 - **48 isolated node(s):** `Summit Health Voice Agent — agent.py LiveKit Agents 1.x worker entrypoint.  R`, `Per-session state and tool/policy/event pipeline.`, `Deterministic keyword-based fallback for weak tool calling.`, `Classify the caller's intent from their first statement.`, `Look up a patient by name and date of birth.` (+43 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **31 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **30 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `ManagedHeroVideo()` connect `Community 62` to `Community 36`, `Community 5`, `Community 38`, `Community 7`, `Community 40`, `Community 6`, `Community 42`, `Community 43`, `Community 44`, `Community 45`, `Community 46`, `Community 47`, `Community 48`, `Community 41`, `Community 39`, `Community 27`, `Community 28`?**
+- **Why does `ManagedHeroVideo()` connect `Community 33` to `Community 36`, `Community 5`, `Community 39`, `Community 8`, `Community 7`, `Community 42`, `Community 43`, `Community 44`, `Community 45`, `Community 46`, `Community 47`, `Community 48`, `Community 40`, `Community 41`, `Community 26`, `Community 27`?**
   _High betweenness centrality (0.154) - this node is a cross-community bridge._
-- **Why does `createHeavyMotionSettler()` connect `Community 7` to `Community 12`?**
+- **Why does `createHeavyMotionSettler()` connect `Community 8` to `Community 13`?**
   _High betweenness centrality (0.147) - this node is a cross-community bridge._
-- **Why does `onReady()` connect `Community 12` to `Community 11`?**
+- **Why does `onReady()` connect `Community 13` to `Community 12`?**
   _High betweenness centrality (0.135) - this node is a cross-community bridge._
 - **Are the 5 inferred relationships involving `Draggable()` (e.g. with `be()` and `he()`) actually correct?**
   _`Draggable()` has 5 INFERRED edges - model-reasoned connections that need verification._
