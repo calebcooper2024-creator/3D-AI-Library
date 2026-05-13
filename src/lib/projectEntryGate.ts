@@ -80,7 +80,9 @@ function derivePhase(
   if (videoSnap.phase === 'metadata' || videoSnap.phase === 'buffering') return 'loading-video';
   if (videoSnap.phase === 'canplay') return 'waiting-for-playback';
   if (videoSnap.phase === 'playing') return 'ready';
-  if (videoSnap.phase === 'timeout') return 'timeout';
+  if (videoSnap.phase === 'timeout') {
+    return videoSnap.isPlaying ? 'ready' : 'waiting-for-playback';
+  }
   if (videoSnap.phase === 'error') return 'error';
   return 'loading-video';
 }
@@ -210,7 +212,7 @@ export async function prepareProjectEntry({
           reportProgress();
           if (snap.isPlaying) {
             resolve(true);
-          } else if (snap.phase === 'timeout' || snap.phase === 'error') {
+          } else if (snap.phase === 'error') {
             resolve(false);
           }
         });
@@ -224,14 +226,16 @@ export async function prepareProjectEntry({
     // behind the overlay. The gate continues waiting for the managed video.
     contentReadyAt = Date.now();
     onContentReady?.();
-    await videoReadyPromise;
-    return 'ready' as const;
+    const videoStarted = await videoReadyPromise;
+    return videoStarted ? 'ready' as const : 'max-wait' as const;
   })();
 
-  const releasedBy = await Promise.race([
-    readyPromise,
-    delay(effectiveMaxMs).then(() => 'max-wait' as const),
-  ]);
+  const releasedBy = hasVideo
+    ? await readyPromise
+    : await Promise.race([
+        readyPromise,
+        delay(effectiveMaxMs).then(() => 'max-wait' as const),
+      ]);
 
   // Enforce minimum overlay duration
   const elapsed = Date.now() - startedAt;

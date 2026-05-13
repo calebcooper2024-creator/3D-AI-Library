@@ -252,6 +252,7 @@ export function prepareVideoForEntry(
   video.defaultMuted = true;
   video.playsInline = true;
   video.preload = 'auto';
+  video.setAttribute('fetchpriority', 'high');
   video.src = src;
 
   record.timer = window.setTimeout(() => {
@@ -301,8 +302,14 @@ export function markManagedVideoPlaying(src: string): void {
   if (!record) return;
 
   if (record.settled) {
-    // Already settled (e.g., timeout) — update snapshot for informational purposes only
-    record.snapshot = { ...record.snapshot, isPlaying: true };
+    // Warmup may time out before the visible hero starts; promote readiness once playback is proven.
+    record.snapshot = {
+      ...record.snapshot,
+      phase: 'playing',
+      progress: 100,
+      canPlay: true,
+      isPlaying: true,
+    };
     notifyListeners(record);
     return;
   }

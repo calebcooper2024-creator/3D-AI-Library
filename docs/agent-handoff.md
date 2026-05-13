@@ -2080,3 +2080,28 @@ Verification run:
 
 Known risks:
 - The lightweight plain covers are intentionally simpler than the fully hydrated art, so some long titles use condensed wrapping until hover hydration replaces the cover.
+
+### 2026-05-12 | Codex | Hero Video Preplay Gate
+
+Goal:
+- Keep the project entry overlay up until the visible hero video has actually started playing.
+
+Files changed:
+- `src/lib/projectEntryGate.ts`: removed the max-wait overlay release for video-backed entries and kept waiting through warmup timeouts until managed playback is reported.
+- `src/components/ManagedHeroVideo.tsx`: added muted autoplay, high-priority preload hinting, explicit load, and immediate retry after mount.
+- `src/lib/videoReadinessTracker.ts`: made warmup timeout recoverable when the visible managed video later reports playback.
+
+Architecture or design decisions:
+- Content still renders behind the overlay so the video element can mount and play.
+- The overlay only dismisses after `markManagedVideoPlaying` confirms the visible hero element is playing; non-video entries retain max-wait behavior.
+- Warmup timeout no longer proves readiness or releases the page for hero-video entries.
+
+Verification run:
+- `npm run lint`: PASS.
+- `npm run build`: PASS, existing large main chunk warning remains.
+- Local Vite preview + Playwright/Edge check on `/CalebCooper/Library` -> Global Intelligence Market: PASS; overlay released after video playback began and no console errors were captured.
+- `graphify query "How does project entry wait for hero video readiness and ManagedHeroVideo playing events?" --budget 2400`: completed.
+- `graphify update .`: completed AST graph update.
+
+Known risks:
+- If a hero video genuinely errors, the gate releases through the error path; otherwise a persistent autoplay/network failure can keep the overlay up until playback succeeds.

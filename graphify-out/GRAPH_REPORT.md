@@ -1,16 +1,16 @@
 # Graph Report - calebs-3d-case-study  (2026-05-12)
 
 ## Corpus Check
-- 202 files · ~328,826 words
+- 202 files · ~329,065 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1259 nodes · 2218 edges · 140 communities (109 shown, 31 thin omitted)
+- 1259 nodes · 2218 edges · 141 communities (110 shown, 31 thin omitted)
 - Extraction: 95% EXTRACTED · 5% INFERRED · 0% AMBIGUOUS · INFERRED: 115 edges (avg confidence: 0.78)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `3ffb96fd`
+- Built from commit: `714d119b`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -68,14 +68,14 @@
 - [[_COMMUNITY_Community 51|Community 51]]
 - [[_COMMUNITY_Community 52|Community 52]]
 - [[_COMMUNITY_Community 53|Community 53]]
-- [[_COMMUNITY_Community 55|Community 55]]
-- [[_COMMUNITY_Community 57|Community 57]]
+- [[_COMMUNITY_Community 54|Community 54]]
+- [[_COMMUNITY_Community 56|Community 56]]
 - [[_COMMUNITY_Community 58|Community 58]]
 - [[_COMMUNITY_Community 59|Community 59]]
 - [[_COMMUNITY_Community 60|Community 60]]
 - [[_COMMUNITY_Community 61|Community 61]]
 - [[_COMMUNITY_Community 62|Community 62]]
-- [[_COMMUNITY_Community 69|Community 69]]
+- [[_COMMUNITY_Community 63|Community 63]]
 - [[_COMMUNITY_Community 70|Community 70]]
 - [[_COMMUNITY_Community 71|Community 71]]
 - [[_COMMUNITY_Community 72|Community 72]]
@@ -84,7 +84,7 @@
 - [[_COMMUNITY_Community 75|Community 75]]
 - [[_COMMUNITY_Community 76|Community 76]]
 - [[_COMMUNITY_Community 77|Community 77]]
-- [[_COMMUNITY_Community 128|Community 128]]
+- [[_COMMUNITY_Community 78|Community 78]]
 - [[_COMMUNITY_Community 129|Community 129]]
 - [[_COMMUNITY_Community 130|Community 130]]
 - [[_COMMUNITY_Community 131|Community 131]]
@@ -92,6 +92,7 @@
 - [[_COMMUNITY_Community 133|Community 133]]
 - [[_COMMUNITY_Community 134|Community 134]]
 - [[_COMMUNITY_Community 135|Community 135]]
+- [[_COMMUNITY_Community 136|Community 136]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `Draggable()` - 26 edges
@@ -117,7 +118,7 @@
 - `SummitHealthAgent` --uses--> `SummitWorkflowState`  [INFERRED]
   agents/summit_voice_agent/agent.py → agents/summit_voice_agent/workflow_state.py
 
-## Communities (140 total, 31 thin omitted)
+## Communities (141 total, 31 thin omitted)
 
 ### Community 0 - "Community 0"
 Cohesion: 0.02
@@ -136,16 +137,16 @@ Cohesion: 0.07
 Nodes (55): A(), ba(), Ca(), da(), Draggable(), Ea(), Fa(), Ga() (+47 more)
 
 ### Community 4 - "Community 4"
-Cohesion: 0.07
-Nodes (50): a(), aq(), b(), bD(), $C(), cD(), d(), dq() (+42 more)
-
-### Community 5 - "Community 5"
 Cohesion: 0.08
 Nodes (34): ed(), A(), Ae(), b(), be(), ce(), D(), Dt() (+26 more)
 
-### Community 6 - "Community 6"
+### Community 5 - "Community 5"
 Cohesion: 0.06
 Nodes (30): AcceptanceMetric(), FooterCard(), GateRow(), Kicker(), Phase(), ReviewField(), StackRow(), StatBlock() (+22 more)
+
+### Community 6 - "Community 6"
+Cohesion: 0.08
+Nodes (42): aq(), b(), bD(), $C(), d(), d1(), dq(), E() (+34 more)
 
 ### Community 7 - "Community 7"
 Cohesion: 0.1
@@ -184,24 +185,24 @@ Cohesion: 0.18
 Nodes (23): _entrypoint(), _medical_question_replay(), Summit Health Voice Agent — contract_replay.py Offline smoke test. No LiveKit r, Verify workers comp blocks scheduling and allows transfer., Verify medical question blocks scheduling and allows log_patient_statement., _run_replay(), _workers_comp_replay(), envelope() (+15 more)
 
 ### Community 16 - "Community 16"
+Cohesion: 0.09
+Nodes (23): bL(), bS(), dS(), eL(), eM(), hL(), I1(), iP() (+15 more)
+
+### Community 17 - "Community 17"
 Cohesion: 0.15
 Nodes (14): componentDidCatch(), constructor(), getDerivedStateFromError(), VisualEditor(), CustomCursor(), downloadAsFolder(), downloadZip(), handleClone() (+6 more)
 
-### Community 17 - "Community 17"
+### Community 18 - "Community 18"
 Cohesion: 0.16
 Nodes (18): delay(), getPhaseMessage(), isMobile(), prepareProjectEntry(), computeBufferedRatio(), computeProgress(), getVideoReadinessSnapshot(), markManagedVideoPlaying() (+10 more)
 
-### Community 18 - "Community 18"
-Cohesion: 0.11
-Nodes (19): bF(), bS(), d1(), E1(), fM(), iP(), jF(), Jx() (+11 more)
-
 ### Community 19 - "Community 19"
-Cohesion: 0.14
-Nodes (18): cP(), DE(), FE(), Fy(), GE(), IU(), ME(), mU() (+10 more)
+Cohesion: 0.12
+Nodes (20): AS(), AU(), Dy(), EU(), fS(), gU(), Is(), Ly() (+12 more)
 
 ### Community 20 - "Community 20"
-Cohesion: 0.13
-Nodes (18): AS(), AU(), Dy(), EU(), fS(), gU(), Is(), Ly() (+10 more)
+Cohesion: 0.14
+Nodes (18): cP(), DE(), FE(), Fy(), GE(), IU(), ME(), mU() (+10 more)
 
 ### Community 21 - "Community 21"
 Cohesion: 0.15
@@ -209,15 +210,15 @@ Nodes (5): _make_slots(), MockEcwAdapter, Summit Health Voice Agent — mock_ecw
 
 ### Community 22 - "Community 22"
 Cohesion: 0.12
-Nodes (17): ke(), di(), dx(), fx(), gx(), hs(), lx(), nI() (+9 more)
-
-### Community 23 - "Community 23"
-Cohesion: 0.12
 Nodes (12): Agent, _LKAgent, decode_control_packet(), Summit Health Voice Agent — event_bus.py Publishes SummitDemoEvent envelopes to, Wraps a LiveKit room to publish SummitDemoEvent envelopes and     receive summi, Serialize an event into the envelope format and publish to the room., Parse a raw data packet from the frontend.     Accepts three shapes:       1. {, Parse a raw data packet from the frontend.     Accepts three shapes:       1. (+4 more)
 
+### Community 24 - "Community 24"
+Cohesion: 0.13
+Nodes (15): ke(), di(), dx(), fx(), gx(), hs(), lx(), Oa() (+7 more)
+
 ### Community 25 - "Community 25"
-Cohesion: 0.12
-Nodes (16): bL(), dS(), eM(), I1(), je(), LG(), ML(), oL() (+8 more)
+Cohesion: 0.22
+Nodes (15): a(), cD(), eD(), hD(), Lh(), mD(), nD(), o() (+7 more)
 
 ### Community 27 - "Community 27"
 Cohesion: 0.31
@@ -265,7 +266,7 @@ Nodes (4): Kicker(), MetricTile(), SignalCard(), SystemCard()
 
 ### Community 40 - "Community 40"
 Cohesion: 0.53
-Nodes (4): Kicker(), MetricTile(), SignalCard(), SystemCard()
+Nodes (4): FeatureCard(), Kicker(), MetricTile(), SignalCard()
 
 ### Community 41 - "Community 41"
 Cohesion: 0.53
@@ -289,7 +290,7 @@ Nodes (4): Kicker(), MetricTile(), SignalCard(), SystemCard()
 
 ### Community 46 - "Community 46"
 Cohesion: 0.53
-Nodes (4): FeatureCard(), Kicker(), MetricTile(), SignalCard()
+Nodes (4): Kicker(), MetricTile(), SignalCard(), SystemCard()
 
 ### Community 47 - "Community 47"
 Cohesion: 0.53
@@ -299,7 +300,11 @@ Nodes (4): Kicker(), MetricTile(), SignalCard(), SystemCard()
 Cohesion: 0.6
 Nodes (3): boot(), clearRevealFlag(), releaseCover()
 
-### Community 50 - "Community 50"
+### Community 49 - "Community 49"
+Cohesion: 0.4
+Nodes (5): bF(), E1(), jF(), R1(), u1()
+
+### Community 51 - "Community 51"
 Cohesion: 0.5
 Nodes (4): Hx(), jG(), wG(), _x()
 
@@ -311,7 +316,7 @@ Nodes (4): Hx(), jG(), wG(), _x()
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `ManagedHeroVideo()` connect `Community 62` to `Community 38`, `Community 35`, `Community 37`, `Community 6`, `Community 7`, `Community 8`, `Community 40`, `Community 42`, `Community 41`, `Community 44`, `Community 45`, `Community 46`, `Community 47`, `Community 39`, `Community 43`, `Community 26`, `Community 27`?**
+- **Why does `ManagedHeroVideo()` connect `Community 63` to `Community 38`, `Community 35`, `Community 37`, `Community 5`, `Community 39`, `Community 8`, `Community 40`, `Community 41`, `Community 43`, `Community 44`, `Community 7`, `Community 46`, `Community 45`, `Community 42`, `Community 47`, `Community 26`, `Community 27`?**
   _High betweenness centrality (0.154) - this node is a cross-community bridge._
 - **Why does `createHeavyMotionSettler()` connect `Community 8` to `Community 12`?**
   _High betweenness centrality (0.147) - this node is a cross-community bridge._

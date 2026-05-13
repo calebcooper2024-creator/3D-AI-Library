@@ -80,6 +80,12 @@ export function ManagedHeroVideo({
     const video = videoRef.current;
     if (!video) return;
 
+    video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
+    video.preload = 'auto';
+    video.setAttribute('fetchpriority', 'high');
+
     const markReady = () => {
       if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
         setVideoReady(true);
@@ -138,6 +144,11 @@ export function ManagedHeroVideo({
     video.addEventListener('waiting', onWaitingOrStalled);
     video.addEventListener('stalled', onWaitingOrStalled);
     markReady();
+    try {
+      video.load();
+    } catch {
+      // Decorative video load failure is handled by the readiness gate timeout/error path.
+    }
     // If the element already has data buffered when we attach (events fired
     // before mount), kick off a retry immediately.
     retryPlay();
@@ -244,6 +255,7 @@ export function ManagedHeroVideo({
         ref={videoRef}
         muted
         loop
+        autoPlay
         playsInline
         poster={poster}
         preload="auto"
