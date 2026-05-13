@@ -2057,3 +2057,26 @@ Verification run:
 
 Known risks:
 - 1080p CRF 28 encodes are intentionally biased toward fast start/smooth playback over maximum visual fidelity.
+
+### 2026-05-12 | Codex | Plain Cover Rest-State Correction
+
+Goal:
+- Fix the shelf rest state so books show a visible lightweight cover face instead of collapsing visually to spine-only books.
+
+Files changed:
+- `src/components/Book.tsx`: added a lightweight `book-plain-cover` face rendered only when the real cover is not hydrated.
+- `src/index.css`: added the plain cover face styling sized to the existing projected cover budget.
+
+Architecture or design decisions:
+- Did not change `Bookshelf` item offsets, step sizing, route behavior, or video behavior.
+- The plain cover uses existing book color/text metadata and no cover image/custom cover DOM.
+- Hover/focus/open still hydrates the one active book's real cover image/custom cover content.
+
+Verification run:
+- `npm run lint`: PASS.
+- `npm run build`: PASS, existing large main chunk warning remains.
+- Local Edge headless screenshot at `http://127.0.0.1:4174/CalebCooper/Library`: cover faces visible at rest.
+- `graphify update .`: completed AST graph update.
+
+Known risks:
+- The lightweight plain covers are intentionally simpler than the fully hydrated art, so some long titles use condensed wrapping until hover hydration replaces the cover.

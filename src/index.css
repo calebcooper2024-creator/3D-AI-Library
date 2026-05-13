@@ -105,6 +105,104 @@ body::before {
   contain: strict;
 }
 
+.book-plain-cover {
+  position: absolute;
+  left: calc(var(--spine-width) - var(--hinge-overlap));
+  top: 0;
+  z-index: 6;
+  width: 188px;
+  height: 100%;
+  overflow: hidden;
+  isolation: isolate;
+  transform: translateZ(2px);
+  box-shadow:
+    inset 10px 0 16px rgba(0,0,0,0.18),
+    inset -18px 0 28px rgba(0,0,0,0.12),
+    14px 18px 30px rgba(0,0,0,0.08);
+  pointer-events: none;
+}
+
+.book-plain-cover::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(90deg, rgba(0,0,0,0.22), transparent 18%, transparent 78%, rgba(255,255,255,0.12)),
+    linear-gradient(180deg, rgba(255,255,255,0.12), transparent 36%, rgba(0,0,0,0.18));
+  pointer-events: none;
+}
+
+.book-plain-cover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background-image: url("/paper-texture.jpg");
+  opacity: 0.22;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.book-plain-cover-top,
+.book-plain-cover-main,
+.book-plain-cover-author {
+  position: absolute;
+  z-index: 3;
+}
+
+.book-plain-cover-top {
+  top: 24px;
+  left: 22px;
+  right: 22px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  line-height: 1;
+  opacity: 0.55;
+  text-transform: uppercase;
+}
+
+.book-plain-cover-main {
+  left: 22px;
+  right: 22px;
+  bottom: 88px;
+}
+
+.book-plain-cover-title {
+  max-width: 144px;
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 0.96;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+
+.book-plain-cover-title.is-long-title {
+  font-size: 21px;
+  line-height: 1;
+}
+
+.book-plain-cover-subtitle {
+  margin-top: 14px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  line-height: 1.35;
+  opacity: 0.72;
+  text-transform: uppercase;
+}
+
+.book-plain-cover-author {
+  left: 22px;
+  right: 22px;
+  bottom: 28px;
+  font-family: var(--font-mono);
+  font-size: 8px;
+  line-height: 1;
+  opacity: 0.52;
+  text-transform: uppercase;
+}
+
 .book-back-group {
   position: absolute;
   left: calc(var(--spine-width) - var(--hinge-overlap));
