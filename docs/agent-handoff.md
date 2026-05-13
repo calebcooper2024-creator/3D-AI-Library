@@ -2032,3 +2032,28 @@ Verification run:
 
 Known risks:
 - The active cover hydration is hover/focus/click driven; a very fast click on a cold image may show the lightweight fallback for a moment before the route overlay takes over.
+
+### 2026-05-12 | Codex | Restore Plain Covers And Downscale Hero Videos
+
+Goal:
+- Correct the shelf regression so books show the original cover-facing geometry at rest, while still avoiding full cover-image hydration until hover/focus/open.
+- Reduce hero video decode/transfer cost by bringing oversized videos down to 1080p.
+
+Files changed:
+- `src/components/Bookshelf.tsx`: restored the `Book` component for every shelf item at rest; inactive items render the plain/fallback cover and spine with `hydrateCover={false}` and `renderSpineContent={false}`.
+- `src/index.css`: removed the temporary spine-only shelf styling.
+- `public/videos/*.mp4`: transcoded all files above 1080p to 1080p H.264 with `+faststart`, preserving existing filenames and routes.
+
+Architecture or design decisions:
+- The library shelf now keeps the original book orientation and cover shape visible at rest.
+- Real cover art is still one-active-book-only: hover/focus/open hydrates the existing primary cover image/visual asset.
+- Hero video components and data routes were not changed; only the underlying MP4 payloads were reduced.
+
+Verification run:
+- `npm run lint`: PASS.
+- `npm run build`: PASS, existing large main chunk warning remains.
+- `graphify update .`: completed AST graph update.
+- `ffprobe`: all transcoded oversized videos now report 1920x1080 or smaller.
+
+Known risks:
+- 1080p CRF 28 encodes are intentionally biased toward fast start/smooth playback over maximum visual fidelity.

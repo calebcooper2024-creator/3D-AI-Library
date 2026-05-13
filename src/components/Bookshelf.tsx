@@ -52,30 +52,6 @@ function preloadImageAsset(url: string): Promise<ImagePreloadResult> {
 const getPrimaryCoverUrl = (book: ShelfBook): string | null =>
   book.coverImage ?? book.visualAssetUrls?.[0] ?? null;
 
-function LightweightBookSpine({ book, index }: { book: ShelfBook; index: number }) {
-  const spineTextColor = book.spineTextColor || book.textColor;
-
-  return (
-    <div
-      className="lightweight-book-spine"
-      style={{
-        backgroundColor: book.spineColor,
-        color: spineTextColor,
-      }}
-    >
-      <span className="lightweight-book-spine-number">
-        No. {String(index + 1).padStart(2, '0')}
-      </span>
-      <h3 className={`lightweight-book-spine-title ${book.fontTitle}`}>
-        {book.title}
-      </h3>
-      <span className="lightweight-book-spine-author">
-        {book.author}
-      </span>
-    </div>
-  );
-}
-
 export const Bookshelf = ({
   books,
   onSelectBook,
@@ -600,18 +576,14 @@ export const Bookshelf = ({
                   onClick={() => handleSelectInstance(book.id, instanceKey)}
                   onKeyDown={(event) => handleItemKeyDown(event, book.id, instanceKey)}
                 >
-                  {isActive ? (
-                    <Book
-                      book={book}
-                      index={bookIndex}
-                      isOpening={isOpening}
-                      isHovered={activeInstanceKey === instanceKey}
-                      hydrateCover={isCoverHydrated}
-                      renderSpineContent={isCoverHydrated}
-                    />
-                  ) : (
-                    <LightweightBookSpine book={book} index={bookIndex} />
-                  )}
+                  <Book
+                    book={book}
+                    index={bookIndex}
+                    isOpening={isOpening}
+                    isHovered={activeInstanceKey === instanceKey}
+                    hydrateCover={isCoverHydrated}
+                    renderSpineContent={isCoverHydrated}
+                  />
                 </motion.div>
               );
             })}
