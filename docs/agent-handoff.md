@@ -2105,3 +2105,23 @@ Verification run:
 
 Known risks:
 - If a hero video genuinely errors, the gate releases through the error path; otherwise a persistent autoplay/network failure can keep the overlay up until playback succeeds.
+
+### 2026-05-13 | Codex | Restore Library Shelf Book Geometry
+
+Goal:
+- Make the Library shelf books render with the same full 3D book geometry as the About page shelf.
+
+Files changed:
+- `src/components/Bookshelf.tsx`: removed the Library-only `hydrateCover` / `renderSpineContent` overrides so `Book` uses its default full cover and spine rendering, matching `HomeView`.
+
+Architecture or design decisions:
+- Did not change shelf offsets, stage sizing, scroll controls, route behavior, or hero video behavior.
+- This prioritizes restoring the correct book orientation and 3D cover presentation over the previous one-active-cover hydration optimization.
+
+Verification run:
+- `npm run lint`: PASS.
+- `npm run build`: PASS, existing large main chunk warning remains.
+- `graphify update .`: completed AST graph update.
+
+Known risks:
+- The Library shelf now renders full cover content at rest again, matching About but increasing initial shelf image/content work compared with the temporary lightweight-cover path.
